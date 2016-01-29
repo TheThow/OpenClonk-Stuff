@@ -1,0 +1,7 @@
+[Material]
+Name=BestestBrick
+Density=90
+Friction=15
+Placement=80
+TextureOverlay=brick_
+Shape=0

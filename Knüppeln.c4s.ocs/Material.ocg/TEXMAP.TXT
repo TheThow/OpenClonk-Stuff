@@ -1,0 +1,36 @@
+# Automatically generated texture map
+# Contains material-texture-combinations added at runtime
+# Import materials from global file as well
+OverloadMaterials
+# Import textures from global file as well
+OverloadTextures
+
+73=Brick-brick_
+74=BestestBrick-brick_
+75=BestestTunnel-tunnel
+76=BackgroundBlood-gore
+77=Blood-blood
+1=Acid-acid
+2=Amethyst-amethyst
+3=Ashes-ashes
+4=Brick-brick
+5=BrickSoft-brick
+6=Coal-coal
+7=DuroLava-lava_red
+8=Earth-earth
+9=Everrock-everrock
+10=Firestone-firestone
+11=Gold-gold
+12=Granite-granite
+13=HalfVehicle-none
+14=Ice-ice
+15=Lava-lava_red
+16=Ore-ore
+17=Rock-rock
+18=Ruby-ruby
+19=Sand-sand
+20=SandDry-sand
+21=Snow-snow1
+22=Tunnel-tunnel
+23=Vehicle-none
+24=Water-water

@@ -1,0 +1,16 @@
+###############################################################################
+#                                                                             #
+#                                ControlDefs                                  #
+#                                                                             #
+#                                                                             #
+###############################################################################
+
+[ControlDefs]
+
+
+	[ControlDef]
+	Identifier=QuickSwitch
+	GUIName=$CON_QuickSwitch$
+	GUIDesc=$CON_QuickSwitch_Desc$
+	Hold=1
+	SendCursorPos=1
