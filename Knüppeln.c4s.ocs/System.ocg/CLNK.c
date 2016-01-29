@@ -451,7 +451,7 @@ func ChooseMenu()
 	}
 	
 	choosemenu_id = GuiOpen(menu);
-
+	this->SetMenu(choosemenu_id, true);
 }
 
 func ScenOptsUpdateDesc(data, int player, int ID, int subwindowID, object target)
@@ -467,5 +467,5 @@ func ScenOptsUpdateDesc(data, int player, int ID, int subwindowID, object target
 func ScenOptsActivate(data, int player, int ID, int subwindowID, object target)
 {
 	Type = data[0];
-	GuiClose(choosemenu_id);
+	this->CancelMenu();
 }
