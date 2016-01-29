@@ -12,5 +12,21 @@
 	Identifier=QuickSwitch
 	GUIName=$CON_QuickSwitch$
 	GUIDesc=$CON_QuickSwitch_Desc$
-	Hold=1
-	SendCursorPos=1
+	
+	[ControlDef]
+	Identifier=AimingCursor
+	
+[ControlSets]
+
+	[ControlSet]
+	Name=WASD_Hotkeys_IntQueue_MouseCon_
+	GUIName=Keyboard and Mouse
+	Keyboard=1
+	Mouse=1
+	Gamepad=0
+
+		[Assignment]
+		Key=Mouse1Move
+		Control=AimingCursor
+		Priority=30
+				

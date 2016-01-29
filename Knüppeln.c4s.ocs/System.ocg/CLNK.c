@@ -18,7 +18,6 @@ local healthregen_base = 100;
 local healthregen_max = 20;
 
 local SPECIAL1_MANA = 25;
-local special1;
 
 local choosemenu_id;
 
@@ -42,15 +41,13 @@ public func ObjectControl(int plr, int ctrl, int x, int y, int strength, bool re
 			AddEffect("BlockingCD", this, 1, BLOCK_CD);
 		}
 	}
-
-	if (ctrl == CON_QuickSwitch && release == false)
+	
+	if (ctrl == CON_QuickSwitch)
 	{
-		/*
-		var a = GetPlayerCursorPos(plr);
+		
+		var a = GetPlayerCursorPos(plr, true);
 		var x1 = a[0] - GetX();
 		var y1 = a[1] - GetY();
-		
-		Log("%d %d | %d %d", x1, y1, x, y);
 		
 		if(GetMagicEnergy() >= SPECIAL1_MANA)
 		{
@@ -62,29 +59,8 @@ public func ObjectControl(int plr, int ctrl, int x, int y, int strength, bool re
 		{
 			Sound("UI::Error", 0, 50, GetOwner());
 		}
-		*/
-		special1 = true;
-		return 1;
-	}
-
-	if (ctrl == CON_QuickSwitch && release == true)
-	{
-		special1 = false;
-		return 1;
-	}
-
-	if (ctrl == CON_Use && release == false && special1 == true)
-	{
-		if(GetMagicEnergy() >= SPECIAL1_MANA)
-		{
-			LaunchSpecial1(x, y);
-			DoMagicEnergy(-SPECIAL1_MANA);
-			return 1;
-		}
-		else
-		{
-			Sound("UI::Error", 0, 50, GetOwner());
-		}
+		
+		return true;
 	}
 
 	if (ctrl == CON_Jump && IsJumping() && release == false) 
@@ -192,6 +168,8 @@ public func ObjectControl(int plr, int ctrl, int x, int y, int strength, bool re
 	 
 	return _inherited(plr, ctrl, x, y, strength, repeat, release);
 }
+
+
 
 func ControlLeftDouble()
 {
