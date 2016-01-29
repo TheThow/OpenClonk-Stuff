@@ -1,7 +1,6 @@
 
 local speed = 50;
 local Type = "none";
-local _Angle = 0;
 
 func Initialize()
 {
@@ -15,12 +14,12 @@ func IsReflectable()
 	return true;
 }
 
-func Launch(object shooter, int angle, string type)
+func Launch(object clonk, int x, int y)
 {
-	Type = type;
-	_Angle = angle;
+	Type = clonk->GetChampType();
+	var angle = Angle(0,0,x,y);
 
-	AddEffect("HitCheck", this, 1,1, nil,nil, shooter);
+	AddEffect("HitCheck", this, 1,1, nil,nil, clonk);
 	AddEffect("TheEffect", this, 20, 1, this, Projectile);
 
 	SetVelocity(angle, speed);
@@ -40,7 +39,6 @@ func Launch(object shooter, int angle, string type)
 		SetLightRange(30, 70);
 		SetLightColor(RGB(255, 100, 0));
 	}
-
 }
 
 func FxTheEffectStart()

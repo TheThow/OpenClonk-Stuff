@@ -2,7 +2,7 @@
 
 local MaxEnergy = 100000;
 local MaxMagic = 100000;
-local Type = "none";
+local ChampType = "none";
 
 local TIMER = 10;
 local MOVEMENT_CD = 15;
@@ -253,14 +253,14 @@ func ChooseMenu()
 */
 func ChooseType(id ID, string type)
 {
-	Type = type;
+	ChampType = type;
 }
 
 func FxBlockingStart()
 {
 	Sound("block", false, 50);
 	
-	if( Type == "Electro")
+	if( ChampType == "Electro")
 	{
 		for(var i = 0; i < 360; i+=10)
 		{
@@ -280,7 +280,7 @@ func FxBlockingStart()
 		}
 	}
 	
-	if( Type == "Fire")
+	if( ChampType == "Fire")
 	{
 		for(var i = 0; i < 360; i+=10)
 		{
@@ -333,7 +333,7 @@ func IsBlocking()
 
 func CreateJumpEffect(int from, int to)
 {
-	if(Type == "Electro")
+	if(ChampType == "Electro")
 	{
 		Sound("electric_shot", false, 30);
 
@@ -355,7 +355,7 @@ func CreateJumpEffect(int from, int to)
 		}
 	}
 	
-	if(Type == "Fire")
+	if(ChampType == "Fire")
 	{
 		Sound("Fire::Inflame", false, 30);
 
@@ -379,11 +379,10 @@ func CreateJumpEffect(int from, int to)
 
 func LaunchSpecial1(x, y)
 {
-	if (Type == "Electro" || Type == "Fire")
+	if (ChampType == "Electro" || ChampType == "Fire")
 	{
 		var proj = CreateObject(Projectile,0,0,GetOwner());
-		var angle = Angle(0,0, x, y);
-		proj->Launch(this, angle, Type);
+		proj->Launch(this, x, y);
 	}
 }
 
@@ -466,6 +465,11 @@ func ScenOptsUpdateDesc(data, int player, int ID, int subwindowID, object target
 
 func ScenOptsActivate(data, int player, int ID, int subwindowID, object target)
 {
-	Type = data[0];
+	ChampType = data[0];
 	GuiClose(choosemenu_id);
+}
+
+func GetChampType()
+{
+	return ChampType;
 }
