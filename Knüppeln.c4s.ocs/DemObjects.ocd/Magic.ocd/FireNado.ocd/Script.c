@@ -35,20 +35,7 @@ func Launch(object clonk, int x, int y)
 
 func ChargeStop(proplist params)
 {
-	var angle = params.angle;
-	SetVelocity(angle, Speed);
-	
-	AddEffect("FireNado", this, 20, 1 ,this, GetID());
-	AddEffect("Remove", this, 20, Durr, this, GetID());
-	
-	Sound("Fire::Fireball", false, 100);
-	Sound("Fire::FuseLoop", false, 20, nil, 1);
-}
-
-func FxChargeStop(object target, proplist effect, int reason, bool temporary)
-{
-	effect.clonk->SetAction("Jump");
-	var angle = effect.new_angle;
+	var angle = params.new_angle;
 	SetVelocity(angle, Speed);
 	
 	AddEffect("FireNado", this, 20, 1 ,this, GetID());
@@ -60,14 +47,14 @@ func FxChargeStop(object target, proplist effect, int reason, bool temporary)
 
 func FxFireNadoTimer(object target, proplist effect, int time)
 {
-	for(var o in FindObjects(Find_InRect(-size_x/2, -size_y/2, size_x, size_y), Find_Or(Find_ID(Clonk), Find_Func("IsReflectable"))))
+	for(var o in FindObjects(Find_InRect(-size_x/2, -size_y/2, size_x, size_y), Find_Or(Find_ID(Clonk), Find_Func("IsReflectable")), Find_NoContainer()))
 	{
 		if (o->GetID() == Clonk)
 		{
 			if(!GetEffect("NadoCD", o) && o->GetOwner() != GetOwner())
 			{
 				o->Fling(0, -5);
-				o->DoEnergy(SpellDamage);
+				o->DoEnergy(-SpellDamage);
 				AddEffect("NadoCD", o, 20, 10);
 			}
 		}

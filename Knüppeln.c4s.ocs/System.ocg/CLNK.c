@@ -20,7 +20,7 @@ local SPECIAL1_MANA = 25;
 
 local choosemenu_id;
 
-local ChampType = "none";
+local ChampType = Rock;
 
 func Initialize()
 {
@@ -37,7 +37,7 @@ public func ObjectControl(int plr, int ctrl, int x, int y, int strength, bool re
 	if(IsCharging())
 		return 1;
 	
-	if (ctrl == CON_Interact && release == false)
+	if (ctrl == CON_Interact && release == false && !Contained())
 	{
 		if(!GetEffect("BlockingCD", this))
 		{
@@ -46,7 +46,7 @@ public func ObjectControl(int plr, int ctrl, int x, int y, int strength, bool re
 		}
 	}
 	
-	if (ctrl == CON_QuickSwitch && release == false)
+	if (ctrl == CON_QuickSwitch && release == false && !Contained())
 	{
 		
 		var a = GetPlayerCursorPos(plr, true);
@@ -58,7 +58,7 @@ public func ObjectControl(int plr, int ctrl, int x, int y, int strength, bool re
 		return true;
 	}
 	
-	if (ctrl == CON_Contents && release == false)
+	if (ctrl == CON_Contents && release == false && !Contained())
 	{
 		var a = GetPlayerCursorPos(plr, true);
 		var x1 = a[0] - GetX();
@@ -77,7 +77,7 @@ public func ObjectControl(int plr, int ctrl, int x, int y, int strength, bool re
   			{
   				RemoveEffect("IntControlJumpDouble", this);
 	 			SetYDir(-this.JumpSpeed /4*3 * GetCon(), 100 * 100);
-	 			CreateJumpEffect(50, 130);
+	 			JumpEffect(50, 130);
 	 			DoMagicEnergy(-JUMP_MANA);
 	 		}
 			else
@@ -101,7 +101,7 @@ public func ObjectControl(int plr, int ctrl, int x, int y, int strength, bool re
   			{
 	    		RemoveEffect("IntControlLeftDouble", this);
 	    		ControlLeftDouble();
-	    		CreateJumpEffect(-30, 50);
+	    		JumpEffect(-30, 50);
 	    		DoMagicEnergy(-JUMP_MANA);
     		}
     		else
@@ -127,7 +127,7 @@ public func ObjectControl(int plr, int ctrl, int x, int y, int strength, bool re
   			{
     			RemoveEffect("IntControlRightDouble", this);
     			ControlRightDouble();
-    			CreateJumpEffect(130, 210);
+    			JumpEffect(130, 210);
     			DoMagicEnergy(-JUMP_MANA);
     		}
       		else
@@ -151,7 +151,7 @@ public func ObjectControl(int plr, int ctrl, int x, int y, int strength, bool re
   			{
     			RemoveEffect("IntControlDownDouble", this);
     			SetYDir(this.JumpSpeed * GetCon(), 100 * 100);
-    			CreateJumpEffect(230, 310);
+    			JumpEffect(230, 310);
     			DoMagicEnergy(-JUMP_MANA);
     		}
       		else
@@ -175,6 +175,10 @@ public func ObjectControl(int plr, int ctrl, int x, int y, int strength, bool re
 	return _inherited(plr, ctrl, x, y, strength, repeat, release);
 }
 
+func JumpEffect(from, to)
+{
+	ChampType->JumpEffect(this, from, to);
+}
 
 
 func ControlLeftDouble()
@@ -250,55 +254,11 @@ func FxStopTumblingTimer()
 	return -1;
 }
 
-func ChooseType(id ID, string type)
-{
-	ChampType = type;
-}
-
 func FxBlockingStart()
 {
 	Sound("block", false, 50);
 	
-	if( ChampType == "Electro")
-	{
-		for(var i = 0; i < 360; i+=10)
-		{
-			var r = BLOCK_RANGE;
-			var x = Cos(i, r);
-			var y = Sin(i, r);
-			
-			var angle = Angle(0,0,x,y) + 90;
-			
-			var trailparticles =
-			{
-				Size = PV_Linear(15,0),
-				Rotation = angle
-			};
-		
-			CreateParticle("BlueSpark", x, y, 0, 0, 10, trailparticles);
-		}
-	}
-	
-	if( ChampType == "Fire")
-	{
-		for(var i = 0; i < 360; i+=10)
-		{
-			var r = BLOCK_RANGE;
-			var x = Cos(i, r);
-			var y = Sin(i, r);
-			
-			var angle = Angle(0,0,x,y) + 90;
-			
-			var trailparticles =
-			{
-				Prototype = Particles_FireTrail(),
-				Size = PV_Linear(10,0),
-				Rotation = PV_Linear(360,0),
-			};
-		
-			CreateParticle("Fire", x, y, 0, 0, 10, trailparticles);
-		}
-	}
+	ChampType->BlockEffect(this, BLOCK_RANGE);
 	
 	for(var o in FindObjects(Find_Distance(BLOCK_RANGE), Find_Func("IsReflectable")))
 	{
@@ -330,76 +290,14 @@ func IsBlocking()
 }
 
 
-func CreateJumpEffect(int from, int to)
-{
-	if(ChampType == "Electro")
-	{
-		Sound("electric_shot", false, 30);
-
-		for(var i = from; i < to; i+=5)
-		{
-			var r = 10;
-			var x = Cos(i, r);
-			var y = Sin(i, r);
-			
-			var angle = Angle(0,0,x,y);
-			
-			var trailparticles =
-			{
-				Size = PV_Linear(15,0),
-				Rotation = angle
-			};
-		
-			CreateParticle("BlueSpark", x, y, x, y, 10, trailparticles);
-		}
-	}
-	
-	if(ChampType == "Fire")
-	{
-		Sound("Fire::Inflame", false, 30);
-
-		for(var i = from; i < to; i+=5)
-		{
-			var r = 10;
-			var x = Cos(i, r);
-			var y = Sin(i, r);
-			
-			var trailparticles =
-			{
-				Prototype = Particles_FireTrail(),
-				Size = PV_Linear(10,0),
-				Rotation = PV_Linear(360,0)
-			};
-		
-			CreateParticle("Fire", x, y, x, y, 10, trailparticles);
-		}
-	}
-}
-
 func LaunchSpecial1(x, y)
 {
-	if (ChampType == "Electro")
-	{
-		LaunchSpell(ElectroProjectile, x, y);
-	}
-	if (ChampType == "Fire")
-	{
-		LaunchSpell(FireProjectile, x, y);
-	}
+	ChampType->LaunchSpecial1(this, x, y);
 }
 
 func LaunchSpecial2(int x, int y)
 {
-	if (ChampType == "Fire")
-	{
-		var y_off = 20 - FireNado.size_y;
-		LaunchSpell(FireNado, x, y, 0, y_off);
-	}
-	
-	if (ChampType == "Electro")
-	{
-		LaunchSpell(ElectroOrb, x, y, 0, y_off);
-	}
+	ChampType->LaunchSpecial2(this, x, y);
 }
 
 func LaunchSpell(id ID, x, y, x_off, y_off)
@@ -419,8 +317,8 @@ func LaunchSpell(id ID, x, y, x_off, y_off)
 func ChooseMenu()
 {
 	var champs = [
-					["Electro Man", Rock, "He is the most bestest electro man of all time", "Electro"],
-					["Fire Man", Wood, "He is the most bestest fire man of all time", "Fire"]
+					["Electro Man", Rock, "He is the most bestest electro man of all time", ElectroMan],
+					["Fire Man", Wood, "He is the most bestest fire man of all time", FireMan]
 				 ];
 
 	var menu = 
@@ -496,6 +394,7 @@ func ScenOptsUpdateDesc(data, int player, int ID, int subwindowID, object target
 func ScenOptsActivate(data, int player, int ID, int subwindowID, object target)
 {
 	ChampType = data[0];
+	
 	this->CancelMenu();
 }
 
@@ -536,7 +435,6 @@ func IsCharging()
 {
 	return GetEffect("Charge", this);
 }
-
 
 
 local ActMap = {

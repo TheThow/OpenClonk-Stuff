@@ -128,7 +128,7 @@ func OrbEffect()
 
 func CheckForEnemies()
 {
-	for(var o in FindObjects(Find_Distance(Size), Find_ID(Clonk)))
+	for(var o in FindObjects(Find_Distance(Size), Find_ID(Clonk), Find_NoContainer()))
 	{
 		if(o->GetOwner() == GetOwner())
 			continue;

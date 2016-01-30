@@ -6,26 +6,26 @@
 */
 
 
-func LaunchSpecial1(int x, int y)
+func LaunchSpecial1(object clonk, int x, int y)
 {
-	Clonk->LaunchSpell(FireProjectile, x, y, 0, 0);
+	clonk->LaunchSpell(FireProjectile, x, y, 0, 0);
 }
 
-func LaunchSpecial2(int x, int y)
+func LaunchSpecial2(object clonk, int x, int y)
 {
-	var y_off = 20 - FireNado.size_y;
-	Clonk->LaunchSpell(FireNado, x, y, 0, y_off);
+	var y_off = -6;
+	clonk->LaunchSpell(FireNado, x, y, 0, y_off);
 }
 
-func JumpEffect(from, to)
+func JumpEffect(object clonk, from, to)
 {
 	Sound("Fire::Inflame", false, 30);
 
 	for(var i = from; i < to; i+=5)
 	{
 		var r = 10;
-		var x = Cos(i, r);
-		var y = Sin(i, r);
+		var x = clonk->GetX() + Cos(i, r);
+		var y = clonk->GetY() + Sin(i, r);
 		
 		var trailparticles =
 		{
@@ -34,19 +34,17 @@ func JumpEffect(from, to)
 			Rotation = PV_Linear(360,0)
 		};
 	
-		CreateParticle("Fire", x, y, x, y, 10, trailparticles);
+		CreateParticle("Fire", x, y, Cos(i, r), Sin(i, r), 10, trailparticles);
 	}
 }
 
-func BlockEffect(range)
+func BlockEffect(object clonk, range)
 {
 	for(var i = 0; i < 360; i+=10)
 	{
 		var r = range;
-		var x = Cos(i, r);
-		var y = Sin(i, r);
-		
-		var angle = Angle(0,0,x,y) + 90;
+		var x = clonk->GetX() + Cos(i, r);
+		var y = clonk->GetY() + Sin(i, r);
 		
 		var trailparticles =
 		{
