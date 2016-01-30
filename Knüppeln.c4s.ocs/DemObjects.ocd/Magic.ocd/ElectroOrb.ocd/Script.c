@@ -150,7 +150,8 @@ func CheckForEnemies()
 
 func Hit()
 {
-	Return();
+	if(!GetEffect("Comeback", this))
+		Return();
 }
 
 func Return()
@@ -163,9 +164,10 @@ func Return()
 	AddEffect("Comeback", this, 20, 1, this, GetID());
 }
 
-func FxRemoveStop()
+func FxRemoveStop(object target, proplist effect, int reason, bool temporary)
 {
 	OnRemove();
+	
 	RemoveObject();
 }
 
