@@ -7,7 +7,7 @@ local TIMER = 10;
 local MOVEMENT_CD = 15;
 
 local BLOCK_CD = 35;
-local BLOCK_DURR = 1;
+local BLOCK_DURR = 4;
 local BLOCK_RANGE = 25;
 
 local JUMP_MANA = 10;
@@ -77,7 +77,7 @@ public func ObjectControl(int plr, int ctrl, int x, int y, int strength, bool re
   			{
   				RemoveEffect("IntControlJumpDouble", this);
 	 			SetYDir(-this.JumpSpeed /4*3 * GetCon(), 100 * 100);
-	 			JumpEffect(50, 130);
+	 			JumpEffect("Up");
 	 			DoMagicEnergy(-JUMP_MANA);
 	 		}
 			else
@@ -101,7 +101,7 @@ public func ObjectControl(int plr, int ctrl, int x, int y, int strength, bool re
   			{
 	    		RemoveEffect("IntControlLeftDouble", this);
 	    		ControlLeftDouble();
-	    		JumpEffect(-30, 50);
+	    		JumpEffect("Left");
 	    		DoMagicEnergy(-JUMP_MANA);
     		}
     		else
@@ -127,7 +127,7 @@ public func ObjectControl(int plr, int ctrl, int x, int y, int strength, bool re
   			{
     			RemoveEffect("IntControlRightDouble", this);
     			ControlRightDouble();
-    			JumpEffect(130, 210);
+    			JumpEffect("Right");
     			DoMagicEnergy(-JUMP_MANA);
     		}
       		else
@@ -151,7 +151,7 @@ public func ObjectControl(int plr, int ctrl, int x, int y, int strength, bool re
   			{
     			RemoveEffect("IntControlDownDouble", this);
     			SetYDir(this.JumpSpeed * GetCon(), 100 * 100);
-    			JumpEffect(230, 310);
+    			JumpEffect("Down");
     			DoMagicEnergy(-JUMP_MANA);
     		}
       		else
@@ -175,9 +175,9 @@ public func ObjectControl(int plr, int ctrl, int x, int y, int strength, bool re
 	return _inherited(plr, ctrl, x, y, strength, repeat, release);
 }
 
-func JumpEffect(from, to)
+func JumpEffect(dir)
 {
-	ChampType->JumpEffect(this, from, to);
+	ChampType->JumpEffect(this, dir);
 }
 
 
@@ -204,7 +204,7 @@ func Hit()
 func Death(...)
 {
 	CastObjects(Flesh, 8, 50);
-	CastPXS("Blood", 50, 30);
+	//CastPXS("Blood", 50, 30);
 	Sound("kill", false, 100);
 	//RemoveObject();
 	SetClrModulation(RGBa(255,255,255,0));
@@ -260,33 +260,34 @@ func FxBlockingStart()
 	
 	ChampType->BlockEffect(this, BLOCK_RANGE);
 	
+	Block();
+}
+
+func FxBlockTimer(object target, proplist effect, int time)
+{
+	if(time >= BLOCK_DURR)
+		return -1;
+		
+	Block();
+}
+
+
+func Block()
+{
 	for(var o in FindObjects(Find_Distance(BLOCK_RANGE), Find_Func("IsReflectable")))
 	{
 		var xdir = o->GetXDir();
 		var ydir = o->GetYDir();
 		
-		var entryangle = Angle(0,0,xdir,ydir);
+		//var entryangle = Angle(0,0,xdir,ydir);
 		var objectangle = Angle(GetX(), GetY(), o->GetX(), o->GetY());
 		
 		var speed = Sqrt(xdir**2+ydir**2);
 		
-		var tangle = 2* ( (objectangle + 90)%360 - entryangle) + entryangle;
+		//var tangle = 2* ( (objectangle + 90)%360 - entryangle) + entryangle;
+		var tangle = objectangle;
         o->SetSpeed(Sin(tangle, speed), -Cos(tangle, speed));
 	}
-	
-}
-
-func FxBlockingDamage()
-{
-	return 0;
-}
-
-func IsBlocking()
-{
-	if(GetEffect("Blocking", this))
-		return false;
-		
-	return true;
 }
 
 
@@ -415,6 +416,18 @@ func Charge(object caller, string callback, int time, proplist params, bool noso
 		Sound("charge", false, 20);
 }
 
+func FxChargeDamage(object target, proplist effect, int damage, int cause)
+{
+	if (damage >= 0)
+		return;
+
+	if(GetAction() == "Float")
+		SetAction("Jump");
+		
+	effect.c->~ChargeInterrupted();
+	RemoveEffect(effect.name, this);
+}
+
 func FxChargeStop(object target, proplist effect, int reason, bool temporary)
 {
 	if(temporary)
@@ -428,7 +441,8 @@ func FxChargeStop(object target, proplist effect, int reason, bool temporary)
 	
 	effect.p.new_angle = Angle(0,0,x1,y1);
 	
-	effect.c->Call(effect.f, effect.p);
+	if(effect.c)
+		effect.c->Call(effect.f, effect.p);
 }
 
 func IsCharging()

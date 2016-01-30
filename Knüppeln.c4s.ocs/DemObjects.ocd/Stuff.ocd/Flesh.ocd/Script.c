@@ -38,7 +38,7 @@ func FxDrawBloodTimer(object target, proplist effect, int time)
 func Hit()
 {
 	Sound("splash*", false, 10);
-	CastPXS("Blood", 25, 10);
+	//CastPXS("Blood", 25, 10);
 	RemoveObject();
 }
 

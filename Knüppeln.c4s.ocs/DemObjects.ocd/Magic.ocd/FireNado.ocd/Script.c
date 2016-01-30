@@ -16,7 +16,7 @@ local SpellDamage = 30;
 local a = 0;
 
 local Speed = 30;
-local Durr = 76;
+local Durr = 70;
 local Charge_durr = 20;
 
 func Initialize()
@@ -43,6 +43,13 @@ func ChargeStop(proplist params)
 	
 	Sound("Fire::Fireball", false, 100);
 	Sound("Fire::FuseLoop", false, 20, nil, 1);
+	SetLightRange(30, 70);
+	SetLightColor(RGB(255, 100, 0));
+}
+
+func ChargeInterrupted()
+{
+	RemoveObject();
 }
 
 func FxFireNadoTimer(object target, proplist effect, int time)

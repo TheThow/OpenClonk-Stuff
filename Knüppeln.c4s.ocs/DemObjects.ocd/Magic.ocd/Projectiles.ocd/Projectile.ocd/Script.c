@@ -47,76 +47,16 @@ func Launch(object clonk, int x, int y)
 
 func FxTheEffectStart()
 {
-
 	this->~InitEffect();
-/*
-	if(Type == "Electro")
-	{	
-		var lightparticle =
-		{
-			Alpha = 30,
-			Size = 30,
-			BlitMode = GFX_BLIT_Additive,
-			Rotation = PV_Step(30, 0, 1),
-			Attach = ATTACH_Back | ATTACH_MoveRelative
-			
-		};
-		CreateParticle("Flash", 0, 0, 0, 0, 0, lightparticle);
-	}
-
-	if(Type == "Fire")
-	{
-		var lightparticle =
-		{
-			R = 255,
-			G = 100,
-			B = 0,
-			Alpha = 40,
-			Size = 50,
-			BlitMode = GFX_BLIT_Additive,
-			Rotation = PV_Step(30, 0, 1),
-			Attach = ATTACH_Back | ATTACH_MoveRelative
-			
-		};
-		CreateParticle("Shockwave", 0, 0, 0, 0, 0, lightparticle);
-		
-		
-	}*/
 }
 
 func FxTheEffectTimer(object target, proplist effect, int time)
 {
-/*
-	if (Type == "Electro")
-	{
-		var trailparticles =
-		{
-			Prototype = Particles_ElectroSpark2(),
-			Size = PV_Linear(RandomX(5,15),0),
-			BlitMode = GFX_BLIT_Additive,
-			Rotation = Angle(0,0,GetXDir(), GetYDir())
-		};
-		
-		CreateParticle("ElectroSpark", 0, 0, 0, 0, 10, trailparticles, 5);
-	}
-	
-	if (Type == "Fire")
-	{
-		var firetrailparticles =
-		{
-			Prototype = Particles_FireTrail(),
-			Size = PV_Linear(10,0)
-		};
-		CreateParticle("Fire", 0, 0, 0, 0, 10, firetrailparticles);
-	}*/
 	this->~TravelEffect();
 }
 
 public func HitObject(obj)
 {
-	if(!obj->IsBlocking())
-		return false;
-		
 	Hit();
 }
 
@@ -125,7 +65,10 @@ public func Hit()
 	Explode(SpellDamage);
 }
 
-local Plane = 450;
+func ChargeInterrupted()
+{
+	RemoveObject();
+}
 
 local ActMap = {
 

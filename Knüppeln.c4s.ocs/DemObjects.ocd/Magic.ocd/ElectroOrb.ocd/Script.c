@@ -16,6 +16,8 @@ local Size = 15;
 local Name = "$Name$";
 local Description = "$Description$";
 
+local LifeTime = 200;
+
 local plr_hit;
 
 local Target;
@@ -50,6 +52,9 @@ func ChargeStop(proplist params)
 	
 	OrbEffect();
 	AddEffect("HitCheck", this, 1,1, nil,nil, params.cl);
+	
+	SetLightRange(30, 70);
+	SetLightColor(RGB(255, 255, 255));
 }
 
 func FxElectroOrbTimer(object target, proplist effect, int time)
@@ -151,12 +156,48 @@ func Hit()
 func Return()
 {
 	RemoveEffect("ElectroOrb", this);
+	AddEffect("Remove", this, 20, LifeTime, this, GetID());
 	for(var i = 0; i < GetLength(plr_hit); i++)
 		plr_hit[i] = 0;
 	
 	AddEffect("Comeback", this, 20, 1, this, GetID());
 }
 
+func FxRemoveStop()
+{
+	OnRemove();
+	RemoveObject();
+}
+
+func ChargeInterrupted()
+{
+	RemoveObject();
+}
+
+func OnRemove()
+{
+	var particles =
+	{
+		Prototype = Particles_Glimmer(),
+		R = 150,
+		G = 200,
+		B = 255,
+		Alpha = 255,
+		Size = PV_Linear(5, 0),
+	};
+	CreateParticle("StarSpark", 0, 0, PV_Random(-50,50), PV_Random(-50, 50), 20, particles, 15);
+	
+	var sphereparticle =
+	{
+		Alpha = PV_Linear(255, 0),
+		Size = 10,
+		R = 150,
+		G = 200,
+		B = 255,
+		BlitMode = GFX_BLIT_Additive,
+	};
+	CreateParticle("StarSpark", 0, 0, 0, 0, 10, sphereparticle, 4);
+}
 
 
 local ActMap = {

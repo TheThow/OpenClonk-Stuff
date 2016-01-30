@@ -17,8 +17,31 @@ func LaunchSpecial2(object clonk, int x, int y)
 	clonk->LaunchSpell(FireNado, x, y, 0, y_off);
 }
 
-func JumpEffect(object clonk, from, to)
+func JumpEffect(object clonk, dir)
 {
+	var from, to;
+
+	if (dir == "Up")
+	{
+		from = 50; 
+		to = 130;
+	}
+	if (dir == "Left")
+	{
+		from = -30; 
+		to = 50;
+	}
+	if (dir == "Right")
+	{
+		from = 130; 
+		to = 210;
+	}
+	if (dir == "Down")
+	{
+		from = 230; 
+		to = 310;
+	}
+
 	Sound("Fire::Inflame", false, 30);
 
 	for(var i = from; i < to; i+=5)
