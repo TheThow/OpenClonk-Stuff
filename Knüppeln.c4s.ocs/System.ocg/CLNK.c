@@ -2,24 +2,25 @@
 
 local MaxEnergy = 100000;
 local MaxMagic = 100000;
-local ChampType = "none";
 
 local TIMER = 10;
 local MOVEMENT_CD = 15;
 
 local BLOCK_CD = 35;
-local BLOCK_DURR = 7;
-local BLOCK_RANGE = 20;
+local BLOCK_DURR = 1;
+local BLOCK_RANGE = 25;
 
 local JUMP_MANA = 10;
 local MaxContentsCount = 1;
 
 local healthregen_base = 100;
-local healthregen_max = 20;
+local HEALTHREGEN_MAX = 20;
 
 local SPECIAL1_MANA = 25;
 
 local choosemenu_id;
+
+local ChampType = "none";
 
 func Initialize()
 {
@@ -32,6 +33,9 @@ func Initialize()
 
 public func ObjectControl(int plr, int ctrl, int x, int y, int strength, bool repeat, bool release)
 {	
+
+	if(IsCharging())
+		return 1;
 	
 	if (ctrl == CON_Interact && release == false)
 	{
@@ -42,23 +46,25 @@ public func ObjectControl(int plr, int ctrl, int x, int y, int strength, bool re
 		}
 	}
 	
-	if (ctrl == CON_QuickSwitch)
+	if (ctrl == CON_QuickSwitch && release == false)
 	{
 		
 		var a = GetPlayerCursorPos(plr, true);
 		var x1 = a[0] - GetX();
 		var y1 = a[1] - GetY();
 		
-		if(GetMagicEnergy() >= SPECIAL1_MANA)
-		{
-			LaunchSpecial1(x1, y1);
-			DoMagicEnergy(-SPECIAL1_MANA);
-			return 1;
-		}
-		else
-		{
-			Sound("UI::Error", 0, 50, GetOwner());
-		}
+		LaunchSpecial1(x1, y1);
+		
+		return true;
+	}
+	
+	if (ctrl == CON_Contents && release == false)
+	{
+		var a = GetPlayerCursorPos(plr, true);
+		var x1 = a[0] - GetX();
+		var y1 = a[1] - GetY();
+		
+		LaunchSpecial2(x1, y1);
 		
 		return true;
 	}
@@ -95,7 +101,7 @@ public func ObjectControl(int plr, int ctrl, int x, int y, int strength, bool re
   			{
 	    		RemoveEffect("IntControlLeftDouble", this);
 	    		ControlLeftDouble();
-	    		CreateJumpEffect(-40, 40);
+	    		CreateJumpEffect(-30, 50);
 	    		DoMagicEnergy(-JUMP_MANA);
     		}
     		else
@@ -121,7 +127,7 @@ public func ObjectControl(int plr, int ctrl, int x, int y, int strength, bool re
   			{
     			RemoveEffect("IntControlRightDouble", this);
     			ControlRightDouble();
-    			CreateJumpEffect(140, 220);
+    			CreateJumpEffect(130, 210);
     			DoMagicEnergy(-JUMP_MANA);
     		}
       		else
@@ -174,14 +180,14 @@ public func ObjectControl(int plr, int ctrl, int x, int y, int strength, bool re
 func ControlLeftDouble()
 {
   	SetXDir(-40);
-  	SetYDir(-15);
+  	SetYDir(GetYDir() - 15);
   	return true;
 }
 
 func ControlRightDouble()
 {
   	SetXDir(40);
-  	SetYDir(-15);
+  	SetYDir(GetYDir() - 15);
   	return true;
 }
 
@@ -210,7 +216,7 @@ func FxManaRegenTimer()
 
 func FxAutoHealTimer()
 {
-	if(GetEnergy() < healthregen_base + healthregen_max && GetEnergy() < GetMaxEnergy())
+	if(GetEnergy() < healthregen_base + HEALTHREGEN_MAX && GetEnergy() < GetMaxEnergy())
 	{
 		DoEnergy(1);
 	}
@@ -243,14 +249,7 @@ func FxStopTumblingTimer()
 	}
 	return -1;
 }
-/*
-func ChooseMenu()
-{
-	CreateMenu(Clonk, this, 0, "Choose your Champion!", 0, 1);
-	AddMenuItem("Electro Man", "ChooseType", Rock, 0, "Electro\"");
-	AddMenuItem("Fire Man", "ChooseType", Wood, 0, "Fire\"");
-}
-*/
+
 func ChooseType(id ID, string type)
 {
 	ChampType = type;
@@ -379,10 +378,41 @@ func CreateJumpEffect(int from, int to)
 
 func LaunchSpecial1(x, y)
 {
-	if (ChampType == "Electro" || ChampType == "Fire")
+	if (ChampType == "Electro")
 	{
-		var proj = CreateObject(Projectile,0,0,GetOwner());
-		proj->Launch(this, x, y);
+		LaunchSpell(ElectroProjectile, x, y);
+	}
+	if (ChampType == "Fire")
+	{
+		LaunchSpell(FireProjectile, x, y);
+	}
+}
+
+func LaunchSpecial2(int x, int y)
+{
+	if (ChampType == "Fire")
+	{
+		var y_off = 20 - FireNado.size_y;
+		LaunchSpell(FireNado, x, y, 0, y_off);
+	}
+	
+	if (ChampType == "Electro")
+	{
+		LaunchSpell(ElectroOrb, x, y, 0, y_off);
+	}
+}
+
+func LaunchSpell(id ID, x, y, x_off, y_off)
+{
+	if (GetMagicEnergy() >= ID.ManaCost)
+	{
+		var spell = CreateObject(ID,x_off, y_off,GetOwner());
+		spell->Launch(this, x, y);
+		DoMagicEnergy(-ID.ManaCost);
+	}
+	else
+	{
+		Sound("UI::Error", 0, 50, GetOwner());
 	}
 }
 
@@ -473,3 +503,53 @@ func GetChampType()
 {
 	return ChampType;
 }
+
+func Charge(object caller, string callback, int time, proplist params, bool nosound)
+{
+	SetAction("Float");
+	var eff = AddEffect("Charge", this, 20, time, this, GetID());
+	eff.f = callback;
+	eff.c = caller;
+	eff.p = params;
+	
+	if(!nosound)
+		Sound("charge", false, 20);
+}
+
+func FxChargeStop(object target, proplist effect, int reason, bool temporary)
+{
+	if(temporary)
+		return;
+
+	SetAction("Jump");
+			
+	var a = GetPlayerCursorPos(GetOwner(), true);
+	var x1 = a[0] - GetX();
+	var y1 = a[1] - GetY();
+	
+	effect.p.new_angle = Angle(0,0,x1,y1);
+	
+	effect.c->Call(effect.f, effect.p);
+}
+
+func IsCharging()
+{
+	return GetEffect("Charge", this);
+}
+
+
+
+local ActMap = {
+
+	Float = {
+		Prototype = Action,
+		Name = "Float",
+		Procedure = DFA_FLOAT,
+		NextAction = "Float",
+		Length = 1,
+		Delay = 1,
+		FacetBase = 1,
+		StartCall = "Floating",
+		Speed=0
+	}
+};

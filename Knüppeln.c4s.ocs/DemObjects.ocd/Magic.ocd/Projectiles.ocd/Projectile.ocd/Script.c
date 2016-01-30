@@ -1,6 +1,9 @@
 
-local speed = 50;
+local Speed = 50;
 local Type = "none";
+
+local ManaCost = 25;
+local SpellDamage = 15;
 
 func Initialize()
 {
@@ -22,12 +25,13 @@ func Launch(object clonk, int x, int y)
 	AddEffect("HitCheck", this, 1,1, nil,nil, clonk);
 	AddEffect("TheEffect", this, 20, 1, this, Projectile);
 
-	SetVelocity(angle, speed);
+	SetVelocity(angle, Speed);
 	
+	/*
 	if (Type == "Electro")
 	{
 		Sound("electric_shot", false, 100);
-		Sound("electric", false, 20, nil, 1);
+		Sound("electro_travel", false, 50, nil, 1);
 		SetLightRange(30, 70);
 		SetLightColor(RGB(255, 255, 255));
 	}
@@ -38,24 +42,26 @@ func Launch(object clonk, int x, int y)
 		Sound("Fire::FuseLoop", false, 20, nil, 1);
 		SetLightRange(30, 70);
 		SetLightColor(RGB(255, 100, 0));
-	}
+	}*/
 }
 
 func FxTheEffectStart()
 {
+
+	this->~InitEffect();
+/*
 	if(Type == "Electro")
-	{
+	{	
 		var lightparticle =
 		{
-			Prototype = Particles_ElectroSpark2(),
-			Alpha = 50,
-			Size = PV_Random(60, 80, 1),
-			Rotation = PV_Step(10, PV_Random(0, 360, 5), 1),
+			Alpha = 30,
+			Size = 30,
 			BlitMode = GFX_BLIT_Additive,
+			Rotation = PV_Step(30, 0, 1),
 			Attach = ATTACH_Back | ATTACH_MoveRelative
 			
 		};
-		CreateParticle("ElectroSpark", 0, 0, 0, 0, 0, lightparticle, 20);
+		CreateParticle("Flash", 0, 0, 0, 0, 0, lightparticle);
 	}
 
 	if(Type == "Fire")
@@ -75,22 +81,23 @@ func FxTheEffectStart()
 		CreateParticle("Shockwave", 0, 0, 0, 0, 0, lightparticle);
 		
 		
-	}
+	}*/
 }
 
 func FxTheEffectTimer(object target, proplist effect, int time)
 {
+/*
 	if (Type == "Electro")
 	{
 		var trailparticles =
 		{
 			Prototype = Particles_ElectroSpark2(),
-			Size = PV_Linear(RandomX(20,35),0),
+			Size = PV_Linear(RandomX(5,15),0),
 			BlitMode = GFX_BLIT_Additive,
 			Rotation = Angle(0,0,GetXDir(), GetYDir())
 		};
 		
-		CreateParticle("ElectroSpark", 0, 0, 0, 0, 10, trailparticles);
+		CreateParticle("ElectroSpark", 0, 0, 0, 0, 10, trailparticles, 5);
 	}
 	
 	if (Type == "Fire")
@@ -101,7 +108,8 @@ func FxTheEffectTimer(object target, proplist effect, int time)
 			Size = PV_Linear(10,0)
 		};
 		CreateParticle("Fire", 0, 0, 0, 0, 10, firetrailparticles);
-	}
+	}*/
+	this->~TravelEffect();
 }
 
 public func HitObject(obj)
@@ -114,11 +122,9 @@ public func HitObject(obj)
 
 public func Hit()
 {
-	Explode(15);
+	Explode(SpellDamage);
 }
 
-local Name = "$Name$";
-local Description = "$Description$";
 local Plane = 450;
 
 local ActMap = {
