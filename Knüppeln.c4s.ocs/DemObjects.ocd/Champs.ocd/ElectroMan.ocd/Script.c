@@ -16,6 +16,11 @@ func LaunchSpecial2(object clonk, int x, int y)
 	clonk->LaunchSpell(ElectroOrb, x, y, 0, 0);
 }
 
+func LaunchSpecial3(object clonk, int x, int y)
+{
+	clonk->LaunchSpell(ThunderStrike, x, y, x, y);
+}
+
 func JumpEffect(object clonk, dir)
 {
 	var from;

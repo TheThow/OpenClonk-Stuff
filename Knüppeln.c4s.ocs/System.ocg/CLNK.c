@@ -33,7 +33,6 @@ func Initialize()
 
 public func ObjectControl(int plr, int ctrl, int x, int y, int strength, bool repeat, bool release)
 {	
-
 	if(IsCharging())
 		return 1;
 	
@@ -41,7 +40,7 @@ public func ObjectControl(int plr, int ctrl, int x, int y, int strength, bool re
 	{
 		if(!GetEffect("BlockingCD", this))
 		{
-			AddEffect("Blocking", this, 1, BLOCK_DURR, this, Clonk);
+			AddEffect("Blocking", this, 1, BLOCK_DURR, this, GetID());
 			AddEffect("BlockingCD", this, 1, BLOCK_CD);
 		}
 	}
@@ -54,6 +53,17 @@ public func ObjectControl(int plr, int ctrl, int x, int y, int strength, bool re
 		var y1 = a[1] - GetY();
 		
 		LaunchSpecial1(x1, y1);
+		
+		return true;
+	}
+	
+	if (ctrl == CON_NextCrew && release == false && !Contained())
+	{
+		var a = GetPlayerCursorPos(plr, true);
+		var x1 = a[0] - GetX();
+		var y1 = a[1] - GetY();
+		
+		LaunchSpecial3(x1, y1);
 		
 		return true;
 	}
@@ -299,6 +309,11 @@ func LaunchSpecial1(x, y)
 func LaunchSpecial2(int x, int y)
 {
 	ChampType->LaunchSpecial2(this, x, y);
+}
+
+func LaunchSpecial3(int x, int y)
+{
+	ChampType->LaunchSpecial3(this, x, y);
 }
 
 func LaunchSpell(id ID, x, y, x_off, y_off)
