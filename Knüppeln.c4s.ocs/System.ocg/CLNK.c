@@ -334,7 +334,8 @@ func ChooseMenu()
 {
 	var champs = [
 					["Electro Man", Rock, "He is the most bestest electro man of all time", ElectroMan],
-					["Fire Man", Wood, "He is the most bestest fire man of all time", FireMan]
+					["Fire Man", Wood, "He is the most bestest fire man of all time", FireMan],
+					["Light Man", Lantern, "He is the most brightest man of all time", LightMan]
 				 ];
 
 	var menu = 
