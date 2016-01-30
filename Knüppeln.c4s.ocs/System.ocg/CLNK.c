@@ -365,13 +365,13 @@ func ChooseMenu()
 				
 				OnMouseIn = 
 					[ 
-						GuiAction_Call(this, "ScenOptsUpdateDesc", [champ[2], champ[1]]), 
+						GuiAction_Call(this, "ChampUpdateDesc", [champ[2], champ[1]]), 
 						GuiAction_SetTag("Hover")
 					],
 			
 				OnMouseOut = { Hover = GuiAction_SetTag("Std")},
 				
-				OnClick = GuiAction_Call(this, "ScenOptsActivate", [champ[3]]),
+				OnClick = GuiAction_Call(this, "SelectChamp", [champ[3]]),
 			},
 		};
 		GuiAddSubwindow(subm, menu.list);
@@ -381,7 +381,7 @@ func ChooseMenu()
 	this->SetMenu(choosemenu_id, true);
 }
 
-func ScenOptsUpdateDesc(data, int player, int ID, int subwindowID, object target)
+func ChampUpdateDesc(data, int player, int ID, int subwindowID, object target)
 {
 	var update = 
 	{
@@ -391,7 +391,7 @@ func ScenOptsUpdateDesc(data, int player, int ID, int subwindowID, object target
 	GuiUpdate(update, choosemenu_id, 1, this);
 }
 
-func ScenOptsActivate(data, int player, int ID, int subwindowID, object target)
+func SelectChamp(data, int player, int ID, int subwindowID, object target)
 {
 	ChampType = data[0];
 	
