@@ -30,7 +30,6 @@ func Launch(object clonk, int x, int y)
 	shooter = clonk;
 	SetController(clonk->GetOwner());
 	angle = Angle(0, 0, x, y);
-	SetVelocity(Angle(0, 0, x, y) + RandomX(-3, 3), Speed + RandomX(-5, 5));
 	AddEffect("HitCheck", this, 1,1, nil,nil, clonk, true);
 	ScheduleCall(this, "Hit", LifeTime);
 	
@@ -45,7 +44,7 @@ func Hit()
 
 public func HitObject(obj)
 {
-	obj->DoEnergy(-SpellDamage * 10, true, nil, GetController());
+	obj->DoEnergy(-SpellDamage * 100, true, nil, GetController());
 }
 
 func FxLightRayStart(target, fx, temp)
@@ -74,6 +73,9 @@ func FxLightRayTimer(target, fx, time)
 {
 	if (!shooter) return -1;
 	current_length += 5;
+	var new_coords = GetPlayerCursorPos(shooter->GetOwner(), true);
+	if (new_coords)
+		angle = Angle(shooter->GetX(), shooter->GetY(), new_coords[0], new_coords[1]);
 	var from_x = AbsX(shooter->GetX());
 	var from_y = AbsY(shooter->GetY());
 	var to_x   = from_x + Sin(angle, current_length);
@@ -90,6 +92,7 @@ func FxLightRayTimer(target, fx, time)
 	var mid_y  = (from_y + to_y) / 2;
 	
 	fx.ray.Size = len;
+	fx.ray.Rotation = angle;
 	
 	CreateParticle("StarSpark", from_x, from_y, 0, 0, 10, fx.stars, 2);
 	CreateParticle("StarSpark", to_x, to_y, 0, 0, 10, fx.stars, 2);

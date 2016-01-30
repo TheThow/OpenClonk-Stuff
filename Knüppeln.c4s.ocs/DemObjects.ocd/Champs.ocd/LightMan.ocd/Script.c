@@ -8,12 +8,12 @@
 
 func LaunchSpecial1(object clonk, int x, int y)
 {
-	clonk->LaunchSpell(LightRay, x, y, 0, 0);
+	clonk->LaunchSpell(LightStar, x, y, 0, 0);
 }
 
 func LaunchSpecial2(object clonk, int x, int y)
 {
-	clonk->LaunchSpell(LightStar, x, y, 0, 0);
+	clonk->LaunchSpell(LightRay, x, y, 0, 0);
 }
 
 func JumpEffect(object clonk, dir)
