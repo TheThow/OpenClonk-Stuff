@@ -5,10 +5,10 @@
 	@author 
 */
 
-local ManaCost = 70;
+local ManaCost = 60;
 local SpellDamage = 50;
 
-local Delay = 40;
+local Delay = 30;
 local Size = 30;
 
 
