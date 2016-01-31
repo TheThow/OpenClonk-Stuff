@@ -37,9 +37,6 @@ func Initialize()
 
 public func ObjectControl(int plr, int ctrl, int x, int y, int strength, bool repeat, bool release)
 {	
-	if(IsCharging())
-		return 1;
-	
 	if (ctrl == CON_Interact && release == false && !Contained())
 	{
 		if(!GetEffect("BlockingCD", this))
