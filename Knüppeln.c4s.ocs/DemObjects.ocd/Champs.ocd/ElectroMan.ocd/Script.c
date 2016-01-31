@@ -54,6 +54,12 @@ func Special3(object clonk, int x, int y, bool released, bool mouseclick, bool a
 		}
 		
 		clonk->LaunchSpell(ThunderStrike, x, y, x, y);
+		
+		if(clonk.RangeDummy.range_on == false)
+		{
+			Log("This shouldn't happen");
+			Log("special1: %d special2: %d special3: %d", clonk.special_active[1], clonk.special_active[2], clonk.special_active[3]);
+		}		
 	}
 }
 

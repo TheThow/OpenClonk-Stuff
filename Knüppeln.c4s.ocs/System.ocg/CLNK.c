@@ -92,14 +92,19 @@ public func ObjectControl(int plr, int ctrl, int x, int y, int strength, bool re
 	
 	if (ctrl == CON_Use && release == false)
 	{
+		var flag = false;
+		
 		for(var i = 0; i < GetLength(special_active); i++)
 		{
 			if(special_active[i] == true)
 			{
 				Call(Format("LaunchSpecial%d", i), x, y, false, true, CanCast());
-				return 1;
+				flag = true;
 			}
 		}
+		
+		if (flag)
+			return true;
 	}
 
 	if (ctrl == CON_Jump && IsJumping() && release == false) 
@@ -246,8 +251,16 @@ func Death(...)
 	CastObjects(Flesh, 8, 50);
 	//CastPXS("Blood", 50, 30);
 	Sound("kill", false, 100);
-	//RemoveObject();
+	
 	SetClrModulation(RGBa(255,255,255,0));
+	
+	if(RangeDummy)
+	{
+		RangeDummy->ClearParticles();
+		RemoveObject(RangeDummy);
+	}
+	
+	RemoveObject();
 	
 	return _inherited(...);
 }
@@ -509,12 +522,24 @@ func CanCast()
 
 func ShowSpellRange(object clonk, id spell, proplist props)
 {
+	if(!RangeDummy)
+	{
+		RangeDummy = CreateObject(Dummy, 0, 0, GetOwner());
+		RangeDummy.Visibility = VIS_Owner;
+		RangeDummy->SetAction("HangOnto", this);
+	}
+
 	RangeDummy->CreateParticle("Shockwave", 0, 0, 0, 0, 0, props);
+	RangeDummy.range_on = true;
 }
 
 func CancelShowSpellRange()
 {
-	RangeDummy->ClearParticles();
+	if(RangeDummy)
+	{
+		RangeDummy->ClearParticles();
+		RangeDummy.range_on = false;
+	}
 }
 
 func CanBeHit()

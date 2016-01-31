@@ -20,6 +20,8 @@ local Speed = 30;
 local Durr = 70;
 local Charge_durr = 20;
 
+local angle_prec = 10;
+
 func Initialize()
 {
 	SetAction("Travel");
@@ -33,7 +35,7 @@ func Launch(object clonk, int x, int y)
 	marker->SetClrModulation(RGBa(255,255,255,100));
 	
 	var params = {
-		angle = Angle(0,0,x,y),
+		angle = Angle(0,0,x,y, angle_prec),
 		clonk = clonk,
 		x = x,
 		y = y,
@@ -60,6 +62,7 @@ func ChargeStop(proplist params)
 	eff.ty = params.y;
 	eff.marker = params.marker;
 	eff.clonk = params.clonk;
+	eff.angle_prec = angle_prec;
 	
 	params.clonk->SetAction("Float");
 	params.clonk->MakeHitable(false);
@@ -76,7 +79,7 @@ func FxFireDashTimer(object target, proplist effect, int time)
 	var x = target->GetX();
 	var y = target->GetY();
 	
-	target->SetPosition(target->GetX() + Sin(a, 6), target->GetY() + -Cos(a, 6));
+	target->SetPosition(target->GetX() + Sin(a, 6, effect.angle_prec), target->GetY() + -Cos(a, 6, effect.angle_prec));
 
 	for(var o in FindObjects(Find_Distance(effect.Size1, x, y), Find_ID(Clonk), Find_NoContainer(), Find_Func("CanBeHit")))
 	{
