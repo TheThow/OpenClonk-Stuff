@@ -56,7 +56,7 @@ func LaunchSpecial3(object clonk, int x, int y, bool released, bool mouseclick, 
 		
 		for(var i = 0; i < 360; i++)
 		{
-			if(GBackSolid(cx + x + Sin(i, 10), cy + y + Cos(i, 10)))
+			if(GBackSolid(cx + x + Sin(i, 5), cy + y + Cos(i, 5)))
 				solidcheck = true;
 		}
 	

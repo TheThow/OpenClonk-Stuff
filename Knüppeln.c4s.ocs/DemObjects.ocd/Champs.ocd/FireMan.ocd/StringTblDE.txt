@@ -1,1 +1,1 @@
-Description=Brzl!
+Description=Brzl! \n\nQ = Fire Shot \nE = Fire Tornado \nR = Fire Dash

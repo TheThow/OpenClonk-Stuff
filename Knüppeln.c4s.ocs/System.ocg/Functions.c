@@ -97,3 +97,36 @@ global func DrawLightning(fromX, fromY, toX, toY, props)
         }
     }
 }
+
+global func Unstuck()
+{
+	if(!this->Stuck())
+		return;
+
+	var flag = false;
+
+	for(var i = 0; i < 30; i += 5)
+	{
+		for(var r = 0; r < 360; r += 10)
+		{
+			var x = Sin(r, i);
+			var y = -Cos(r, i);
+		
+			if(!GBackSolid(x, y))
+			{
+				SetPosition(GetX() + x, GetY() + y);
+				
+				if(!this->Stuck())
+				{
+					flag = true;
+					break;
+				}
+			}
+
+		}
+		
+		if(flag)
+			break;
+	}
+	
+}

@@ -9,7 +9,7 @@ local Name = "$Name$";
 local Description = "$Description$";
 
 local ManaCost = 50;
-local SpellRange = 200;
+local SpellRange = 180;
 
 local Size1 = 25;
 local Size2 = 40;
@@ -59,8 +59,10 @@ func ChargeStop(proplist params)
 	eff.tx = params.x;
 	eff.ty = params.y;
 	eff.marker = params.marker;
+	eff.clonk = params.clonk;
 	
 	params.clonk->SetAction("Float");
+	params.clonk->MakeHitable(false);
 	
 	Sound("Fire::Fireball", false, 100);
 	RemoveObject();
@@ -153,5 +155,7 @@ func FxFireDashStop(object target, proplist effect, int reason, bool temporary)
 	}
 	
 	effect.marker->RemoveObject();
+	effect.clonk->MakeHitable(true);
+	effect.clonk->Unstuck();
 }
 

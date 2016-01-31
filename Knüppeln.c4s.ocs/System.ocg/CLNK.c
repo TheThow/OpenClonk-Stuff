@@ -8,7 +8,7 @@ local MOVEMENT_CD = 15;
 local TUMBLE_DUR = 25;
 
 local BLOCK_CD = 35;
-local BLOCK_DUR = 4;
+local BLOCK_DUR = 8;
 local BLOCK_RANGE = 25;
 
 local JUMP_MANA = 10;
@@ -502,7 +502,7 @@ func IsCharging()
 
 func CanCast()
 {
-	if(Contained() || GetAction() == "Tumble" || IsCharging())
+	if(Contained() || GetAction() == "Tumble" || IsCharging() || GetAction() == "Float")
 		return false;
 	return true;
 }
@@ -519,9 +519,34 @@ func CancelShowSpellRange()
 
 func CanBeHit()
 {
+	if(GetEffect("Unhitable", this))
+		return false;
+	
 	return true;
 }
 
+func MakeHitable(bool hitable)
+{
+	if(hitable)
+	{
+		if(GetEffect("Unhitable", this))
+			RemoveEffect("Unhitable", this);
+	}
+	else
+	{
+		AddEffect("Unhitable", this, 20, 1, this);
+	}
+}
+
+func FxUnhitableTimer()
+{
+	return;
+}
+
+func FxUnhitableDamage()
+{
+	return;
+}
 
 local ActMap = {
 

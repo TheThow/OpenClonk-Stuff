@@ -1,5 +1,6 @@
 #include Projectile
 
+local SpellDamage = 18;
 
 func InitEffect()
 {
@@ -43,4 +44,9 @@ func HitObject(obj)
 {
 	AddFireHitEffect(obj);
 	return _inherited(obj);
+}
+
+func Hit()
+{
+	Explode(SpellDamage);
 }

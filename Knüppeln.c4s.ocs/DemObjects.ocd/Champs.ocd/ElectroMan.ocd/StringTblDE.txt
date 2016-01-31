@@ -1,1 +1,1 @@
-Description=Zap!
+Description=Zap! \n\nQ = Electro Shot \nE = Electro Orb \nR = Thunder Strike
