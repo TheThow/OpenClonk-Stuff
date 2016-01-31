@@ -5,16 +5,21 @@
 	@author 
 */
 
+#include Man
 
-func LaunchSpecial1(object clonk, int x, int y)
+func LaunchSpecial1(object clonk, int x, int y, bool released, bool mouseclick)
 {
-	clonk->LaunchSpell(FireProjectile, x, y, 0, 0);
+	if(!released && !mouseclick)
+		clonk->LaunchSpell(FireProjectile, x, y, 0, 0);
 }
 
-func LaunchSpecial2(object clonk, int x, int y)
+func LaunchSpecial2(object clonk, int x, int y, bool released, bool mouseclick)
 {
-	var y_off = -6;
-	clonk->LaunchSpell(FireNado, x, y, 0, y_off);
+	if(!released && !mouseclick)
+	{
+		var y_off = -6;
+		clonk->LaunchSpell(FireNado, x, y, 0, y_off);
+	}
 }
 
 func JumpEffect(object clonk, dir)

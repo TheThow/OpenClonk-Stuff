@@ -5,15 +5,19 @@
 	@author 
 */
 
+#include Man
 
-func LaunchSpecial1(object clonk, int x, int y)
+
+func LaunchSpecial1(object clonk, int x, int y, bool released, bool mouseclick)
 {
-	clonk->LaunchSpell(LightStar, x, y, 0, 0);
+	if(!released && !mouseclick)
+		clonk->LaunchSpell(LightStar, x, y, 0, 0);
 }
 
-func LaunchSpecial2(object clonk, int x, int y)
+func LaunchSpecial2(object clonk, int x, int y, bool released, bool mouseclick)
 {
-	clonk->LaunchSpell(LightRay, x, y, 0, 0);
+	if(!released && !mouseclick)
+		clonk->LaunchSpell(LightRay, x, y, 0, 0);
 }
 
 func JumpEffect(object clonk, dir)

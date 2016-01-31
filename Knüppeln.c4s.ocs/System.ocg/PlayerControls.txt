@@ -10,8 +10,15 @@
 
 	[ControlDef]
 	Identifier=QuickSwitch
-	GUIName=$CON_QuickSwitch$
-	GUIDesc=$CON_QuickSwitch_Desc$
+	Hold=1
+	
+	[ControlDef]
+	Identifier=Contents
+	Hold=1
+	
+	[ControlDef]
+	Identifier=NextCrew
+	Hold=1
 	
 	[ControlDef]
 	Identifier=AimingCursor

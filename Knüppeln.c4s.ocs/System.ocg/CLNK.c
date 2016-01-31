@@ -22,6 +22,10 @@ local choosemenu_id;
 
 local ChampType = Rock;
 
+local special_active =  [0, 0, 0, 0];
+
+local RangeDummy = 0;
+
 func Initialize()
 {
 	AddEffect("ManaRegen", this, 20, 5, this, Clonk);
@@ -45,38 +49,67 @@ public func ObjectControl(int plr, int ctrl, int x, int y, int strength, bool re
 		}
 	}
 	
-	if (ctrl == CON_QuickSwitch && release == false && !Contained())
+	if (ctrl == CON_QuickSwitch)
 	{
+		special_active[1] = !release;
+		
+		if(!CanCast())
+			return 1;
 		
 		var a = GetPlayerCursorPos(plr, true);
 		var x1 = a[0] - GetX();
 		var y1 = a[1] - GetY();
 		
-		LaunchSpecial1(x1, y1);
+		LaunchSpecial1(x1, y1, release, false);
 		
 		return true;
 	}
 	
-	if (ctrl == CON_NextCrew && release == false && !Contained())
+	if (ctrl == CON_Contents)
 	{
+		special_active[2] = !release;
+		
+		if(!CanCast())
+			return 1;
+	
 		var a = GetPlayerCursorPos(plr, true);
 		var x1 = a[0] - GetX();
 		var y1 = a[1] - GetY();
 		
-		LaunchSpecial3(x1, y1);
+		LaunchSpecial2(x1, y1, release, false);
 		
 		return true;
 	}
 	
-	if (ctrl == CON_Contents && release == false && !Contained())
+	
+	if (ctrl == CON_NextCrew)
 	{
+		special_active[3] = !release;
+		
+		if(!CanCast())
+			return 1;
+	
 		var a = GetPlayerCursorPos(plr, true);
 		var x1 = a[0] - GetX();
 		var y1 = a[1] - GetY();
 		
-		LaunchSpecial2(x1, y1);
+		LaunchSpecial3(x1, y1, release, false);
 		
 		return true;
+	}
+	
+	if (ctrl == CON_Use && release == false)
+	{
+		for(var i = 0; i < GetLength(special_active); i++)
+		{
+			if(special_active[i] == true)
+			{
+				if(CanCast())
+					Call(Format("LaunchSpecial%d", i), x, y, false, true);
+				
+				return 1;
+			}
+		}
 	}
 
 	if (ctrl == CON_Jump && IsJumping() && release == false) 
@@ -297,23 +330,25 @@ func Block()
 		//var tangle = 2* ( (objectangle + 90)%360 - entryangle) + entryangle;
 		var tangle = objectangle;
         o->SetSpeed(Sin(tangle, speed), -Cos(tangle, speed));
+        
+        o->~Blocked();
 	}
 }
 
 
-func LaunchSpecial1(x, y)
+func LaunchSpecial1(x, y, released, mouse)
 {
-	ChampType->LaunchSpecial1(this, x, y);
+	ChampType->LaunchSpecial1(this, x, y, released, mouse);
 }
 
-func LaunchSpecial2(int x, int y)
+func LaunchSpecial2(int x, int y, released, mouse)
 {
-	ChampType->LaunchSpecial2(this, x, y);
+	ChampType->LaunchSpecial2(this, x, y, released, mouse);
 }
 
-func LaunchSpecial3(int x, int y)
+func LaunchSpecial3(int x, int y, released, mouse)
 {
-	ChampType->LaunchSpecial3(this, x, y);
+	ChampType->LaunchSpecial3(this, x, y, released, mouse);
 }
 
 func LaunchSpell(id ID, x, y, x_off, y_off)
@@ -464,6 +499,23 @@ func FxChargeStop(object target, proplist effect, int reason, bool temporary)
 func IsCharging()
 {
 	return GetEffect("Charge", this);
+}
+
+func CanCast()
+{
+	if(Contained() || GetAction() == "Tumble" || IsCharging())
+		return false;
+	return true;
+}
+
+func ShowSpellRange(object clonk, id spell, proplist props)
+{
+	CreateParticle("Shockwave", 0, 0, 0, 0, 0, props);
+}
+
+func CancelShowSpellRange()
+{
+	ClearParticles();
 }
 
 

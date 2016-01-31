@@ -5,20 +5,54 @@
 	@author 
 */
 
+#include Man
 
-func LaunchSpecial1(object clonk, int x, int y)
+func LaunchSpecial1(object clonk, int x, int y, bool released, bool mouseclick)
 {
-	clonk->LaunchSpell(ElectroProjectile, x, y, 0, 0);
+	if(!released && !mouseclick)
+		clonk->LaunchSpell(ElectroProjectile, x, y, 0, 0);
 }
 
-func LaunchSpecial2(object clonk, int x, int y)
+func LaunchSpecial2(object clonk, int x, int y, bool released, bool mouseclick)
 {
-	clonk->LaunchSpell(ElectroOrb, x, y, 0, 0);
+	if(!released && !mouseclick)
+		clonk->LaunchSpell(ElectroOrb, x, y, 0, 0);
 }
 
-func LaunchSpecial3(object clonk, int x, int y)
+func LaunchSpecial3(object clonk, int x, int y, bool released, bool mouseclick)
 {
-	clonk->LaunchSpell(ThunderStrike, x, y, x, y);
+	if(!released && !mouseclick)
+	{
+		var props =
+		{
+			R = 150,
+			G = 215,
+			B = 255,
+			Alpha = 40,
+			Size = ThunderStrike.SpellRange*2 + ThunderStrike.SpellRange/50*20,
+			BlitMode = GFX_BLIT_Additive,
+			Rotation = PV_Step(10, 0, 1),
+			Attach = ATTACH_Back | ATTACH_MoveRelative
+			
+		};
+		clonk->ShowSpellRange(clonk, ThunderStrike, props);
+	}
+	
+	if(released && !mouseclick)
+	{
+		clonk->CancelShowSpellRange();
+	}
+
+	if(!released && mouseclick)
+	{
+		if (Sqrt(x**2 + y**2) > ThunderStrike.SpellRange)
+		{
+			Sound("UI::Error", false, 50, clonk->GetOwner());
+			return 1;
+		}
+		
+		clonk->LaunchSpell(ThunderStrike, x, y, x, y);
+	}
 }
 
 func JumpEffect(object clonk, dir)
@@ -86,4 +120,9 @@ func BlockEffect(object clonk, range)
 		CreateParticle("BlueSpark", x, y, 0, 0, 10, trailparticles);
 	}
 	
+}
+
+func ShowRange()
+{
+
 }
