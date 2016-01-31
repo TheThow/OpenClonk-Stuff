@@ -9,19 +9,19 @@
 
 local Description = "$Description$";
 
-func LaunchSpecial1(object clonk, int x, int y, bool released, bool mouseclick)
+func LaunchSpecial1(object clonk, int x, int y, bool released, bool mouseclick, bool abletocast)
 {
-	if(!released && !mouseclick)
+	if(!released && !mouseclick && abletocast)
 		clonk->LaunchSpell(ElectroProjectile, x, y, 0, 0);
 }
 
-func LaunchSpecial2(object clonk, int x, int y, bool released, bool mouseclick)
+func LaunchSpecial2(object clonk, int x, int y, bool released, bool mouseclick, bool abletocast)
 {
-	if(!released && !mouseclick)
+	if(!released && !mouseclick && abletocast)
 		clonk->LaunchSpell(ElectroOrb, x, y, 0, 0);
 }
 
-func LaunchSpecial3(object clonk, int x, int y, bool released, bool mouseclick)
+func LaunchSpecial3(object clonk, int x, int y, bool released, bool mouseclick, bool abletocast)
 {
 	if(!released && !mouseclick)
 	{
@@ -45,7 +45,7 @@ func LaunchSpecial3(object clonk, int x, int y, bool released, bool mouseclick)
 		clonk->CancelShowSpellRange();
 	}
 
-	if(!released && mouseclick)
+	if(!released && mouseclick && abletocast)
 	{
 		if (Sqrt(x**2 + y**2) > ThunderStrike.SpellRange)
 		{

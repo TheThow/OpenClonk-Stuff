@@ -9,18 +9,65 @@
 
 local Description = "$Description$";
 
-func LaunchSpecial1(object clonk, int x, int y, bool released, bool mouseclick)
+func LaunchSpecial1(object clonk, int x, int y, bool released, bool mouseclick, bool abletocast)
 {
-	if(!released && !mouseclick)
+	if(!released && !mouseclick && abletocast)
 		clonk->LaunchSpell(FireProjectile, x, y, 0, 0);
 }
 
-func LaunchSpecial2(object clonk, int x, int y, bool released, bool mouseclick)
+func LaunchSpecial2(object clonk, int x, int y, bool released, bool mouseclick, bool abletocast)
 {
-	if(!released && !mouseclick)
+	if(!released && !mouseclick && abletocast)
 	{
 		var y_off = -6;
 		clonk->LaunchSpell(FireNado, x, y, 0, y_off);
+	}
+}
+
+func LaunchSpecial3(object clonk, int x, int y, bool released, bool mouseclick, bool abletocast)
+{
+	if(!released && !mouseclick)
+	{
+		var props =
+		{
+			R = 255,
+			G = 215,
+			B = 0,
+			Alpha = 40,
+			Size = FireDash.SpellRange*2 + FireDash.SpellRange/50*20,
+			BlitMode = GFX_BLIT_Additive,
+			Rotation = PV_Step(10, 0, 1),
+			Attach = ATTACH_Back | ATTACH_MoveRelative
+			
+		};
+		clonk->ShowSpellRange(clonk, FireDash, props);
+	}
+	
+	if(released && !mouseclick)
+	{
+		clonk->CancelShowSpellRange();
+	}
+
+	if(!released && mouseclick && abletocast)
+	{
+		var solidcheck = false;
+		var cx = clonk->GetX();
+		var cy = clonk->GetY();
+		
+		for(var i = 0; i < 360; i++)
+		{
+			if(GBackSolid(cx + x + Sin(i, 10), cy + y + Cos(i, 10)))
+				solidcheck = true;
+		}
+	
+		if (Sqrt(x**2 + y**2) > FireDash.SpellRange
+			|| solidcheck)
+		{
+			Sound("UI::Error", false, 50, clonk->GetOwner());
+			return 1;
+		}
+		
+		clonk->LaunchSpell(FireDash, x, y, x, y);
 	}
 }
 

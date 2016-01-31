@@ -54,14 +54,11 @@ public func ObjectControl(int plr, int ctrl, int x, int y, int strength, bool re
 	{
 		special_active[1] = !release;
 		
-		if(!CanCast())
-			return 1;
-		
 		var a = GetPlayerCursorPos(plr, true);
 		var x1 = a[0] - GetX();
 		var y1 = a[1] - GetY();
 		
-		LaunchSpecial1(x1, y1, release, false);
+		LaunchSpecial1(x1, y1, release, false, CanCast());
 		
 		return true;
 	}
@@ -69,15 +66,12 @@ public func ObjectControl(int plr, int ctrl, int x, int y, int strength, bool re
 	if (ctrl == CON_Contents)
 	{
 		special_active[2] = !release;
-		
-		if(!CanCast())
-			return 1;
 	
 		var a = GetPlayerCursorPos(plr, true);
 		var x1 = a[0] - GetX();
 		var y1 = a[1] - GetY();
 		
-		LaunchSpecial2(x1, y1, release, false);
+		LaunchSpecial2(x1, y1, release, false, CanCast());
 		
 		return true;
 	}
@@ -86,15 +80,12 @@ public func ObjectControl(int plr, int ctrl, int x, int y, int strength, bool re
 	if (ctrl == CON_NextCrew)
 	{
 		special_active[3] = !release;
-		
-		if(!CanCast())
-			return 1;
 	
 		var a = GetPlayerCursorPos(plr, true);
 		var x1 = a[0] - GetX();
 		var y1 = a[1] - GetY();
 		
-		LaunchSpecial3(x1, y1, release, false);
+		LaunchSpecial3(x1, y1, release, false, CanCast());
 		
 		return true;
 	}
@@ -105,11 +96,8 @@ public func ObjectControl(int plr, int ctrl, int x, int y, int strength, bool re
 		{
 			if(special_active[i] == true)
 			{
-				if(CanCast())
-				{
-					Call(Format("LaunchSpecial%d", i), x, y, false, true);
-					return 1;
-				}
+				Call(Format("LaunchSpecial%d", i), x, y, false, true, CanCast());
+				return 1;
 			}
 		}
 	}
@@ -345,19 +333,19 @@ func Block()
 }
 
 
-func LaunchSpecial1(x, y, released, mouse)
+func LaunchSpecial1(x, y, released, mouse, abletocast)
 {
-	ChampType->LaunchSpecial1(this, x, y, released, mouse);
+	ChampType->LaunchSpecial1(this, x, y, released, mouse, abletocast);
 }
 
-func LaunchSpecial2(int x, int y, released, mouse)
+func LaunchSpecial2(int x, int y, released, mouse, abletocast)
 {
-	ChampType->LaunchSpecial2(this, x, y, released, mouse);
+	ChampType->LaunchSpecial2(this, x, y, released, mouse, abletocast);
 }
 
-func LaunchSpecial3(int x, int y, released, mouse)
+func LaunchSpecial3(int x, int y, released, mouse, abletocast)
 {
-	ChampType->LaunchSpecial3(this, x, y, released, mouse);
+	ChampType->LaunchSpecial3(this, x, y, released, mouse, abletocast);
 }
 
 func LaunchSpell(id ID, x, y, x_off, y_off)
@@ -500,6 +488,8 @@ func FxChargeStop(object target, proplist effect, int reason, bool temporary)
 	var y1 = a[1] - GetY();
 	
 	effect.p.new_angle = Angle(0,0,x1,y1);
+	effect.p.new_x = x1;
+	effect.p.new_y = y1;
 	
 	if(effect.c)
 		effect.c->Call(effect.f, effect.p);

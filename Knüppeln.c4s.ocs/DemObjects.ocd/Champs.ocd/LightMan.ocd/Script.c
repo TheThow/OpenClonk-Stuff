@@ -9,15 +9,15 @@
 
 local Description = "$Description$";
 
-func LaunchSpecial1(object clonk, int x, int y, bool released, bool mouseclick)
+func LaunchSpecial1(object clonk, int x, int y, bool released, bool mouseclick, bool abletocast)
 {
-	if(!released && !mouseclick)
+	if(!released && !mouseclick && abletocast)
 		clonk->LaunchSpell(LightStar, x, y, 0, 0);
 }
 
-func LaunchSpecial2(object clonk, int x, int y, bool released, bool mouseclick)
+func LaunchSpecial2(object clonk, int x, int y, bool released, bool mouseclick, bool abletocast)
 {
-	if(!released && !mouseclick)
+	if(!released && !mouseclick && abletocast)
 		clonk->LaunchSpell(LightRay, x, y, 0, 0);
 }
 
