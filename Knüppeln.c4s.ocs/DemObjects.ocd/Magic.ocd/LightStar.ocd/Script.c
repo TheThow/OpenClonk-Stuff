@@ -33,6 +33,26 @@ func Launch(object clonk, int x, int y)
 	shooter = clonk;
 	AddEffect("Lasers", this, 1, 2, this, nil);
 	SoundAt("LightMan::LightStar", nil, nil, nil, nil, nil, Random(30));
+	
+	
+	this.particle_stars = 
+	{
+		Stretch = PV_Random(15000, 20000),
+		Size = PV_Linear(2, 0),
+		Alpha = PV_Random(255,0,3),
+		BlitMode = GFX_BLIT_Additive,
+		Rotation = PV_Random(0, 360),
+		G = 0, B = 0
+	};
+	
+	this.particle_ray = 
+	{
+		Size = 16,
+		Alpha = PV_Linear(255,0),
+		BlitMode = GFX_BLIT_Additive,
+		Rotation = TargetAngle,
+		G = 0, B = 0
+	};
 }
 
 func Remove()
@@ -44,41 +64,17 @@ public func HitObject(obj)
 {
 	if(obj->~CanBeHit() == false)
 		return;
-
+	obj->SetSpeed(7 * obj->GetXDir(1) / 10, 7 * obj->GetYDir(1) / 10, 1); 
 	obj->DoEnergy(-SpellDamage, nil, nil, GetController());
-}
-
-func FxLasersStart(target, fx, temp)
-{
-	if (temp) return;
-	
-	fx.stars = 
-	{
-		Stretch = PV_Random(15000, 20000),
-		Size = PV_Linear(2, 0),
-		Alpha = PV_Random(255,0,3),
-		BlitMode = GFX_BLIT_Additive,
-		Rotation = PV_Random(0, 360),
-		G = 0, B = 0
-	};
-	
-	fx.ray = 
-	{
-		Size = 16,
-		Alpha = PV_Linear(255,0),
-		BlitMode = GFX_BLIT_Additive,
-		Rotation = TargetAngle,
-		G = 0, B = 0
-	};
 }
 
 func FxLasersTimer(target, fx, time)
 {
 	if (time < ChargeTime - 1)
 	{
-		CreateParticle("StarSpark", 0, 0, 0, 0, 10, fx.stars, 2);
+		CreateParticle("StarSpark", 0, 0, 0, 0, 10, this.particle_stars, 2);
 		return FX_OK;
 	}
-	this->Call(LightRay.DoTheLaser, 0, 0, Sin(TargetAngle, Length), -Cos(TargetAngle, Length), TargetAngle, Length, fx, true);
+	this->Call(LightRay.DoTheLaser, 0, 0, Sin(TargetAngle, Length), -Cos(TargetAngle, Length), TargetAngle, Length, true, true);
 	RemoveObject();
 }
