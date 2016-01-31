@@ -81,7 +81,7 @@ func JumpEffect(object clonk, dir)
 		to = 310;
 	}
 
-	Sound("electric_shot", false, 30);
+	Sound("electro_shot", false, 30);
 
 	for(var i = from; i < to; i+=5)
 	{
@@ -89,15 +89,20 @@ func JumpEffect(object clonk, dir)
 		var x = clonk->GetX() + Cos(i, r);
 		var y = clonk->GetY() + Sin(i, r);
 		
-		var angle = Angle(0,0,x,y);
+		var angle = Angle(0,0,Cos(i, r),Sin(i, r));
 		
 		var trailparticles =
 		{
-			Size = PV_Linear(15,0),
-			Rotation = angle
+			Prototype = Particles_ElectroSpark2(),
+			Size = PV_Linear(10,0),
+			Rotation = angle,
+			R = 150,
+			G = 215,
+			B = 255,
+			OnCollision = PC_Bounce(),
 		};
 	
-		CreateParticle("BlueSpark", x, y, Cos(i, r), Sin(i, r), 10, trailparticles);
+		CreateParticle("Lightning", x, y, Cos(i, r), Sin(i, r), 10, trailparticles);
 	}
 }
 
@@ -109,15 +114,19 @@ func BlockEffect(object clonk, range)
 		var x = clonk->GetX() + Cos(i, r);
 		var y = clonk->GetY() + Sin(i, r);
 		
-		var angle = Angle(0,0,x,y) + 90;
+		var angle = Angle(0,0,Cos(i, r),Sin(i, r)) + 90;
 		
 		var trailparticles =
 		{
+			Prototype = Particles_ElectroSpark2(),
 			Size = PV_Linear(15,0),
-			Rotation = angle
+			Rotation = angle,
+			R = 150,
+			G = 215,
+			B = 255,
 		};
 	
-		CreateParticle("BlueSpark", x, y, 0, 0, 10, trailparticles);
+		CreateParticle("Lightning", x, y, 0, 0, 10, trailparticles);
 	}
 	
 }

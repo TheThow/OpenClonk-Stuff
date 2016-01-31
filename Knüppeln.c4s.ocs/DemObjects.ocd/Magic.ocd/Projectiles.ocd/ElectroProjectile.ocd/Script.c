@@ -6,7 +6,7 @@ local pB = 255;
 
 func InitEffect()
 {
-	Sound("electric_shot", false, 100);
+	Sound("electro_shot", false, 100);
 	Sound("electro_travel", false, 50, nil, 1);
 	SetLightRange(30, 70);
 	SetLightColor(RGB(200, 215, 255));

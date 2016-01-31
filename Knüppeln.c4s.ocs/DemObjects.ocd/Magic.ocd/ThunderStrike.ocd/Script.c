@@ -7,7 +7,7 @@
 
 local ManaCost = 60;
 local SpellDamage = 50;
-local SpellRange = 200;
+local SpellRange = 250;
 
 local Delay = 30;
 local Size = 30;
@@ -26,7 +26,7 @@ func Initialize()
 func Launch(object clonk, int x, int y)
 {
 	AddEffect("Charge", this, 20, 1, this, GetID());
-	Sound("charge", false, 50);
+	Sound("electro_charge", false, 50);
 	
 	var flashparticle =
 	{

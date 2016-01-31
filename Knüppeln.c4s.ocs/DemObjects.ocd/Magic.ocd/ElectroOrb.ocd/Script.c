@@ -52,7 +52,7 @@ func ChargeStop(proplist params)
 	
 	AddEffect("ElectroOrb", this, 20, 1 ,this, GetID());
 	
-	Sound("electric_shot", false, 100);
+	Sound("electro_shot", false, 100);
 	Sound("electro_travel", false, 20, nil, 1);
 	
 	OrbEffect();
@@ -199,7 +199,7 @@ func CheckForEnemies()
 			plr_hit[GetPlayerByIndex(o->GetOwner())] = 1;
 			o->Fling(0,-1);
 			o->DoEnergy(-SpellDamage);
-			Sound("electric_shot", false, 50);
+			Sound("electro_shot", false, 50);
 			AddElectroHitEffect(o);
 		}
 	}

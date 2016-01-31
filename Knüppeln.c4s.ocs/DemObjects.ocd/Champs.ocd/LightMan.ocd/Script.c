@@ -54,7 +54,7 @@ func JumpEffect(object clonk, dir)
 		var x = clonk->GetX() + Cos(i, r);
 		var y = clonk->GetY() + Sin(i, r);
 		
-		var angle = Angle(0,0,x,y);
+		var angle = Angle(0,0,Cos(i, r),Sin(i, r));
 		
 		var trailparticles =
 		{

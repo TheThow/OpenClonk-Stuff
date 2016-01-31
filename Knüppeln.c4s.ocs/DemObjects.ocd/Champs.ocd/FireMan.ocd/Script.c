@@ -68,7 +68,7 @@ func JumpEffect(object clonk, dir)
 
 func BlockEffect(object clonk, range)
 {
-	for(var i = 0; i < 360; i+=10)
+	for(var i = 0; i < 360; i+=5)
 	{
 		var r = range;
 		var x = clonk->GetX() + Cos(i, r);
@@ -81,7 +81,7 @@ func BlockEffect(object clonk, range)
 			Rotation = PV_Linear(360,0),
 		};
 	
-		CreateParticle("Fire", x, y, 0, 0, 10, trailparticles);
+		CreateParticle("Fire", x, y, 0, 0, 10, trailparticles, 2);
 	}
 }
 
