@@ -7,6 +7,7 @@
 
 #include Man
 
+local Description = "$Description$";
 
 func LaunchSpecial1(object clonk, int x, int y, bool released, bool mouseclick)
 {

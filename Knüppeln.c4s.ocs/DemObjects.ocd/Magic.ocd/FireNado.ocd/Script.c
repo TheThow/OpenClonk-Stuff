@@ -93,6 +93,24 @@ func FxFireNadoTimer(object target, proplist effect, int time)
 			a++;
 	}
 	
+	var chaoticspark =
+	{
+		Size = PV_Linear(1, 0),
+		ForceX = PV_KeyFrames(10, 0, PV_Random(-6, 6), 333, PV_Random(-6, -6), 666, PV_Random(6, 6), 1000, PV_Random(-6, 6)),
+		ForceY = PV_KeyFrames(10, 0, PV_Random(-8, 5), 333, PV_Random(-8, 5), 666, PV_Random(-10, 10), 1000, PV_Random(-10, 15)),
+		Stretch = PV_Speed(1000, 500),
+		Rotation = PV_Direction(),
+		CollisionVertex = 0,
+		OnCollision = PC_Die(),
+		R = 255,
+		G = PV_Linear(255,100),
+		B = PV_Random(0, 100),
+		DampingX=950,
+		DampingY=950,
+		Alpha = PV_Random(100,180),
+		BlitMode = GFX_BLIT_Additive
+	};
+	CreateParticle("Magic", RandomX(-5, 5), RandomX(-10, 10), RandomX(25, -25) + GetXDir(), RandomX(-25, 12) + GetYDir(), 50, chaoticspark, 4);
 	return 0;
 }
 

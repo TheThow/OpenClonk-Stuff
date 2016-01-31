@@ -36,10 +36,11 @@ func Launch(object clonk, int x, int y)
 		G = pG,
 		B = pB,
 		BlitMode = GFX_BLIT_Additive,
-		Attach = ATTACH_Back | ATTACH_MoveRelative
+		Attach = ATTACH_Back | ATTACH_MoveRelative,
+		Rotation = PV_Step(50)
 		
 	};
-	CreateParticle("Flash", 0, 0, 0, 0, 0, flashparticle);
+	CreateParticle("StarFlash", 0, 0, 0, 0, 0, flashparticle);
 }
 
 func FxChargeTimer(object target, proplist effect, int time)
@@ -53,7 +54,7 @@ func FxChargeTimer(object target, proplist effect, int time)
 		{
 			var props =
 			{
-				Size = 5,
+				Size = PV_Linear(5,4),
 				R = 255, G = 255, B = 255,
 				Alpha = PV_KeyFrames(0, 0, 200, 100, 0, 200, 255, 1000, 0),
 				Phase = PV_Random(0, 5),

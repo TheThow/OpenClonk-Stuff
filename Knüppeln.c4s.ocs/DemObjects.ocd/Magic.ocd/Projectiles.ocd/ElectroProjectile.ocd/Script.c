@@ -75,13 +75,13 @@ func ExplosionEffect(int level, int x, int y, int smoothness, bool silent, int d
 	var sphereparticle =
 	{
 		Alpha = PV_Linear(255, 0),
-		Size = level,
+		Size = level*2,
 		R = pR,
 		G = pG,
 		B = pB,
 		BlitMode = GFX_BLIT_Additive,
 	};
-	CreateParticle("StarSpark", x, y, 0, 0, 10, sphereparticle, 4);
+	CreateParticle("StarSpark", x, y, 0, 0, 7, sphereparticle, 4);
 	Sound("electro_explosion", false, 50);
 	
 }

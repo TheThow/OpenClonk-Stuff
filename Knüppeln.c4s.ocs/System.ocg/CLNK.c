@@ -25,12 +25,15 @@ local ChampType = Rock;
 
 local special_active =  [0, 0, 0, 0];
 
-local RangeDummy = 0;
+local RangeDummy;
 
 func Initialize()
 {
 	AddEffect("ManaRegen", this, 20, 5, this, Clonk);
 	AddEffect("AutoHeal", this, 20, 40*3, this, Clonk);
+	RangeDummy = CreateObject(Dummy, 0, 0, GetOwner());
+	RangeDummy.Visibility = VIS_Owner;
+	RangeDummy->SetAction("HangOnto", this);
 	
 	return _inherited();
 }
@@ -374,9 +377,9 @@ func LaunchSpell(id ID, x, y, x_off, y_off)
 func ChooseMenu()
 {
 	var champs = [
-					["Electro Man", Rock, "He is the most bestest electro man of all time", ElectroMan],
-					["Fire Man", Wood, "He is the most bestest fire man of all time", FireMan],
-					["Light Man", Lantern, "He is the most brightest man of all time", LightMan]
+					["Electro Man", ElectroMan],
+					["Fire Man", FireMan],
+					["Light Man", LightMan]
 				 ];
 
 	var menu = 
@@ -423,13 +426,13 @@ func ChooseMenu()
 				
 				OnMouseIn = 
 					[ 
-						GuiAction_Call(this, "ChampUpdateDesc", [champ[2], champ[1]]), 
+						GuiAction_Call(this, "ChampUpdateDesc", [champ[1]]), 
 						GuiAction_SetTag("Hover")
 					],
 			
 				OnMouseOut = { Hover = GuiAction_SetTag("Std")},
 				
-				OnClick = GuiAction_Call(this, "SelectChamp", [champ[3]]),
+				OnClick = GuiAction_Call(this, "SelectChamp", [champ[1]]),
 			},
 		};
 		GuiAddSubwindow(subm, menu.list);
@@ -443,8 +446,8 @@ func ChampUpdateDesc(data, int player, int ID, int subwindowID, object target)
 {
 	var update = 
 	{
-		icon = {Symbol = data[1]},
-		textwindow = {Text = data[0]}
+		icon = {Symbol = data[0]},
+		textwindow = {Text = data[0].Description}
 	};
 	GuiUpdate(update, choosemenu_id, 1, this);
 }
@@ -516,12 +519,12 @@ func CanCast()
 
 func ShowSpellRange(object clonk, id spell, proplist props)
 {
-	CreateParticle("Shockwave", 0, 0, 0, 0, 0, props);
+	RangeDummy->CreateParticle("Shockwave", 0, 0, 0, 0, 0, props);
 }
 
 func CancelShowSpellRange()
 {
-	ClearParticles();
+	RangeDummy->ClearParticles();
 }
 
 
