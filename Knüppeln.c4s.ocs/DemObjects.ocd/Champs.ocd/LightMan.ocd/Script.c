@@ -21,6 +21,12 @@ func Special2(object clonk, int x, int y, bool released, bool mouseclick, bool a
 		clonk->LaunchSpell(LightRay, x, y, 0, 0);
 }
 
+func Special3(object clonk, int x, int y, bool released, bool mouseclick, bool abletocast)
+{
+	if(!released && !mouseclick && abletocast)
+		clonk->LaunchSpell(LightBlink, x, y, 0, 0);
+}
+
 func JumpEffect(object clonk, dir)
 {
 	var from;
