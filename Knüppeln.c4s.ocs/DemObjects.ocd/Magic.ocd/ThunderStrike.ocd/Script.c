@@ -12,6 +12,10 @@ local SpellRange = 200;
 local Delay = 30;
 local Size = 30;
 
+local pR = 175;
+local pG = 215;
+local pB = 255;
+
 
 func Initialize()
 {
@@ -28,9 +32,9 @@ func Launch(object clonk, int x, int y)
 	{
 		Alpha = 20,
 		Size = Size*2,
-		R = 255,
-		G = 255,
-		B = 255,
+		R = pR,
+		G = pG,
+		B = pB,
 		BlitMode = GFX_BLIT_Additive,
 		Attach = ATTACH_Back | ATTACH_MoveRelative
 		
@@ -79,7 +83,10 @@ func FxChargeStop()
 		R = 255, G = 255, B = 255,
 		Alpha = PV_KeyFrames(0, 0, 200, 100, 0, 200, 255, 1000, 0),
 		Phase = PV_Random(0, 5),
-		BlitMode = GFX_BLIT_Additive
+		BlitMode = GFX_BLIT_Additive,
+		R = pR,
+		G = pG,
+		B = pB,
 	};
 	
 	
@@ -91,9 +98,9 @@ func FxChargeStop()
 	{
 		Alpha = 100,
 		Size = Size * 2,
-		R = 255,
-		G = 255,
-		B = 255,
+		R = pR,
+		G = pG,
+		B = pB,
 		Rotation = PV_Random(0,360),
 		BlitMode = GFX_BLIT_Additive,
 	};
@@ -102,13 +109,14 @@ func FxChargeStop()
 	var particles =
 	{
 		Prototype = Particles_Glimmer(),
-		R = 255,
-		G = 255,
-		B = 255,
+		R = pR,
+		G = pG,
+		B = pB,
 		Alpha = 255,
 		Size = PV_Linear(10, 0),
+		OnCollision = PC_Bounce(),
 	};
-	CreateParticle("StarSpark", 0, 0, PV_Random(-80,80), PV_Random(-80, 80), 20, particles, 25);
+	CreateParticle("StarSpark", 0, 0, PV_Random(-80,80), PV_Random(-80, 80), 25, particles, 25);
 	
 	RemoveObject();
 }

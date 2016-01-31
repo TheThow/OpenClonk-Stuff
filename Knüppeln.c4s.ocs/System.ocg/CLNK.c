@@ -105,9 +105,10 @@ public func ObjectControl(int plr, int ctrl, int x, int y, int strength, bool re
 			if(special_active[i] == true)
 			{
 				if(CanCast())
+				{
 					Call(Format("LaunchSpecial%d", i), x, y, false, true);
-				
-				return 1;
+					return 1;
+				}
 			}
 		}
 	}

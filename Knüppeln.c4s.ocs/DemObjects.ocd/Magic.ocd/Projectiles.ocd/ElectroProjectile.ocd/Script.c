@@ -1,12 +1,15 @@
 #include Projectile
 
+local pR = 175;
+local pG = 215;
+local pB = 255;
 
 func InitEffect()
 {
 	Sound("electric_shot", false, 100);
 	Sound("electro_travel", false, 50, nil, 1);
 	SetLightRange(30, 70);
-	SetLightColor(RGB(255, 255, 255));
+	SetLightColor(RGB(200, 215, 255));
 
 	var lightparticle =
 	{
@@ -14,7 +17,10 @@ func InitEffect()
 		Size = 30,
 		BlitMode = GFX_BLIT_Additive,
 		Rotation = PV_Step(30, 0, 1),
-		Attach = ATTACH_Back | ATTACH_MoveRelative
+		Attach = ATTACH_Back | ATTACH_MoveRelative,
+		R = pR,
+		G = pG,
+		B = pB,
 		
 	};
 	CreateParticle("Flash", 0, 0, 0, 0, 0, lightparticle);
@@ -25,7 +31,10 @@ func InitEffect()
 		Size = 8,
 		BlitMode = GFX_BLIT_Additive,
 		Rotation = PV_Step(30, 0, 1),
-		Attach = ATTACH_Back | ATTACH_MoveRelative
+		Attach = ATTACH_Back | ATTACH_MoveRelative,
+		R = pR,
+		G = pG,
+		B = pB,
 		
 	};
 	CreateParticle("Shockwave", 0, 0, 0, 0, 0, lightparticle2, 2);
@@ -36,14 +45,17 @@ func TravelEffect(int time)
 	var trailparticles =
 	{
 		Prototype = Particles_ElectroSpark2(),
-		Size = PV_Linear(RandomX(10,20),0),
+		Size = PV_Linear(RandomX(5,15),0),
 		BlitMode = GFX_BLIT_Additive,
 		Rotation = Angle(0,0,GetXDir(), GetYDir()),
-		ForceX = PV_Random(-7,7),
-		ForceY = PV_Random(-7,7),
+		R = pR,
+		G = pG,
+		B = pB,
 	};
 	
-	CreateParticle("ElectroSpark", 0, 0, 0, 0, 10, trailparticles, 5);
+	var angle = Angle(0,0, GetXDir(), GetYDir()) + 180;
+	
+	CreateParticle("Lightning", Sin(angle, 5), -Cos(angle, 5), PV_Random(-10,10), PV_Random(-10,10), 10, trailparticles, 5);
 }
 
 func ExplosionEffect(int level, int x, int y, int smoothness, bool silent, int damage_level)
@@ -51,21 +63,22 @@ func ExplosionEffect(int level, int x, int y, int smoothness, bool silent, int d
 	var particles =
 	{
 		Prototype = Particles_Glimmer(),
-		R = 150,
-		G = 200,
-		B = 255,
+		R = pR,
+		G = pG,
+		B = pB,
 		Alpha = 255,
 		Size = PV_Linear(10, 0),
+		OnCollision = PC_Bounce(),
 	};
-	CreateParticle("StarSpark", x, y, PV_Random(-50,50), PV_Random(-50, 50), 20, particles, 25);
+	CreateParticle("StarSpark", x, y, PV_Random(-60,60), PV_Random(-60, 60), 25, particles, 20);
 	
 	var sphereparticle =
 	{
 		Alpha = PV_Linear(255, 0),
 		Size = level,
-		R = 150,
-		G = 200,
-		B = 255,
+		R = pR,
+		G = pG,
+		B = pB,
 		BlitMode = GFX_BLIT_Additive,
 	};
 	CreateParticle("StarSpark", x, y, 0, 0, 10, sphereparticle, 4);

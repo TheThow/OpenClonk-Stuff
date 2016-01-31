@@ -5,7 +5,7 @@
 	@author 
 */
 
-local ManaCost = 40;
+local ManaCost = 35;
 local SpellDamage = 20;
 local Speed = 40;
 local Durr = 35;
@@ -21,6 +21,10 @@ local LifeTime = 200;
 local plr_hit;
 
 local Target;
+
+local pR = 175;
+local pG = 215;
+local pB = 255;
 
 func Initialize()
 {
@@ -108,9 +112,9 @@ func OrbEffect()
 	{
 		Alpha = 80,
 		Size = Size,
-		R = 150,
-		G = 200,
-		B = 255,
+		R = pR,
+		G = pG,
+		B = pB,
 		BlitMode = GFX_BLIT_Additive,
 		Attach = ATTACH_Back | ATTACH_MoveRelative
 		
@@ -121,9 +125,9 @@ func OrbEffect()
 	{
 		Alpha = 30,
 		Size = Size*2,
-		R = 150,
-		G = 200,
-		B = 255,
+		R = pR,
+		G = pG,
+		B = pB,
 		BlitMode = GFX_BLIT_Additive,
 		Attach = ATTACH_Back | ATTACH_MoveRelative
 		
@@ -181,9 +185,9 @@ func OnRemove()
 	var particles =
 	{
 		Prototype = Particles_Glimmer(),
-		R = 150,
-		G = 200,
-		B = 255,
+		R = pR,
+		G = pG,
+		B = pB,
 		Alpha = 255,
 		Size = PV_Linear(5, 0),
 	};
@@ -193,9 +197,9 @@ func OnRemove()
 	{
 		Alpha = PV_Linear(255, 0),
 		Size = 10,
-		R = 150,
-		G = 200,
-		B = 255,
+		R = pR,
+		G = pG,
+		B = pB,
 		BlitMode = GFX_BLIT_Additive,
 	};
 	CreateParticle("StarSpark", 0, 0, 0, 0, 10, sphereparticle, 4);
