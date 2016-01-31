@@ -57,6 +57,9 @@ func FxTheEffectTimer(object target, proplist effect, int time)
 
 public func HitObject(obj)
 {
+	if(obj->~CanBeHit() == false)
+		return;
+		
 	Hit();
 }
 

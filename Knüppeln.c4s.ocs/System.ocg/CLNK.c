@@ -517,6 +517,11 @@ func CancelShowSpellRange()
 	RangeDummy->ClearParticles();
 }
 
+func CanBeHit()
+{
+	return true;
+}
+
 
 local ActMap = {
 

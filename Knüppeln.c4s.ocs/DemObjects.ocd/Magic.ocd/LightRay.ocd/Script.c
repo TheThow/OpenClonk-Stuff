@@ -44,6 +44,9 @@ func Hit()
 
 public func HitObject(obj)
 {
+	if(obj->~CanBeHit() == false)
+		return;
+
 	obj->DoEnergy(-SpellDamage * 100, true, nil, GetController());
 }
 
