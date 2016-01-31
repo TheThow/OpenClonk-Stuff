@@ -63,6 +63,7 @@ func FxFireNadoTimer(object target, proplist effect, int time)
 				o->Fling(0, -5);
 				o->DoEnergy(-SpellDamage);
 				AddEffect("NadoCD", o, 20, 10);
+				AddFireHitEffect(o);
 			}
 		}
 		

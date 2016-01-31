@@ -5,9 +5,10 @@ local MaxMagic = 100000;
 
 local TIMER = 10;
 local MOVEMENT_CD = 15;
+local TUMBLE_DUR = 25;
 
 local BLOCK_CD = 35;
-local BLOCK_DURR = 4;
+local BLOCK_DUR = 4;
 local BLOCK_RANGE = 25;
 
 local JUMP_MANA = 10;
@@ -41,7 +42,7 @@ public func ObjectControl(int plr, int ctrl, int x, int y, int strength, bool re
 	{
 		if(!GetEffect("BlockingCD", this))
 		{
-			AddEffect("Blocking", this, 1, BLOCK_DURR, this, GetID());
+			AddEffect("Blocking", this, 1, BLOCK_DUR, this, GetID());
 			AddEffect("BlockingCD", this, 1, BLOCK_CD);
 		}
 	}
@@ -136,6 +137,7 @@ public func ObjectControl(int plr, int ctrl, int x, int y, int strength, bool re
 	
 	if (ctrl == CON_Left && IsJumping() && release == false)
 	{
+	
 	  	if (GetEffect("IntControlLeftDouble", this))
   		{
   		 	if(GetMagicEnergy() >= JUMP_MANA)
@@ -144,6 +146,9 @@ public func ObjectControl(int plr, int ctrl, int x, int y, int strength, bool re
 	    		ControlLeftDouble();
 	    		JumpEffect("Left");
 	    		DoMagicEnergy(-JUMP_MANA);
+	    		
+	    		if(GetDir() == DIR_Right)
+					FlipDir();
     		}
     		else
 			{
@@ -170,6 +175,9 @@ public func ObjectControl(int plr, int ctrl, int x, int y, int strength, bool re
     			ControlRightDouble();
     			JumpEffect("Right");
     			DoMagicEnergy(-JUMP_MANA);
+    			
+    			if(GetDir() == DIR_Left)
+					FlipDir();
     		}
       		else
 			{
@@ -282,7 +290,7 @@ func StartTumble()
 	if(GetEffect("StopTumbling", this))
 		RemoveEffect("StopTumbling", this);
 		
-	AddEffect("StopTumbling", this, 20, 25, this, Clonk);
+	AddEffect("StopTumbling", this, 20, TUMBLE_DUR, this, Clonk);
 	return _inherited();
 }
 
@@ -306,7 +314,7 @@ func FxBlockingStart()
 
 func FxBlockTimer(object target, proplist effect, int time)
 {
-	if(time >= BLOCK_DURR)
+	if(time >= BLOCK_DUR)
 		return -1;
 		
 	Block();

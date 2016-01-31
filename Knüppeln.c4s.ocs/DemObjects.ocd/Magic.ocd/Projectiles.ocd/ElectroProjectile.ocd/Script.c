@@ -85,3 +85,9 @@ func ExplosionEffect(int level, int x, int y, int smoothness, bool silent, int d
 	Sound("electro_explosion", false, 50);
 	
 }
+
+func HitObject(obj)
+{
+	AddElectroHitEffect(obj);
+	return _inherited(obj);
+}

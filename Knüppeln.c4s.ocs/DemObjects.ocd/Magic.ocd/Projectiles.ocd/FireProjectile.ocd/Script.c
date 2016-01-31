@@ -38,3 +38,9 @@ func ExplosionEffect(...)
 {
 	return _inherited(...);
 }
+
+func HitObject(obj)
+{
+	AddFireHitEffect(obj);
+	return _inherited(obj);
+}

@@ -10,6 +10,7 @@ local SpellDamage = 20;
 local Speed = 40;
 local Durr = 35;
 local Charge_durr = 20;
+local l_effect_range = 100;
 
 local Size = 15;
 
@@ -57,8 +58,46 @@ func ChargeStop(proplist params)
 	OrbEffect();
 	AddEffect("HitCheck", this, 1,1, nil,nil, params.cl);
 	
+	//AddEffect("OrbTravel", this, 20, 1, this, GetID());
+	
 	SetLightRange(30, 70);
 	SetLightColor(RGB(255, 255, 255));
+}
+
+func FxOrbTravelTimer(object target, proplist effect, int time)
+{
+	var props =
+	{
+		Size = 5,
+		Alpha = PV_KeyFrames(0, 0, 200, 100, 0, 200, 255, 1000, 0),
+		Phase = PV_Random(0, 5),
+		BlitMode = GFX_BLIT_Additive,
+		R = pR,
+		G = pG,
+		B = pB,
+	};
+
+	if(effect.cd > 0)
+	{
+		effect.cd--;
+	}
+	else
+	{
+		var r = Random(360);
+		
+		for(var i = 0; i < l_effect_range; i++)
+		{
+			var x = Sin(r, i);
+			var y = -Cos(r, i);
+		
+			if(GBackSolid(x, y))
+			{
+				DrawLightningSmall(0, 0, x, y, props);
+				effect.cd = 20;
+				break;
+			}
+		}
+	}
 }
 
 func FxElectroOrbTimer(object target, proplist effect, int time)
@@ -133,6 +172,19 @@ func OrbEffect()
 		
 	};
 	CreateParticle("Flash", 0, 0, 0, 0, 0, flashparticle);
+	
+	var flashparticle2 =
+	{
+		Alpha = 30,
+		Size = Size/2,
+		R = pR,
+		G = pG,
+		B = pB,
+		BlitMode = GFX_BLIT_Additive,
+		Attach = ATTACH_Back | ATTACH_MoveRelative
+		
+	};
+	CreateParticle("Flash", 0, 0, 0, 0, 0, flashparticle2,5);
 }
 
 func CheckForEnemies()
@@ -148,6 +200,7 @@ func CheckForEnemies()
 			o->Fling(0,-1);
 			o->DoEnergy(-SpellDamage);
 			Sound("electric_shot", false, 50);
+			AddElectroHitEffect(o);
 		}
 	}
 }

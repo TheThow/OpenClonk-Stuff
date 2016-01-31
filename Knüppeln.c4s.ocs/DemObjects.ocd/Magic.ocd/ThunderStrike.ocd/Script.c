@@ -80,7 +80,6 @@ func FxChargeStop()
 	var props =
 	{
 		Size = 10,
-		R = 255, G = 255, B = 255,
 		Alpha = PV_KeyFrames(0, 0, 200, 100, 0, 200, 255, 1000, 0),
 		Phase = PV_Random(0, 5),
 		BlitMode = GFX_BLIT_Additive,
@@ -127,7 +126,8 @@ func CheckForEnemies()
 	{
 		var angle = Angle(GetX(), GetY(), o->GetX(), o->GetY());
 		
-		o->Fling(Sin(angle, 4), -Cos(angle, 4));
+		o->Fling(Sin(angle, 8), -Cos(angle, 8));
 		o->DoEnergy(-SpellDamage);
+		AddElectroHitEffect(o);
 	}
 }
