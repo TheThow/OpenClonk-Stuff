@@ -17,7 +17,7 @@ local Name = "$Name$";
 local Description = "$Description$";
 
 local ChargeTime = 38;
-local Length = 60;
+local Length = 150;
 local TargetAngle = 0;
 local shooter;
 
