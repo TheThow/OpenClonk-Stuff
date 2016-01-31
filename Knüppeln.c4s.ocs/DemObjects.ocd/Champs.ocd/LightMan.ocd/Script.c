@@ -69,10 +69,27 @@ func JumpEffect(object clonk, dir)
 
 func BlockEffect(object clonk, range)
 {
-	var particles =
+	var ray = 
 	{
-		Prototype = Particles_Flash(),
-		Size = range,
+		Size = 16,
+		Alpha = PV_Linear(255,0),
+		BlitMode = GFX_BLIT_Additive,
+		G = 0, B = 0
 	};
-	CreateParticle("Flash", 0, 0, 0, 0, 5, particles);
+	for (var angle = 0; angle < 360; angle += 10)
+	{
+		ray.Rotation = angle + 90;
+		var from_x = clonk->GetX();
+		var from_y = clonk->GetY();
+		var off_x = +Sin(angle, range);
+		var off_y = -Cos(angle, range);
+		var to_x = from_x + off_x;
+		var to_y = from_y + off_y;
+		CreateParticle("RaySpark", to_x, to_y, 0, 0, 10, ray, 1);
+		if (!Random(5))
+		{
+			ray.Rotation = angle;
+			DrawParticleLine("RaySpark", from_x + off_x/4, from_y + off_y/4, from_x + 3 * off_x / 4, from_y + 3 * off_y / 4, 8, 0, 0, 10, ray);	
+		}
+	}
 }

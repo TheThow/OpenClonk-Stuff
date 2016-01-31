@@ -16,27 +16,26 @@ local Size = 15;
 local Name = "$Name$";
 local Description = "$Description$";
 
-local LifeTime = 65;
+local ChargeTime = 38;
+local Length = 60;
+local TargetAngle = 0;
+local shooter;
 
 func Initialize()
 {
-	SetAction("Travel");
-	SetRDir(10);
-	SetClrModulation(RGBa(0,0,0,0));
+	SetCategory(C4D_StaticBack);
 }
 
 func Launch(object clonk, int x, int y)
 {
 	SetController(clonk->GetOwner());
-	SetVelocity(Angle(0, 0, x, y) + RandomX(-3, 3), Speed + RandomX(-5, 5));
-	AddEffect("HitCheck", this, 1,1, nil,nil, clonk, true);
-	ScheduleCall(this, "Hit", LifeTime);
-	
-	AddEffect("LightSparks", this, 1, 1, this, nil);
+	TargetAngle = Angle(0, 0, x, y);
+	shooter = clonk;
+	AddEffect("Lasers", this, 1, 2, this, nil);
 	SoundAt("LightMan::LightStar", nil, nil, nil, nil, nil, Random(30));
 }
 
-func Hit()
+func Remove()
 {
 	RemoveObject();
 }
@@ -47,49 +46,39 @@ public func HitObject(obj)
 		return;
 
 	obj->DoEnergy(-SpellDamage, nil, nil, GetController());
-	Hit();
 }
 
-func FxLightSparksStart(target, fx, temp)
+func FxLasersStart(target, fx, temp)
 {
 	if (temp) return;
-	fx.particles = 
+	
+	fx.stars = 
 	{
-		Stretch = PV_Random(6000, 10000),
+		Stretch = PV_Random(15000, 20000),
 		Size = PV_Linear(2, 0),
 		Alpha = PV_Random(255,0,3),
 		BlitMode = GFX_BLIT_Additive,
 		Rotation = PV_Random(0, 360),
+		G = 0, B = 0
 	};
-}
-
-func FxLightSparksTimer(target, fx, time)
-{
-	CreateParticle("StarSpark", 0, 0, 0, 0, 10, fx.particles, 2);
-}
-
-func Destruction()
-{
-	var particles =
+	
+	fx.ray = 
 	{
-		Prototype = Particles_Glimmer(),
-		R = 255, G = 255, B = 200,
-		Stretch = PV_Speed(4000, 2000),
+		Size = 16,
+		Alpha = PV_Linear(255,0),
+		BlitMode = GFX_BLIT_Additive,
+		Rotation = TargetAngle,
+		G = 0, B = 0
 	};
-	CreateParticle("StarSpark", 0, 0, PV_Random(-50, 50), PV_Random(-50, 50), PV_Random(5, 10), particles, 30);
 }
 
-local ActMap = {
-
-	Travel = {
-		Prototype = Action,
-		Name = "Travel",
-		Procedure = DFA_FLOAT,
-		NextAction = "Travel",
-		Length = 1,
-		Delay = 1,
-		FacetBase = 1,
-		StartCall = "Traveling",
-		Speed=1000
-	},
-};
+func FxLasersTimer(target, fx, time)
+{
+	if (time < ChargeTime - 1)
+	{
+		CreateParticle("StarSpark", 0, 0, 0, 0, 10, fx.stars, 2);
+		return FX_OK;
+	}
+	this->Call(LightRay.DoTheLaser, 0, 0, Sin(TargetAngle, Length), -Cos(TargetAngle, Length), TargetAngle, Length, fx, true);
+	RemoveObject();
+}
