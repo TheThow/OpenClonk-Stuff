@@ -3,6 +3,9 @@
 local pR = 175;
 local pG = 215;
 local pB = 255;
+local Speed = 70;
+local SpellDamage = 15;
+local Size = 20;
 
 func InitEffect()
 {
@@ -58,7 +61,7 @@ func TravelEffect(int time)
 	CreateParticle("Lightning", Sin(angle, 5), -Cos(angle, 5), PV_Random(-10,10), PV_Random(-10,10), 10, trailparticles, 5);
 }
 
-func ExplosionEffect(int level, int x, int y, int smoothness, bool silent, int damage_level)
+func HitEffect()
 {
 	var particles =
 	{
@@ -70,24 +73,33 @@ func ExplosionEffect(int level, int x, int y, int smoothness, bool silent, int d
 		Size = PV_Linear(10, 0),
 		OnCollision = PC_Bounce(),
 	};
-	CreateParticle("StarSpark", x, y, PV_Random(-60,60), PV_Random(-60, 60), 25, particles, 20);
+	CreateParticle("StarSpark", 0, 0, PV_Random(-60,60), PV_Random(-60, 60), 25, particles, 20);
 	
 	var sphereparticle =
 	{
 		Alpha = PV_Linear(255, 0),
-		Size = level*2,
+		Size = Size*2,
 		R = pR,
 		G = pG,
 		B = pB,
 		BlitMode = GFX_BLIT_Additive,
 	};
-	CreateParticle("StarSpark", x, y, 0, 0, 7, sphereparticle, 4);
+	CreateParticle("StarSpark", 0, 0, 0, 0, 7, sphereparticle, 4);
 	Sound("electro_explosion", false, 50);
 	
 }
 
-func HitObject(obj)
+func Hit()
 {
-	AddElectroHitEffect(obj);
-	return _inherited(obj);
+	HitEffect();
+	
+	for(var o in FindObjects(Find_Distance(Size), Find_ID(Clonk), Find_NoContainer()))
+	{
+		o->DoEnergy(-SpellDamage);
+		AddElectroHitEffect(o);
+		var angle = Angle(GetX(), GetY(), o->GetX(), o->GetY());
+		o->SetVelocity(angle, 10);
+	}
+	
+	RemoveObject();
 }

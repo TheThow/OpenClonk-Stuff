@@ -17,7 +17,7 @@ local a = 0;
 
 local Speed = 30;
 local Durr = 70;
-local Charge_durr = 20;
+local Charge_durr = 15;
 
 func Initialize()
 {

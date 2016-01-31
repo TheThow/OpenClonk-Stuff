@@ -9,7 +9,7 @@ local ManaCost = 35;
 local SpellDamage = 20;
 local Speed = 40;
 local Durr = 35;
-local Charge_durr = 20;
+local Charge_durr = 15;
 local l_effect_range = 100;
 
 local Size = 15;
