@@ -335,17 +335,17 @@ func Block()
 
 func LaunchSpecial1(x, y, released, mouse, abletocast)
 {
-	ChampType->LaunchSpecial1(this, x, y, released, mouse, abletocast);
+	ChampType->Special1(this, x, y, released, mouse, abletocast);
 }
 
 func LaunchSpecial2(int x, int y, released, mouse, abletocast)
 {
-	ChampType->LaunchSpecial2(this, x, y, released, mouse, abletocast);
+	ChampType->Special2(this, x, y, released, mouse, abletocast);
 }
 
 func LaunchSpecial3(int x, int y, released, mouse, abletocast)
 {
-	ChampType->LaunchSpecial3(this, x, y, released, mouse, abletocast);
+	ChampType->Special3(this, x, y, released, mouse, abletocast);
 }
 
 func LaunchSpell(id ID, x, y, x_off, y_off)
