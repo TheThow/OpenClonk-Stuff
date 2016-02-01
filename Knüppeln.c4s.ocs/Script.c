@@ -8,7 +8,7 @@
 
 func Initialize()
 {
-	//CreateObject(Goal_LastManStanding);
+	CreateObject(Goal_LastManStanding);
 }
 
 

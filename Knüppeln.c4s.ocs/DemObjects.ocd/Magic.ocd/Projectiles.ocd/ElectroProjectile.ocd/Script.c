@@ -49,7 +49,7 @@ func TravelEffect(int time)
 	var trailparticles =
 	{
 		Prototype = Particles_ElectroSpark2(),
-		Size = PV_Linear(RandomX(5,15),0),
+		Size = PV_Linear(PV_Random(5,15),0),
 		BlitMode = GFX_BLIT_Additive,
 		Rotation = Angle(0,0,GetXDir(), GetYDir()),
 		R = pR,

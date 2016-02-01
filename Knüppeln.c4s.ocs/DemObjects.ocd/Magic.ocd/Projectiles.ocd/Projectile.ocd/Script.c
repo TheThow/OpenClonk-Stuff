@@ -1,5 +1,5 @@
 
-local Speed = 50;
+local Speed = 60;
 local Type = "none";
 
 local ManaCost = 25;

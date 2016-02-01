@@ -1,0 +1,15 @@
+[DefCore]
+id=EarthProjectile
+Version=6,0
+Category=C4D_Object
+Width=6
+Height=6
+Offset=-3,-3
+Picture=0,0,64,64
+Vertices=3
+VertexX=0,2,-2
+VertexY=1,-1,-1
+VertexFriction=40,40
+Mass=14
+StretchGrowth=1
+Rotate=1
