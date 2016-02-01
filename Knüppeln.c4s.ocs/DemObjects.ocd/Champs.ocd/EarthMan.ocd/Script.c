@@ -77,7 +77,7 @@ func JumpEffect(object clonk, dir)
 		var smoke =
 		{
 			Alpha = PV_Linear(255, 0),
-			Size = 10,
+			Size = 8,
 			DampingX = 900, DampingY = 900,
 			R = 150, G = 120, B = 100,
 			Phase = PV_Random(0, 15)
@@ -108,7 +108,7 @@ func BlockEffect(object clonk, range)
 		var smoke =
 		{
 			Alpha = PV_Linear(255, 0),
-			Size = 10,
+			Size = 8,
 			DampingX = 900, DampingY = 900,
 			R = 150, G = 120, B = 100,
 			Phase = PV_Random(0, 15)

@@ -500,6 +500,9 @@ func Charge(object caller, string callback, int time, proplist params, bool noso
 
 func FxChargeTimer(object target, proplist effect, int time)
 {
+	if(!effect.c)
+		return -1;
+
 	var a = GetPlayerCursorPos(GetOwner(), true);
 	var x1 = a[0] - GetX();
 	var y1 = a[1] - GetY();
@@ -530,6 +533,9 @@ func FxChargeStop(object target, proplist effect, int reason, bool temporary)
 {
 	if(temporary)
 		return;
+		
+	if(!effect.c)
+		return -1;
 
 	SetAction("Jump");
 			
