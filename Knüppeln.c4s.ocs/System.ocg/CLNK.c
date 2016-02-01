@@ -1,6 +1,6 @@
 #appendto Clonk
 
-local champs = [ElectroMan, FireMan, LightMan];
+local champs = [ElectroMan, FireMan, LightMan, IceMan];
 
 local MaxEnergy = 100000;
 local MaxMagic = 100000;
@@ -425,11 +425,14 @@ func ChooseMenu()
 		}
 	};
 	
+	var index = 0;
 	for(var champ in champs)
 	{
+		index += 1;
 		var subm =
 		{
 			ID = champ,
+			Priority = index,
 			Bottom = "+4em",
 			icon = {Priority = 10, Symbol = champ, Right = "+4em", Bottom = "+4em"},
 			text = {Priority = 10, Left = "+5em", Style = GUI_TextVCenter, Text = champ.Name},
@@ -472,6 +475,9 @@ func SelectChamp(data, int player, int ID, int subwindowID, object target)
 	ChampType = data[0];
 	
 	this->CancelMenu();
+	var relauncher = Contained();
+	if (relauncher)
+		relauncher->~RelaunchClonk();
 }
 
 func GetChampType()

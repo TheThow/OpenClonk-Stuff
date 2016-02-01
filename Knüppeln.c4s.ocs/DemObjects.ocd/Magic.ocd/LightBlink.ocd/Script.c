@@ -58,9 +58,12 @@ func Launch(object clonk, int x, int y)
 	var from_y = shooter->GetY();
 	var to_x   = from_x + Sin(TargetAngle, Length);
 	var to_y   = from_y - Cos(TargetAngle, Length);
-	to_x = BoundBy(to_x, 5, LandscapeWidth() - 5);
-	to_y = BoundBy(to_y, 10, LandscapeHeight() - 10); 
+	//to_x = BoundBy(to_x, 5, LandscapeWidth() - 5);
+	//to_y = BoundBy(to_y, 10, LandscapeHeight() - 10); 
 	
+	var last_x = from_x;
+	var last_y = from_y;
+		
 	var point  = PathFree2(from_x, from_y, to_x, to_y);
 	
 	if (point)
@@ -70,21 +73,26 @@ func Launch(object clonk, int x, int y)
 	}
 	var len = Distance(from_x, from_y, to_x, to_y);
 	
-	var last_x = from_x;
-	var last_y = from_y;
-	for (var distance = 0; distance < len; ++distance)
+	// Try a few positions around the target.
+	shooter->SetPosition(to_x, to_y, true);
+	if (shooter->Stuck()) shooter->SetPosition(to_x, to_y - 10, true);
+	// Still stuck? Then try to project the shooter towards the point.
+	if (shooter->Stuck())
 	{
-		var x_ = from_x + Sin(TargetAngle, distance);
-		var y_ = from_y - Cos(TargetAngle, distance);
-		shooter->SetPosition(x_, y_, true);
-		if (shooter->Stuck())
+		for (var distance = 0; distance < len; ++distance)
 		{
-			shooter->SetPosition(last_x, last_y);
-			break;
-		}
-		last_x = x_;
-		last_y = y_;
-	} 
+			var x_ = from_x + Sin(TargetAngle, distance);
+			var y_ = from_y - Cos(TargetAngle, distance);
+			shooter->SetPosition(x_, y_, true);
+			if (shooter->Stuck())
+			{
+				shooter->SetPosition(last_x, last_y);
+				break;
+			}
+			last_x = x_;
+			last_y = y_;
+		} 
+	}
 	shooter->CreateParticle("StarSpark", PV_Random(-10, 10), PV_Random(-10, 10), 0, 0, 30, this.particle_stars, 50);
 	this->Call(LightRay.DoTheLaser, 0, 0, Sin(TargetAngle, Length), -Cos(TargetAngle, Length), TargetAngle, Length, false, false);
 	RemoveObject();
