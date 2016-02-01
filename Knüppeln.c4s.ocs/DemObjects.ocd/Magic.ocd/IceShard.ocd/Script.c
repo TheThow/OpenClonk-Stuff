@@ -97,12 +97,33 @@ func FxIntInFlightTimer(target, fx, int time)
 	SetPosition(Target->GetX() + x, Target->GetY() + y);
 }
 
+func FxFlightSparksStart(target, fx, temp)
+{
+	if (temp) return;
+	fx.particles = 
+	{
+		R = 100,
+		G = 100,
+		B = 255,
+		Size = PV_Linear(12, 0),
+		DampingX = 900, DampingY = 900,
+		BlitMode = GFX_BLIT_Additive,
+		Rotation = PV_Step(10)
+	};
+}
+
+func FxFlightSparksTimer(target, fx, time)
+{
+	CreateParticle("StarSpark", PV_Random(-2, 2), PV_Random(-2, 2), 0, 0, 5, fx.particles, 3);
+}
+
 func FireNow()
 {
 	SetCategory(C4D_Object);
 	SetVelocity(angle, Speed);
 	RemoveEffect("IntInFlight", this);
 	AddEffect("HitCheck", this, 1,1, nil,nil, Target);
+	AddEffect("FlightSparks", this, 1, 1, this);
 }
 
 public func HitObject(obj)
@@ -111,6 +132,11 @@ public func HitObject(obj)
 		return;
 		
 	Hit();
+}
+
+func IsReflectable()
+{
+	return true;
 }
 
 func Hit()
