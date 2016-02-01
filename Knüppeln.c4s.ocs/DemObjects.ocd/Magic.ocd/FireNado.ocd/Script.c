@@ -14,10 +14,11 @@ local size_x = 25;
 local size_y = 30;
 local SpellDamage = 30;
 local a = 0;
+local a2 = 0;
 
 local Speed = 30;
 local Durr = 70;
-local Charge_durr = 20;
+local Charge_Dur = 20;
 
 func Initialize()
 {
@@ -30,7 +31,7 @@ func Launch(object clonk, int x, int y)
 	var params = {
 		angle = Angle(0,0,x,y)
 	};
-	clonk->Charge(this, "ChargeStop", Charge_durr, params);
+	clonk->Charge(this, "ChargeStop", Charge_Dur, params);
 }
 
 func ChargeStop(proplist params)
@@ -50,6 +51,25 @@ func ChargeStop(proplist params)
 func ChargeInterrupted()
 {
 	RemoveObject();
+}
+
+func ChargeEffect(proplist params)
+{
+	var cnt = 3;
+
+	for(var i = 0; i < cnt; i++)
+	{
+		var firetrailparticles =
+		{
+			Prototype = Particles_FireTrail(),
+			Size = PV_Linear(8,0),
+			OnCollision=nil,
+		};
+	
+		var r = 360/cnt * i;
+		CreateParticle("Fire", Sin(r + a2, 20), -Cos(r + a2, 20), PV_Random(-2,2), PV_Random(-2,2), 30, firetrailparticles, 3);
+	}
+	a2+=360/Charge_Dur/cnt;
 }
 
 func FxFireNadoTimer(object target, proplist effect, int time)

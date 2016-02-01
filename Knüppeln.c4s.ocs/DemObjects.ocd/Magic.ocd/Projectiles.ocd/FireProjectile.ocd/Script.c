@@ -1,6 +1,6 @@
 #include Projectile
 
-local SpellDamage = 18;
+local SpellDamage = 20;
 
 func InitEffect()
 {

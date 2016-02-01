@@ -64,6 +64,51 @@ func ChargeStop(proplist params)
 	SetLightColor(RGB(255, 255, 255));
 }
 
+func ChargeEffect(proplist params)
+{
+	var flashparticle2 =
+	{
+		Alpha = 30,
+		Size = Size/3,
+		R = pR,
+		G = pG,
+		B = pB,
+		BlitMode = GFX_BLIT_Additive,
+		Attach = ATTACH_Back | ATTACH_MoveRelative
+		
+	};
+	
+	var a = params.new_angle;
+	var x = Sin(a, 10);
+	var y = -Cos(a, 10);
+	
+	CreateParticle("Flash", x, y, 0, 0, 5, flashparticle2, 2);
+	
+	for(var i = 0; i < 360; i+= RandomX(3,15))
+	{
+		if(!Random(10))
+		{
+			var props =
+			{
+				Size = PV_Linear(5,4),
+				R = 255, G = 255, B = 255,
+				Alpha = PV_KeyFrames(0, 0, 200, 100, 0, 200, 255, 1000, 0),
+				Phase = PV_Random(0, 5),
+				BlitMode = GFX_BLIT_Additive,
+				Rotation = i + 180,
+			};
+			
+			x = x + Sin(i, Size/3 + RandomX(-2, 2));
+			y = y + -Cos(i, Size/3 + RandomX(-2, 2));
+			
+			var xdir = Sin(i + 180, RandomX(5, 10));
+			var ydir = -Cos(i + 180, RandomX(5, 10));
+			
+			CreateParticle("Lightning", x, y, xdir, ydir, 5, props, 1);
+		}
+	}
+}
+
 func FxOrbTravelTimer(object target, proplist effect, int time)
 {
 	var props =
@@ -184,7 +229,7 @@ func OrbEffect()
 		Attach = ATTACH_Back | ATTACH_MoveRelative
 		
 	};
-	CreateParticle("Flash", 0, 0, 0, 0, 0, flashparticle2,5);
+	CreateParticle("Flash", 0, 0, 0, 0, 0, flashparticle2, 5);
 }
 
 func CheckForEnemies()

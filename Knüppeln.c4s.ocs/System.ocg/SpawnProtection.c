@@ -18,7 +18,7 @@ global func FxSpawnProtectionStart(object target, proplist effect, int temporary
 			R = 255,
 			G = 255,
 			B = 255,
-			Alpha = 255,
+			Alpha = 100,
 			Size = 40,
 			BlitMode = GFX_BLIT_Additive,
 			Rotation = PV_Step(10, 0, 1),

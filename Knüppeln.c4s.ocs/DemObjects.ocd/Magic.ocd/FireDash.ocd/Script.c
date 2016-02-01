@@ -46,6 +46,31 @@ func Launch(object clonk, int x, int y)
 
 }
 
+func ChargeEffect(proplist params)
+{
+	var clonk = params.clonk;
+
+	for(var i = 0; i < 360; i+= RandomX(3,15))
+	{
+		if(!Random(10))
+		{
+			var props =
+			{
+				Prototype = Particles_FireTrail(),
+				Size = PV_Linear(10,0),
+				BlitMode = GFX_BLIT_Additive,
+				OnCollision=nil,
+				CollisionVertex=nil
+			};
+			
+			var xdir = Sin(i + 180, RandomX(15, 30));
+			var ydir = -Cos(i + 180, RandomX(15, 30));
+			
+			CreateParticle("Fire", clonk->GetX() - GetX() + Sin(i, 30), clonk->GetY() - GetY() - Cos(i, 30), PV_Random(xdir -2, xdir + 2), PV_Random(ydir - 2 , ydir + 2), 20, props, 2);
+		}
+	}
+}
+
 func ChargeStop(proplist params)
 {
 
@@ -120,6 +145,7 @@ func FxFireDashTimer(object target, proplist effect, int time)
 		Prototype = Particles_FireTrail(),
 		Size = PV_Linear(effect.Size1,0),
 		BlitMode = GFX_BLIT_Additive,
+		OnCollision=nil,
 	};
 	CreateParticle("Fire", x, y, PV_Random(-7,7), PV_Random(-7,7), 20, firetrailparticles, 3);
 	

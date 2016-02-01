@@ -262,7 +262,8 @@ func Death(...)
 		RemoveObject(RangeDummy);
 	}
 	
-	RemoveObject();
+	if(this)
+		RemoveObject();
 	
 	return _inherited(...);
 }
@@ -481,13 +482,30 @@ func GetChampType()
 func Charge(object caller, string callback, int time, proplist params, bool nosound)
 {
 	SetAction("Float");
-	var eff = AddEffect("Charge", this, 20, time, this, GetID());
+	var eff = AddEffect("Charge", this, 20, 1, this, GetID());
 	eff.f = callback;
 	eff.c = caller;
 	eff.p = params;
+	eff.time = time;
 	
 	if(!nosound)
 		Sound("charge", false, 20);
+}
+
+func FxChargeTimer(object target, proplist effect, int time)
+{
+	var a = GetPlayerCursorPos(GetOwner(), true);
+	var x1 = a[0] - GetX();
+	var y1 = a[1] - GetY();
+	
+	effect.p.new_angle = Angle(0,0,x1,y1);
+	effect.p.new_x = x1;
+	effect.p.new_y = y1;
+
+	effect.c->~ChargeEffect(effect.p);
+	
+	if(time >= effect.time)
+		return -1;
 }
 
 func FxChargeDamage(object target, proplist effect, int damage, int cause)
