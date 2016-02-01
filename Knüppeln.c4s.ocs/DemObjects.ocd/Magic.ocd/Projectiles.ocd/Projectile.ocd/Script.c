@@ -52,7 +52,7 @@ func FxTheEffectStart()
 
 func FxTheEffectTimer(object target, proplist effect, int time)
 {
-	this->~TravelEffect();
+	this->~TravelEffect(time);
 }
 
 public func HitObject(obj)
