@@ -81,7 +81,7 @@ func FxFireDashTimer(object target, proplist effect, int time)
 	
 	target->SetPosition(target->GetX() + Sin(a, 6, effect.angle_prec), target->GetY() + -Cos(a, 6, effect.angle_prec));
 
-	for(var o in FindObjects(Find_Distance(effect.Size1, x, y), Find_ID(Clonk), Find_NoContainer(), Find_Func("CanBeHit")))
+	for(var o in FindObjects(Find_Distance(effect.Size1, x, y), Find_Func("CanBeHit")))
 	{
 		if(o->GetOwner() == target->GetOwner())
 			continue;

@@ -8,23 +8,31 @@
 #include Man
 
 local Description = "$Description$";
+local Name = "$Name$";
 
-func Special1(object clonk, int x, int y, bool released, bool mouseclick, bool abletocast)
+func Special1(object clonk, int x, int y, bool released, bool mouseclick, bool abletocast, bool cooldown)
 {
-	if(!released && !mouseclick && abletocast)
+	if(!released && !mouseclick && abletocast && !cooldown)
+	{
 		clonk->LaunchSpell(FireProjectile, x, y, 0, 0);
+		return 1;
+	}
+	return 0;
 }
 
-func Special2(object clonk, int x, int y, bool released, bool mouseclick, bool abletocast)
+func Special2(object clonk, int x, int y, bool released, bool mouseclick, bool abletocast, bool cooldown)
 {
-	if(!released && !mouseclick && abletocast)
+	if(!released && !mouseclick && abletocast && !cooldown)
 	{
 		var y_off = -6;
 		clonk->LaunchSpell(FireNado, x, y, 0, y_off);
+		return 1;
 	}
+	
+	return 0;
 }
 
-func Special3(object clonk, int x, int y, bool released, bool mouseclick, bool abletocast)
+func Special3(object clonk, int x, int y, bool released, bool mouseclick, bool abletocast, bool cooldown)
 {
 	if(!released && !mouseclick)
 	{
@@ -64,11 +72,14 @@ func Special3(object clonk, int x, int y, bool released, bool mouseclick, bool a
 			|| solidcheck)
 		{
 			Sound("UI::Error", false, 50, clonk->GetOwner());
-			return 1;
+			return 0;
 		}
 		
 		clonk->LaunchSpell(FireDash, x, y, x, y);
+		return 1;
 	}
+	
+	return 0;
 }
 
 func JumpEffect(object clonk, dir)

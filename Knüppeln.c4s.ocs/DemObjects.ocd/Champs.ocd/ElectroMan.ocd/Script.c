@@ -8,20 +8,29 @@
 #include Man
 
 local Description = "$Description$";
+local Name = "$Name$";
 
-func Special1(object clonk, int x, int y, bool released, bool mouseclick, bool abletocast)
+func Special1(object clonk, int x, int y, bool released, bool mouseclick, bool abletocast, bool cooldown)
 {
-	if(!released && !mouseclick && abletocast)
+	if(!released && !mouseclick && abletocast && !cooldown)
+	{
 		clonk->LaunchSpell(ElectroProjectile, x, y, 0, 0);
+		return 1;
+	}
+	return 0;
 }
 
-func Special2(object clonk, int x, int y, bool released, bool mouseclick, bool abletocast)
+func Special2(object clonk, int x, int y, bool released, bool mouseclick, bool abletocast, bool cooldown)
 {
-	if(!released && !mouseclick && abletocast)
+	if(!released && !mouseclick && abletocast && !cooldown)
+	{
 		clonk->LaunchSpell(ElectroOrb, x, y, 0, 0);
+		return 1;
+	}
+	return 0;
 }
 
-func Special3(object clonk, int x, int y, bool released, bool mouseclick, bool abletocast)
+func Special3(object clonk, int x, int y, bool released, bool mouseclick, bool abletocast, bool cooldown)
 {
 	if(!released && !mouseclick)
 	{
@@ -43,6 +52,7 @@ func Special3(object clonk, int x, int y, bool released, bool mouseclick, bool a
 	if(released && !mouseclick)
 	{
 		clonk->CancelShowSpellRange();
+		
 	}
 
 	if(!released && mouseclick && abletocast)
@@ -50,7 +60,7 @@ func Special3(object clonk, int x, int y, bool released, bool mouseclick, bool a
 		if (Sqrt(x**2 + y**2) > ThunderStrike.SpellRange)
 		{
 			Sound("UI::Error", false, 50, clonk->GetOwner());
-			return 1;
+			return 0;
 		}
 		
 		clonk->LaunchSpell(ThunderStrike, x, y, x, y);
@@ -59,8 +69,11 @@ func Special3(object clonk, int x, int y, bool released, bool mouseclick, bool a
 		{
 			Log("This shouldn't happen");
 			Log("special1: %d special2: %d special3: %d", clonk.special_active[1], clonk.special_active[2], clonk.special_active[3]);
-		}		
+		}
+		return 1;
 	}
+	
+	return 0;
 }
 
 func JumpEffect(object clonk, dir)

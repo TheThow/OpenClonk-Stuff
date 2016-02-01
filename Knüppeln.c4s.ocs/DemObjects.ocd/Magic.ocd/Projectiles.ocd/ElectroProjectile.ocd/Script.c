@@ -94,7 +94,7 @@ func Hit()
 {
 	HitEffect();
 	
-	for(var o in FindObjects(Find_Distance(Size), Find_ID(Clonk), Find_NoContainer(), Find_Func("CanBeHit")))
+	for(var o in FindObjects(Find_Distance(Size), Find_Func("CanBeHit")))
 	{
 		o->DoEnergy(-SpellDamage);
 		AddElectroHitEffect(o);

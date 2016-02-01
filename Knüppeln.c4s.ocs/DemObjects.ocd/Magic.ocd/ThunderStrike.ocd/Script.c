@@ -123,7 +123,7 @@ func FxChargeStop()
 
 func CheckForEnemies()
 {
-	for(var o in FindObjects(Find_Distance(Size), Find_ID(Clonk), Find_NoContainer(), Find_Func("CanBeHit")))
+	for(var o in FindObjects(Find_Distance(Size), Find_Func("CanBeHit")))
 	{
 		var angle = Angle(GetX(), GetY(), o->GetX(), o->GetY());
 		

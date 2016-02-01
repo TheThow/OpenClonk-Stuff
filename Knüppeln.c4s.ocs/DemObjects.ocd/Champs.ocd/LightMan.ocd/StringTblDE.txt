@@ -1,1 +1,2 @@
+Name=Light Man
 Description=Also known as bullshit man

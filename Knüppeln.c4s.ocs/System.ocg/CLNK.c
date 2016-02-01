@@ -1,14 +1,16 @@
 #appendto Clonk
 
+local champs = [ElectroMan, FireMan, LightMan];
+
 local MaxEnergy = 100000;
 local MaxMagic = 100000;
 
 local TIMER = 10;
-local MOVEMENT_CD = 15;
+local MOVEMENT_CD = 12;
 local TUMBLE_DUR = 25;
 
 local BLOCK_CD = 35;
-local BLOCK_DUR = 8;
+local BLOCK_DUR = 5;
 local BLOCK_RANGE = 25;
 
 local JUMP_MANA = 10;
@@ -45,7 +47,7 @@ public func ObjectControl(int plr, int ctrl, int x, int y, int strength, bool re
 	{
 		if(!GetEffect("BlockingCD", this))
 		{
-			AddEffect("Blocking", this, 1, BLOCK_DUR, this, GetID());
+			AddEffect("Blocking", this, 1, 1, this, GetID());
 			AddEffect("BlockingCD", this, 1, BLOCK_CD);
 		}
 	}
@@ -114,7 +116,7 @@ public func ObjectControl(int plr, int ctrl, int x, int y, int strength, bool re
   			if(GetMagicEnergy() >= JUMP_MANA)
   			{
   				RemoveEffect("IntControlJumpDouble", this);
-	 			SetYDir(-this.JumpSpeed /4*3 * GetCon(), 100 * 100);
+	 			SetYDir(-this.JumpSpeed*4/5 * GetCon(), 100 * 100);
 	 			JumpEffect("Up");
 	 			DoMagicEnergy(-JUMP_MANA);
 	 		}
@@ -316,7 +318,7 @@ func FxBlockingStart()
 	Block();
 }
 
-func FxBlockTimer(object target, proplist effect, int time)
+func FxBlockingTimer(object target, proplist effect, int time)
 {
 	if(time >= BLOCK_DUR)
 		return -1;
@@ -348,24 +350,33 @@ func Block()
 
 func LaunchSpecial1(x, y, released, mouse, abletocast)
 {
-	ChampType->Special1(this, x, y, released, mouse, abletocast);
+	ChampType->Special1(this, x, y, released, mouse, abletocast, GetEffect("Special1CD", this));
+	if(!released && !mouse && abletocast && !GetEffect("Special1CD", this))
+		AddEffect("Special1CD", this, 20, ChampType.Special1Cooldown);
+	
 }
 
 func LaunchSpecial2(int x, int y, released, mouse, abletocast)
 {
-	ChampType->Special2(this, x, y, released, mouse, abletocast);
+	ChampType->Special2(this, x, y, released, mouse, abletocast, GetEffect("Special2CD", this));
+	if(!released && !mouse && abletocast && !GetEffect("Special2CD", this))
+		AddEffect("Special2CD", this, 20, ChampType.Special2Cooldown);
 }
 
 func LaunchSpecial3(int x, int y, released, mouse, abletocast)
 {
-	ChampType->Special3(this, x, y, released, mouse, abletocast);
+	ChampType->Special3(this, x, y, released, mouse, abletocast, GetEffect("Special3CD", this));
+	if(!released && !mouse && abletocast && !GetEffect("Special3CD", this))
+		AddEffect("Special3CD", this, 20, ChampType.Special3Cooldown);
 }
 
 func LaunchSpell(id ID, x, y, x_off, y_off)
 {
+	var spell;
+
 	if (GetMagicEnergy() >= ID.ManaCost)
 	{
-		var spell = CreateObject(ID,x_off, y_off,GetOwner());
+		spell = CreateObject(ID,x_off, y_off,GetOwner());
 		spell->Launch(this, x, y);
 		DoMagicEnergy(-ID.ManaCost);
 	}
@@ -373,15 +384,17 @@ func LaunchSpell(id ID, x, y, x_off, y_off)
 	{
 		Sound("UI::Error", 0, 50, GetOwner());
 	}
+	
+	return spell;
 }
 
 func ChooseMenu()
 {
-	var champs = [
-					["Electro Man", ElectroMan],
-					["Fire Man", FireMan],
-					["Light Man", LightMan]
-				 ];
+	//var champs = [
+	//				["Electro Man", ElectroMan],
+	//				["Fire Man", FireMan],
+	//				["Light Man", LightMan]
+	//			 ];
 
 	var menu = 
 	{
@@ -415,10 +428,10 @@ func ChooseMenu()
 	{
 		var subm =
 		{
-			ID = champ[1],
+			ID = champ,
 			Bottom = "+4em",
-			icon = {Priority = 10, Symbol = champ[1], Right = "+4em", Bottom = "+4em"},
-			text = {Priority = 10, Left = "+5em", Style = GUI_TextVCenter, Text = champ[0]},
+			icon = {Priority = 10, Symbol = champ, Right = "+4em", Bottom = "+4em"},
+			text = {Priority = 10, Left = "+5em", Style = GUI_TextVCenter, Text = champ.Name},
 			
 			selector = // only visible for host
 			{
@@ -427,13 +440,13 @@ func ChooseMenu()
 				
 				OnMouseIn = 
 					[ 
-						GuiAction_Call(this, "ChampUpdateDesc", [champ[1]]), 
+						GuiAction_Call(this, "ChampUpdateDesc", [champ]), 
 						GuiAction_SetTag("Hover")
 					],
 			
 				OnMouseOut = { Hover = GuiAction_SetTag("Std")},
 				
-				OnClick = GuiAction_Call(this, "SelectChamp", [champ[1]]),
+				OnClick = GuiAction_Call(this, "SelectChamp", [champ]),
 			},
 		};
 		GuiAddSubwindow(subm, menu.list);
@@ -515,7 +528,7 @@ func IsCharging()
 
 func CanCast()
 {
-	if(Contained() || GetAction() == "Tumble" || IsCharging() || GetAction() == "Float")
+	if(Contained() || GetAction() == "Tumble" || IsCharging() || GetAction() == "Float" || GetEffect("SpawnProtection", this))
 		return false;
 	return true;
 }
@@ -545,6 +558,12 @@ func CancelShowSpellRange()
 func CanBeHit()
 {
 	if(GetEffect("Unhitable", this))
+		return false;
+		
+	if(Contained())
+		return false;
+	
+	if(!GetAlive())
 		return false;
 	
 	return true;
