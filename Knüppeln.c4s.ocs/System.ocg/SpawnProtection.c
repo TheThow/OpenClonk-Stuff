@@ -12,6 +12,7 @@ global func FxSpawnProtectionStart(object target, proplist effect, int temporary
 	target->SetObjectLayer(target);
 	target->SetClrModulation(RGBa(255,255,255, 100));
 	effect.dummy = CreateObject(Dummy, target->GetX(), target->GetY(), target->GetOwner());
+	effect.dummy.Visibility = VIS_All;
 	effect.dummy->SetAction("HangOnto", target);
 	var props =
 		{
@@ -36,7 +37,7 @@ global func FxSpawnProtectionTimer(object target, proplist effect, int time)
 
 global func FxSpawnProtectionStop(object target, proplist effect, int reason, bool temporary)
 {
-	if(temporary && !target)
+	if(temporary || !target)
 		return;
 	
 	target->SetObjectLayer(nil);
