@@ -263,7 +263,7 @@ func Death(...)
 	}
 	
 	if(this)
-		RemoveObject();
+		FadeOut(30, true);
 	
 	return _inherited(...);
 }
