@@ -472,6 +472,9 @@ func SelectChamp(data, int player, int ID, int subwindowID, object target)
 	ChampType = data[0];
 	
 	this->CancelMenu();
+	var relauncher = Contained();
+	if (relauncher)
+		relauncher->~RelaunchClonk();
 }
 
 func GetChampType()
