@@ -7,6 +7,7 @@
 
 
 local Master;
+local MaxEnergy = 100000;
 
 func Initialize()
 {
@@ -99,6 +100,8 @@ func FxParticlesDamage(object target, proplist effect, int damage, int cause)
 {
 	if(Master)
 		Master->GotDamage(damage);
+		
+	return 0;
 }
 
 func IsHitable()

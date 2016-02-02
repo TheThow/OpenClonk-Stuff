@@ -8,7 +8,7 @@
 local ManaCost = 35;
 
 local stones;
-local HP = 0;
+local HP = 50;
 local Dur = 220;
 
 local MaxDst = 100;
@@ -28,9 +28,8 @@ func CreateWall(int angle, int count, int hp)
 {
 	stones = CreateArray(count);
 	
-	HP = hp;
-	if(!HP)
-		HP = 75;
+	if(hp)
+		HP = hp;
 	
 	for(var i = 0; i < count; i++)
 	{
@@ -50,7 +49,7 @@ func GotDamage(int dmg)
 	if(GetEffect("DamageCD", this))
 		return;
 
-	HP = HP - dmg;
+	HP = HP + dmg/1000;
 	
 	if(HP <= 0)
 		Destroy();

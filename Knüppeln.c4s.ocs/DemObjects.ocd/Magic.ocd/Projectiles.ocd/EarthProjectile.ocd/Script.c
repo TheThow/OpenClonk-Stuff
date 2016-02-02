@@ -3,7 +3,7 @@
 local pR = 50;
 local pG = 255;
 local pB = 50;
-local Speed = 90;
+local Speed = 80;
 local SpellDamage = 25;
 local Size = 20;
 local ManaCost = 20;
@@ -13,7 +13,6 @@ local counter = 0;
 func Initialize()
 {
 	SetRDir(10);
-	AddEffect("DirUpdate", this, 20, 1, this);
 }
 
 func InitEffect()
@@ -60,8 +59,6 @@ func HitEffect()
 		BlitMode = GFX_BLIT_Additive,
 	};
 	CreateParticle("StarSpark", 0, 0, 0, 0, 7, sphereparticle, 4);
-	
-	Sound("electro_explosion", false, 50);
 	
 	for(var o in FindObjects(Find_Distance(SpellDamage), Find_Func("CanBeHit")))
 	{

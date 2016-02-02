@@ -539,9 +539,13 @@ func FxChargeDamage(object target, proplist effect, int damage, int cause)
 
 	if(GetAction() == "Float")
 		SetAction("Jump");
+	
+	if(effect.c)
+		effect.c->~ChargeInterrupted();
 		
-	effect.c->~ChargeInterrupted();
 	RemoveEffect(effect.name, this);
+	
+	return damage;
 }
 
 func FxChargeStop(object target, proplist effect, int reason, bool temporary)
@@ -550,7 +554,7 @@ func FxChargeStop(object target, proplist effect, int reason, bool temporary)
 		return;
 		
 	if(!effect.c)
-		return -1;
+		return 0;
 
 	SetAction("Jump");
 			
@@ -564,6 +568,7 @@ func FxChargeStop(object target, proplist effect, int reason, bool temporary)
 	
 	if(effect.c)
 		effect.c->Call(effect.f, effect.p);
+	
 }
 
 func IsCharging()
