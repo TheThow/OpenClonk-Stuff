@@ -22,6 +22,20 @@ func Special1(object clonk, int x, int y, bool released, bool mouseclick, bool a
 
 func Special2(object clonk, int x, int y, bool released, bool mouseclick, bool abletocast, bool cooldown)
 {
+	if(!released && !mouseclick && abletocast && !cooldown)
+	{
+		var angle = Angle(0, 0, x, y);
+		var dst = Distance(0, 0, x, y);
+		
+		if(dst > EarthWall.MaxDst)
+		{
+			x = Sin(angle, EarthWall.MaxDst);
+			y = -Cos(angle, EarthWall.MaxDst);
+		}
+		
+		clonk->LaunchSpell(EarthWall, x, y, x, y);
+		return 1;
+	}
 	return 0;
 }
 
@@ -65,7 +79,7 @@ func JumpEffect(object clonk, dir)
 		
 		var trailparticles =
 		{
-			Size = PV_Linear(10,0),
+			Size = PV_Linear(8,0),
 			BlitMode = GFX_BLIT_Additive,
 			R = 50,
 			G = 255,
@@ -76,8 +90,8 @@ func JumpEffect(object clonk, dir)
 		
 		var smoke =
 		{
-			Alpha = PV_Linear(255, 0),
-			Size = 8,
+			Alpha = 255,
+			Size = PV_Linear(7,0),
 			DampingX = 900, DampingY = 900,
 			R = 150, G = 120, B = 100,
 			Phase = PV_Random(0, 15)
@@ -107,60 +121,37 @@ func BlockEffect(object clonk, range)
 		
 		var smoke =
 		{
-			Alpha = PV_Linear(255, 0),
-			Size = 8,
+			Alpha = 255,
+			Size = PV_Linear(7,0),
 			DampingX = 900, DampingY = 900,
 			R = 150, G = 120, B = 100,
 			Phase = PV_Random(0, 15)
 		};
-		CreateParticle("Smoke", x, y, PV_Random(-2,2), PV_Random(-2,2), 10, smoke, 2);
+		CreateParticle("Smoke", x, y, PV_Random(-2,2), PV_Random(-2,2), 10, smoke, 4);
 	}
 }
 
-func FxFireHitTimer(object target, proplist effect, int time)
+func FxEarthHitTimer(object target, proplist effect, int time)
 {
-	var chaoticspark =
+	var lightning =
 	{
-		Size = PV_Linear(1, 0),
-		ForceX = PV_KeyFrames(10, 0, PV_Random(-6, 6), 333, PV_Random(-6, -6), 666, PV_Random(6, 6), 1000, PV_Random(-6, 6)),
-		ForceY = PV_KeyFrames(10, 0, PV_Random(-8, 5), 333, PV_Random(-8, 5), 666, PV_Random(-10, 10), 1000, PV_Random(-10, 15)),
-		Stretch = PV_Speed(1000, 500),
-		Rotation = PV_Direction(),
-		CollisionVertex = 0,
-		OnCollision = PC_Die(),
-		R = 255,
-		G = PV_Linear(255,200),
-		B = PV_Random(0, 100),
-		DampingX=950,
-		DampingY=950,
-		Alpha = PV_Random(100,180),
-		BlitMode = GFX_BLIT_Additive
-	};
-	var sharpflame =
-	{
-		Size = 4,
-		R = 255,
-		G = PV_KeyFrames(0, 0, 255, 666, 0, 627, 0),
-		B = 0,
-		Rotation = PV_Random(0, 360),
-		Phase = PV_Random(0, 5),
-		OnCollision = 0,
+		Prototype = Particles_ElectroSpark2(),
+		Size = PV_Linear(PV_Random(2,5),0),
 		BlitMode = GFX_BLIT_Additive,
-		Attach = ATTACH_Front | ATTACH_MoveRelative
+		Rotation = PV_Random(0,360),
+		R = 50,
+		G = 255,
+		B = 50,
+		Attach = ATTACH_Back | ATTACH_MoveRelative,
 	};
 	
-	var x = target->GetX();
-	var y = target->GetY();
-	
-	CreateParticle("Magic", PV_Random(x + -5, x+ 5), PV_Random(y + -10, y + 10), PV_Random(25, -25), PV_Random(-25, 12), 50, chaoticspark);
-	
-	CreateParticle("FireSharp", RandomX(x + -5, x+ 5), RandomX(y + -10, y + 10), 0, PV_Random(-3,-10), 10, sharpflame, 2);
+	target->CreateParticle("Lightning", RandomX(-5, 5), RandomX(-10, 10), 0, 0, 10, lightning, 2);
 	
 	if(time > 40)
 		return -1;
 }
 
-global func AddFireHitEffect(object target)
+global func AddEarthHitEffect(object target)
 {
-	AddEffect("FireHit", target, 20, 1, nil, FireMan);
+	AddEffect("EarthHit", target, 20, 1, nil, EarthMan);
 }

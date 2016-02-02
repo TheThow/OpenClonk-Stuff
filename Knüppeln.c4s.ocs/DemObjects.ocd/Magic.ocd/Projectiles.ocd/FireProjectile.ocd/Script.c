@@ -43,11 +43,15 @@ func ExplosionEffect(...)
 
 func HitObject(obj)
 {
-	AddFireHitEffect(obj);
+	//AddFireHitEffect(obj);
 	return _inherited(obj);
 }
 
 func Hit()
 {
+	for(var o in FindObjects(Find_Distance(SpellDamage), Find_Func("CanBeHit")))
+	{
+		AddFireHitEffect(o);
+	}
 	Explode(SpellDamage);
 }

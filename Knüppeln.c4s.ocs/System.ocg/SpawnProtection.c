@@ -31,7 +31,7 @@ global func FxSpawnProtectionStart(object target, proplist effect, int temporary
 
 global func FxSpawnProtectionTimer(object target, proplist effect, int time)
 {
-	if(time > 160)
+	if(time > 120)
 		return -1;
 }
 

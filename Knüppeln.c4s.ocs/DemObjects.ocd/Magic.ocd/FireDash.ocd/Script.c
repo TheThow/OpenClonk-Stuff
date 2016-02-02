@@ -91,6 +91,7 @@ func ChargeStop(proplist params)
 	
 	params.clonk->SetAction("Float");
 	params.clonk->MakeHitable(false);
+	params.clonk->SetObjectLayer(params.clonk);
 	
 	Sound("Fire::Fireball", false, 100);
 	RemoveObject();
@@ -186,5 +187,6 @@ func FxFireDashStop(object target, proplist effect, int reason, bool temporary)
 	effect.marker->RemoveObject();
 	effect.clonk->MakeHitable(true);
 	effect.clonk->Unstuck();
+	effect.clonk->SetObjectLayer(nil);
 }
 

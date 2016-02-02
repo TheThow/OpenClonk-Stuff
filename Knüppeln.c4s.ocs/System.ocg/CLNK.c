@@ -1,6 +1,6 @@
 #appendto Clonk
 
-local champs = [ElectroMan, FireMan, LightMan, IceMan];
+local champs = [ElectroMan, FireMan, LightMan, IceMan, EarthMan];
 
 local MaxEnergy = 100000;
 local MaxMagic = 100000;
@@ -81,7 +81,14 @@ public func ObjectControl(int plr, int ctrl, int x, int y, int strength, bool re
 	
 	if (ctrl == CON_NextCrew)
 	{
+		if(special_active[3] == !release)
+		{
+			Log("Missing event");
+		}
 		special_active[3] = !release;
+		
+		if(special_active[3] != !release)
+			Log("ARRAYS FUCKED UP");
 	
 		var a = GetPlayerCursorPos(plr, true);
 		var x1 = a[0] - GetX();

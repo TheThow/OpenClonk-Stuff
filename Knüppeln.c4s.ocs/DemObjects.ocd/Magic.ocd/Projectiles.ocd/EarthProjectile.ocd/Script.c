@@ -3,10 +3,17 @@
 local pR = 50;
 local pG = 255;
 local pB = 50;
-local Speed = 50;
-local SpellDamage = 30;
-local Size = 30;
+local Speed = 90;
+local SpellDamage = 25;
+local Size = 20;
 local ManaCost = 20;
+
+local counter = 0;
+
+func Initialize()
+{
+	SetRDir(10);
+}
 
 func InitEffect()
 {
@@ -20,20 +27,18 @@ func TravelEffect(int time)
 {
 	var trailparticles =
 	{
-		Size = PV_Linear(PV_Random(10, 15),0),
+		Size = PV_Linear(PV_Random(7, 12),0),
 		BlitMode = GFX_BLIT_Additive,
 		R = pR,
 		G = pG,
 		B = pB,
 	};
 	
-	CreateParticle("Flash", PV_Random(-5,5), PV_Random(-5,5), PV_Random(-10,10), PV_Random(-10,10), 10, trailparticles, 5);
+	CreateParticle("Flash", PV_Random(-3,3), PV_Random(-3,3), PV_Random(-7,7), PV_Random(-7,7), 10, trailparticles, 7);
 }
 
 func HitEffect()
 {
-	ShakeViewport(SpellDamage, 0, 0);
-	
 	var smoke =
 	{
 		Alpha = PV_Linear(255, 0),
@@ -60,14 +65,31 @@ func HitEffect()
 
 func Hit()
 {
+	if(counter < 1)
+	{
+		Bounce();
+		Sound("Hits::Materials::Rock::RockHit?");
+		counter++;
+		return;
+	}
+
 	HitEffect();
 	
-	for(var o in FindObjects(Find_Distance(Size), Find_Func("CanBeHit")))
+	for(var o in FindObjects(Find_Distance(SpellDamage), Find_Func("CanBeHit")))
 	{
-		o->DoEnergy(-SpellDamage);
-		var angle = Angle(GetX(), GetY(), o->GetX(), o->GetY());
-		o->Fling(Sin(angle, 5), -Cos(angle, 5));
+		AddEarthHitEffect(o);
 	}
+	Explode(SpellDamage);
+}
+
+func Bounce()
+{
+	var angle = Angle(0, 0, GetXDir(), GetYDir());
 	
-	RemoveObject();
+	var surface_angle = Angle(0, 0, GetX(), GetY());
+	var angle_diff = GetTurnDirection(angle, surface_angle);
+	var new_angle = surface_angle + angle_diff;
+	
+	SetXDir(Sin(new_angle, GetXDir()));
+	SetYDir(-Cos(new_angle, GetYDir()));
 }

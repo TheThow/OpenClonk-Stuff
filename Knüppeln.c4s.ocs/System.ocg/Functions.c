@@ -104,8 +104,11 @@ global func Unstuck()
 		return;
 
 	var flag = false;
+	
+	var ix = GetX();
+	var iy = GetY();
 
-	for(var i = 0; i < 30; i += 5)
+	for(var i = 0; i < 40; i += 5)
 	{
 		for(var r = 0; r < 360; r += 10)
 		{
@@ -114,7 +117,7 @@ global func Unstuck()
 		
 			if(!GBackSolid(x, y))
 			{
-				SetPosition(GetX() + x, GetY() + y);
+				SetPosition(ix + x, iy + y);
 				
 				if(!this->Stuck())
 				{

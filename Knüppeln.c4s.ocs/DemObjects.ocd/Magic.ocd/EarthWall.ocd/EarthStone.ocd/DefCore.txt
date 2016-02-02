@@ -1,0 +1,10 @@
+[DefCore]
+id=EarthStone
+Version=6,0
+Category=C4D_Object
+Width=10
+Height=10
+Offset=-5,-5
+SolidMask=0,0,10,10
+NoStabilize=1
+Rotate=1

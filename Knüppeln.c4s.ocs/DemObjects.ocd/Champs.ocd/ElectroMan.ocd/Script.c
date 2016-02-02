@@ -162,7 +162,7 @@ func FxElectroHitTimer(object target, proplist effect, int time)
 	var lightning =
 	{
 		Prototype = Particles_ElectroSpark2(),
-		Size = PV_Linear(RandomX(2,5),0),
+		Size = PV_Linear(PV_Random(2,5),0),
 		BlitMode = GFX_BLIT_Additive,
 		Rotation = PV_Random(0,360),
 		R = 175,
@@ -171,10 +171,7 @@ func FxElectroHitTimer(object target, proplist effect, int time)
 		Attach = ATTACH_Back | ATTACH_MoveRelative,
 	};
 	
-	var x = target->GetX();
-	var y = target->GetY();
-	
-	CreateParticle("Lightning", RandomX(x + -5, x+ 5), RandomX(y + -10, y + 10), 0, 0, 10, lightning, 2);
+	target->CreateParticle("Lightning", RandomX(-5, 5), RandomX(-10, 10), 0, 0, 10, lightning, 2);
 	
 	if(time > 40)
 		return -1;
