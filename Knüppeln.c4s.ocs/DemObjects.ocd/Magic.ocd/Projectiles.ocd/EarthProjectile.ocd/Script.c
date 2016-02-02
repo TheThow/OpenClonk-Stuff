@@ -10,9 +10,6 @@ local ManaCost = 20;
 
 local counter = 0;
 
-local xdir;
-local ydir;
-
 func Initialize()
 {
 	SetRDir(10);
@@ -67,11 +64,11 @@ func HitEffect()
 	Sound("electro_explosion", false, 50);
 }
 
-func Hit()
+func Hit(int xdir, int ydir)
 {
-	if(counter < 1)
+	if (counter < 1)
 	{
-		Bounce();
+		Bounce(xdir, ydir);
 		Sound("Hits::Materials::Rock::RockHit?");
 		counter++;
 		return;
@@ -86,23 +83,16 @@ func Hit()
 	Explode(SpellDamage);
 }
 
-func Bounce()
+func Bounce(int xdir, int ydir)
 {
 	var angle = Angle(0, 0, xdir, ydir);
 	
-	var surface = GetSurfaceVector(xdir, ydir);
+	var surface = GetSurfaceVector(0, 0);
 	var surface_angle = Angle(0, 0, surface[0], surface[1]);
 	var angle_diff = GetTurnDirection(angle - 180, surface_angle);
 	var new_angle = surface_angle + angle_diff;
 	
-	SetXDir(Sin(new_angle, xdir/4*3));
-	SetYDir(-Cos(new_angle, ydir/4*3));
-}
-
-func FxDirUpdateTimer()
-{
-	if(GetXDir())
-		xdir = GetXDir();
-	if(GetYDir())
-		ydir = GetYDir();
+	var speed = Distance(0, 0, xdir, ydir);
+	SetXDir(Sin(new_angle, speed), 100);
+	SetYDir(-Cos(new_angle, speed), 100);
 }
