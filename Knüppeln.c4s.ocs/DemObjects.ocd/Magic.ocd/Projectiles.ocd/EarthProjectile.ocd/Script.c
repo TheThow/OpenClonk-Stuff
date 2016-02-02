@@ -62,6 +62,21 @@ func HitEffect()
 	CreateParticle("StarSpark", 0, 0, 0, 0, 7, sphereparticle, 4);
 	
 	Sound("electro_explosion", false, 50);
+	
+	for(var o in FindObjects(Find_Distance(SpellDamage), Find_Func("CanBeHit")))
+	{
+		AddEarthHitEffect(o);
+	}
+	
+	Explode(SpellDamage);
+}
+
+func HitObject(obj)
+{
+	if(obj->~CanBeHit() == false)
+		return;
+		
+	HitEffect();
 }
 
 func Hit(int xdir, int ydir)
@@ -76,11 +91,6 @@ func Hit(int xdir, int ydir)
 
 	HitEffect();
 	
-	for(var o in FindObjects(Find_Distance(SpellDamage), Find_Func("CanBeHit")))
-	{
-		AddEarthHitEffect(o);
-	}
-	Explode(SpellDamage);
 }
 
 func Bounce(int xdir, int ydir)
@@ -93,6 +103,7 @@ func Bounce(int xdir, int ydir)
 	var new_angle = surface_angle + angle_diff;
 	
 	var speed = Distance(0, 0, xdir, ydir);
+	speed = speed*3/4;
 	SetXDir(Sin(new_angle, speed), 100);
 	SetYDir(-Cos(new_angle, speed), 100);
 }

@@ -23,7 +23,7 @@ local SPECIAL1_MANA = 25;
 
 local choosemenu_id;
 
-local ChampType = Rock;
+local ChampType = Man;
 
 local special_active =  [0, 0, 0, 0];
 
