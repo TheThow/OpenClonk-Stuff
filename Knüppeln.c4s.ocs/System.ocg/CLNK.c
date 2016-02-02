@@ -25,12 +25,14 @@ local choosemenu_id;
 
 local ChampType = Man;
 
-local special_active =  [0, 0, 0, 0];
+local special_active =  nil;
 
 local RangeDummy;
 
-func Initialize()
+func Construction()
 {
+	special_active =  [0, 0, 0, 0];
+	
 	AddEffect("ManaRegen", this, 20, 5, this, Clonk);
 	AddEffect("AutoHeal", this, 20, 40*3, this, Clonk);
 	RangeDummy = CreateObject(Dummy, 0, 0, GetOwner());
