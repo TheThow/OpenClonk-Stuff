@@ -79,7 +79,7 @@ public func ObjectControl(int plr, int ctrl, int x, int y, int strength, bool re
 	}
 	
 	
-	if (ctrl == CON_NextCrew)
+	if (ctrl == CON_Skill3)
 	{
 		if(special_active[3] == !release)
 		{
