@@ -527,7 +527,7 @@ func FxChargeTimer(object target, proplist effect, int time)
 func FxChargeDamage(object target, proplist effect, int damage, int cause)
 {
 	if (damage >= 0)
-		return;
+		return damage;
 
 	if(GetAction() == "Float")
 		SetAction("Jump");
