@@ -66,7 +66,7 @@ func JumpEffect(object clonk, dir)
 		to = 310;
 	}
 
-	Sound("electro_shot", false, 30);
+	Sound("electro_shot", false, 20, nil, nil, nil, 200);
 
 	for(var i = from; i < to; i+=5)
 	{
@@ -74,12 +74,13 @@ func JumpEffect(object clonk, dir)
 		var x = clonk->GetX() + Cos(i, r);
 		var y = clonk->GetY() + Sin(i, r);
 		
-		var angle = Angle(0,0,Cos(i, r),Sin(i, r));
-		
 		var trailparticles =
 		{
-			Size = PV_Linear(15,0),
-			Rotation = angle
+			Size = PV_Linear(2,0),
+			Rotation = PV_Random(0, 360, 1),
+			G = 0, B = 0,
+			Stretch = PV_Random(10000, 20000),
+			BlitMode = GFX_BLIT_Additive
 		};
 	
 		CreateParticle("StarSpark", x, y, Cos(i, r), Sin(i, r), 10, trailparticles);
