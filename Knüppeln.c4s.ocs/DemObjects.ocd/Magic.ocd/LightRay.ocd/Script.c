@@ -120,28 +120,27 @@ func DoTheLaser(from_x, from_y, to_x, to_y, angle, max_length, no_bounce, stop_a
 		}
 	}
 	
-	if (!object_hit)
+
+	var point  = PathFree2(GetX() + from_x, GetY() + from_y, GetX() + to_x, GetY() + to_y);
+	if (point)
 	{
-		var point  = PathFree2(GetX() + from_x, GetY() + from_y, GetX() + to_x, GetY() + to_y);
-		if (point)
+		to_x = point[0] - GetX();
+		to_y = point[1] - GetY();
+		len = Distance(from_x, from_y, to_x, to_y);
+		
+		var remaining = max_length - len;
+		if (!no_bounce && (remaining > 10) && (remaining < max_length))
 		{
-			to_x = point[0] - GetX();
-			to_y = point[1] - GetY();
-			len = Distance(from_x, from_y, to_x, to_y);
-			
-			var remaining = max_length - len;
-			if (!no_bounce && (remaining > 10) && (remaining < max_length))
-			{
-				var surface = GetSurfaceVector(to_x, to_y);
-				var surface_angle = Angle(0, 0, surface[0], surface[1]);
-				var angle_diff = GetTurnDirection(angle - 180, surface_angle);
-				var new_angle = surface_angle + angle_diff;
-				var new_to_x = to_x + Sin(new_angle, remaining);
-				var new_to_y = to_y - Cos(new_angle, remaining);
-				DoTheLaser(to_x + surface[0], to_y + surface[1], new_to_x, new_to_y, new_angle, remaining, false, stop_at_target);
-			}
+			var surface = GetSurfaceVector(to_x, to_y);
+			var surface_angle = Angle(0, 0, surface[0], surface[1]);
+			var angle_diff = GetTurnDirection(angle - 180, surface_angle);
+			var new_angle = surface_angle + angle_diff;
+			var new_to_x = to_x + Sin(new_angle, remaining);
+			var new_to_y = to_y - Cos(new_angle, remaining);
+			DoTheLaser(to_x + surface[0], to_y + surface[1], new_to_x, new_to_y, new_angle, remaining, false, stop_at_target);
 		}
 	}
+	
 		
 	this.particle_ray.Rotation = angle;
 	

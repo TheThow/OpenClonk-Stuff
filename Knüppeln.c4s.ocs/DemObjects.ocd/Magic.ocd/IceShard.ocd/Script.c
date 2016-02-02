@@ -30,6 +30,11 @@ func Launch(object clonk, int x, int y)
 	SetController(clonk->GetController());
 }
 
+func ChargeInterrupted()
+{
+	RemoveObject();
+}
+
 func ChargeStop(proplist params)
 {
 	Sound("Liquids::Splash*", false, 100, nil, nil, nil, 200);
