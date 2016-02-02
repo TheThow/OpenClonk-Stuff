@@ -29,7 +29,7 @@ func Initialize()
 	SetAction("Travel");
 	AddEffect("Particles", this, 20, 1, this);
 	
-	for(var o in FindObjects(Find_OCF(OCF_Alive)))
+	for(var o in FindObjects(Find_OCF(OCF_Alive), Find_Distance(10)))
 	{
 		o->Unstuck();
 	}

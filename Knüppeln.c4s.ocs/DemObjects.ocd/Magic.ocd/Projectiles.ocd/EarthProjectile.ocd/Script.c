@@ -10,9 +10,13 @@ local ManaCost = 20;
 
 local counter = 0;
 
+local xdir;
+local ydir;
+
 func Initialize()
 {
 	SetRDir(10);
+	AddEffect("DirUpdate", this, 20, 1, this);
 }
 
 func InitEffect()
@@ -84,12 +88,21 @@ func Hit()
 
 func Bounce()
 {
-	var angle = Angle(0, 0, GetXDir(), GetYDir());
+	var angle = Angle(0, 0, xdir, ydir);
 	
-	var surface_angle = Angle(0, 0, GetX(), GetY());
-	var angle_diff = GetTurnDirection(angle, surface_angle);
+	var surface = GetSurfaceVector(xdir, ydir);
+	var surface_angle = Angle(0, 0, surface[0], surface[1]);
+	var angle_diff = GetTurnDirection(angle - 180, surface_angle);
 	var new_angle = surface_angle + angle_diff;
 	
-	SetXDir(Sin(new_angle, GetXDir()));
-	SetYDir(-Cos(new_angle, GetYDir()));
+	SetXDir(Sin(new_angle, xdir/4*3));
+	SetYDir(-Cos(new_angle, ydir/4*3));
+}
+
+func FxDirUpdateTimer()
+{
+	if(GetXDir())
+		xdir = GetXDir();
+	if(GetYDir())
+		ydir = GetYDir();
 }
