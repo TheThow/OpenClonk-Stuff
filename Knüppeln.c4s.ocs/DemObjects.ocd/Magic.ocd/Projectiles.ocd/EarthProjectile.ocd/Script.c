@@ -78,7 +78,7 @@ func HitObject(obj)
 
 func Hit(int xdir, int ydir)
 {
-	if (counter < 1)
+	if (counter < 1 && Distance(0, 0, xdir, ydir) > 5)
 	{
 		Bounce(xdir, ydir);
 		Sound("Hits::Materials::Rock::RockHit?");

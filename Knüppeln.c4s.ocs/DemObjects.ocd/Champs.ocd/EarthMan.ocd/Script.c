@@ -22,6 +22,7 @@ func Special1(object clonk, int x, int y, bool released, bool mouseclick, bool a
 
 func Special2(object clonk, int x, int y, bool released, bool mouseclick, bool abletocast, bool cooldown)
 {
+/*
 	if(!released && !mouseclick && abletocast && !cooldown)
 	{
 		var angle = Angle(0, 0, x, y);
@@ -36,6 +37,48 @@ func Special2(object clonk, int x, int y, bool released, bool mouseclick, bool a
 		clonk->LaunchSpell(EarthWall, x, y, x, y);
 		return 1;
 	}
+	return 0;
+	*/
+	if(!released && !mouseclick)
+	{
+		var props =
+		{
+			R = 50,
+			G = 255,
+			B = 50,
+			Alpha = 40,
+			Size = EarthWall.SpellRange*2,
+			BlitMode = GFX_BLIT_Additive,
+			Rotation = PV_Step(10, 0, 1),
+			Attach = ATTACH_Back | ATTACH_MoveRelative
+			
+		};
+		clonk->ShowSpellRange(clonk, EarthWall, props);
+	}
+	
+	if(released && !mouseclick)
+	{
+		clonk->CancelShowSpellRange();
+		
+	}
+
+	if(!released && mouseclick && abletocast)
+	{
+		if (Sqrt(x**2 + y**2) > EarthWall.SpellRange)
+		{
+			var a = Angle(0,0, x, y, 10);
+			var newx = Sin(a, EarthWall.SpellRange, 10);
+			var newy = -Cos(a, EarthWall.SpellRange, 10);
+			clonk->LaunchSpell(EarthWall, newx, newy, newx, newy);
+			
+			return 1;
+		}
+		
+		clonk->LaunchSpell(EarthWall, x, y, x, y);
+		
+		return 1;
+	}
+	
 	return 0;
 }
 

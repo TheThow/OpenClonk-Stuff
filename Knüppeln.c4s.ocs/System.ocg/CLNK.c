@@ -107,7 +107,7 @@ public func ObjectControl(int plr, int ctrl, int x, int y, int strength, bool re
 		return true;
 	}
 	
-	if (ctrl == CON_Use && release == false)
+	if (ctrl == CON_Use)
 	{
 		var flag = false;
 		
@@ -115,7 +115,7 @@ public func ObjectControl(int plr, int ctrl, int x, int y, int strength, bool re
 		{
 			if(special_active[i] == true)
 			{
-				Call(Format("LaunchSpecial%d", i), x, y, false, true, CanCast());
+				Call(Format("LaunchSpecial%d", i), x, y, release, true, CanCast());
 				flag = true;
 			}
 		}
@@ -522,7 +522,7 @@ func FxChargeTimer(object target, proplist effect, int time)
 	var x1 = a[0] - GetX();
 	var y1 = a[1] - GetY();
 	
-	effect.p.new_angle = Angle(0,0,x1,y1);
+	effect.p.new_angle = Angle(0,0,x1,y1,10);
 	effect.p.new_x = x1;
 	effect.p.new_y = y1;
 
@@ -562,7 +562,7 @@ func FxChargeStop(object target, proplist effect, int reason, bool temporary)
 	var x1 = a[0] - GetX();
 	var y1 = a[1] - GetY();
 	
-	effect.p.new_angle = Angle(0,0,x1,y1);
+	effect.p.new_angle = Angle(0,0,x1,y1, 10);
 	effect.p.new_x = x1;
 	effect.p.new_y = y1;
 	
@@ -592,7 +592,7 @@ func ShowSpellRange(object clonk, id spell, proplist props)
 		RangeDummy->SetAction("HangOnto", this);
 	}
 
-	RangeDummy->CreateParticle("Shockwave", 0, 0, 0, 0, 0, props);
+	RangeDummy->CreateParticle("Shockwave2", 0, 0, 0, 0, 0, props);
 	RangeDummy.range_on = true;
 }
 

@@ -20,12 +20,12 @@ func IsReflectable()
 func Launch(object clonk, int x, int y)
 {
 	Type = clonk->GetChampType();
-	var angle = Angle(0,0,x,y);
+	var angle = Angle(0,0,x,y, 10);
 
 	AddEffect("HitCheck", this, 1,1, nil,nil, clonk);
 	AddEffect("TheEffect", this, 20, 1, this, Projectile);
 
-	SetVelocity(angle, Speed);
+	SetVelocity(angle, Speed, 10);
 	
 	/*
 	if (Type == "Electro")

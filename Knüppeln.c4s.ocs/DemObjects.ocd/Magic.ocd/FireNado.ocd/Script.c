@@ -37,7 +37,7 @@ func Launch(object clonk, int x, int y)
 func ChargeStop(proplist params)
 {
 	var angle = params.new_angle;
-	SetVelocity(angle, Speed);
+	SetVelocity(angle, Speed, 10);
 	
 	AddEffect("FireNado", this, 20, 1 ,this, GetID());
 	AddEffect("Remove", this, 20, Durr, this, GetID());

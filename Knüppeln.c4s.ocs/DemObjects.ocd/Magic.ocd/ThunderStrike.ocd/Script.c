@@ -7,7 +7,7 @@
 
 local ManaCost = 60;
 local SpellDamage = 50;
-local SpellRange = 250;
+local SpellRange = 275;
 
 local Delay = 30;
 local Size = 30;

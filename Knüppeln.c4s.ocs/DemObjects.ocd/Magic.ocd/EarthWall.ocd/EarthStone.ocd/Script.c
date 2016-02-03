@@ -34,6 +34,17 @@ func Initialize()
 	{
 		o->Unstuck();
 	}
+	
+	var smoke = 
+	{
+		ForceX = PV_Wind(200 - 180),
+		DampingX = 900, DampingY = 900,
+		Alpha = PV_Linear(255, 0),
+		R = 100, G = 100, B = 100,
+		Size = PV_Linear(PV_Random(4, 10), PV_Random(20, 30)),
+		Phase = PV_Random(0, 15)
+	};
+	CreateParticle("Smoke", PV_Random(-5,5), PV_Random(-5,5), PV_Random(-15, 15), PV_Random(-15, 15), 30, smoke, 15);
 }
 
 func SetMaster(master)
@@ -94,6 +105,17 @@ func FxParticlesStop(object target, proplist effect, int reason, bool temporary)
 		BlitMode = GFX_BLIT_Additive,
 	};
 	CreateParticle("Smoke", 0, 0, PV_Random(-10 , 10), PV_Random(-10, 20), 50, props, 10);
+	
+	var smoke = 
+	{
+		ForceX = PV_Wind(200 - 180),
+		DampingX = 900, DampingY = 900,
+		Alpha = PV_Linear(255, 0),
+		R = 100, G = 100, B = 100,
+		Size = PV_Linear(PV_Random(4, 10), PV_Random(20, 30)),
+		Phase = PV_Random(0, 15)
+	};
+	CreateParticle("Smoke", PV_Random(-5,5), PV_Random(-5,5), PV_Random(-15, 15), PV_Random(-15, 15), 30, smoke, 15);
 }
 
 func FxParticlesDamage(object target, proplist effect, int damage, int cause)

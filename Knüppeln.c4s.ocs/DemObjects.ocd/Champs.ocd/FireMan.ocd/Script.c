@@ -42,7 +42,7 @@ func Special3(object clonk, int x, int y, bool released, bool mouseclick, bool a
 			G = 215,
 			B = 0,
 			Alpha = 40,
-			Size = FireDash.SpellRange*2 + FireDash.SpellRange/50*20,
+			Size = FireDash.SpellRange*2,
 			BlitMode = GFX_BLIT_Additive,
 			Rotation = PV_Step(10, 0, 1),
 			Attach = ATTACH_Back | ATTACH_MoveRelative
@@ -68,11 +68,20 @@ func Special3(object clonk, int x, int y, bool released, bool mouseclick, bool a
 				solidcheck = true;
 		}
 	
-		if (Sqrt(x**2 + y**2) > FireDash.SpellRange
-			|| solidcheck)
+		if (solidcheck)
 		{
 			Sound("UI::Error", false, 50, clonk->GetOwner());
 			return 0;
+		}
+		
+		if (Sqrt(x**2 + y**2) > FireDash.SpellRange)
+		{
+			var a = Angle(0,0, x, y, 10);
+			var newx = Sin(a, FireDash.SpellRange, 10);
+			var newy = -Cos(a, FireDash.SpellRange, 10);
+			clonk->LaunchSpell(FireDash, newx, newy, newx, newy);
+			
+			return 1;
 		}
 		
 		clonk->LaunchSpell(FireDash, x, y, x, y);

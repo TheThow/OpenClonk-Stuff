@@ -40,7 +40,7 @@ func Special3(object clonk, int x, int y, bool released, bool mouseclick, bool a
 			G = 215,
 			B = 255,
 			Alpha = 40,
-			Size = ThunderStrike.SpellRange*2 + ThunderStrike.SpellRange/50*20,
+			Size = ThunderStrike.SpellRange*2,
 			BlitMode = GFX_BLIT_Additive,
 			Rotation = PV_Step(10, 0, 1),
 			Attach = ATTACH_Back | ATTACH_MoveRelative
@@ -52,24 +52,22 @@ func Special3(object clonk, int x, int y, bool released, bool mouseclick, bool a
 	if(released && !mouseclick)
 	{
 		clonk->CancelShowSpellRange();
-		
 	}
 
 	if(!released && mouseclick && abletocast)
 	{
 		if (Sqrt(x**2 + y**2) > ThunderStrike.SpellRange)
 		{
-			Sound("UI::Error", false, 50, clonk->GetOwner());
-			return 0;
+			var a = Angle(0,0, x, y, 10);
+			var newx = Sin(a, ThunderStrike.SpellRange, 10);
+			var newy = -Cos(a, ThunderStrike.SpellRange, 10);
+			clonk->LaunchSpell(ThunderStrike, newx, newy, newx, newy);
+			
+			return 1;
 		}
 		
 		clonk->LaunchSpell(ThunderStrike, x, y, x, y);
 		
-		if(clonk.RangeDummy.range_on == false)
-		{
-			Log("This shouldn't happen");
-			Log("special1: %d special2: %d special3: %d", clonk.special_active[1], clonk.special_active[2], clonk.special_active[3]);
-		}
 		return 1;
 	}
 	

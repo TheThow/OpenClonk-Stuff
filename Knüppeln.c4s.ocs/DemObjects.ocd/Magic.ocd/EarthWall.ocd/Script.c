@@ -11,7 +11,7 @@ local stones;
 local HP = 50;
 local Dur = 220;
 
-local MaxDst = 100;
+local SpellRange = 100;
 
 func Initialize()
 {

@@ -5,11 +5,11 @@
 	@author 
 */
 
-local ManaCost = 35;
+local ManaCost = 30;
 local SpellDamage = 20;
-local Speed = 50;
-local Durr = 35;
-local Charge_durr = 15;
+local Speed = 55;
+local Dur = 30;
+local Charge_dur = 15;
 local l_effect_range = 100;
 
 local Size = 15;
@@ -41,14 +41,14 @@ func Launch(object clonk, int x, int y)
 		angle = Angle(0,0,x,y),
 		cl = clonk
 	};
-	clonk->Charge(this, "ChargeStop", Charge_durr, params);
+	clonk->Charge(this, "ChargeStop", Charge_dur, params);
 	Target = clonk;
 }
 
 func ChargeStop(proplist params)
 {
 	var angle = params.new_angle;
-	SetVelocity(angle, Speed);
+	SetVelocity(angle, Speed, 10);
 	
 	AddEffect("ElectroOrb", this, 20, 1 ,this, GetID());
 	
@@ -79,8 +79,8 @@ func ChargeEffect(proplist params)
 	};
 	
 	var a = params.new_angle;
-	var x = Sin(a, 10);
-	var y = -Cos(a, 10);
+	var x = Sin(a, 10, 10);
+	var y = -Cos(a, 10, 10);
 	
 	CreateParticle("Flash", x, y, 0, 0, 5, flashparticle2, 2);
 	
@@ -108,7 +108,7 @@ func ChargeEffect(proplist params)
 		}
 	}
 }
-
+/*
 func FxOrbTravelTimer(object target, proplist effect, int time)
 {
 	var props =
@@ -144,12 +144,12 @@ func FxOrbTravelTimer(object target, proplist effect, int time)
 		}
 	}
 }
-
+*/
 func FxElectroOrbTimer(object target, proplist effect, int time)
 {
 	CheckForEnemies();
 	
-	if(time == Durr)
+	if(time == Dur)
 	{
 		Return();
 		return -1;
@@ -166,13 +166,13 @@ func FxComebackTimer(object target, proplist effect, int time)
 
 	CheckForEnemies();
 	
-	var angle = Angle(GetX(), GetY(), Target->GetX(), Target->GetY());
+	var angle = Angle(GetX(), GetY(), Target->GetX(), Target->GetY(), 10);
 	
-	var txdir = Sin(angle, Speed);
-	var tydir = -Cos(angle, Speed);
+	var txdir = Sin(angle, Speed, 10);
+	var tydir = -Cos(angle, Speed, 10);
 	
-	SetXDir(GetXDir() + (txdir - GetXDir())/10);
-	SetYDir(GetYDir() + (tydir - GetYDir())/10);
+	SetXDir((GetXDir() + (txdir - GetXDir())/10));
+	SetYDir((GetYDir() + (tydir - GetYDir())/10));
 	
 	if(ObjectDistance(this, Target) < Size)
 		RemoveObject();
@@ -246,14 +246,34 @@ func CheckForEnemies()
 			o->DoEnergy(-SpellDamage);
 			Sound("electro_shot", false, 50);
 			AddElectroHitEffect(o);
+			
+			var trailparticles =
+			{
+				Prototype = Particles_ElectroSpark2(),
+				Size = PV_Linear(PV_Random(5,15),0),
+				BlitMode = GFX_BLIT_Additive,
+				Rotation = PV_Random(0,360),
+				R = pR,
+				G = pG,
+				B = pB,
+			};
+			
+			CreateParticle("Lightning", o->GetX() - GetX(), o->GetY() - GetY(), 0, 0, 10, trailparticles, 5);
 		}
 	}
 }
 
-func Hit()
+func Hit(xdir, ydir)
 {
-	if(!GetEffect("Comeback", this))
-		Return();
+	Bounce(xdir, ydir);
+	
+	if(Distance(0,0, xdir, ydir) > 25)
+		Sound("electro_shot", false, 50);
+}
+
+func IsReflectable()
+{
+	return 1;
 }
 
 func Return()
@@ -318,3 +338,18 @@ local ActMap = {
 		Speed=1000
 	},
 };
+
+func Bounce(int xdir, int ydir)
+{
+	var angle = Angle(0, 0, xdir, ydir);
+	
+	var surface = GetSurfaceVector(0, 0);
+	var surface_angle = Angle(0, 0, surface[0], surface[1]);
+	var angle_diff = GetTurnDirection(angle - 180, surface_angle);
+	var new_angle = surface_angle + angle_diff;
+	
+	var speed = Distance(0, 0, xdir, ydir);
+	speed = speed;
+	SetXDir(Sin(new_angle, speed), 100);
+	SetYDir(-Cos(new_angle, speed), 100);
+}
