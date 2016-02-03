@@ -243,9 +243,9 @@ func CheckForEnemies()
 		{
 			plr_hit[GetPlayerByIndex(o->GetOwner())] = 1;
 			o->Fling(0,-1);
-			o->DoEnergy(-SpellDamage);
+			o->AddElectroHitEffect();
+			
 			Sound("electro_shot", false, 50);
-			AddElectroHitEffect(o);
 			
 			var trailparticles =
 			{
@@ -259,6 +259,8 @@ func CheckForEnemies()
 			};
 			
 			CreateParticle("Lightning", o->GetX() - GetX(), o->GetY() - GetY(), 0, 0, 10, trailparticles, 5);
+			
+			o->DoEnergy(-SpellDamage);
 		}
 	}
 }

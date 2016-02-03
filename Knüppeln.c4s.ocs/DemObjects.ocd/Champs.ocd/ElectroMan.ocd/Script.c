@@ -175,7 +175,7 @@ func FxElectroHitTimer(object target, proplist effect, int time)
 		return -1;
 }
 
-global func AddElectroHitEffect(object target)
+global func AddElectroHitEffect()
 {
-	AddEffect("ElectroHit", target, 20, 1, nil, ElectroMan);
+	this->AddEffect("ElectroHit", this, 20, 1, nil, ElectroMan);
 }

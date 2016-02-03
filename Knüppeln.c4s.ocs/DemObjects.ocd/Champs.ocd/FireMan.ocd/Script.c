@@ -197,7 +197,7 @@ func FxFireHitTimer(object target, proplist effect, int time)
 		return -1;
 }
 
-global func AddFireHitEffect(object target)
+global func AddFireHitEffect()
 {
-	AddEffect("FireHit", target, 20, 1, nil, FireMan);
+	this->AddEffect("FireHit", this, 20, 1, nil, FireMan);
 }

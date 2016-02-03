@@ -84,6 +84,11 @@ func Special2(object clonk, int x, int y, bool released, bool mouseclick, bool a
 
 func Special3(object clonk, int x, int y, bool released, bool mouseclick, bool abletocast, bool cooldown)
 {
+	if(!released && !mouseclick && abletocast && !cooldown)
+	{
+		clonk->LaunchSpell(DeathRock, x, y, 0, 0);
+		return 1;
+	}
 	return 0;
 }
 
@@ -194,7 +199,7 @@ func FxEarthHitTimer(object target, proplist effect, int time)
 		return -1;
 }
 
-global func AddEarthHitEffect(object target)
+global func AddEarthHitEffect()
 {
-	AddEffect("EarthHit", target, 20, 1, nil, EarthMan);
+	this->AddEffect("EarthHit", this, 20, 1, nil, EarthMan);
 }

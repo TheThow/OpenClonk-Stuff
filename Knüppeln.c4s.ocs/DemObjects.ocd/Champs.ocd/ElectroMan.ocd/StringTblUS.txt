@@ -1,2 +1,2 @@
 Name=Electro Man
-Description=Zap! \n\nQ = Electro Shot \nE = Electro Orb \nR = Thunder Strike
+Description=You can use him to charge your smartphone. \n\nQ = Electro Shot \nE = Electro Orb \nR = Thunder Strike

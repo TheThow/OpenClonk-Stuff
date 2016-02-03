@@ -128,7 +128,7 @@ func CheckForEnemies()
 		var angle = Angle(GetX(), GetY(), o->GetX(), o->GetY());
 		
 		o->Fling(Sin(angle, 8), -Cos(angle, 8));
+		o->AddElectroHitEffect();
 		o->DoEnergy(-SpellDamage);
-		AddElectroHitEffect(o);
 	}
 }

@@ -114,9 +114,9 @@ func FxFireDashTimer(object target, proplist effect, int time)
 		if(!GetEffect("DashCD", o))
 		{
 			o->Fling(0, -5);
-			o->DoEnergy(-effect.SpellDamage1);
 			AddEffect("DashCD", o, 20, 10);
-			AddFireHitEffect(o);
+			o->AddFireHitEffect();
+			o->DoEnergy(-effect.SpellDamage1);
 		}
 		
 	}

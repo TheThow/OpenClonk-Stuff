@@ -81,9 +81,9 @@ func FxFireNadoTimer(object target, proplist effect, int time)
 			if(!GetEffect("NadoCD", o) && o->GetOwner() != GetOwner())
 			{
 				o->Fling(0, -5);
-				o->DoEnergy(-SpellDamage);
+				o->AddFireHitEffect();
 				AddEffect("NadoCD", o, 20, 10);
-				AddFireHitEffect(o);
+				o->DoEnergy(-SpellDamage);
 			}
 		}
 		

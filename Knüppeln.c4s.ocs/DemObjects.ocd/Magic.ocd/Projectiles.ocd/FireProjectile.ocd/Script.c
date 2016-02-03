@@ -51,7 +51,7 @@ func Hit()
 {
 	for(var o in FindObjects(Find_Distance(SpellDamage), Find_Func("CanBeHit")))
 	{
-		AddFireHitEffect(o);
+		o->AddFireHitEffect();
 	}
 	Explode(SpellDamage);
 }

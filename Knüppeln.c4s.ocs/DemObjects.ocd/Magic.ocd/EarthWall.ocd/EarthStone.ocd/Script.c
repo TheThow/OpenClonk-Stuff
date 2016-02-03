@@ -11,7 +11,6 @@ local MaxEnergy = 100000;
 
 func Initialize()
 {
-
 	SetSolidMask();
 	if(GBackSolid())
 	{

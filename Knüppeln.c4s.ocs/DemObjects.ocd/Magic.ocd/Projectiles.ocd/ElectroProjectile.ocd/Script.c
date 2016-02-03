@@ -96,10 +96,10 @@ func Hit()
 	
 	for(var o in FindObjects(Find_Distance(Size), Find_Func("CanBeHit")))
 	{
-		o->DoEnergy(-SpellDamage);
-		AddElectroHitEffect(o);
+		o->AddElectroHitEffect();
 		var angle = Angle(GetX(), GetY(), o->GetX(), o->GetY());
 		o->SetVelocity(angle, 10);
+		o->DoEnergy(-SpellDamage);
 	}
 	
 	RemoveObject();

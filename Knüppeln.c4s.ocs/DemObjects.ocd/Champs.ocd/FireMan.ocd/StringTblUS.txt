@@ -1,2 +1,2 @@
 Name=Fire Man
-Description=Brzl! \n\nQ = Fire Shot \nE = Fire Tornado \nR = Fire Dash
+Description=Someone need a lighter? \n\nQ = Fire Shot \nE = Fire Tornado \nR = Fire Dash
