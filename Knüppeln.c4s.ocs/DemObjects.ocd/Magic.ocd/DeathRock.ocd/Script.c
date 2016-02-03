@@ -34,7 +34,7 @@ func ChargeStop(proplist params)
 	
 	Sound("Fire::BlastLiquid3", false, 100);
 	
-	AddEffect("CheckEnemies", this, 20,1, this);
+	AddEffect("CheckEnemies", this, 1, 1, this);
 	
 	SetLightRange(30, 70);
 	SetLightColor(RGB(50, 255, 50));
@@ -54,16 +54,14 @@ func FxCheckEnemiesTimer()
 {
 	for(var o in FindObjects(Find_Distance(20), Find_Or(Find_Func("IsReflectable"), Find_Func("CanBeHit"))))
 	{
-		if(GetEffect("DeathRockCD", o) || (o->GetOwner() == GetOwner()))
-		{
-			continue;
-		}
-		
-		Log("Hit");
+		if (GetEffect("DeathRockCD", o)) continue;
+		if (GetOwner() == o->GetOwner()) continue;
+		AddEffect("DeathRockCD", o, 1, 60);
+
 		var angle = Angle(GetX(), GetY(), o->GetX(), o->GetY());
 		o->Fling(Sin(angle, 5), -Cos(angle, 5));
 		o->AddEarthHitEffect();
-		AddEffect("DeathRockCD", o, 1, 30);
+		
 		o->DoEnergy(-SpellDamage);
 		Sound("Hits::GeneralHit1", false, 50);
 	}
