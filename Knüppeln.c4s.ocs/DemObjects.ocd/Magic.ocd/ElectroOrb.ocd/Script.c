@@ -84,7 +84,7 @@ func ChargeEffect(proplist params)
 	
 	CreateParticle("Flash", x, y, 0, 0, 5, flashparticle2, 2);
 	
-	for(var i = 0; i < 360; i+= RandomX(3,15))
+	for(var i = a/10 - 90; i < a/10 + 270; i+= RandomX(3,10))
 	{
 		if(!Random(10))
 		{
@@ -269,7 +269,7 @@ func Hit(xdir, ydir)
 {
 	Bounce(xdir, ydir);
 	
-	if(Distance(0,0, xdir, ydir) > 25)
+	if(Distance(0,0, GetXDir(), GetYDir()) > 30)
 		Sound("electro_shot", false, 50);
 }
 

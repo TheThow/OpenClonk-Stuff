@@ -59,7 +59,6 @@ func FxCheckEnemiesTimer()
 			continue;
 		}
 		
-		Log("Hit");
 		var angle = Angle(GetX(), GetY(), o->GetX(), o->GetY());
 		o->Fling(Sin(angle, 5), -Cos(angle, 5));
 		o->AddEarthHitEffect();
@@ -68,6 +67,7 @@ func FxCheckEnemiesTimer()
 		Sound("Hits::GeneralHit1", false, 50);
 	}
 }
+
 
 func ChargeEffect(proplist params)
 {
@@ -89,7 +89,7 @@ func ChargeEffect(proplist params)
 	
 	CreateParticle("Flash", x, y, 0, 0, 5, flashparticle2, 2);
 	
-	for(var i = 0; i < 360; i+= RandomX(3,10))
+	for(var i = a/10 - 90; i <  a/10 + 270; i+= RandomX(3,10))
 	{
 		if(!Random(5))
 		{
@@ -103,8 +103,8 @@ func ChargeEffect(proplist params)
 				Rotation = i + 180,
 			};
 			
-			x = x + Sin(i, Size/3);
-			y = y - Cos(i, Size/3);
+			x = x + Sin(i, Size/3 + RandomX(-2, 2));
+			y = y - Cos(i, Size/3 + RandomX(-2, 2));
 			
 			var xdir = Sin(i + 180, 15);
 			var ydir = -Cos(i + 180, 15);
@@ -163,7 +163,7 @@ func Bounce(int xdir, int ydir)
 
 	for(var i = 0; i < GetVertexNum(); i++)
 	{
-		if(GetContact(i))
+		if(GetContact(i, 1))
 		{
 			x = GetVertex(i, VTX_X);
 			y = GetVertex(i, VTX_Y);

@@ -141,10 +141,10 @@ public func ObjectControl(int plr, int ctrl, int x, int y, int strength, bool re
 			}
 	 	}
 	 	
-	 	if(!GetEffect("JumpCD", this))
+	 	if(!GetEffect("JumpMCD", this))
 	 	{
 	 		AddEffect("IntControlJumpDouble", this, 1, TIMER);
-	 		AddEffect("JumpCD", this, 1, MOVEMENT_CD);
+	 		AddEffect("JumpMCD", this, 1, MOVEMENT_CD);
 	 	}
 	}
 	
@@ -170,10 +170,10 @@ public func ObjectControl(int plr, int ctrl, int x, int y, int strength, bool re
   		}
   		
   		
-  		if(!GetEffect("LeftCD", this))
+  		if(!GetEffect("LeftMCD", this))
 	 	{
 	 		AddEffect("IntControlLeftDouble", this, 1, TIMER);
-	 		AddEffect("LeftCD", this, 1, MOVEMENT_CD);
+	 		AddEffect("LeftMCD", this, 1, MOVEMENT_CD);
 	 	}
   		
 	}
@@ -198,10 +198,10 @@ public func ObjectControl(int plr, int ctrl, int x, int y, int strength, bool re
 			}
   		}
   		
-  		if(!GetEffect("RightCD", this))
+  		if(!GetEffect("RightMCD", this))
 	 	{
   			AddEffect("IntControlRightDouble", this, 1, TIMER);
-  			AddEffect("RightCD", this, 1, MOVEMENT_CD);
+  			AddEffect("RightMCD", this, 1, MOVEMENT_CD);
   		}
 	}
 	
@@ -222,10 +222,10 @@ public func ObjectControl(int plr, int ctrl, int x, int y, int strength, bool re
 			}
   		}
   		
-  		if(!GetEffect("DownCD", this))
+  		if(!GetEffect("DownMCD", this))
 	 	{
   			AddEffect("IntControlDownDouble", this, 1, TIMER);
-  			AddEffect("DownCD", this, 1, MOVEMENT_CD);
+  			AddEffect("DownMCD", this, 1, MOVEMENT_CD);
   		}
 	}
 	
@@ -259,7 +259,7 @@ func ControlRightDouble()
 
 func Hit()
 {
-	RemoveEffect("*CD", this);
+	RemoveEffect("*MCD", this);
 	return _inherited(...);
 }
 
