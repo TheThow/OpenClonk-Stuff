@@ -159,10 +159,20 @@ func Hit(xdir, ydir)
 
 func Bounce(int xdir, int ydir)
 {
+	var x, y;
 
+	for(var i = 0; i < GetVertexNum(); i++)
+	{
+		if(GetContact(i))
+		{
+			x = GetVertex(i, VTX_X);
+			y = GetVertex(i, VTX_Y);
+		}
+	}
+	
 	var angle = Angle(0, 0, xdir, ydir);
 	
-	var surface = GetSurfaceVector(0, 0);
+	var surface = GetSurfaceVector(x, y);
 	var surface_angle = Angle(0, 0, surface[0], surface[1]);
 	var angle_diff = GetTurnDirection(angle - 180, surface_angle);
 	var new_angle = surface_angle + angle_diff;
