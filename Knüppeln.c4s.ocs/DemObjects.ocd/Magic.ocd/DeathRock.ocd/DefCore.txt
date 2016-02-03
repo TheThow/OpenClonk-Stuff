@@ -1,7 +1,7 @@
 [DefCore]
 id=DeathRock
 Version=6,0
-Category=C4D_Object
+Category=C4D_Vehicle
 Width=40
 Height=40
 Offset=-20,-20

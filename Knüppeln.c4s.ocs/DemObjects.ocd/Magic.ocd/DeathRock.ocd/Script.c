@@ -54,14 +54,18 @@ func FxCheckEnemiesTimer()
 {
 	for(var o in FindObjects(Find_Distance(20), Find_Or(Find_Func("IsReflectable"), Find_Func("CanBeHit"))))
 	{
-		if(GetEffect("DeathRockCD", o))
+		if(GetEffect("DeathRockCD", o) || (o->GetOwner() == GetOwner()))
+		{
 			continue;
-			
+		}
+		
+		Log("Hit");
 		var angle = Angle(GetX(), GetY(), o->GetX(), o->GetY());
 		o->Fling(Sin(angle, 5), -Cos(angle, 5));
 		o->AddEarthHitEffect();
+		AddEffect("DeathRockCD", o, 1, 30);
 		o->DoEnergy(-SpellDamage);
-		AddEffect("DeathRockCD", o, 20, 30);
+		Sound("Hits::GeneralHit1", false, 50);
 	}
 }
 
@@ -100,7 +104,7 @@ func ChargeEffect(proplist params)
 			};
 			
 			x = x + Sin(i, Size/3);
-			y = y + -Cos(i, Size/3);
+			y = y - Cos(i, Size/3);
 			
 			var xdir = Sin(i + 180, 15);
 			var ydir = -Cos(i + 180, 15);
@@ -155,6 +159,7 @@ func Hit(xdir, ydir)
 
 func Bounce(int xdir, int ydir)
 {
+
 	var angle = Angle(0, 0, xdir, ydir);
 	
 	var surface = GetSurfaceVector(0, 0);
