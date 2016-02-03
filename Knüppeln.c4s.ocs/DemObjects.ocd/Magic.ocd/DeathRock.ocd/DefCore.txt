@@ -8,8 +8,9 @@ Offset=-20,-20
 Vertices=4
 VertexX=-10,10,-10,10
 VertexY=-10,-10,10,10
-VertexCNAT=1,1,1,1
+VertexCNAT=5, 6, 9, 10
 Mass=1
-Rotate=1
+Rotate=0
 NoStabilize=1
-
+StretchGrowth=1
+IncompleteActivity=1

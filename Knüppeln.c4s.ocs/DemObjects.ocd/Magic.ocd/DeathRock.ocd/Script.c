@@ -9,10 +9,12 @@ local Charge_dur = 40;
 local Size = 20;
 
 local LifeTime = 200;
+local rotation = 0;
 
-private func Initialize()
+private func Construction()
 {
- 	SetProperty("MeshTransformation", Trans_Rotate(RandomX(0,359),0,1,0));
+	rotation = Random(360);
+	AddTimer("Rotate", 1);
   	//SetProperty("MeshTransformation", Trans_Mul(Trans_Scale(1000,1000,1000),Trans_Rotate(RandomX(0,359),0,1,0), Trans_Rotate(RandomX(0,359), 1, 0, 0)));
   	SetClrModulation(RGBa(255,255,255,0));
   	SetAction("Travel");
@@ -25,10 +27,12 @@ func Launch(object clonk, int x, int y)
 		cl = clonk
 	};
 	clonk->Charge(this, "ChargeStop", Charge_dur, params);
+	SetCon(20);
 }
 
 func ChargeStop(proplist params)
 {
+	Unstuck();
 	var angle = params.new_angle;
 	SetVelocity(angle, Speed, 10);
 	
@@ -48,6 +52,13 @@ func ChargeStop(proplist params)
 	if(GetXDir())
 		dir = GetXDir() / Abs(GetXDir());
 	SetRDir(10*dir);
+	AddEffect("Growth", this, 1, 1, this);
+}
+
+func FxGrowthTimer()
+{
+	if (GetCon() >= 100) return -1;
+	DoCon(1);
 }
 
 func FxCheckEnemiesTimer()
@@ -145,6 +156,12 @@ func FxParticlesTimer(object target, proplist effect, int time)
 	CreateParticle("Lightning", RandomX(-12, 12), RandomX(-12, 12), 0, 0, 10, lightning, 2);
 }
 
+func Rotate()
+{
+	rotation += 5;
+	SetProperty("MeshTransformation", Trans_Rotate(rotation,0,1,0));
+}
+
 func Hit(xdir, ydir)
 {
 	Bounce(xdir, ydir);
@@ -167,7 +184,25 @@ func Bounce(int xdir, int ydir)
 		{
 			x = GetVertex(i, VTX_X);
 			y = GetVertex(i, VTX_Y);
+			break;
 		}
+	}
+	
+	// No vertex has contact?
+	if (x == nil)
+	{
+		// Just invert the higher velocity..
+		if (Abs(xdir) > Abs(ydir))
+		{
+			SetXDir(-xdir, 100);
+			SetYDir(ydir, 100);
+		}
+		else
+		{
+			SetXDir(xdir, 100);
+			SetYDir(-ydir, 100);
+		}
+		return;
 	}
 	
 	var angle = Angle(0, 0, xdir, ydir);
@@ -186,6 +221,19 @@ func FxLifeStop(object target, proplist effect, int reason, bool temporary)
 {
 	if(temporary)
 		return;
+	
+	var particles = 
+	{
+		Size = PV_KeyFrames(0, 0, 0, 100, PV_Random(3, 5), 1000, 3),
+		R = 180,
+		G = 200,
+		B = 180,
+		Alpha = PV_Linear(255, 0),
+		ForceY = PV_Gravity(125),
+		CollisionVertex = 0
+	};
+	SoundAt("Hits::Materials::Rock::Rockfall1");
+	CreateParticle("SmokeDirty", PV_Random(-8, 8), PV_Random(-8, 8), PV_Random(-20, 20), PV_Random(-20, 20), PV_Random(10, 60), particles, 400);
 	
 	RemoveObject();
 }
