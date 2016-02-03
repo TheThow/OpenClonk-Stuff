@@ -1,2 +1,2 @@
 Name=Ice Man
-Description=Brzl!
+Description=Noone ain't as cool as IceMan.

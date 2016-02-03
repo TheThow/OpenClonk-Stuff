@@ -32,7 +32,7 @@ func Launch(object clonk, int x, int y)
 	TargetAngle = Angle(0, 0, x, y);
 	shooter = clonk;
 	AddEffect("Lasers", this, 1, 2, this, nil);
-	SoundAt("LightMan::LightStar", nil, nil, nil, nil, nil, Random(30));
+	SoundAt("LaserMan::LightStar", nil, nil, nil, nil, nil, Random(30));
 	
 	
 	this.particle_stars = 
@@ -75,6 +75,6 @@ func FxLasersTimer(target, fx, time)
 		CreateParticle("StarSpark", 0, 0, 0, 0, 10, this.particle_stars, 2);
 		return FX_OK;
 	}
-	this->Call(LightRay.DoTheLaser, 0, 0, Sin(TargetAngle, Length), -Cos(TargetAngle, Length), TargetAngle, Length, true, true);
+	this->Call(LaserRay.DoTheLaser, 0, 0, Sin(TargetAngle, Length), -Cos(TargetAngle, Length), TargetAngle, Length, true, true);
 	RemoveObject();
 }

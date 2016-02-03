@@ -32,7 +32,7 @@ func Launch(object clonk, int x, int y)
 	TargetAngle = Angle(0, 0, x, y);
 	shooter = clonk;
 	
-	SoundAt("LightMan::LightStar", nil, nil, nil, nil, nil, -200);
+	SoundAt("LaserMan::LightStar", nil, nil, nil, nil, nil, -200);
 	
 	
 	this.particle_stars = 
@@ -94,7 +94,7 @@ func Launch(object clonk, int x, int y)
 		} 
 	}
 	shooter->CreateParticle("StarSpark", PV_Random(-10, 10), PV_Random(-10, 10), 0, 0, 30, this.particle_stars, 50);
-	this->Call(LightRay.DoTheLaser, 0, 0, Sin(TargetAngle, Length), -Cos(TargetAngle, Length), TargetAngle, Length, false, false);
+	this->Call(LaserRay.DoTheLaser, 0, 0, Sin(TargetAngle, Length), -Cos(TargetAngle, Length), TargetAngle, Length, false, false);
 	RemoveObject();
 }
 

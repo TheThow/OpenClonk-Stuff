@@ -1,5 +1,5 @@
 [DefCore]
-id=LightBlink
+id=LaserStar
 Version=5,2,0,1
 Category=C4D_Vehicle
 Width=8

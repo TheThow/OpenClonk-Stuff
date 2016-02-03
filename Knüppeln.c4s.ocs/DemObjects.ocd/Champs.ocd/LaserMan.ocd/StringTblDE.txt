@@ -1,0 +1,2 @@
+Name=Laser Man
+Description=Totally laser! \n\nQ = Laser Star \nE = Laser Shot \nR = Blink

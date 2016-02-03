@@ -14,7 +14,7 @@ func Special1(object clonk, int x, int y, bool released, bool mouseclick, bool a
 {
 	if(!released && !mouseclick && abletocast)
 	{
-		clonk->LaunchSpell(LightStar, x, y, 0, 0);
+		clonk->LaunchSpell(LaserStar, x, y, 0, 0);
 		return 1;
 	}
 	return 0;
@@ -24,7 +24,7 @@ func Special2(object clonk, int x, int y, bool released, bool mouseclick, bool a
 {
 	if(!released && !mouseclick && abletocast)
 	{
-		clonk->LaunchSpell(LightRay, x, y, 0, 0);
+		clonk->LaunchSpell(LaserRay, x, y, 0, 0);
 		return 1;
 	}
 	return 0;
@@ -34,7 +34,7 @@ func Special3(object clonk, int x, int y, bool released, bool mouseclick, bool a
 {
 	if(!released && !mouseclick && abletocast)
 	{
-		clonk->LaunchSpell(LightBlink, x, y, 0, 0);
+		clonk->LaunchSpell(LaserBlink, x, y, 0, 0);
 		return 1;
 	}
 	return 0;
