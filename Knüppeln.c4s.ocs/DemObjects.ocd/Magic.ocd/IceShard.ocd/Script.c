@@ -81,13 +81,15 @@ func FxIntInFlightTimer(target, fx, int time)
 	if (!Target) return RemoveObject();
 
 	angle = 5 * time + offset;
-	var radius = Min(time, this.Radius);
+	var radius = Min(time, this.Radius / 2);
+	var lifetime = 7;
 	if (is_selected)
 	{
-		radius += 5;
+		radius = this.Radius;
 		fx.particles.BlitMode = GFX_BLIT_Additive;
 		fx.particles.R = 100;
 		fx.particles.G = 100;
+		lifetime = 15;
 	}
 	else
 	{
@@ -96,7 +98,7 @@ func FxIntInFlightTimer(target, fx, int time)
 		fx.particles.G = 255;
 	}
 	
-	CreateParticle("StarFlash", PV_Random(-2, 2), PV_Random(-2, 2), 0, 0, 15, fx.particles, 3);
+	CreateParticle("StarFlash", PV_Random(-2, 2), PV_Random(-2, 2), 0, 0, lifetime, fx.particles, 3);
 	var x = Sin(angle, radius);
 	var y = -Cos(angle, radius);
 	SetPosition(Target->GetX() + x, Target->GetY() + y);
