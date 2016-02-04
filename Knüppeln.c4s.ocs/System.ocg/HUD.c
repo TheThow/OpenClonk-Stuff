@@ -39,7 +39,7 @@ func ShowHUD()
 		Top = "92%",
 		Left="50%",
 		Right="50%",
-		Style = GUI_Multiple,
+		Style = GUI_Multiple | GUI_NoCrop,
 		
 		q_icon = 
 		{
