@@ -9,12 +9,15 @@
 func Initialize()
 {
 	CreateObject(Goal_LastManStanding);
+	CheckScenarioParameters();
 }
 
 
 func InitializePlayer(int plr, int iX, int iY, object pBase, int iTeam)
 {
 	SpawnPlayer(plr);
+   	SetPlayerZoomByViewRange(plr, 700, 0, PLRZOOM_LimitMin);
+   	SetPlayerZoomByViewRange(plr, 700, 0, PLRZOOM_LimitMax);
 	return;
 }
 
@@ -23,7 +26,8 @@ func SpawnPlayer(int plr, prev_clonk)
 	var clonk = GetCrew(plr);
 	clonk->CreateContents(Sword);
 	clonk->SetMagicEnergy(50);
-	clonk->ChooseMenu();
+	ScheduleCall(clonk, "ChooseMenu", 15, 0);
+	//clonk->ChooseMenu();
 }
 
 // Gamecall from LastManStanding goal, on respawning.

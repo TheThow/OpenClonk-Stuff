@@ -2,7 +2,6 @@
 Icon=19
 Title=Knüppeln.c4s
 Version=7
-NoInitialize=true
 
 [Player1]
 

@@ -1,0 +1,4 @@
+RandomChampName=Random Champions
+RandomChampDesc=You can only choose between two random champions each time you respawn
+RandomChampOff=Off
+RandomChampOn=On

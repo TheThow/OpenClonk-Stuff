@@ -36,7 +36,8 @@ func ShowHUD()
 	var hud =
 	{
 		Player=GetOwner(),
-		Top = "92%",
+		Target=this,
+		Top = "100% - 4em",
 		Left="50%",
 		Right="50%",
 		Style = GUI_Multiple | GUI_NoCrop,
@@ -69,17 +70,17 @@ func ShowHUD()
 
 func FxUpdateHUDTimer()
 {
-	if(GetMagicEnergy() < ChampType.Special1Spell.ManaCost || !CanCast())
+	if(GetMagicEnergy() < ChampType.Special1Spell.ManaCost || !CanCast() || GetEffect("Special1CD", this))
 		QSymbol->SetClrModulation(RGB(255,0,0));
 	else
 		QSymbol->SetClrModulation(RGB(255,255,255));
 		
-	if(GetMagicEnergy() < ChampType.Special2Spell.ManaCost || !CanCast())
+	if(GetMagicEnergy() < ChampType.Special2Spell.ManaCost || !CanCast() || GetEffect("Special2CD", this))
 		ESymbol->SetClrModulation(RGB(255,0,0));
 	else
 		ESymbol->SetClrModulation(RGB(255,255,255));
 		
-	if(GetMagicEnergy() < ChampType.Special3Spell.ManaCost || !CanCast())
+	if(GetMagicEnergy() < ChampType.Special3Spell.ManaCost || !CanCast() || GetEffect("Special3CD", this))
 		RSymbol->SetClrModulation(RGB(255,0,0));
 	else
 		RSymbol->SetClrModulation(RGB(255,255,255));
@@ -89,7 +90,7 @@ func FxUpdateHUDStop(object target, proplist effect, int reason, bool temporary)
 {
 	if(temporary)
 		return;
-		
+	
 	QSymbol->RemoveObject();
 	ESymbol->RemoveObject();
 	RSymbol->RemoveObject();

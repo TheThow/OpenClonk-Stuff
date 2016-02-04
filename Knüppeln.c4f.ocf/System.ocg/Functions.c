@@ -133,3 +133,9 @@ global func Unstuck()
 	}
 	
 }
+
+global func CheckScenarioParameters()
+{
+	if(SCENPAR_Rule_RandomChamp == 2)
+		CreateObject(Rule_RandomChamp, 0, 0, -1);
+}

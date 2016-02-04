@@ -1,6 +1,6 @@
 #appendto Clonk
 
-local champs = [ElectroMan, FireMan, LaserMan, IceMan, EarthMan];
+local Champ_Def = [ElectroMan, FireMan, LaserMan, IceMan, EarthMan];
 
 local MaxEnergy = 100000;
 local MaxMagic = 100000;
@@ -420,6 +420,19 @@ func ChooseMenu()
 	//				["Fire Man", FireMan],
 	//				["Light Man", LightMan]
 	//			 ];
+	
+	var champs = Champ_Def;
+	
+	if(FindObject(Find_ID(Rule_RandomChamp)))
+	{
+		var i = Random(GetLength(Champ_Def));
+		var u = Random(GetLength(Champ_Def));
+		
+		while(u == i)
+			u = Random(GetLength(Champ_Def));
+		
+		champs = [Champ_Def[i], Champ_Def[u]];
+	}
 
 	var menu = 
 	{
@@ -649,6 +662,15 @@ func FxUnhitableTimer()
 func FxUnhitableDamage()
 {
 	return;
+}
+
+func Incinerate(
+	strength /* strength between 0 and 100 */
+	, int caused_by /* the player that caused the incineration */
+	, blasted /* whether the object was incinerated by an explosion */
+	, incinerating_object /* the object that caused the incineration */)
+{
+	return DoEnergy(-3);
 }
 
 local ActMap = {
