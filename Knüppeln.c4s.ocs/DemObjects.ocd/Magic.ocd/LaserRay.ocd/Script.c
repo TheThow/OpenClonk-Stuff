@@ -109,7 +109,7 @@ func DoTheLaser(from_x, from_y, to_x, to_y, angle, max_length, no_bounce, stop_a
 	
 	var len = max_length;
 	var object_hit = nil;
-	
+
 	if (stop_at_target)
 	{
 		var object_hit = FindObject(Find_OnLine(from_x, from_y, to_x, to_y), Find_OCF(OCF_Alive), Find_Exclude(this.shooter), Find_Func("CanBeHit"));
@@ -117,6 +117,13 @@ func DoTheLaser(from_x, from_y, to_x, to_y, angle, max_length, no_bounce, stop_a
 		{
 			to_x = object_hit->GetX() - GetX();
 			to_y = object_hit->GetY() - GetY();
+			
+			if (object_hit->~IsBlocking())
+			{
+				var range = object_hit->GetBlockingRange();
+				to_x -= Sin(angle, range);
+				to_y -= -Cos(angle, range);
+			}
 		}
 	}
 	

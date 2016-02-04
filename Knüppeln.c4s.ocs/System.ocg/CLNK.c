@@ -342,6 +342,15 @@ func FxBlockingTimer(object target, proplist effect, int time)
 	Block();
 }
 
+public func IsBlocking()
+{
+	return GetEffect("Blocking", this) != nil;
+}
+
+public func GetBlockingRange()
+{
+	return BLOCK_RANGE;
+}
 
 func Block()
 {
