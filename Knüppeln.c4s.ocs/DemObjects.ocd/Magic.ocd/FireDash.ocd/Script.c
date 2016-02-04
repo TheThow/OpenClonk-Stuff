@@ -30,7 +30,7 @@ func Initialize()
 
 func Launch(object clonk, int x, int y)
 {
-	var marker = CreateObject(Icon_Cancel, clonk->GetX() + x - GetX(), clonk->GetY() + y - GetY(), GetOwner());
+	var marker = CreateObject(Icon_Cancel, clonk->GetX() + x - GetX(), clonk->GetY() + y - GetY() + 16, GetOwner());
 	marker.Visibility = VIS_Owner;
 	marker->SetClrModulation(RGBa(255,255,255,100));
 	

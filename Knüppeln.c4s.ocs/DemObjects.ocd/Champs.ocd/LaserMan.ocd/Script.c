@@ -10,6 +10,10 @@
 local Description = "$Description$";
 local Name = "$Name$";
 
+local Special1Spell = LaserStar;
+local Special2Spell = LaserRay;
+local Special3Spell = LaserBlink;
+
 func Special1(object clonk, int x, int y, bool released, bool mouseclick, bool abletocast, bool cooldown)
 {
 	if(!released && !mouseclick && abletocast)

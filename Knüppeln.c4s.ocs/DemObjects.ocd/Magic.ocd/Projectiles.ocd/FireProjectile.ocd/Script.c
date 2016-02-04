@@ -49,6 +49,7 @@ func HitObject(obj)
 
 func Hit()
 {
+	CastObjects(Flame, RandomX(2,3), RandomX(10,15));
 	for(var o in FindObjects(Find_Distance(SpellDamage), Find_Func("CanBeHit")))
 	{
 		o->AddFireHitEffect();

@@ -10,11 +10,15 @@
 local Description = "$Description$";
 local Name = "$Name$";
 
+local Special1Spell = EarthProjectile;
+local Special2Spell = EarthWall;
+local Special3Spell = DeathRock;
+
 func Special1(object clonk, int x, int y, bool released, bool mouseclick, bool abletocast, bool cooldown)
 {
 	if(!released && !mouseclick && abletocast && !cooldown)
 	{
-		clonk->LaunchSpell(EarthProjectile, x, y, 0, 0);
+		clonk->LaunchSpell(Special1Spell, x, y, 0, 0);
 		return 1;
 	}
 	return 0;
@@ -53,7 +57,7 @@ func Special2(object clonk, int x, int y, bool released, bool mouseclick, bool a
 			Attach = ATTACH_Back | ATTACH_MoveRelative
 			
 		};
-		clonk->ShowSpellRange(clonk, EarthWall, props);
+		clonk->ShowSpellRange(clonk, Special2Spell, props);
 	}
 	
 	if(released && !mouseclick)
@@ -64,17 +68,17 @@ func Special2(object clonk, int x, int y, bool released, bool mouseclick, bool a
 
 	if(!released && mouseclick && abletocast)
 	{
-		if (Sqrt(x**2 + y**2) > EarthWall.SpellRange)
+		if (Sqrt(x**2 + y**2) > Special2Spell.SpellRange)
 		{
 			var a = Angle(0,0, x, y, 10);
-			var newx = Sin(a, EarthWall.SpellRange, 10);
-			var newy = -Cos(a, EarthWall.SpellRange, 10);
-			clonk->LaunchSpell(EarthWall, newx, newy, newx, newy);
+			var newx = Sin(a, Special2Spell.SpellRange, 10);
+			var newy = -Cos(a, Special2Spell.SpellRange, 10);
+			clonk->LaunchSpell(Special2Spell, newx, newy, newx, newy);
 			
 			return 1;
 		}
 		
-		clonk->LaunchSpell(EarthWall, x, y, x, y);
+		clonk->LaunchSpell(Special2Spell, x, y, x, y);
 		
 		return 1;
 	}
@@ -86,7 +90,7 @@ func Special3(object clonk, int x, int y, bool released, bool mouseclick, bool a
 {
 	if(!released && !mouseclick && abletocast && !cooldown)
 	{
-		clonk->LaunchSpell(DeathRock, x, y, 0, 0);
+		clonk->LaunchSpell(Special3Spell, x, y, 0, 0);
 		return 1;
 	}
 	return 0;

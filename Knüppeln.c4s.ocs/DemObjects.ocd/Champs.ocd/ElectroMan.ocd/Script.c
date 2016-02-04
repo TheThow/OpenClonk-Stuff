@@ -10,11 +10,15 @@
 local Description = "$Description$";
 local Name = "$Name$";
 
+local Special1Spell = ElectroProjectile;
+local Special2Spell = ElectroOrb;
+local Special3Spell = ThunderStrike;
+
 func Special1(object clonk, int x, int y, bool released, bool mouseclick, bool abletocast, bool cooldown)
 {
 	if(!released && !mouseclick && abletocast && !cooldown)
 	{
-		clonk->LaunchSpell(ElectroProjectile, x, y, 0, 0);
+		clonk->LaunchSpell(Special1Spell, x, y, 0, 0);
 		return 1;
 	}
 	return 0;
@@ -24,7 +28,7 @@ func Special2(object clonk, int x, int y, bool released, bool mouseclick, bool a
 {
 	if(!released && !mouseclick && abletocast && !cooldown)
 	{
-		clonk->LaunchSpell(ElectroOrb, x, y, 0, 0);
+		clonk->LaunchSpell(Special2Spell, x, y, 0, 0);
 		return 1;
 	}
 	return 0;
@@ -40,13 +44,13 @@ func Special3(object clonk, int x, int y, bool released, bool mouseclick, bool a
 			G = 215,
 			B = 255,
 			Alpha = 40,
-			Size = ThunderStrike.SpellRange*2,
+			Size = Special3Spell.SpellRange*2,
 			BlitMode = GFX_BLIT_Additive,
 			Rotation = PV_Step(10, 0, 1),
 			Attach = ATTACH_Back | ATTACH_MoveRelative
 			
 		};
-		clonk->ShowSpellRange(clonk, ThunderStrike, props);
+		clonk->ShowSpellRange(clonk, Special3Spell, props);
 	}
 	
 	if(released && !mouseclick)
@@ -56,17 +60,17 @@ func Special3(object clonk, int x, int y, bool released, bool mouseclick, bool a
 
 	if(!released && mouseclick && abletocast)
 	{
-		if (Sqrt(x**2 + y**2) > ThunderStrike.SpellRange)
+		if (Sqrt(x**2 + y**2) > Special3Spell.SpellRange)
 		{
 			var a = Angle(0,0, x, y, 10);
-			var newx = Sin(a, ThunderStrike.SpellRange, 10);
-			var newy = -Cos(a, ThunderStrike.SpellRange, 10);
-			clonk->LaunchSpell(ThunderStrike, newx, newy, newx, newy);
+			var newx = Sin(a, Special3Spell.SpellRange, 10);
+			var newy = -Cos(a, Special3Spell.SpellRange, 10);
+			clonk->LaunchSpell(Special3Spell, newx, newy, newx, newy);
 			
 			return 1;
 		}
 		
-		clonk->LaunchSpell(ThunderStrike, x, y, x, y);
+		clonk->LaunchSpell(Special3Spell, x, y, x, y);
 		
 		return 1;
 	}

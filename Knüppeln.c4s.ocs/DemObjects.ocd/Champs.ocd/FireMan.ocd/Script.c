@@ -10,11 +10,15 @@
 local Description = "$Description$";
 local Name = "$Name$";
 
+local Special1Spell = FireProjectile;
+local Special2Spell = FireNado;
+local Special3Spell = FireDash;
+
 func Special1(object clonk, int x, int y, bool released, bool mouseclick, bool abletocast, bool cooldown)
 {
 	if(!released && !mouseclick && abletocast && !cooldown)
 	{
-		clonk->LaunchSpell(FireProjectile, x, y, 0, 0);
+		clonk->LaunchSpell(Special1Spell, x, y, 0, 0);
 		return 1;
 	}
 	return 0;
@@ -25,7 +29,7 @@ func Special2(object clonk, int x, int y, bool released, bool mouseclick, bool a
 	if(!released && !mouseclick && abletocast && !cooldown)
 	{
 		var y_off = -6;
-		clonk->LaunchSpell(FireNado, x, y, 0, y_off);
+		clonk->LaunchSpell(Special2Spell, x, y, 0, y_off);
 		return 1;
 	}
 	
@@ -48,7 +52,7 @@ func Special3(object clonk, int x, int y, bool released, bool mouseclick, bool a
 			Attach = ATTACH_Back | ATTACH_MoveRelative
 			
 		};
-		clonk->ShowSpellRange(clonk, FireDash, props);
+		clonk->ShowSpellRange(clonk, Special3Spell, props);
 	}
 	
 	if(released && !mouseclick)
@@ -74,17 +78,17 @@ func Special3(object clonk, int x, int y, bool released, bool mouseclick, bool a
 			return 0;
 		}
 		
-		if (Sqrt(x**2 + y**2) > FireDash.SpellRange)
+		if (Sqrt(x**2 + y**2) > Special3Spell.SpellRange)
 		{
 			var a = Angle(0,0, x, y, 10);
-			var newx = Sin(a, FireDash.SpellRange, 10);
-			var newy = -Cos(a, FireDash.SpellRange, 10);
-			clonk->LaunchSpell(FireDash, newx, newy, newx, newy);
+			var newx = Sin(a, Special3Spell.SpellRange, 10);
+			var newy = -Cos(a, Special3Spell.SpellRange, 10);
+			clonk->LaunchSpell(Special3Spell, newx, newy, newx, newy);
 			
 			return 1;
 		}
 		
-		clonk->LaunchSpell(FireDash, x, y, x, y);
+		clonk->LaunchSpell(Special3Spell, x, y, x, y);
 		return 1;
 	}
 	

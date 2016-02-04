@@ -6,7 +6,7 @@ local pB = 50;
 local Speed = 80;
 local SpellDamage = 25;
 local Size = 20;
-local ManaCost = 20;
+local ManaCost = 25;
 
 local counter = 0;
 

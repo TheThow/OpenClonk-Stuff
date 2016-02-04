@@ -16,7 +16,7 @@ local SpellDamage = 30;
 local a = 0;
 local a2 = 0;
 
-local Speed = 30;
+local Speed = 35;
 local Durr = 70;
 local Charge_Dur = 20;
 
@@ -107,7 +107,7 @@ func FxFireNadoTimer(object target, proplist effect, int time)
 		};
 	
 		var r = (360 * 3) * i / detail;
-		CreateParticle("Fire", Cos(r + a, size_x * i / detail / 2), size_y/2 + size_y * i / detail, 0, 0, 5, firetrailparticles);
+		CreateParticle("Fire", Cos(r + a, size_x * i / detail / 2), size_y/2 + size_y * i / detail, 0, 0, 4, firetrailparticles);
 		
 		if(time%3)
 			a++;

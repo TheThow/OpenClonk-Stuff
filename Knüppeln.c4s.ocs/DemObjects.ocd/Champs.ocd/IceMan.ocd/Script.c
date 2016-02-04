@@ -10,6 +10,10 @@
 local Name = "$Name$";
 local Description = "$Description$";
 
+local Special1Spell = IceProjectile;
+local Special2Spell = IceShard;
+local Special3Spell = IceShardUltimate;
+
 func Special1(object clonk, int x, int y, bool released, bool mouseclick, bool abletocast)
 {
 	if(!released && !mouseclick && abletocast)
@@ -177,5 +181,5 @@ func FxFireHitTimer(object target, proplist effect, int time)
 
 global func AddFireHitEffect(object target)
 {
-	AddEffect("FireHit", target, 20, 1, nil, FireMan);
+	this->AddEffect("FireHit", target, 20, 1, nil, FireMan);
 }

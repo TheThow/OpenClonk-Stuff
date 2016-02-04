@@ -3,7 +3,7 @@
 
 local ManaCost = 50;
 local SpellDamage = 35;
-local Speed = 60;
+local Speed = 50;
 local Charge_dur = 40;
 
 local Size = 20;
@@ -58,14 +58,16 @@ func ChargeStop(proplist params)
 func FxGrowthTimer()
 {
 	if (GetCon() >= 100) return -1;
-	DoCon(1);
+	DoCon(5);
+	
+	//SetProperty("MeshTransformation", Trans_Scale(200 + con, 200 + con, 200 + con));
 }
 
-func FxCheckEnemiesTimer()
+func FxCheckEnemiesTimer(object target, proplist effect, int time)
 {
 	for(var o in FindObjects(Find_Distance(20), Find_Or(Find_Func("IsReflectable"), Find_Func("CanBeHit"))))
 	{
-		if(GetEffect("DeathRockCD", o) || (o->GetOwner() == GetOwner()))
+		if(GetEffect("DeathRockCD", o) || (o->GetOwner() == GetOwner() && time < 30))
 		{
 			continue;
 		}
@@ -95,8 +97,8 @@ func ChargeEffect(proplist params)
 	};
 	
 	var a = params.new_angle;
-	var x = Sin(a, 10, 10);
-	var y = -Cos(a, 10, 10);
+	var x = Sin(a, 15, 10);
+	var y = -Cos(a, 15, 10);
 	
 	CreateParticle("Flash", x, y, 0, 0, 5, flashparticle2, 2);
 	
@@ -180,7 +182,7 @@ func Bounce(int xdir, int ydir)
 
 	for(var i = 0; i < GetVertexNum(); i++)
 	{
-		if(GetContact(i, 1))
+		if(GetContact(i))
 		{
 			x = GetVertex(i, VTX_X);
 			y = GetVertex(i, VTX_Y);

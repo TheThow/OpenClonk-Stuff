@@ -9,6 +9,10 @@ local Special1Cooldown = 10;
 local Special2Cooldown = 10;
 local Special3Cooldown = 10;
 
+local Special1Spell = Projectile;
+local Special2Spell = Projectile;
+local Special3Spell = Projectile;
+
 func Special1(object clonk, int x, int y, bool released, bool mouseclick, bool abletocast, bool cooldown)
 {
 	return 0;
