@@ -170,7 +170,7 @@ func FxElectroHitTimer(object target, proplist effect, int time)
 		R = 175,
 		G = 215,
 		B = 255,
-		Attach = ATTACH_Back | ATTACH_MoveRelative,
+		Attach = ATTACH_Front | ATTACH_MoveRelative,
 	};
 	
 	target->CreateParticle("Lightning", RandomX(-5, 5), RandomX(-10, 10), 0, 0, 10, lightning, 2);

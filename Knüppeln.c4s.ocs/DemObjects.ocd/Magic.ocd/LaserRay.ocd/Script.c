@@ -81,6 +81,7 @@ public func HitObject(obj)
 {
 	if(obj->~CanBeHit() == false)
 		return;
+	obj->AddLaserHitEffect();
 	obj->Fling(0, -2, nil, true);
 	obj->DoEnergy(-SpellDamage, false, nil, GetController());
 }

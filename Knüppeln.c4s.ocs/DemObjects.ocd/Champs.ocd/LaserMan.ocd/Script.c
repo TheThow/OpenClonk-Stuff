@@ -117,3 +117,28 @@ func BlockEffect(object clonk, range)
 		}
 	}
 }
+
+func FxLaserHitTimer(object target, proplist effect, int time)
+{
+	var lightning =
+	{
+		Prototype = Particles_ElectroSpark2(),
+		Size = PV_Linear(PV_Random(2,5),0),
+		BlitMode = GFX_BLIT_Additive,
+		Rotation = PV_Random(0,360),
+		R = 255,
+		G = 0,
+		B = 0,
+		Attach = ATTACH_Front | ATTACH_MoveRelative,
+	};
+	
+	target->CreateParticle("Lightning", RandomX(-5, 5), RandomX(-10, 10), 0, 0, 10, lightning, 2);
+	
+	if(time > 40)
+		return -1;
+}
+
+global func AddLaserHitEffect()
+{
+	this->AddEffect("LaserHit", this, 20, 1, nil, LaserMan);
+}

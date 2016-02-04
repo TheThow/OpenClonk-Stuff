@@ -194,7 +194,7 @@ func FxEarthHitTimer(object target, proplist effect, int time)
 		R = 50,
 		G = 255,
 		B = 50,
-		Attach = ATTACH_Back | ATTACH_MoveRelative,
+		Attach = ATTACH_Front | ATTACH_MoveRelative,
 	};
 	
 	target->CreateParticle("Lightning", RandomX(-5, 5), RandomX(-10, 10), 0, 0, 10, lightning, 2);
