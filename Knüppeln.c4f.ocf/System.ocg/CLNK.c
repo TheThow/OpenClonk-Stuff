@@ -564,8 +564,10 @@ func FxChargeDamage(object target, effect fx, int damage, int cause)
 		SetAction("Jump");
 	
 	if(fx.c)
+	{
 		fx.c->~ChargeInterrupted();
-		
+		fx.c = nil;
+	}	
 	RemoveEffect(nil, nil, fx);
 	
 	return damage;
