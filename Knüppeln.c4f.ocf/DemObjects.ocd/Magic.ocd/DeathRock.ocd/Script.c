@@ -30,6 +30,11 @@ func Launch(object clonk, int x, int y)
 	SetCon(20);
 }
 
+func ChargeInterrupted()
+{
+	RemoveObject();
+}
+
 func ChargeStop(proplist params)
 {
 	Unstuck();

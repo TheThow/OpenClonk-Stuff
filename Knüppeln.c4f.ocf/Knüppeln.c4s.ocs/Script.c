@@ -16,8 +16,8 @@ func Initialize()
 func InitializePlayer(int plr, int iX, int iY, object pBase, int iTeam)
 {
 	SpawnPlayer(plr);
-   	SetPlayerZoomByViewRange(plr, 700, 0, PLRZOOM_LimitMin);
-   	SetPlayerZoomByViewRange(plr, 700, 0, PLRZOOM_LimitMax);
+   	SetPlayerZoomByViewRange(plr, 700, 0, PLRZOOM_Direct);
+   	SetPlayerZoomByViewRange(plr, 700, 0, PLRZOOM_Direct);
 	return;
 }
 

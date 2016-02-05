@@ -90,7 +90,7 @@ func ChargeStop(proplist params)
 	eff.angle_prec = angle_prec;
 	
 	params.clonk->SetAction("Float");
-	params.clonk->MakeHitable(false);
+	//params.clonk->MakeHitable(false);
 	params.clonk->SetObjectLayer(params.clonk);
 	
 	Sound("Fire::Fireball", false, 100);
@@ -164,15 +164,21 @@ func FxFireDashTimer(object target, proplist effect, int time)
 	return 0;
 }
 
+func ChargeInterrupted()
+{
+	RemoveObject();
+}
+
 func FxFireDashStop(object target, proplist effect, int reason, bool temporary)
 {
 	if(temporary)
 		return;
-		
+	
+	
 	target->SetAction("Jump");
 	ExplosionEffect(effect.Size2, target->GetX(), target->GetY(),0,0,0);
 	
-	for(var o in FindObjects(Find_Distance(effect.Size2, target->GetX(), target->GetY()), Find_ID(Clonk), Find_NoContainer(), Find_Func("CanBeHit")))
+	for(var o in FindObjects(Find_Distance(effect.Size2, target->GetX(), target->GetY()), Find_Func("CanBeHit")))
 	{
 		if(o->GetOwner() == target->GetOwner())
 			continue;
@@ -180,12 +186,12 @@ func FxFireDashStop(object target, proplist effect, int reason, bool temporary)
 		var angle = Angle(GetX(), GetY(), o->GetX(), o->GetY());
 		
 		o->Fling(Sin(angle, 8), -Cos(angle, 8));
-		o->DoEnergy(-effect.SpellDamage2);
 		AddFireHitEffect(o);
+		o->DoEnergy(-effect.SpellDamage2);
 	}
 	
 	effect.marker->RemoveObject();
-	effect.clonk->MakeHitable(true);
+	//effect.clonk->MakeHitable(true);
 	effect.clonk->Unstuck();
 	effect.clonk->SetObjectLayer(nil);
 }
