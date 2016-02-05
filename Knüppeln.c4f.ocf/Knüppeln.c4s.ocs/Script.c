@@ -9,6 +9,7 @@
 func Initialize()
 {
 	CreateObject(Goal_LastManStanding);
+	CreateObject(Rule_KillLogs);
 	CheckScenarioParameters();
 }
 

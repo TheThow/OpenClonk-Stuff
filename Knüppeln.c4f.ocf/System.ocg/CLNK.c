@@ -263,7 +263,7 @@ func Hit()
 	return _inherited(...);
 }
 
-func Death(...)
+func Death(int killed_by)
 {
 	CastObjects(Flesh, 8, 50);
 	//CastPXS("Blood", 50, 30);
@@ -280,7 +280,7 @@ func Death(...)
 	if(this)
 		FadeOut(30, true);
 	
-	return _inherited(...);
+	return _inherited(killed_by);
 }
 
 func FxManaRegenTimer()
