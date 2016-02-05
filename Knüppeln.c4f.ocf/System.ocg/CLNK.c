@@ -526,7 +526,7 @@ func GetChampType()
 func Charge(object caller, string callback, int time, proplist params, bool nosound)
 {
 	SetAction("Float");
-	var eff = AddEffect("Charge", this, 20, 1, this, GetID());
+	var eff = AddEffect("Charge", this, 20, 1, this);
 	eff.f = callback;
 	eff.c = caller;
 	eff.p = params;
