@@ -565,7 +565,7 @@ func FxChargeDamage(object target, effect fx, int damage, int cause)
 	
 	if(fx.c)
 	{
-		fx.c->~ChargeInterrupted();
+		fx.c->~ChargeInterrupted(fx.p);
 		fx.c = nil;
 	}	
 	RemoveEffect(nil, nil, fx);

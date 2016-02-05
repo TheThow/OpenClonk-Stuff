@@ -164,8 +164,10 @@ func FxFireDashTimer(object target, proplist effect, int time)
 	return 0;
 }
 
-func ChargeInterrupted()
+func ChargeInterrupted(params)
 {
+	if(params.marker)
+		params.marker->RemoveObject();
 	RemoveObject();
 }
 
