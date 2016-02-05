@@ -402,6 +402,7 @@ func LaunchSpell(id ID, x, y, x_off, y_off)
 	if (GetMagicEnergy() >= ID.ManaCost)
 	{
 		spell = CreateObject(ID,x_off, y_off,GetOwner());
+		spell->SetController(GetOwner());
 		spell->Launch(this, x, y);
 		DoMagicEnergy(-ID.ManaCost);
 	}
