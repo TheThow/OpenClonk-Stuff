@@ -13,7 +13,7 @@ local BLOCK_CD = 35;
 local BLOCK_DUR = 5;
 local BLOCK_RANGE = 25;
 
-local JUMP_MANA = 10;
+local JUMP_MANA = 8;
 local MaxContentsCount = 1;
 
 local healthregen_base = 100;
