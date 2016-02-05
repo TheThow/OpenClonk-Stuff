@@ -44,7 +44,7 @@ func Hit()
 
 func CanDrawOn(x, y)
 {
-	if(GBackSolid(x,y) || GBackSky(x,y))
+	if(GBackSemiSolid(x,y) || GBackSky(x,y))
 	{
 		return false;
 	}

@@ -174,7 +174,6 @@ func FxFireDashStop(object target, proplist effect, int reason, bool temporary)
 	if(temporary)
 		return;
 	
-	
 	target->SetAction("Jump");
 	ExplosionEffect(effect.Size2, target->GetX(), target->GetY(),0,0,0);
 	

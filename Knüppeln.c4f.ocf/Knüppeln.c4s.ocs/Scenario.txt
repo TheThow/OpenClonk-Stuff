@@ -15,11 +15,11 @@ Version=8
 VegetationLevel=100,0,0,100
 InEarthLevel=0,0,0,100
 Sky=Clouds1;Default
-BottomOpen=1
 MapWidth=80,0,64,10000
 MapHeight=50,0,40,10000
 Phase=0,0,0,100
 Period=0,0,0,100
+BottomOpen=1
 
 [Weather]
 Climate=0,10,0,100

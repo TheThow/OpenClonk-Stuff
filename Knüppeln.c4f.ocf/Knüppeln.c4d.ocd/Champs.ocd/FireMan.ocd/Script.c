@@ -160,6 +160,9 @@ func BlockEffect(object clonk, range)
 
 func FxFireHitTimer(object target, proplist effect, int time)
 {
+	if(time > 40 || !target)
+		return -1;
+
 	var chaoticspark =
 	{
 		Size = PV_Linear(1, 0),
@@ -196,9 +199,6 @@ func FxFireHitTimer(object target, proplist effect, int time)
 	CreateParticle("Magic", PV_Random(x + -5, x+ 5), PV_Random(y + -10, y + 10), PV_Random(25, -25), PV_Random(-25, 12), 50, chaoticspark);
 	
 	CreateParticle("FireSharp", RandomX(x + -5, x+ 5), RandomX(y + -10, y + 10), 0, PV_Random(-3,-10), 10, sharpflame, 2);
-	
-	if(time > 40)
-		return -1;
 }
 
 global func AddFireHitEffect()
