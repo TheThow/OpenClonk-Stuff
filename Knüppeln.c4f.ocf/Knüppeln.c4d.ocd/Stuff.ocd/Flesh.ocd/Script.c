@@ -29,7 +29,7 @@ func FxDrawBloodTimer(object target, proplist effect, int time)
 			continue;
 		}
 		
-		DrawMaterialQuad("BackgroundBlood-gore", x, y, x+1, y, x+1, y+1, x, y+1);
+		DrawMaterialQuad("BackgroundBlood-gore", x, y, x+1, y, x+1, y+1, x, y+1, true);
 	}
 	
 	return 0;
@@ -48,14 +48,5 @@ func CanDrawOn(x, y)
 	{
 		return false;
 	}
-
-	for(var i = 0; i < 360; i+=90)
-	{
-		if(GBackSolid(x + Sin(i, 1), y + -Cos(i, 1)) || GBackSky(x + Sin(i, 1), y + -Cos(i, 1)))
-		{
-			return false;
-		}
-	}
-	
 	return true;
 }
