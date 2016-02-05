@@ -260,7 +260,7 @@ func CheckForEnemies()
 			
 			CreateParticle("Lightning", o->GetX() - GetX(), o->GetY() - GetY(), 0, 0, 10, trailparticles, 5);
 			
-			o->DoEnergy(-SpellDamage);
+			WeaponDamage(o, SpellDamage);
 		}
 	}
 }

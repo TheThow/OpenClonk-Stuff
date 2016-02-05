@@ -671,7 +671,8 @@ func Incinerate(
 	, blasted /* whether the object was incinerated by an explosion */
 	, incinerating_object /* the object that caused the incineration */)
 {
-	return DoEnergy(-3);
+	caused_by = caused_by ?? (incinerating_object || this)->GetController();
+	return DoEnergy(-3, nil, nil, caused_by);
 }
 
 local ActMap = {

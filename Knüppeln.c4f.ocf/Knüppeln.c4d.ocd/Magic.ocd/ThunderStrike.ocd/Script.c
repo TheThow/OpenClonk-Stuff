@@ -129,6 +129,6 @@ func CheckForEnemies()
 		
 		o->Fling(Sin(angle, 8), -Cos(angle, 8));
 		o->AddElectroHitEffect();
-		o->DoEnergy(-SpellDamage);
+		WeaponDamage(o, SpellDamage);
 	}
 }

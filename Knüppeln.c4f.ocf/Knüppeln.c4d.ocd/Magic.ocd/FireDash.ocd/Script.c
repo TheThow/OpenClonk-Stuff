@@ -116,7 +116,7 @@ func FxFireDashTimer(object target, proplist effect, int time)
 			o->Fling(0, -5);
 			AddEffect("DashCD", o, 20, 10);
 			o->AddFireHitEffect();
-			o->DoEnergy(-effect.SpellDamage1);
+			WeaponDamage(o, effect.SpellDamage1);
 		}
 		
 	}
@@ -186,7 +186,7 @@ func FxFireDashStop(object target, proplist effect, int reason, bool temporary)
 		
 		o->Fling(Sin(angle, 8), -Cos(angle, 8));
 		AddFireHitEffect(o);
-		o->DoEnergy(-effect.SpellDamage2);
+		WeaponDamage(o, effect.SpellDamage2);
 	}
 	
 	effect.marker->RemoveObject();

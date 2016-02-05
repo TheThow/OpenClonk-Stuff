@@ -67,7 +67,7 @@ public func HitObject(obj)
 		
 	obj->AddLaserHitEffect();
 	obj->SetSpeed(7 * obj->GetXDir(1) / 10, 7 * obj->GetYDir(1) / 10, 1); 
-	obj->DoEnergy(-SpellDamage, nil, nil, GetController());
+	WeaponDamage(obj, SpellDamage);
 }
 
 func FxLasersTimer(target, fx, time)

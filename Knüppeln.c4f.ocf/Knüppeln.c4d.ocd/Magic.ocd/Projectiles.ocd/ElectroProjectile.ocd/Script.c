@@ -99,7 +99,7 @@ func Hit()
 		o->AddElectroHitEffect();
 		var angle = Angle(GetX(), GetY(), o->GetX(), o->GetY());
 		o->SetVelocity(angle, 10);
-		o->DoEnergy(-SpellDamage);
+		WeaponDamage(o, SpellDamage);
 	}
 	
 	RemoveObject();

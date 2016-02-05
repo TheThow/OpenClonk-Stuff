@@ -83,7 +83,7 @@ public func HitObject(obj)
 		return;
 	obj->AddLaserHitEffect();
 	obj->Fling(0, -2, nil, true);
-	obj->DoEnergy(-SpellDamage, false, nil, GetController());
+	WeaponDamage(obj, SpellDamage);
 }
 
 func FxLightRayTimer(target, fx, time)

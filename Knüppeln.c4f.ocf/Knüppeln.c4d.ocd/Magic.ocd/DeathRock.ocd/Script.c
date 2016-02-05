@@ -81,7 +81,7 @@ func FxCheckEnemiesTimer(object target, proplist effect, int time)
 		o->Fling(Sin(angle, 5), -Cos(angle, 5));
 		o->AddEarthHitEffect();
 		AddEffect("DeathRockCD", o, 1, 30);
-		o->DoEnergy(-SpellDamage);
+		WeaponDamage(o, SpellDamage);
 		Sound("Hits::GeneralHit1", false, 50);
 	}
 }
