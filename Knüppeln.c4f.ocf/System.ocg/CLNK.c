@@ -555,7 +555,7 @@ func FxChargeTimer(object target, proplist effect, int time)
 		return -1;
 }
 
-func FxChargeDamage(object target, proplist effect, int damage, int cause)
+func FxChargeDamage(object target, effect fx, int damage, int cause)
 {
 	if (damage >= 0)
 		return damage;
@@ -563,10 +563,10 @@ func FxChargeDamage(object target, proplist effect, int damage, int cause)
 	if(GetAction() == "Float")
 		SetAction("Jump");
 	
-	if(effect.c)
-		effect.c->~ChargeInterrupted();
+	if(fx.c)
+		fx.c->~ChargeInterrupted();
 		
-	RemoveEffect(effect.name, this);
+	RemoveEffect(nil, nil, fx);
 	
 	return damage;
 }
