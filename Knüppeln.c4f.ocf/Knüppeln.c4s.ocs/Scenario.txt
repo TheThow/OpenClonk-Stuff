@@ -1,7 +1,7 @@
 [Head]
 Icon=19
 Title=Knüppeln.c4s
-Version=7
+Version=8
 
 [Player1]
 
@@ -16,7 +16,6 @@ VegetationLevel=100,0,0,100
 InEarthLevel=0,0,0,100
 Sky=Clouds1;Default
 BottomOpen=1
-AutoScanSideOpen=1
 MapWidth=80,0,64,10000
 MapHeight=50,0,40,10000
 Phase=0,0,0,100

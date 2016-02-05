@@ -14,7 +14,7 @@ local randY = 10;
 func Initialize()
 {
 	SetClrModulation(RGB(128,0,0));
-	AddEffect("DrawBlood", this, 1, 1, this, Flesh);
+	AddEffect("DrawBlood", this, 1, 1, this);
 }
 
 func FxDrawBloodTimer(object target, proplist effect, int time)
@@ -44,10 +44,18 @@ func Hit()
 
 func CanDrawOn(x, y)
 {
-	if( GetMaterial(x,y) == Material("BestestTunnel") || GetMaterial(x,y) == Material("Tunnel")	|| 
-		GetMaterial(x,y-1) == Material("BestestTunnel") || GetMaterial(x,y-1) == Material("Tunnel"))
+	if(GBackSolid(x,y) || GBackSky(x,y))
 	{
-		return true;
+		return false;
 	}
-	return false;
+
+	for(var i = 0; i < 360; i+=90)
+	{
+		if(GBackSolid(x + Sin(i, 1), y + -Cos(i, 1)) || GBackSky(x + Sin(i, 1), y + -Cos(i, 1)))
+		{
+			return false;
+		}
+	}
+	
+	return true;
 }

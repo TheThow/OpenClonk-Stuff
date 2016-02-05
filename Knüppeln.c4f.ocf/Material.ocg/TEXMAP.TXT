@@ -6,10 +6,11 @@ OverloadMaterials
 OverloadTextures
 
 73=Brick-brick_
-74=BestestBrick-brick_
-75=BestestTunnel-tunnel
+74=FlatBrick-brick_
+75=FlatTunnel-tunnel
 76=BackgroundBlood-gore
 77=Blood-blood
+78=FlatBrick-brick
 1=Acid-acid
 2=Amethyst-amethyst
 3=Ashes-ashes
