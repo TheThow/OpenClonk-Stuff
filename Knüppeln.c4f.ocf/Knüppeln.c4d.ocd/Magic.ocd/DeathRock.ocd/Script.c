@@ -3,7 +3,7 @@
 
 local ManaCost = 50;
 local SpellDamage = 35;
-local Speed = 50;
+local Speed = 60;
 local Charge_dur = 40;
 
 local Size = 20;
@@ -219,9 +219,11 @@ func Bounce(int xdir, int ydir)
 	var angle_diff = GetTurnDirection(angle - 180, surface_angle);
 	var new_angle = surface_angle + angle_diff;
 	
-	var speed = Distance(0, 0, xdir, ydir);
-	SetXDir(Sin(new_angle, speed), 100);
-	SetYDir(-Cos(new_angle, speed), 100);
+	//var speed = Distance(0, 0, xdir, ydir);
+	//SetXDir(Sin(new_angle, speed), 100);
+	//SetYDir(-Cos(new_angle, speed), 100);
+	
+	SetVelocity(new_angle, Speed);
 }
 
 func FxLifeStop(object target, proplist effect, int reason, bool temporary)
