@@ -30,20 +30,18 @@ func Initialize()
 
 func Launch(object clonk, int x, int y)
 {
-	var marker = CreateObject(Icon_Cancel, clonk->GetX() + x - GetX(), clonk->GetY() + y - GetY() + 16, GetOwner());
-	marker.Visibility = VIS_Owner;
-	marker->SetClrModulation(RGBa(255,255,255,100));
+	//var marker = CreateObject(Icon_Cancel, clonk->GetX() + x - GetX(), clonk->GetY() + y - GetY() + 16, GetOwner());
+	//marker.Visibility = VIS_Owner;
+	//marker->SetClrModulation(RGBa(255,255,255,100));
 	
 	var params = {
 		angle = Angle(0,0,x,y, angle_prec),
 		clonk = clonk,
 		x = x,
 		y = y,
-		marker = marker
+		//marker = marker
 	};
 	clonk->Charge(this, "ChargeStop", Charge_durr, params);
-	
-
 }
 
 func ChargeEffect(proplist params)
@@ -166,8 +164,8 @@ func FxFireDashTimer(object target, proplist effect, int time)
 
 func ChargeInterrupted(params)
 {
-	if(params.marker)
-		params.marker->RemoveObject();
+	//if(params.marker)
+	//	params.marker->RemoveObject();
 	RemoveObject();
 }
 
@@ -191,7 +189,7 @@ func FxFireDashStop(object target, proplist effect, int reason, bool temporary)
 		WeaponDamage(o, effect.SpellDamage2);
 	}
 	
-	effect.marker->RemoveObject();
+	//effect.marker->RemoveObject();
 	//effect.clonk->MakeHitable(true);
 	effect.clonk->Unstuck();
 	effect.clonk->SetObjectLayer(nil);
