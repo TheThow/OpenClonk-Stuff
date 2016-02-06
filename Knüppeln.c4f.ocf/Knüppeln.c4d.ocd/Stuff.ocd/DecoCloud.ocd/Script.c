@@ -1,0 +1,62 @@
+/**
+	Testi
+	Insert description here
+
+	@author 
+*/
+
+local Name = "$Name$";
+local Description = "$Description$";
+func Initialize()
+{
+
+	DoCon(Random(75));
+
+	SetAction("Float");
+	SetPhase(RandomX(1,16));
+	AddEffect("MoveCloud", this, 100, 5, this);
+}
+
+private func FxMoveCloudTimer()
+{
+	// Get wind speed from various locations of the cloud.
+	var con = GetCon();
+	var wdt = GetDefWidth() * con / 100;
+	var hgt = GetDefHeight() * con / 100;
+	var xoff = wdt * 10 / 25;
+	var yoff = hgt * 10 / 35;
+	var wind = (GetWind() + GetWind(xoff, yoff) + GetWind(xoff, -yoff) + GetWind(-xoff, -yoff) + GetWind(-xoff, yoff) + GetWind(nil, nil, true)) / 6;
+	/*
+	// Move according to wind.
+	if (Abs(wind) < 7)
+		SetXDir(0);
+	else
+		SetXDir(wind * 10, 1000);
+	*/
+	// Loop clouds around the map.
+	
+	var y = Random(LandscapeHeight());
+	
+	if (GetX() >= LandscapeWidth() + wdt/2 - 60) 
+		SetPosition(62 - wdt/2, y);
+	else if (GetX() <= 60 - wdt/2) 
+		SetPosition(LandscapeWidth() + wdt/2 - 62, y);
+		
+	return;
+}
+
+local ActMap = {
+
+	Float = {
+		Prototype = Action,
+		Name = "Float",
+		Procedure = DFA_FLOAT,
+		NextAction = "Float",
+		Length = 1,
+		Delay = 1,
+		FacetBase = 1,
+		Y=175,
+		StartCall = "Floating",
+		Speed = 100,
+	}
+};

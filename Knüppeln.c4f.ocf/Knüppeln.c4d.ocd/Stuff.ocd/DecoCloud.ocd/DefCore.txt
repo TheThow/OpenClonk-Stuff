@@ -1,0 +1,8 @@
+[DefCore]
+id=DecoCloud
+Version=5,2,0,1
+Category=C4D_Vehicle
+Width=512
+Height=350
+Offset=-256,-175
+Picture=0,0,220,110

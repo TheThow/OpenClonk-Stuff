@@ -6,7 +6,7 @@ local Speed = 60;
 func InitEffect()
 {
 	Sound("Fire::Fireball", false, 100);
-	Sound("Fire::FuseLoop", false, 20, nil, 1);
+	Sound("Fire::FuseLoop", false, 50, nil, 1);
 	SetLightRange(30, 70);
 	SetLightColor(RGB(255, 100, 0));
 
@@ -49,7 +49,7 @@ func HitObject(obj)
 
 func Hit()
 {
-	CastObjects(Flame, RandomX(2,3), RandomX(10,15));
+	CastObjects(Flame, RandomX(1,2), RandomX(10,15));
 	for(var o in FindObjects(Find_Distance(SpellDamage), Find_Func("CanBeHit")))
 	{
 		o->AddFireHitEffect();

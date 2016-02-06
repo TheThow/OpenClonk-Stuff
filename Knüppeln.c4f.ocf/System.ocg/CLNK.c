@@ -42,6 +42,8 @@ func Construction()
 	return _inherited();
 }
 
+func IsAiming() { return true; }
+
 
 public func ObjectControl(int plr, int ctrl, int x, int y, int strength, bool repeat, bool release)
 {	
@@ -673,6 +675,9 @@ func Incinerate(
 	, blasted /* whether the object was incinerated by an explosion */
 	, incinerating_object /* the object that caused the incineration */)
 {
+	if(ChampType == FireMan && !GBackLiquid())
+		return;
+
 	caused_by = caused_by ?? (incinerating_object || this)->GetController();
 	return DoEnergy(-3, nil, nil, caused_by);
 }

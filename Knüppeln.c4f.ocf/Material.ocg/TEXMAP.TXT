@@ -6,7 +6,7 @@ OverloadMaterials
 OverloadTextures
 
 73=Brick-brick_
-74=FlatBrick-brick_
+74=FlatBrick-brick_1
 75=FlatTunnel-tunnel
 76=BackgroundBlood-gore
 77=Blood-blood

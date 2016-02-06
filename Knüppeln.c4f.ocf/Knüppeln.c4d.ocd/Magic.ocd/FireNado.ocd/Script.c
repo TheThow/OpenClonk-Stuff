@@ -43,7 +43,7 @@ func ChargeStop(proplist params)
 	AddEffect("Remove", this, 20, Durr, this, GetID());
 	
 	Sound("Fire::Fireball", false, 100);
-	Sound("Fire::FuseLoop", false, 20, nil, 1);
+	Sound("Fire::FuseLoop", false, 50, nil, 1);
 	SetLightRange(30, 70);
 	SetLightColor(RGB(255, 100, 0));
 }
@@ -137,6 +137,8 @@ func FxFireNadoTimer(object target, proplist effect, int time)
 
 func FxRemoveStop()
 {
+	Sound("Fire::Spark1", false, 50);
+	CastObjects(Flame, RandomX(3,4), RandomX(10,25));
 	RemoveObject();
 }
 
