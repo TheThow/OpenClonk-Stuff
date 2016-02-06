@@ -11,6 +11,8 @@ OverloadTextures
 76=BackgroundBlood-gore
 77=Blood-blood
 78=FlatBrick-brick
+79=FlatTunnel-brick_1_dark
+80=Tunnel-brick_1_dark
 1=Acid-acid
 2=Amethyst-amethyst
 3=Ashes-ashes

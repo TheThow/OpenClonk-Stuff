@@ -8,8 +8,8 @@
 
 func Initialize()
 {
-	//CreateObject(Goal_LastManStanding);
-	//CreateObject(Rule_KillLogs);
+	CreateObject(Goal_LastManStanding);
+	CreateObject(Rule_KillLogs);
 	CheckScenarioParameters();
 	InitClouds();
 }
@@ -18,7 +18,7 @@ func InitClouds()
 {
 	for(var i = 0; i < 8; i++)
 	{
-		var cloud = CreateObject(DecoCloud, Random(LandscapeWidth()) - 200, Random(LandscapeHeight()), -1);
+		var cloud = CreateObject(DecoCloud, Random(LandscapeWidth() + 200) - 200, Random(LandscapeHeight()), -1);
 		cloud->SetClrModulation(RGBa(255, 128, 0, 80));
 		cloud->SetXDir(RandomX(1, 3));
 	}
