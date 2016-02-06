@@ -27,7 +27,7 @@ func InitClouds()
 
 func InitializePlayer(int plr, int iX, int iY, object pBase, int iTeam)
 {
-	SpawnPlayer(plr);
+	//SpawnPlayer(plr);
    	SetPlayerZoomByViewRange(plr, 700, 0, PLRZOOM_Direct);
    	SetPlayerZoomByViewRange(plr, 700, 0, PLRZOOM_Direct);
 	return;
