@@ -5,12 +5,9 @@
 	@author 
 */
 
-local Name = "$Name$";
-local Description = "$Description$";
 func Initialize()
 {
-
-	DoCon(Random(75));
+	//DoCon(Random(75));
 
 	SetAction("Float");
 	SetPhase(RandomX(1,16));
@@ -38,9 +35,15 @@ private func FxMoveCloudTimer()
 	var y = Random(LandscapeHeight());
 	
 	if (GetX() >= LandscapeWidth() + wdt/2 - 60) 
+	{
 		SetPosition(62 - wdt/2, y);
+		SetPhase(RandomX(1,16));
+	}
 	else if (GetX() <= 60 - wdt/2) 
+	{
 		SetPosition(LandscapeWidth() + wdt/2 - 62, y);
+		SetPhase(RandomX(1,16));
+	}
 		
 	return;
 }
@@ -52,11 +55,13 @@ local ActMap = {
 		Name = "Float",
 		Procedure = DFA_FLOAT,
 		NextAction = "Float",
-		Length = 1,
-		Delay = 1,
-		FacetBase = 1,
-		Y=175,
-		StartCall = "Floating",
+		Length = 16,
+		FacetBase=1,
+		X=0,
+		Y=0,
+		Delay = 0,
+		Wdt = 512,
+		Hgt = 350,
 		Speed = 100,
 	}
 };

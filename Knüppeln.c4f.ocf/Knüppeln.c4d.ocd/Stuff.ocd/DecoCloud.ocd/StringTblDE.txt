@@ -1,2 +1,0 @@
-Name=Testi
-Description=Insert description here
