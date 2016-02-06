@@ -5,6 +5,8 @@
 	@author 
 */
 
+local Plane = 600;
+
 func Initialize()
 {
 	//DoCon(Random(75));

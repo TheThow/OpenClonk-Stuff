@@ -19,7 +19,7 @@ func InitClouds()
 	for(var i = 0; i < 8; i++)
 	{
 		var cloud = CreateObject(DecoCloud, Random(LandscapeWidth() + 200) - 200, Random(LandscapeHeight()), -1);
-		cloud->SetClrModulation(RGBa(255, 128, 0, 80));
+		cloud->SetClrModulation(RGBa(255, 128, 0, 50));
 		cloud->SetXDir(RandomX(1, 3));
 	}
 }
@@ -56,7 +56,7 @@ protected func OnPlayerRelaunch(int plr)
 
 global func GetRandomSpawn()
 {
-	var spawns = [[80,160],[250,200],[360,200],[510,200],[660,200],[940,160]];
+	var spawns = [[80,190],[250,230],[360,230],[510,230],[660,230],[940,190]];
 	var rand = Random(GetLength(spawns));
 	return spawns[rand];
 }
