@@ -5,7 +5,7 @@
 	@author 
 */
 
-local Plane = 600;
+local Plane = 650;
 
 func Initialize()
 {

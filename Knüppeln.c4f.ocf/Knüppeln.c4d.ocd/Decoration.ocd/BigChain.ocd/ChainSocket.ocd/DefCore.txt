@@ -1,9 +1,9 @@
 [DefCore]
-id=BigChain
+id=ChainSocket
 Version=5,2,0,1
 Category=C4D_StaticBack
-Width=16
-Height=510
-Offset=-8,-255
+Width=20
+Height=8
+Offset=-10,-4
 Rotate=1
 StretchGrowth=1
