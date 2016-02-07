@@ -1,6 +1,6 @@
 #appendto Clonk
 
-local Champ_Def = [ElectroMan, FireMan, LaserMan, IceMan, EarthMan];
+local Champ_Def = [ElectroMan, FireMan, LaserMan, IceMan, EarthMan, NinjaMan];
 
 local MaxEnergy = 100000;
 local MaxMagic = 100000;
@@ -111,6 +111,11 @@ public func ObjectControl(int plr, int ctrl, int x, int y, int strength, bool re
 	
 	if (ctrl == CON_Use)
 	{
+		if(IsCharging())
+			return true;
+			
+		ChampType->LeftClick(this, x, y, release, CanCast());
+	
 		var flag = false;
 		
 		for(var i = 0; i < GetLength(special_active); i++)
@@ -133,7 +138,7 @@ public func ObjectControl(int plr, int ctrl, int x, int y, int strength, bool re
   			if(GetMagicEnergy() >= JUMP_MANA)
   			{
   				RemoveEffect("IntControlJumpDouble", this);
-	 			SetYDir(-this.JumpSpeed*4/5 * GetCon(), 100 * 100);
+	 			SetYDir(-this.JumpSpeed*5/6 * GetCon(), 100 * 100);
 	 			JumpEffect("Up");
 	 			DoMagicEnergy(-JUMP_MANA);
 	 		}
@@ -525,9 +530,11 @@ func GetChampType()
 	return ChampType;
 }
 
-func Charge(object caller, string callback, int time, proplist params, bool nosound)
+func Charge(object caller, string callback, int time, proplist params, bool nosound, bool nofloat)
 {
-	SetAction("Float");
+	if(!nofloat)
+		SetAction("Float");
+		
 	var eff = AddEffect("Charge", this, 20, 1, this);
 	eff.f = callback;
 	eff.c = caller;

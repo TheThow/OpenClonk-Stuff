@@ -1,0 +1,4 @@
+RandomChampName=Zufalls Champions
+RandomChampDesc=Man hat immer nur zwei zufällige Champions zur Auswahl
+RandomChampOff=Aus
+RandomChampOn=An

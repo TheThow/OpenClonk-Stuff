@@ -1,0 +1,18 @@
+[ParameterDef]
+ID=Rule_RandomChamp
+Default=1
+LeagueValue=1
+Name=$RandomChampName$
+Description=$RandomChampDesc$
+
+	[Options]
+		
+		[Option]
+		Name=$RandomChampOff$
+		Description=$RandomChampOff$
+		Value=1
+		
+		[Option]
+		Name=$RandomChampOn$
+		Description=$RandomChampOn$
+		Value=2

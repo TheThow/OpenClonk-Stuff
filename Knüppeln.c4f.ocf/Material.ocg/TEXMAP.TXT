@@ -5,14 +5,18 @@ OverloadMaterials
 # Import textures from global file as well
 OverloadTextures
 
-73=Brick-brick_
+73=Brick-brick_1
 74=FlatBrick-brick_1
 75=FlatTunnel-tunnel
 76=BackgroundBlood-gore
 77=Blood-blood
-78=FlatBrick-brick
+78=FlatBrick-brick_1
 79=FlatTunnel-brick_1_dark
 80=Tunnel-brick_1_dark
+81=FlatTunnel-brick_2
+82=FlatBrick-brick_2_light
+83=Tunnel-brick_2
+84=Brick-brick_2_light
 1=Acid-acid
 2=Amethyst-amethyst
 3=Ashes-ashes

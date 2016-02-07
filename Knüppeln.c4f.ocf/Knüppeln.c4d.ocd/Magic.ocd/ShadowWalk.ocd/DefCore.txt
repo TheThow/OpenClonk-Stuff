@@ -1,0 +1,17 @@
+[DefCore]
+id=ShadowWalk
+Version=5,2,0,1
+Category=C4D_Vehicle
+Width=20
+Height=30
+Offset=-10,-15
+Vertices=4
+VertexX=-10,-10,10,10
+VertexY=-15,15,-15,15
+VertexFriction=20
+Value=1
+Mass=10
+Components=FireNado=1
+Projectile=1
+Rotate=1
+

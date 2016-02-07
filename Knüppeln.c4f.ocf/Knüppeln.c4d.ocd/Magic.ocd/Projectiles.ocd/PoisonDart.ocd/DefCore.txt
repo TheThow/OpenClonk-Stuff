@@ -1,0 +1,15 @@
+[DefCore]
+id=PoisonDart
+Version=6,0
+Category=C4D_Object
+Width=6
+Height=6
+Offset=-3,-3
+Picture=0,0,64,64
+Vertices=1
+VertexX=0
+VertexY=0
+VertexFriction=40,40
+Mass=14
+StretchGrowth=1
+Rotate=1

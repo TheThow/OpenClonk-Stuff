@@ -37,3 +37,8 @@ func BlockEffect(object clonk, int range)
 {
 
 }
+
+func LeftClick(object clonk, int x, int y, bool released, bool abletocast)
+{
+
+}
