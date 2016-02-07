@@ -519,6 +519,9 @@ func SelectChamp(data, int player, int ID, int subwindowID, object target)
 {
 	ChampType = data[0];
 	
+	if(ChampType == NinjaMan)
+		PushActionSpeed("Walk", 250);
+	
 	this->CancelMenu();
 	var relauncher = Contained();
 	if (relauncher)

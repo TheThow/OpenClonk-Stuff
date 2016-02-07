@@ -12,9 +12,8 @@ local ManaCost = 40;
 local SpellRange = 40;
 
 local SpellDamage = 50;
-local SpellRange = 30;
 
-local Charge_dur = 25;
+local Charge_dur = 15;
 
 local angle_prec = 10;
 
@@ -49,9 +48,9 @@ func ChargeEffect(proplist params)
 			{
 				Size = PV_Linear(2,0),
 				BlitMode = GFX_BLIT_Additive,
-				R = 255,
-				G = 0,
-				B = 0,
+				R = 0,
+				G = 255,
+				B = 255,
 				Attach = ATTACH_Back | ATTACH_MoveRelative
 			};
 			
@@ -65,9 +64,8 @@ func ChargeEffect(proplist params)
 
 func ChargeStop(proplist params)
 {
+
 	var a = params.new_angle;
-	var range = 60;
-	
 	var clonk = params.clonk;
 	var sword = clonk->FindContents(Sword);
 	
@@ -80,47 +78,76 @@ func ChargeStop(proplist params)
 	sword->PlayWeaponAnimation(clonk, animation, 10, Anim_Linear(0, 0, clonk->GetAnimationLength(animation), length, ANIM_Remove), Anim_Const(1000));
 	sword->PlayAnimation(animation_sword, 10, Anim_Linear(0, 0, GetAnimationLength(animation_sword), length, ANIM_Remove), Anim_Const(1000));
 	
-	var flag = false;
+	var range = 60;
 	
+	var props2 =
+	{
+		Size = PV_Linear(1,0),
+		BlitMode = GFX_BLIT_Additive,
+		R = 255,
+		G = 255,
+		B = 255,
+	};
+		var props =
+	{
+		Size = PV_Linear(2,0),
+		BlitMode = GFX_BLIT_Additive,
+		R = 0,
+		G = 255,
+		B = 255,
+	};
 	for(var i = a - (range-10)*10; i < a + (range-10)*10; i++)
 	{
-		var x = Sin(i, SpellRange, 10);
-		var y = -Cos(i, SpellRange, 10);
-		
-		var props =
-		{
-			Size = PV_Linear(2,0),
-			BlitMode = GFX_BLIT_Additive,
-			R = 255,
-			G = 0,
-			B = 0,
-		};
-		
+		var x = Sin(i, SpellRange - 4, 10);
+		var y = -Cos(i, SpellRange - 4, 10);
 		clonk->CreateParticle("Flash", x, y, 0, 0, 20, props, 2);
 	}
-	
-	for(var o in FindObjects(Find_Distance(SpellRange), Find_Func("CanBeHit")))
+	for(var i = a - (range-10)*10; i < a + (range-10)*10; i++)
 	{
-		if(o->GetOwner() == GetOwner())
-			continue;
-		
-		var object_angle = Angle(GetX(), GetY(), o->GetX(), o->GetY());
-		var dst = Distance(GetX(), GetY(), o->GetX(), o->GetY());
-		
-		//if(object_angle > (a/10-range)%360 && object_angle < (a/10+range)%360 || dst < 10)
-		if(Abs(GetTurnDirection(object_angle, a/10)) < range || dst < 12)
-		{
-			o->Fling(Sin(a, 12, 10), -Cos(a, 12, 10));
-			WeaponDamage(o, SpellDamage);
-			Sound("Objects::Weapons::WeaponHit?", false, 50);
-			flag = true;
-		}
+		var x = Sin(i, SpellRange - 5, 10);
+		var y = -Cos(i, SpellRange - 5, 10);
+		clonk->CreateParticle("Flash", x, y, 0, 0, 20, props2, 2);
 	}
 	
-	if(!flag)
-		Sound("Objects::Weapons::WeaponSwing?", false, 50);
+	var eff = AddEffect("CheckHit", clonk, 1,1, nil, GetID());
+	eff.p = params;
+	eff.dmg = SpellDamage;
+	eff.range = SpellRange;
+	
+	Sound("Objects::Weapons::WeaponSwing?", false, 50);
 	
 	RemoveObject();
+}
+
+func FxCheckHitTimer(object target, proplist effect, int time)
+{
+	if(time > 5)
+	{
+		return -1;
+	}
+
+	var params = effect.p;
+	
+	var a = params.new_angle;
+	var range = 60;
+
+	for(var o in FindObjects(Find_Distance(effect.range, target->GetX(), target->GetY()), Find_Func("CanBeHit")))
+	{
+		if(o->GetOwner() == target->GetOwner())
+			continue;
+		
+		var object_angle = Angle(target->GetX(), target->GetY(), o->GetX(), o->GetY());
+		var dst = Distance(target->GetX(), target->GetY(), o->GetX(), o->GetY());
+		
+		//if(object_angle > (a/10-range)%360 && object_angle < (a/10+range)%360 || dst < 10)
+		if((Abs(GetTurnDirection(object_angle, a/10)) < range || dst < 15) && !GetEffect("CriticalHitCD", o))
+		{
+			AddEffect("CriticalHitCD", o, 1, 10);
+			o->Fling(Sin(a, 12, 10), -Cos(a, 12, 10));
+			target->WeaponDamage(o, effect.dmg);
+			target->Sound("Objects::Weapons::WeaponHit?", false, 50);
+		}
+	}
 }
 
 

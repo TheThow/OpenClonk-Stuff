@@ -1,5 +1,5 @@
 [DefCore]
-id=CriticalHit
+id=CriticalStrike
 Version=5,2,0,1
 Category=C4D_Vehicle
 Width=20

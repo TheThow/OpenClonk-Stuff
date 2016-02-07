@@ -1,2 +1,2 @@
-Name=Electro Man
-Description=You can use him to charge your smartphone. \n\nQ = Electro Shot \nE = Electro Orb \nR = Thunder Strike
+Name=Ninja Man
+Description=Now you see me, now you don't! \n\nQ = Poison Dart \nE = Shadow Walk \nR = Critical Strike

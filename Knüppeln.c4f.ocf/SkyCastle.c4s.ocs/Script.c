@@ -11,6 +11,7 @@ func Initialize()
 	CreateObject(Goal_LastManStanding);
 	CreateObject(Rule_KillLogs);
 	CheckScenarioParameters();
+	SetSkyParallax(0, 15, 15, nil, nil, 1, 1);
 }
 
 func InitializePlayer(int plr, int iX, int iY, object pBase, int iTeam)

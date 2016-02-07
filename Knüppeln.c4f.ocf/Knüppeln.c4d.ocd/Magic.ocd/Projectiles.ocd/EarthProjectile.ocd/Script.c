@@ -4,7 +4,7 @@ local pR = 50;
 local pG = 255;
 local pB = 50;
 local Speed = 80;
-local SpellDamage = 25;
+local SpellDamage = 20;
 local Size = 20;
 local ManaCost = 25;
 

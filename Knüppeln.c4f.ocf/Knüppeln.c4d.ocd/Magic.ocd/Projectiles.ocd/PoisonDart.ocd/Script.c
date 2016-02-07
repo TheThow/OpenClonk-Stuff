@@ -4,8 +4,8 @@ local pR = 0;
 local pG = 200;
 local pB = 0;
 local Speed = 100;
-local SpellDamage = 10;
-local ManaCost = 25;
+local SpellDamage = 15;
+local ManaCost = 18;
 
 local counter = 0;
 
@@ -66,7 +66,7 @@ func HitEffect()
 		BlitMode = GFX_BLIT_Additive,
 	};
 	CreateParticle("StarSpark", 0, 0, 0, 0, 7, sphereparticle, 4);
-	Sound("Hits::ProjectileHitLiving?", false, 50, 1);
+	
 	RemoveObject();
 }
 
@@ -76,6 +76,7 @@ func HitObject(obj)
 		return;
 	AddEffect("PoisonDart", obj, 1, 120, nil, GetID());
 	obj->DoEnergy(-SpellDamage);
+	Sound("Hits::ProjectileHitLiving?", false, 50);
 	HitEffect();
 }
 
@@ -84,6 +85,7 @@ func FxPoisonDartStart(object target, proplist effect, int temporary)
 	var dummy = CreateObject(Dummy, target->GetX(), target->GetY(), target->GetOwner());
 	dummy.Visibility = VIS_Owner;
 	dummy->SetAction("HangOnto", target);
+	dummy.Plane = 650;
 	
 	var flashparticle =
 	{

@@ -12,9 +12,9 @@ local Name = "$Name$";
 
 local Special1Spell = PoisonDart;
 local Special2Spell = ShadowWalk;
-local Special3Spell = CriticalHit;
+local Special3Spell = CriticalStrike;
 
-local Special2Cooldown = 150;
+local Special2Cooldown = 130;
 
 func Special1(object clonk, int x, int y, bool released, bool mouseclick, bool abletocast, bool cooldown)
 {
