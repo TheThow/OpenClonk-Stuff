@@ -121,7 +121,7 @@ func ChargeStop(proplist params)
 
 func FxCheckHitTimer(object target, proplist effect, int time)
 {
-	if(time > 5)
+	if(time > 2)
 	{
 		return -1;
 	}

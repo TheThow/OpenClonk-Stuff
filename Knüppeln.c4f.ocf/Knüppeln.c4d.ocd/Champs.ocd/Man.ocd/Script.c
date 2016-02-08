@@ -42,3 +42,8 @@ func LeftClick(object clonk, int x, int y, bool released, bool abletocast)
 {
 
 }
+
+func InitChamp(object clonk)
+{
+
+}

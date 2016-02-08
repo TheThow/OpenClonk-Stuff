@@ -141,3 +141,8 @@ func FxRemoveStop(target)
 {
 	target->RemoveObject();
 }
+
+func InitChamp(object clonk)
+{
+	clonk->PushActionSpeed("Walk", 250);
+}

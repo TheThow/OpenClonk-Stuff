@@ -1,0 +1,9 @@
+[DefCore]
+id=BallsManBall
+Version=5,2,0,1
+Category=C4D_Vehicle
+Width=12
+Height=12
+Offset=-6,-6
+Rotate=1
+NoStabilize=1

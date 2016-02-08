@@ -402,7 +402,7 @@ func LaunchSpecial3(int x, int y, released, mouse, abletocast)
 		AddEffect("Special3CD", this, 20, ChampType.Special3Cooldown);
 }
 
-func LaunchSpell(id ID, x, y, x_off, y_off)
+func LaunchSpell(id ID, int x, int y, int x_off, int y_off, proplist params)
 {
 	var spell;
 
@@ -410,7 +410,7 @@ func LaunchSpell(id ID, x, y, x_off, y_off)
 	{
 		spell = CreateObject(ID,x_off, y_off,GetOwner());
 		spell->SetController(GetOwner());
-		spell->Launch(this, x, y);
+		spell->Launch(this, x, y, params);
 		DoMagicEnergy(-ID.ManaCost);
 	}
 	else
@@ -519,8 +519,7 @@ func SelectChamp(data, int player, int ID, int subwindowID, object target)
 {
 	ChampType = data[0];
 	
-	if(ChampType == NinjaMan)
-		PushActionSpeed("Walk", 250);
+	ChampType->InitChamp(this);
 	
 	this->CancelMenu();
 	var relauncher = Contained();

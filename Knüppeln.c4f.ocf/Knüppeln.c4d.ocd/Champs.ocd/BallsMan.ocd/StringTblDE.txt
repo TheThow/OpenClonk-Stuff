@@ -1,0 +1,2 @@
+Name=Balls Man
+Description=To be honest he only has one ball. \n\nQ = Attack Order \nE = Home Call \nR = Discharge

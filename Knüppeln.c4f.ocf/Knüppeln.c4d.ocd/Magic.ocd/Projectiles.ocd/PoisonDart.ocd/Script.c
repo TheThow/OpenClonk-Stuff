@@ -4,7 +4,7 @@ local pR = 0;
 local pG = 200;
 local pB = 0;
 local Speed = 100;
-local SpellDamage = 15;
+local SpellDamage = 12;
 local ManaCost = 18;
 
 local counter = 0;
@@ -85,7 +85,7 @@ func FxPoisonDartStart(object target, proplist effect, int temporary)
 	var dummy = CreateObject(Dummy, target->GetX(), target->GetY(), target->GetOwner());
 	dummy.Visibility = VIS_Owner;
 	dummy->SetAction("HangOnto", target);
-	dummy.Plane = 650;
+	dummy.Plane = 950;
 	
 	var flashparticle =
 	{
