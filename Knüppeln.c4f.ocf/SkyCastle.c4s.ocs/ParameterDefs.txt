@@ -1,18 +1,23 @@
 [ParameterDef]
-ID=Rule_RandomChamp
+ID=ChampSelection
 Default=1
 LeagueValue=1
-Name=$RandomChampName$
-Description=$RandomChampDesc$
+Name=$ChampSelectionName$
+Description=$ChampSelectionDesc$
 
 	[Options]
 		
 		[Option]
-		Name=$RandomChampOff$
-		Description=$RandomChampOff$
+		Name=$ChampSelection1$
+		Description=$ChampSelection1$
 		Value=1
 		
 		[Option]
-		Name=$RandomChampOn$
-		Description=$RandomChampOn$
+		Name=$ChampSelection2$
+		Description=$ChampSelection2$
 		Value=2
+		
+		[Option]
+		Name=$ChampSelection3$
+		Description=$ChampSelection3$
+		Value=3

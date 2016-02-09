@@ -2,18 +2,16 @@ Kurz:
 - Icons für Champions
 - SkyCastle gestalten
 - Ketten
-- Desc
-
+- Ballsman
 
 
 Mittel:
-- Ballsman
 - Spielzielauswahl
-- Teammodus
+- Mehr Regeln
 
 
 Lang:
-- Kisten
+- Kisten / Items
 - Tauntmenu
 - Death Cam
 - BombRun(?)

@@ -38,7 +38,7 @@ func SpawnPlayer(int plr, prev_clonk)
 	var clonk = GetCrew(plr);
 	clonk->CreateContents(Sword);
 	clonk->SetMagicEnergy(50);
-	ScheduleCall(clonk, "ChooseMenu", 15, 0);
+	ScheduleCall(clonk, "SelectChampion", 15, 0);
 	//clonk->ChooseMenu();
 }
 

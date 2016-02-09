@@ -136,6 +136,24 @@ global func Unstuck()
 
 global func CheckScenarioParameters()
 {
-	if(SCENPAR_Rule_RandomChamp == 2)
+	if(SCENPAR_ChampSelection == 2)
 		CreateObject(Rule_RandomChamp, 0, 0, -1);
+		
+	if(SCENPAR_ChampSelection == 3)
+		CreateObject(Rule_ChampRotation, 0, 0, -1);
+	
 }
+
+global func ShuffleArray(array arr)
+  {
+    for (var i = GetLength(arr) - 1; i > 0; i--)
+    {
+      var index = Random(i + 1);
+      // Simple swap
+      var a = arr[index];
+      arr[index] = arr[i];
+      arr[i] = a;
+    }
+    
+    return arr;
+  }

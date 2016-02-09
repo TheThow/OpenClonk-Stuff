@@ -80,6 +80,12 @@ func HomeCall()
 
 func FxFollowMasterTimer(object target, proplist effect, int time)
 {
+	if(!master)
+	{
+		RemoveObject();
+		return;
+	}
+
 	MoveToPos(master->GetX(), master->GetY() - 15);
 	
 	var trailparticles2 =
@@ -99,6 +105,12 @@ func FxFollowMasterTimer(object target, proplist effect, int time)
 
 func FxHomeCallTimer(object target, proplist fx, int time)
 {
+	if(!master)
+	{
+		RemoveObject();
+		return;
+	}
+
 	fx.x = master->GetX();
 	fx.y = master->GetY();
 	var angle = Angle(GetX(), GetY(), fx.x, fx.y, 10);
@@ -181,6 +193,12 @@ func FxHomeCallTimer(object target, proplist fx, int time)
 
 func FxMoveToTimer(object target, proplist fx, int time)
 {
+	if(!master)
+	{
+		RemoveObject();
+		return;
+	}
+
 	MoveToPos(fx.x, fx.y);
 	CheckForEnemies();
 	
