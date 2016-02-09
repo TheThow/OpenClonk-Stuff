@@ -1,2 +1,2 @@
 Name=Ice Man
-Description=Noone ain't as cool as IceMan.
+Description=Noone ain't as cool as IceMan. \nQ = Snow Ball \nE = Ice Shards \nR=Even more Ice Shards \n\nContributed by Zapper

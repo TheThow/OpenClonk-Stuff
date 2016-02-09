@@ -1,2 +1,2 @@
 Name=Earth Man
-Description=Caught between a rock and a hard place \n\nQ = Energy Shot \nE = Stone Wall \nR = Big Rock
+Description=Caught between a rock and a hard place \n\nQ = Small Rock \nE = Stone Wall \nR = Big Rock

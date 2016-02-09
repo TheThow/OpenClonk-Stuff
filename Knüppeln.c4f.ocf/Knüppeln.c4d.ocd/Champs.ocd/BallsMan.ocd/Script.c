@@ -11,8 +11,10 @@ local Description = "$Description$";
 local Name = "$Name$";
 
 local Special1Spell = BallAttackOrder;
-local Special2Spell = ElectroOrb;
+local Special2Spell = BallHomeCall;
 local Special3Spell = ThunderStrike;
+
+local Special2Cooldown = 40;
 
 func Special1(object clonk, int x, int y, bool released, bool mouseclick, bool abletocast, bool cooldown)
 {
@@ -31,7 +33,10 @@ func Special2(object clonk, int x, int y, bool released, bool mouseclick, bool a
 {
 	if(!released && !mouseclick && abletocast && !cooldown)
 	{
-		clonk->LaunchSpell(Special2Spell, x, y, 0, 0);
+		var param = {
+			ball = clonk.Ball
+		};
+		clonk->LaunchSpell(Special2Spell, x, y, 0, 0, param);
 		return 1;
 	}
 	return 0;

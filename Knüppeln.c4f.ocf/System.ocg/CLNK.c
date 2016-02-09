@@ -70,7 +70,7 @@ public func ObjectControl(int plr, int ctrl, int x, int y, int strength, bool re
 		var x1 = a[0] - GetX();
 		var y1 = a[1] - GetY();
 		
-		LaunchSpecial1(x1, y1, release, false, CanCast());
+		LaunchSpecial1(x1, y1, release, false, CanCast() && ChampType->CanCastSpecial1(this));
 		
 		return true;
 	}
@@ -83,7 +83,7 @@ public func ObjectControl(int plr, int ctrl, int x, int y, int strength, bool re
 		var x1 = a[0] - GetX();
 		var y1 = a[1] - GetY();
 		
-		LaunchSpecial2(x1, y1, release, false, CanCast());
+		LaunchSpecial2(x1, y1, release, false, CanCast() && ChampType->CanCastSpecial2(this));
 		
 		return true;
 	}
@@ -91,20 +91,13 @@ public func ObjectControl(int plr, int ctrl, int x, int y, int strength, bool re
 	
 	if (ctrl == CON_Skill3)
 	{
-		if(special_active[3] == !release)
-		{
-			Log("Missing event");
-		}
 		special_active[3] = !release;
-		
-		if(special_active[3] != !release)
-			Log("ARRAYS FUCKED UP");
 	
 		var a = GetPlayerCursorPos(plr, true);
 		var x1 = a[0] - GetX();
 		var y1 = a[1] - GetY();
 		
-		LaunchSpecial3(x1, y1, release, false, CanCast());
+		LaunchSpecial3(x1, y1, release, false, CanCast() && ChampType->CanCastSpecial3(this));
 		
 		return true;
 	}
@@ -122,7 +115,7 @@ public func ObjectControl(int plr, int ctrl, int x, int y, int strength, bool re
 		{
 			if(special_active[i] == true)
 			{
-				Call(Format("LaunchSpecial%d", i), x, y, release, true, CanCast());
+				Call(Format("LaunchSpecial%d", i), x, y, release, true, CanCast() && ChampType->Call(Format("CanCastSpecial%d", i), this));
 				flag = true;
 			}
 		}
@@ -361,7 +354,7 @@ public func GetBlockingRange()
 
 func Block()
 {
-	for(var o in FindObjects(Find_Distance(BLOCK_RANGE), Find_Func("IsReflectable")))
+	for(var o in FindObjects(Find_Distance(BLOCK_RANGE), Find_Func("IsReflectable", this)))
 	{
 		var xdir = o->GetXDir();
 		var ydir = o->GetYDir();
@@ -382,23 +375,23 @@ func Block()
 
 func LaunchSpecial1(x, y, released, mouse, abletocast)
 {
-	ChampType->Special1(this, x, y, released, mouse, abletocast, GetEffect("Special1CD", this));
-	if(!released && !mouse && abletocast && !GetEffect("Special1CD", this))
+	var ret = ChampType->Special1(this, x, y, released, mouse, abletocast, GetEffect("Special1CD", this));
+	if(!released && !mouse && abletocast && !GetEffect("Special1CD", this) && ret)
 		AddEffect("Special1CD", this, 20, ChampType.Special1Cooldown);
 	
 }
 
 func LaunchSpecial2(int x, int y, released, mouse, abletocast)
 {
-	ChampType->Special2(this, x, y, released, mouse, abletocast, GetEffect("Special2CD", this));
-	if(!released && !mouse && abletocast && !GetEffect("Special2CD", this))
+	var ret = ChampType->Special2(this, x, y, released, mouse, abletocast, GetEffect("Special2CD", this));
+	if(!released && !mouse && abletocast && !GetEffect("Special2CD", this) && ret)
 		AddEffect("Special2CD", this, 20, ChampType.Special2Cooldown);
 }
 
 func LaunchSpecial3(int x, int y, released, mouse, abletocast)
 {
-	ChampType->Special3(this, x, y, released, mouse, abletocast, GetEffect("Special3CD", this));
-	if(!released && !mouse && abletocast && !GetEffect("Special3CD", this))
+	var ret = ChampType->Special3(this, x, y, released, mouse, abletocast, GetEffect("Special3CD", this));
+	if(!released && !mouse && abletocast && !GetEffect("Special3CD", this) && ret)
 		AddEffect("Special3CD", this, 20, ChampType.Special3Cooldown);
 }
 

@@ -37,7 +37,7 @@ func ShowHUD()
 	{
 		Player=GetOwner(),
 		Target=this,
-		Top = "100% - 4em",
+		Top = "100% - 3em",
 		Left="50%",
 		Right="50%",
 		Style = GUI_Multiple | GUI_NoCrop,
@@ -62,7 +62,7 @@ func ShowHUD()
 			Right = "8em",
 			Symbol=RSymbol,
 		},
-		
+	
 	};
 	hudID = GuiOpen(hud);
 	
@@ -70,17 +70,17 @@ func ShowHUD()
 
 func FxUpdateHUDTimer()
 {
-	if(GetMagicEnergy() < ChampType.Special1Spell.ManaCost || !CanCast() || GetEffect("Special1CD", this))
+	if(GetMagicEnergy() < ChampType.Special1Spell.ManaCost || !CanCast() || GetEffect("Special1CD", this) || !ChampType->CanCastSpecial1(this))
 		QSymbol->SetClrModulation(RGB(255,0,0));
 	else
 		QSymbol->SetClrModulation(RGB(255,255,255));
 		
-	if(GetMagicEnergy() < ChampType.Special2Spell.ManaCost || !CanCast() || GetEffect("Special2CD", this))
+	if(GetMagicEnergy() < ChampType.Special2Spell.ManaCost || !CanCast() || GetEffect("Special2CD", this) || !ChampType->CanCastSpecial2(this))
 		ESymbol->SetClrModulation(RGB(255,0,0));
 	else
 		ESymbol->SetClrModulation(RGB(255,255,255));
 		
-	if(GetMagicEnergy() < ChampType.Special3Spell.ManaCost || !CanCast() || GetEffect("Special3CD", this))
+	if(GetMagicEnergy() < ChampType.Special3Spell.ManaCost || !CanCast() || GetEffect("Special3CD", this) || !ChampType->CanCastSpecial3(this))
 		RSymbol->SetClrModulation(RGB(255,0,0));
 	else
 		RSymbol->SetClrModulation(RGB(255,255,255));

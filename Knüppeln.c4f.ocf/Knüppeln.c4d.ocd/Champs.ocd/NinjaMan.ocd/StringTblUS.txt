@@ -1,2 +1,2 @@
 Name=Ninja Man
-Description=Now you see me, now you don't! \n\nQ = Poison Dart \nE = Shadow Walk \nR = Critical Strike
+Description=Now you see me, now you don't! \n\nQ = Poison Dart \nE = Shadow Walk \nR = Critical Strike \n\nPassive = Increased movement speed

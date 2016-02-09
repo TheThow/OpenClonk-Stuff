@@ -5,10 +5,10 @@
 	@author 
 */
 
-local ManaCost = 12;
+local ManaCost = 25;
 
 func Launch(object clonk, int x, int y, proplist params)
 {
-	params.ball->AttackOrder(x, y);
+	params.ball->HomeCall(x, y);
 	RemoveObject();
 }

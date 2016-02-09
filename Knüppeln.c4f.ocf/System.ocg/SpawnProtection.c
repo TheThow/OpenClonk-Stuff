@@ -37,12 +37,15 @@ global func FxSpawnProtectionTimer(object target, proplist effect, int time)
 
 global func FxSpawnProtectionStop(object target, proplist effect, int reason, bool temporary)
 {
-	if(temporary || !target)
+	if(temporary)
 		return;
-	
-	target->SetObjectLayer(nil);
-	target->SetClrModulation(RGBa(255,255,255, 255));
-	
+		
 	if(effect.dummy)
 		effect.dummy->RemoveObject();
+		
+	if(!target)
+		return;
+		
+	target->SetObjectLayer(nil);
+	target->SetClrModulation(RGBa(255,255,255, 255));
 }

@@ -25,7 +25,6 @@ func Initialize()
 
 func Launch(object clonk, int x, int y)
 {
-	
 	var params = {
 		angle = Angle(0,0,x,y, angle_prec),
 		clonk = clonk,
@@ -64,7 +63,6 @@ func ChargeEffect(proplist params)
 
 func ChargeStop(proplist params)
 {
-
 	var a = params.new_angle;
 	var clonk = params.clonk;
 	var sword = clonk->FindContents(Sword);
@@ -114,7 +112,7 @@ func ChargeStop(proplist params)
 	eff.dmg = SpellDamage;
 	eff.range = SpellRange;
 	
-	Sound("Objects::Weapons::WeaponSwing?", false, 50);
+	Sound("critical_swing", false, 50);
 	
 	RemoveObject();
 }
