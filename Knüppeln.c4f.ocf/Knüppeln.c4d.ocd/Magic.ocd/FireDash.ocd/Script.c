@@ -17,8 +17,8 @@ local SpellDamage1 = 20;
 local SpellDamage2 = 40;
 
 local Speed = 30;
-local Durr = 70;
-local Charge_durr = 20;
+local Dur = 70;
+local Charge_dur = 20;
 
 local angle_prec = 10;
 
@@ -41,7 +41,7 @@ func Launch(object clonk, int x, int y)
 		y = y,
 		//marker = marker
 	};
-	clonk->Charge(this, "ChargeStop", Charge_durr, params);
+	clonk->Charge(this, "ChargeStop", Charge_dur, params);
 }
 
 func ChargeEffect(proplist params)
@@ -71,7 +71,6 @@ func ChargeEffect(proplist params)
 
 func ChargeStop(proplist params)
 {
-
 	var eff = AddEffect("FireDash", params.clonk, 20, 1 ,nil, GetID());
 	eff.angle = params.angle;
 	eff.dist = Distance(0,0, params.x, params.y);
@@ -87,9 +86,11 @@ func ChargeStop(proplist params)
 	eff.clonk = params.clonk;
 	eff.angle_prec = angle_prec;
 	
-	params.clonk->SetAction("Float");
-	//params.clonk->MakeHitable(false);
-	params.clonk->SetObjectLayer(params.clonk);
+	if(this)
+	{
+		params.clonk->SetAction("Float");
+		params.clonk->SetObjectLayer(params.clonk);
+	}
 	
 	Sound("Fire::Fireball", false, 100);
 	RemoveObject();
@@ -151,6 +152,7 @@ func FxFireDashTimer(object target, proplist effect, int time)
 	var dist = Distance(x, y, effect.startx + effect.tx, effect.starty + effect.ty);
 	if(dist < 10 || (dist > effect.dist + 1 && time > 10))
 	{
+		effect.clonk->SetObjectLayer(nil);
 		return -1;
 	}
 	else
@@ -159,7 +161,6 @@ func FxFireDashTimer(object target, proplist effect, int time)
 		effect.dist = dist;
 	}
 	
-	return 0;
 }
 
 func ChargeInterrupted(params)

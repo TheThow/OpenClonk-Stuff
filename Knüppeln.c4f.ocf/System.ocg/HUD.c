@@ -37,7 +37,7 @@ func ShowHUD()
 	{
 		Player=GetOwner(),
 		Target=this,
-		Top = "100% - 3em",
+		Top = "100% - 4em",
 		Left="50%",
 		Right="50%",
 		Style = GUI_Multiple | GUI_NoCrop,

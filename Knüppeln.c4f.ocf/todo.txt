@@ -1,0 +1,19 @@
+Kurz:
+- Icons für Champions
+- SkyCastle gestalten
+- Ketten
+- Desc
+
+
+
+Mittel:
+- Ballsman
+- Spielzielauswahl
+- Teammodus
+
+
+Lang:
+- Kisten
+- Tauntmenu
+- Death Cam
+- BombRun(?)

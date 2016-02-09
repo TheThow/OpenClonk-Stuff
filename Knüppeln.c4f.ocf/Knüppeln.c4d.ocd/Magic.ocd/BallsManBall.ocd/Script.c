@@ -13,8 +13,8 @@ local Size = 15;
 local ShieldDur = 120;
 local ShieldAmount = 15;
 
-local pR = 0;
-local pG = 0;
+local pR = 50;
+local pG = 50;
 local pB = 255;
 
 local master;

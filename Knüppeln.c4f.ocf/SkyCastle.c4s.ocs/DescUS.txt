@@ -1,3 +1,16 @@
 Knüppeln.c4s
 
-The most bestest scenario of all the times
+Someone thought it would be a good idea to build a castle somewhere in the sky.
+
+
+About Knüppeln:
+
+Choose your champion at the beginning / at each respawn and knüppel your enemies to death!
+
+Controls:
+Double W/A/S/D mid air = Double jump
+Space = Blocks most spells near you
+Q/E/R = Special abilities of your champion
+
+Range indicators:
+Some abilities show range indicators when you press down the button. Mouse click to launch the spell within the range!

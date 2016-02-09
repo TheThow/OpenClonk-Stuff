@@ -1,6 +1,6 @@
 #appendto Clonk
 
-local Champ_Def = [ElectroMan, FireMan, LaserMan, IceMan, EarthMan, NinjaMan];
+local Champ_Def = [ElectroMan, FireMan, LaserMan, IceMan, EarthMan, NinjaMan, BallsMan];
 
 local MaxEnergy = 100000;
 local MaxMagic = 100000;
