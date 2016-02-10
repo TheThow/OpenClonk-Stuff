@@ -48,6 +48,11 @@ func InitChamp(object clonk)
 
 }
 
+func CanCast(object clonk)
+{
+	return true;
+}
+
 func CanCastSpecial1(object clonk)
 {
 	return true;

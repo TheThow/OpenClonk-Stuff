@@ -1,5 +1,5 @@
 ChampSelectionName=Champion Selection
 ChampSelectionDesc=You can only choose between two random champions each time you respawn
 ChampSelection1=Normal
-ChampSelection2=Random Champion
+ChampSelection2=Random
 ChampSelection3=Rotation

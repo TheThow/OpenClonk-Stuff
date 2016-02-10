@@ -12,7 +12,7 @@ local Name = "$Name$";
 
 local Special1Spell = BallAttackOrder;
 local Special2Spell = BallHomeCall;
-local Special3Spell = ThunderStrike;
+local Special3Spell = BallDischarge;
 
 local Special2Cooldown = 40;
 
@@ -44,45 +44,14 @@ func Special2(object clonk, int x, int y, bool released, bool mouseclick, bool a
 
 func Special3(object clonk, int x, int y, bool released, bool mouseclick, bool abletocast, bool cooldown)
 {
-	if(!released && !mouseclick)
+	if(!released && !mouseclick && abletocast && !cooldown)
 	{
-		var props =
-		{
-			R = 150,
-			G = 215,
-			B = 255,
-			Alpha = 40,
-			Size = Special3Spell.SpellRange*2,
-			BlitMode = GFX_BLIT_Additive,
-			Rotation = PV_Step(10, 0, 1),
-			Attach = ATTACH_Back | ATTACH_MoveRelative
-			
+		var param = {
+			ball = clonk.Ball
 		};
-		clonk->ShowSpellRange(clonk, Special3Spell, props);
-	}
-	
-	if(released && !mouseclick)
-	{
-		clonk->CancelShowSpellRange();
-	}
-
-	if(!released && mouseclick && abletocast)
-	{
-		if (Sqrt(x**2 + y**2) > Special3Spell.SpellRange)
-		{
-			var a = Angle(0,0, x, y, 10);
-			var newx = Sin(a, Special3Spell.SpellRange, 10);
-			var newy = -Cos(a, Special3Spell.SpellRange, 10);
-			clonk->LaunchSpell(Special3Spell, newx, newy, newx, newy);
-			
-			return 1;
-		}
-		
-		clonk->LaunchSpell(Special3Spell, x, y, x, y);
-		
+		clonk->LaunchSpell(Special3Spell, x, y, 0, 0, param);
 		return 1;
 	}
-	
 	return 0;
 }
 
@@ -160,6 +129,28 @@ func BlockEffect(object clonk, range)
 		CreateParticle("Lightning", x, y, 0, 0, 10, trailparticles);
 	}
 	
+}
+
+func CanCast(object clonk)
+{
+	if(clonk.Ball)
+	{
+		if(GetEffect("Blocked", clonk.Ball) || GetEffect("Discharge", clonk.Ball))
+			return false;
+	}
+	
+	return _inherited(clonk);
+}
+
+func CanCastSpecial2(object clonk)
+{
+	if(clonk.Ball)
+	{
+		if(GetEffect("HomeCall", clonk.Ball))
+			return false;
+	}
+
+	return true;
 }
 
 func InitChamp(clonk)

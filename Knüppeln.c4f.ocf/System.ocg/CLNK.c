@@ -502,7 +502,7 @@ func IsCharging()
 
 func CanCast()
 {
-	if(Contained() || GetAction() == "Tumble" || IsCharging() || GetAction() == "Float" || GetEffect("SpawnProtection", this))
+	if(Contained() || GetAction() == "Tumble" || IsCharging() || GetAction() == "Float" || GetEffect("SpawnProtection", this) || !ChampType->CanCast(this))
 		return false;
 	return true;
 }

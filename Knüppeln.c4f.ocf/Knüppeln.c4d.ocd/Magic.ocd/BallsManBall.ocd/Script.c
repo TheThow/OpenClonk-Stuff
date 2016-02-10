@@ -10,8 +10,14 @@ local Speed = 55;
 
 local Size = 15;
 
+local DischargeSize = 40;
+local ChargeDur = 12;
+local DischargeDamage = 40;
+
 local ShieldDur = 120;
 local ShieldAmount = 15;
+
+local BlockDur = 10;
 
 local pR = 50;
 local pG = 50;
@@ -48,13 +54,14 @@ func ClearEffects()
 	RemoveEffect("FollowMaster", this);
 	RemoveEffect("MoveTo", this);
 	RemoveEffect("HomeCall", this);
+	RemoveEffect("Idle", this);
 }
 
 func AttackOrder(x, y)
 {
 	ClearEffects();
 
-	Sound("ball_order", false, 20);
+	Sound("Ball::ball_order", false, 20);
 		
 	var eff = AddEffect("MoveTo", this, 1, 1, this);
 	eff.x = master->GetX() + x;
@@ -64,11 +71,25 @@ func AttackOrder(x, y)
 	SetVelocity(angle, Speed, 10);
 }
 
+func Discharge()
+{
+	ClearEffects();
+	SetXDir(0);
+	SetYDir(0);
+	
+	ox=GetX();
+	oy=GetY();
+	
+	AddEffect("Discharge", this, 1, 1 ,this);
+	
+	Sound("Ball::ball_start_discharge", false, 20);
+}
+
 func HomeCall()
 {
 	ClearEffects();
 	
-	Sound("ball_call", false, 20);
+	Sound("Ball::ball_call", false, 20);
 	
 	var eff = AddEffect("HomeCall", this, 1, 1, this);
 	eff.x = master->GetX();
@@ -78,12 +99,86 @@ func HomeCall()
 	SetVelocity(angle, Speed, 10);
 }
 
+func FxDischargeStart(object target, proplist effect, int temporary)
+{
+	for(var i = 0; i < 360; i+= 10)
+	{
+		var props = {
+			Size = PV_Linear(4, 0),
+			Stretch = 10000,
+			Rotation = i + 180,
+		    R = pR,
+		    G = pG,
+		    B = pB,
+			BlitMode = GFX_BLIT_Additive,
+		};
+		
+		var x = Sin(i, DischargeSize + RandomX(-2, 2));
+		var y = -Cos(i, DischargeSize + RandomX(-2, 2));
+		
+		var rnd = RandomX(4,20);
+		var xdir = Sin(i + 180, rnd);
+		var ydir = -Cos(i + 180, rnd);
+		
+		CreateParticle("Flash", x, y, xdir, ydir, 25, props, 1);
+	}
+	
+}
+
+func FxDischargeTimer(object target, proplist effect, int time)
+{
+	if(time >= ChargeDur)
+		return -1;
+}
+
+func FxDischargeStop(object target, proplist effect, int reason, bool temporary)
+{
+	if(temporary)
+		return;
+		
+	Sound("Ball::ball_discharge", false, 70);
+
+	var props = {
+			Size = PV_Linear(20, 200),
+		    R = pR,
+		    G = pG,
+		    B = pB,
+		    Alpha = PV_Linear(120, 0),
+			BlitMode = GFX_BLIT_Additive,
+		};
+		
+	var flashparticle =
+	{
+		Alpha = 100,
+		Size = DischargeSize * 2,
+		R = pR,
+		G = pG,
+		B = pB,
+		Rotation = PV_Random(0,360),
+		BlitMode = GFX_BLIT_Additive,
+	};
+	CreateParticle("StarSpark", 0, 0, 0, 0, 10, flashparticle, 5);
+	
+	for(var o in FindObjects(Find_Distance(Size), Find_Func("CanBeHit")))
+	{
+		var angle = Angle(GetX(), GetY(), o->GetX(), o->GetY());
+		
+		o->Fling(Sin(angle, 8), -Cos(angle, 8));
+		WeaponDamage(o, DischargeDamage);
+	}
+	
+	CreateParticle("Shockwave", 0, 0, 0, 0, 10, props, 1);
+	Sound("Ball::ball_after_discharge", false, 30);
+	
+	Idle();
+}
+
 func FxFollowMasterTimer(object target, proplist effect, int time)
 {
 	if(!master)
 	{
-		RemoveObject();
-		return;
+		KillBall();
+		return -1;
 	}
 
 	MoveToPos(master->GetX(), master->GetY() - 15);
@@ -107,20 +202,17 @@ func FxHomeCallTimer(object target, proplist fx, int time)
 {
 	if(!master)
 	{
-		RemoveObject();
+		KillBall();
+		return -1;
+	}	
+	
+	if(GetEffect("Blocked", this))
+	{
+		ox=GetX();
+		oy=GetY();
 		return;
 	}
-
-	fx.x = master->GetX();
-	fx.y = master->GetY();
-	var angle = Angle(GetX(), GetY(), fx.x, fx.y, 10);
-	var txdir = Sin(angle, Speed + 30, 10);
-	var tydir = -Cos(angle, Speed + 30, 10);
-	SetXDir((GetXDir() + (txdir - GetXDir())/2));
-	SetYDir((GetYDir() + (tydir - GetYDir())/2));
-	
-	CheckForEnemies();
-	
+		
 	var trailparticles =
 	{
 		Size = PV_Linear(5,0),
@@ -132,7 +224,6 @@ func FxHomeCallTimer(object target, proplist fx, int time)
 	};
 	
 	DrawParticleLine("Flash", 0, 0, ox-GetX(), oy-GetY(), 1, 0, 0, 15, trailparticles);
-	
 	
 	var trailparticles2 =
 	{
@@ -151,6 +242,16 @@ func FxHomeCallTimer(object target, proplist fx, int time)
 			CreateParticle("Flash", Sin(i, 3), -Cos(i, 5), 0, 0, 10, trailparticles2, 2);
 		}
 	}
+
+	fx.x = master->GetX();
+	fx.y = master->GetY();
+	var angle = Angle(GetX(), GetY(), fx.x, fx.y, 10);
+	var txdir = Sin(angle, Speed + 30, 10);
+	var tydir = -Cos(angle, Speed + 30, 10);
+	SetXDir((GetXDir() + (txdir - GetXDir())/2));
+	SetYDir((GetYDir() + (tydir - GetYDir())/2));
+	
+	CheckForEnemies();
 	
 	ox=GetX();
 	oy=GetY();
@@ -159,7 +260,7 @@ func FxHomeCallTimer(object target, proplist fx, int time)
 	if(dst < 8)
 	{
 		AddShield(master);
-		Sound("ball_shield", false, 20);
+		Sound("Ball::ball_shield", false, 20);
 		
 		var particles =
 		{
@@ -198,10 +299,14 @@ func FxMoveToTimer(object target, proplist fx, int time)
 		RemoveObject();
 		return;
 	}
-
-	MoveToPos(fx.x, fx.y);
-	CheckForEnemies();
-	
+		
+	if(GetEffect("Blocked", this))
+	{
+		ox=GetX();
+		oy=GetY();
+		return;
+	}
+		
 	var trailparticles =
 	{
 		Size = PV_Linear(5,0),
@@ -232,6 +337,11 @@ func FxMoveToTimer(object target, proplist fx, int time)
 			CreateParticle("Flash", Sin(i, 3), -Cos(i, 5), 0, 0, 10, trailparticles2, 2);
 		}
 	}
+
+
+	MoveToPos(fx.x, fx.y);
+	CheckForEnemies();
+
 	
 	ox=GetX();
 	oy=GetY();
@@ -241,7 +351,22 @@ func FxMoveToTimer(object target, proplist fx, int time)
 	{
 		SetXDir(0);
 		SetYDir(0);
+		Idle();
 		return -1;
+	}
+}
+
+func Idle()
+{
+	AddEffect("Idle", this, 1, 1, this);
+}
+
+func FxIdleTimer()
+{
+	if(!master)
+	{
+		RemoveObject();
+		return;
 	}
 }
 
@@ -262,7 +387,7 @@ func CheckForEnemies()
 		if(o->GetOwner() == GetOwner() || GetEffect("BallHitCD", o))
 			continue;
 			
-		o->Fling();
+		o->Fling(0, -2);
 		AddEffect("BallHitCD", o, 1, 15);
 		
 		var trailparticles =
@@ -279,17 +404,53 @@ func CheckForEnemies()
 		CreateParticle("Lightning", o->GetX() - GetX(), o->GetY() - GetY(), 0, 0, 10, trailparticles, 5);
 		
 		WeaponDamage(o, SpellDamage);
-		
+		Sound("Ball::ball_hit", false, 50);
 	}
 }
 
 func IsReflectable(object clonk)
 {
-	if(clonk == master)
+	if(clonk == master || GetEffect("Blocked", this) || GetEffect("FollowMaster", this))
 		return 0;
 		
 	return 1;
 }
+
+func Blocked()
+{
+	AddEffect("Blocked", this, 1, 1, this);
+	Sound("Ball::ball_blocked", false, 20);
+}
+
+func FxBlockedTimer(object target, proplist fx, int time)
+{
+	if(time >= BlockDur)
+		return -1;
+	
+	var lightning =
+	{
+		Prototype = Particles_ElectroSpark2(),
+		Size = PV_Linear(PV_Random(3,6),0),
+		BlitMode = GFX_BLIT_Additive,
+		Rotation = PV_Random(0,360),
+		R = 100,
+		G = 100,
+		B = pB,
+		Attach = ATTACH_Front,
+	};
+	
+	target->CreateParticle("Lightning", RandomX(-6, 6), RandomX(-6, 6), 0, 0, 20, lightning, 3);
+}
+
+func FxBlockedStop(object target, proplist effect, int reason, bool temporary)
+{
+	if(temporary)
+		return;
+	
+	Sound("Ball::ball_resume", false, 20);
+}
+
+
 
 func AddShield(object clonk)
 {
@@ -353,6 +514,11 @@ func FxBallShieldStop(object target, proplist effect, int reason, bool temporary
 		return;
 }
 
+func KillBall()
+{
+	Sound("Ball::ball_die", false, 50);
+	RemoveObject();
+}
 
 local ActMap = {
 
