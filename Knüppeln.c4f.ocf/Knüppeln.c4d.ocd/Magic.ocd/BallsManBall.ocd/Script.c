@@ -6,27 +6,30 @@
 */
 
 local SpellDamage = 15;
-local Speed = 55;
+local Speed = 50;
 
 local Size = 15;
 
-local DischargeSize = 40;
-local ChargeDur = 12;
+local DischargeSize = 35;
+local ChargeDur = 10;
 local DischargeDamage = 40;
 
 local ShieldDur = 120;
 local ShieldAmount = 15;
 
-local BlockDur = 10;
+local BlockDur = 15;
 
 local pR = 50;
 local pG = 50;
 local pB = 255;
 
+local BorderBound = C4D_Border_Sides | C4D_Border_Top | C4D_Border_Bottom;
+
 local master;
 
 local ox;
 local oy;
+local rangedummy;
 
 func Initialize()
 {
@@ -36,6 +39,23 @@ func Initialize()
 	
 	ox=GetX();
 	oy=GetY();
+	
+	rangedummy = CreateObject(Dummy, 0, 0, GetOwner());
+	rangedummy.Visibility = VIS_Owner;
+	rangedummy->SetAction("HangOnto", this);
+		var props =
+		{
+			R = 255,
+			G = 0,
+			B = 0,
+			Alpha = 40,
+			Size = 70,
+			BlitMode = GFX_BLIT_Additive,
+			Rotation = PV_Step(10, 0, 1),
+			Attach = ATTACH_Back | ATTACH_MoveRelative
+			
+		};
+	rangedummy->CreateParticle("Shockwave", 0, 0, 0, 0, 0, props, 1);
 }
 
 func SetMaster(object clonk)
@@ -159,7 +179,7 @@ func FxDischargeStop(object target, proplist effect, int reason, bool temporary)
 	};
 	CreateParticle("StarSpark", 0, 0, 0, 0, 10, flashparticle, 5);
 	
-	for(var o in FindObjects(Find_Distance(Size), Find_Func("CanBeHit")))
+	for(var o in FindObjects(Find_Distance(DischargeSize), Find_Func("CanBeHit")))
 	{
 		var angle = Angle(GetX(), GetY(), o->GetX(), o->GetY());
 		
@@ -296,7 +316,7 @@ func FxMoveToTimer(object target, proplist fx, int time)
 {
 	if(!master)
 	{
-		RemoveObject();
+		KillBall();
 		return;
 	}
 		
@@ -340,7 +360,7 @@ func FxMoveToTimer(object target, proplist fx, int time)
 
 
 	MoveToPos(fx.x, fx.y);
-	CheckForEnemies();
+	
 
 	
 	ox=GetX();
@@ -351,7 +371,22 @@ func FxMoveToTimer(object target, proplist fx, int time)
 	{
 		SetXDir(0);
 		SetYDir(0);
+		CheckForEnemies();
 		Idle();
+		
+		
+		var flashparticle =
+		{
+			Alpha = 100,
+			Size = Size * 2,
+			R = pR,
+			G = pG,
+			B = pB,
+			Rotation = PV_Random(0,360),
+			BlitMode = GFX_BLIT_Additive,
+		};
+		CreateParticle("StarSpark", 0, 0, 0, 0, 10, flashparticle, 5);
+		
 		return -1;
 	}
 }
@@ -365,7 +400,7 @@ func FxIdleTimer()
 {
 	if(!master)
 	{
-		RemoveObject();
+		KillBall();
 		return;
 	}
 }
@@ -517,6 +552,8 @@ func FxBallShieldStop(object target, proplist effect, int reason, bool temporary
 func KillBall()
 {
 	Sound("Ball::ball_die", false, 50);
+	if(rangedummy)
+		rangedummy->RemoveObject();
 	RemoveObject();
 }
 

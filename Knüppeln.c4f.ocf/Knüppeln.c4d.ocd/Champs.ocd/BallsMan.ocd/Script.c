@@ -14,12 +14,19 @@ local Special1Spell = BallAttackOrder;
 local Special2Spell = BallHomeCall;
 local Special3Spell = BallDischarge;
 
+local Special1Cooldown = 12;
 local Special2Cooldown = 40;
 
 func Special1(object clonk, int x, int y, bool released, bool mouseclick, bool abletocast, bool cooldown)
 {
 	if(!released && !mouseclick && abletocast && !cooldown)
 	{
+		if(Distance(clonk->GetX() + x, clonk->GetY() + y, clonk.Ball->GetX(), clonk.Ball->GetY()) < 35)
+		{
+			Sound("UI::Error", 0, 50, clonk->GetOwner());
+			return 0;
+		}
+	
 		var param = {
 			ball = clonk.Ball
 		};
