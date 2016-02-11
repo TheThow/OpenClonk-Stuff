@@ -368,7 +368,7 @@ func Block()
 		var tangle = objectangle;
         o->SetSpeed(Sin(tangle, speed), -Cos(tangle, speed));
         
-        o->~Blocked();
+        o->~Blocked(this);
 	}
 }
 

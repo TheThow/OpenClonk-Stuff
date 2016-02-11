@@ -5,8 +5,8 @@
 	@author 
 */
 
-local SpellDamage = 15;
-local Speed = 50;
+local SpellDamage = 20;
+local Speed = 60;
 
 local Size = 15;
 
@@ -55,7 +55,7 @@ func Initialize()
 			Attach = ATTACH_Back | ATTACH_MoveRelative
 			
 		};
-	rangedummy->CreateParticle("Shockwave", 0, 0, 0, 0, 0, props, 1);
+	rangedummy->CreateParticle("Shockwave2", 0, 0, 0, 0, 0, props, 1);
 }
 
 func SetMaster(object clonk)
@@ -157,15 +157,6 @@ func FxDischargeStop(object target, proplist effect, int reason, bool temporary)
 		return;
 		
 	Sound("Ball::ball_discharge", false, 70);
-
-	var props = {
-			Size = PV_Linear(20, 200),
-		    R = pR,
-		    G = pG,
-		    B = pB,
-		    Alpha = PV_Linear(120, 0),
-			BlitMode = GFX_BLIT_Additive,
-		};
 		
 	var flashparticle =
 	{
@@ -187,7 +178,37 @@ func FxDischargeStop(object target, proplist effect, int reason, bool temporary)
 		WeaponDamage(o, DischargeDamage);
 	}
 	
-	CreateParticle("Shockwave", 0, 0, 0, 0, 10, props, 1);
+	for(var r = 5; r < DischargeSize; r += 5)
+	{
+		for(var i = 0; i < 360; i+= 1)
+		{
+			var props = {
+				Size = PV_Linear(4, 0),
+				Rotation = PV_Random(0, 360),
+			    R = pR,
+			    G = pG,
+			    B = pB,
+			    Alpha = PV_Linear(255,0),
+				BlitMode = GFX_BLIT_Additive,
+			};
+			
+			var x = Sin(i, r + RandomX(-2, 2));
+			var y = -Cos(i, r + RandomX(-2, 2));
+			
+			
+			CreateParticle("StarSpark", x, y, 0, 0, 25, props, 2);
+		}
+	}
+	
+	var props = {
+		Size = PV_Linear(20, 200),
+	    R = pR,
+	    G = pG,
+	    B = pB,
+	    Alpha = PV_Linear(180, 0),
+		BlitMode = GFX_BLIT_Additive,
+	};
+	CreateParticle("Shockwave2", 0, 0, 0, 0, 10, props, 1);
 	Sound("Ball::ball_after_discharge", false, 30);
 	
 	Idle();
@@ -358,10 +379,7 @@ func FxMoveToTimer(object target, proplist fx, int time)
 		}
 	}
 
-
 	MoveToPos(fx.x, fx.y);
-	
-
 	
 	ox=GetX();
 	oy=GetY();
@@ -393,6 +411,7 @@ func FxMoveToTimer(object target, proplist fx, int time)
 
 func Idle()
 {
+	ClearEffects();
 	AddEffect("Idle", this, 1, 1, this);
 }
 
@@ -445,16 +464,22 @@ func CheckForEnemies()
 
 func IsReflectable(object clonk)
 {
-	if(clonk == master || GetEffect("Blocked", this) || GetEffect("FollowMaster", this))
+	if(clonk == master || GetEffect("Blocked", this) || GetEffect("FollowMaster", this) || GetEffect("Discharge", this))
 		return 0;
 		
 	return 1;
 }
 
-func Blocked()
+func Blocked(object clonk)
 {
 	AddEffect("Blocked", this, 1, 1, this);
 	Sound("Ball::ball_blocked", false, 20);
+	
+	var objectangle = Angle(clonk->GetX(), clonk->GetY(), GetX(), GetY());
+	
+	//var tangle = 2* ( (objectangle + 90)%360 - entryangle) + entryangle;
+	SetVelocity(objectangle, Speed);
+	Idle();
 }
 
 func FxBlockedTimer(object target, proplist fx, int time)
@@ -481,6 +506,9 @@ func FxBlockedStop(object target, proplist effect, int reason, bool temporary)
 {
 	if(temporary)
 		return;
+		
+	SetXDir(0);
+	SetYDir(0);
 	
 	Sound("Ball::ball_resume", false, 20);
 }

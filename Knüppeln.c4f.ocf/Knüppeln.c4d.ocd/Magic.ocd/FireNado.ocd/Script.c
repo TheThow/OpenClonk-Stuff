@@ -8,7 +8,7 @@
 local Name = "$Name$";
 local Description = "$Description$";
 
-local ManaCost = 35;
+local ManaCost = 30;
 
 local size_x = 25;
 local size_y = 30;
@@ -18,7 +18,7 @@ local a2 = 0;
 
 local Speed = 35;
 local Durr = 70;
-local Charge_Dur = 20;
+local Charge_Dur = 15;
 
 func Initialize()
 {

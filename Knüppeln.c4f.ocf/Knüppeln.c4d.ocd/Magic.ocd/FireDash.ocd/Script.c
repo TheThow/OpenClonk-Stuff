@@ -8,7 +8,7 @@
 local Name = "$Name$";
 local Description = "$Description$";
 
-local ManaCost = 50;
+local ManaCost = 45;
 local SpellRange = 180;
 
 local Size1 = 25;

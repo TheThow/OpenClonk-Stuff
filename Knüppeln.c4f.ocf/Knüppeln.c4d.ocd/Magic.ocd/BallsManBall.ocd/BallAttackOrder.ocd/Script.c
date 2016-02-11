@@ -5,7 +5,7 @@
 	@author 
 */
 
-local ManaCost = 12;
+local ManaCost = 8;
 
 func Launch(object clonk, int x, int y, proplist params)
 {

@@ -12,6 +12,7 @@ func Initialize()
 {
 		champs = Clonk.Champ_Def;
 		champs = ShuffleArray(Clonk.Champ_Def);
+		plr_index = CreateArray(GetPlayerCount());
 }
 
 func GetChamp(int plr)

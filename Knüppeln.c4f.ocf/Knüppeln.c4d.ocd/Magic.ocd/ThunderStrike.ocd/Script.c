@@ -5,7 +5,7 @@
 	@author 
 */
 
-local ManaCost = 60;
+local ManaCost = 50;
 local SpellDamage = 50;
 local SpellRange = 275;
 
