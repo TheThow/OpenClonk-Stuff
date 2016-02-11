@@ -17,7 +17,7 @@ local DischargeDamage = 40;
 local ShieldDur = 120;
 local ShieldAmount = 15;
 
-local BlockDur = 15;
+local BlockDur = 40;
 
 local pR = 50;
 local pG = 50;
@@ -287,8 +287,8 @@ func FxHomeCallTimer(object target, proplist fx, int time)
 	fx.x = master->GetX();
 	fx.y = master->GetY();
 	var angle = Angle(GetX(), GetY(), fx.x, fx.y, 10);
-	var txdir = Sin(angle, Speed + 30, 10);
-	var tydir = -Cos(angle, Speed + 30, 10);
+	var txdir = Sin(angle, Speed + 10, 10);
+	var tydir = -Cos(angle, Speed + 10, 10);
 	SetXDir((GetXDir() + (txdir - GetXDir())/2));
 	SetYDir((GetYDir() + (tydir - GetYDir())/2));
 	
@@ -412,6 +412,8 @@ func FxMoveToTimer(object target, proplist fx, int time)
 func Idle()
 {
 	ClearEffects();
+	ox=GetX();
+	oy=GetY();
 	AddEffect("Idle", this, 1, 1, this);
 }
 
@@ -509,6 +511,9 @@ func FxBlockedStop(object target, proplist effect, int reason, bool temporary)
 		
 	SetXDir(0);
 	SetYDir(0);
+	
+	ox=GetX();
+	oy=GetY();
 	
 	Sound("Ball::ball_resume", false, 20);
 }
