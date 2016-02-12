@@ -68,10 +68,9 @@ func ChargeStop(proplist params)
 	var sword = clonk->FindContents(Sword);
 	
 	var length = Sword_Standard_StrikingLength;
-	var rand = Random(2)+1;
 	var arm = "R";
-	var animation = Format("SwordSlash%d.%s", rand, arm);
-	var animation_sword = Format("Strike%d", rand);
+	var animation = Format("SwordSlash%d.%s", 1, arm);
+	var animation_sword = Format("Strike%d", 1);
 	
 	sword->PlayWeaponAnimation(clonk, animation, 10, Anim_Linear(0, 0, clonk->GetAnimationLength(animation), length, ANIM_Remove), Anim_Const(1000));
 	sword->PlayAnimation(animation_sword, 10, Anim_Linear(0, 0, GetAnimationLength(animation_sword), length, ANIM_Remove), Anim_Const(1000));

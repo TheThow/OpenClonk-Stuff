@@ -17,11 +17,16 @@ local Special3Spell = BallDischarge;
 local Special1Cooldown = 12;
 local Special2Cooldown = 40;
 
+local MaxRange = 250;
+
 func Special1(object clonk, int x, int y, bool released, bool mouseclick, bool abletocast, bool cooldown)
 {
 	if(!released && !mouseclick && abletocast && !cooldown)
 	{
-		if(Distance(clonk->GetX() + x, clonk->GetY() + y, clonk.Ball->GetX(), clonk.Ball->GetY()) < 35)
+		var balldist = Distance(clonk->GetX() + x, clonk->GetY() + y, clonk.Ball->GetX(), clonk.Ball->GetY());
+		var clonkdist = Distance(0, 0, x, y);
+		
+		if(balldist < 35 || clonkdist > MaxRange)
 		{
 			Sound("UI::Error", 0, 50, clonk->GetOwner());
 			return 0;
@@ -88,7 +93,7 @@ func JumpEffect(object clonk, dir)
 		to = 310;
 	}
 
-	Sound("electro_shot", false, 30);
+	Sound("Ball::ball_jump", false, 30);
 
 	for(var i = from; i < to; i+=5)
 	{
@@ -96,20 +101,18 @@ func JumpEffect(object clonk, dir)
 		var x = clonk->GetX() + Cos(i, r);
 		var y = clonk->GetY() + Sin(i, r);
 		
-		var angle = Angle(0,0,Cos(i, r),Sin(i, r));
-		
 		var trailparticles =
 		{
 			Prototype = Particles_ElectroSpark2(),
 			Size = PV_Linear(10,0),
-			Rotation = angle,
-			R = 150,
-			G = 215,
+			Rotation = PV_Random(0, 360),
+			R = 50,
+			G = 50,
 			B = 255,
 			OnCollision = PC_Bounce(),
 		};
 	
-		CreateParticle("Lightning", x, y, Cos(i, r), Sin(i, r), 10, trailparticles);
+		CreateParticle("StarSpark", x, y, Cos(i, r), Sin(i, r), 10, trailparticles);
 	}
 }
 
@@ -121,19 +124,17 @@ func BlockEffect(object clonk, range)
 		var x = clonk->GetX() + Cos(i, r);
 		var y = clonk->GetY() + Sin(i, r);
 		
-		var angle = Angle(0,0,Cos(i, r),Sin(i, r)) + 90;
-		
 		var trailparticles =
 		{
 			Prototype = Particles_ElectroSpark2(),
 			Size = PV_Linear(15,0),
-			Rotation = angle,
-			R = 150,
-			G = 215,
+			Rotation = PV_Random(0, 360),
+			R = 50,
+			G = 50,
 			B = 255,
 		};
 	
-		CreateParticle("Lightning", x, y, 0, 0, 10, trailparticles);
+		CreateParticle("StarSpark", x, y, 0, 0, 10, trailparticles);
 	}
 	
 }
@@ -165,5 +166,29 @@ func InitChamp(clonk)
 	var ball = clonk->CreateObject(BallsManBall, 0, -15, clonk->GetOwner());
 	clonk.Ball = ball;
 	ball->SetMaster(clonk);
+	
+	var props =
+	{
+		R = 255,
+		G = 255,
+		B = 255,
+		Alpha = 20,
+		Size = 2,
+		BlitMode = GFX_BLIT_Additive,
+		Attach = ATTACH_Back | ATTACH_MoveRelative
+		
+	};
+	clonk->ShowSpellRange(clonk, nil, nil);
+	clonk->CancelShowSpellRange();
+	
+	for(var i = 0; i < 360; i++)
+	{
+		var x = Sin(i, MaxRange, 1);
+		var y = -Cos(i, MaxRange, 1);
+		clonk.RangeDummy->CreateParticle("Flash", x, y, 0, 0, 0, props);
+	}
+	
+	
+	
 }
 

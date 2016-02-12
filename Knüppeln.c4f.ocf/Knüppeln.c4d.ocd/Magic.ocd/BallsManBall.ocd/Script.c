@@ -12,7 +12,7 @@ local Size = 12;
 
 local DischargeSize = 35;
 local ChargeDur = 10;
-local DischargeDamage = 40;
+local DischargeDamage = 35;
 
 local ShieldDur = 120;
 local ShieldAmount = 15;
@@ -476,7 +476,7 @@ func Blocked(object clonk)
 {
 	AddEffect("Blocked", this, 1, 1, this);
 	Sound("Ball::ball_blocked", false, 20);
-	
+	SetRDir(20);
 	var objectangle = Angle(clonk->GetX(), clonk->GetY(), GetX(), GetY());
 	
 	//var tangle = 2* ( (objectangle + 90)%360 - entryangle) + entryangle;
@@ -514,6 +514,7 @@ func FxBlockedStop(object target, proplist effect, int reason, bool temporary)
 	
 	ox=GetX();
 	oy=GetY();
+	SetRDir(10);
 	
 	Sound("Ball::ball_resume", false, 20);
 }

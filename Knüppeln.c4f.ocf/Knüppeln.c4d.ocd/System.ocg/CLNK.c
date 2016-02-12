@@ -13,7 +13,7 @@ local BLOCK_CD = 35;
 local BLOCK_DUR = 5;
 local BLOCK_RANGE = 25;
 
-local JUMP_MANA = 8;
+local JUMP_MANA = 9;
 local MaxContentsCount = 1;
 
 local healthregen_base = 100;
@@ -133,7 +133,7 @@ public func ObjectControl(int plr, int ctrl, int x, int y, int strength, bool re
   			if(GetMagicEnergy() >= JUMP_MANA)
   			{
   				RemoveEffect("IntControlJumpDouble", this);
-	 			SetYDir(-this.JumpSpeed *5/6 * GetCon(), 100 * 100);
+	 			SetYDir(-this.JumpSpeed * GetCon(), 100 * 100);
 	 			JumpEffect("Up");
 	 			DoMagicEnergy(-JUMP_MANA);
 	 		}
@@ -511,6 +511,9 @@ func CanCast()
 
 func ShowSpellRange(object clonk, id spell, proplist props)
 {
+	if(RangeDummy && RangeDummy->Contained())
+		RangeDummy->RemoveObject();
+
 	if(!RangeDummy)
 	{
 		RangeDummy = CreateObject(Dummy, 0, 0, GetOwner());
