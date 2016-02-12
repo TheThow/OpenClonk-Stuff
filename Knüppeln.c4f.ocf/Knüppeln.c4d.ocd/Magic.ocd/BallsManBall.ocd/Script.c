@@ -8,7 +8,7 @@
 local SpellDamage = 20;
 local Speed = 60;
 
-local Size = 15;
+local Size = 12;
 
 local DischargeSize = 35;
 local ChargeDur = 10;

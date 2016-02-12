@@ -12,6 +12,29 @@ func Initialize()
 	CreateObject(Rule_KillLogs);
 	CheckScenarioParameters();
 	SetSkyParallax(0, 15, 15, nil, nil, 1, 1);
+	SetSkyAdjust(RGB(20,20,20));
+	InitClouds();
+	AddEffect("Raining", nil, 1, 1);
+}
+
+global func FxRainingTimer()
+{
+	CastPXS("Water", 3, 5, Random(LandscapeWidth()), 0);
+}
+
+func InitClouds()
+{
+	var cnt = 15;
+	for(var i = 0; i < cnt; i++)
+	{
+		var cloud = CreateObject(DecoCloud, (LandscapeWidth() + 400)/cnt * i - 200, RandomX(-100, 10), -1);
+		cloud->SetClrModulation(RGBa(30, 30, 30, 170));
+		cloud->SetXDir(1);
+		cloud->SetMinY(-100);
+		cloud->SetMaxY(10);
+		if(!Random(2))
+			cloud->SetR(Random(360));
+	}
 }
 
 func InitializePlayer(int plr, int iX, int iY, object pBase, int iTeam)

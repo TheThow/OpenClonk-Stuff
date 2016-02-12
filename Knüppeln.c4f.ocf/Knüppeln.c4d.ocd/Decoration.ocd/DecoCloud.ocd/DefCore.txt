@@ -8,3 +8,4 @@ Offset=-256,-175
 Picture=0,0,220,110
 Oversize=1
 StretchGrowth=1
+Rotate=1

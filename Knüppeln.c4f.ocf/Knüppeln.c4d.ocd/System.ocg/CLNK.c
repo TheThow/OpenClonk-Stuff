@@ -19,8 +19,6 @@ local MaxContentsCount = 1;
 local healthregen_base = 100;
 local HEALTHREGEN_MAX = 20;
 
-local SPECIAL1_MANA = 25;
-
 local choosemenu_id;
 
 local ChampType = Man;
@@ -33,7 +31,11 @@ func Construction()
 {
 	special_active =  [0, 0, 0, 0];
 	
-	AddEffect("ManaRegen", this, 20, 5, this, Clonk);
+	var interval = 5;
+	if(SCENPAR_IncreasedManaReg == 2)
+		interval = 3;
+	
+	AddEffect("ManaRegen", this, 20, interval, this, Clonk);
 	AddEffect("AutoHeal", this, 20, 40*3, this, Clonk);
 	RangeDummy = CreateObject(Dummy, 0, 0, GetOwner());
 	RangeDummy.Visibility = VIS_Owner;
@@ -131,7 +133,7 @@ public func ObjectControl(int plr, int ctrl, int x, int y, int strength, bool re
   			if(GetMagicEnergy() >= JUMP_MANA)
   			{
   				RemoveEffect("IntControlJumpDouble", this);
-	 			SetYDir(-this.JumpSpeed*5/6 * GetCon(), 100 * 100);
+	 			SetYDir(-this.JumpSpeed *5/6 * GetCon(), 100 * 100);
 	 			JumpEffect("Up");
 	 			DoMagicEnergy(-JUMP_MANA);
 	 		}

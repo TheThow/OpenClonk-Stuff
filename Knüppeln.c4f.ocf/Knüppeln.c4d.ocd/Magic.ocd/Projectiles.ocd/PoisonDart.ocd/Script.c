@@ -74,7 +74,7 @@ func HitObject(obj)
 {
 	if(obj->~CanBeHit() == false)
 		return;
-	AddEffect("PoisonDart", obj, 1, 120, nil, GetID());
+	AddEffect("PoisonDart", obj, 1, 100, nil, GetID());
 	obj->DoEnergy(-SpellDamage);
 	Sound("Hits::ProjectileHitLiving?", false, 50);
 	HitEffect();
@@ -104,7 +104,7 @@ func FxPoisonDartStart(object target, proplist effect, int temporary)
 			var x = Sin(i, 120 + (c * 100));
 			var y = -Cos(i, 120 + (c * 100));
 			
-			dummy->CreateParticle("Flash", x, y, 0, 0, 120, flashparticle, 1);
+			dummy->CreateParticle("Flash", x, y, 0, 0, 100, flashparticle, 1);
 		}
 	}
 	effect.dummy = dummy;

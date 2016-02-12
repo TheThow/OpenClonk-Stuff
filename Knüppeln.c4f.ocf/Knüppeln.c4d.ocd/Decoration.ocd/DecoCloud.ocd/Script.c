@@ -6,6 +6,8 @@
 */
 
 local Plane = 901;
+local maxY;
+local minY;
 
 func Initialize()
 {
@@ -14,6 +16,18 @@ func Initialize()
 	SetAction("Float");
 	SetPhase(RandomX(1,16));
 	AddEffect("MoveCloud", this, 100, 5, this);
+	minY = 0;
+	maxY = LandscapeHeight();
+}
+
+func SetMaxY(int y)
+{
+	maxY = y;
+}
+
+func SetMinY(int y)
+{
+	minY = y;
 }
 
 private func FxMoveCloudTimer()
@@ -34,7 +48,7 @@ private func FxMoveCloudTimer()
 	*/
 	// Loop clouds around the map.
 	
-	var y = Random(LandscapeHeight());
+	var y = RandomX(minY, maxY);
 	
 	if (GetX() >= LandscapeWidth() + wdt/2 - 60) 
 	{

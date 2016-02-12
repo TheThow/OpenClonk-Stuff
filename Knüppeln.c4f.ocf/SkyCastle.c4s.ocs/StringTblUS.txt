@@ -3,3 +3,9 @@ ChampSelectionDesc=You can only choose between two random champions each time yo
 ChampSelection1=Normal
 ChampSelection2=Random
 ChampSelection3=Rotation
+
+RelaunchName=Relaunch Count
+RelaunchDesc=How many times a player will relaunch.
+
+ManaRegName=Increased Mana Regeneration
+ManaRegDesc=Guess what
