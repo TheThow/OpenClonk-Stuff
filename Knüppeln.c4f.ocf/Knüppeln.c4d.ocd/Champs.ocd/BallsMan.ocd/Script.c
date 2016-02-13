@@ -178,8 +178,8 @@ func InitChamp(clonk)
 		Attach = ATTACH_Back | ATTACH_MoveRelative
 		
 	};
-	clonk->ShowSpellRange(clonk, nil, nil);
-	clonk->CancelShowSpellRange();
+	//clonk->ShowSpellRange(clonk, nil, nil);
+	//clonk->CancelShowSpellRange();
 	
 	for(var i = 0; i < 360; i++)
 	{

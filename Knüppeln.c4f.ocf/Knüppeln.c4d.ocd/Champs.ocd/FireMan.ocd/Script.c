@@ -38,61 +38,19 @@ func Special2(object clonk, int x, int y, bool released, bool mouseclick, bool a
 
 func Special3(object clonk, int x, int y, bool released, bool mouseclick, bool abletocast, bool cooldown)
 {
-	if(!released && !mouseclick)
+	var props =
 	{
-		var props =
-		{
-			R = 255,
-			G = 215,
-			B = 0,
-			Alpha = 40,
-			Size = FireDash.SpellRange*2,
-			BlitMode = GFX_BLIT_Additive,
-			Rotation = PV_Step(10, 0, 1),
-			Attach = ATTACH_Back | ATTACH_MoveRelative
-			
-		};
-		clonk->ShowSpellRange(clonk, Special3Spell, props);
-	}
-	
-	if(released && !mouseclick)
-	{
-		clonk->CancelShowSpellRange();
-	}
-
-	if(!released && mouseclick && abletocast)
-	{
-		var solidcheck = false;
-		var cx = clonk->GetX();
-		var cy = clonk->GetY();
+		R = 255,
+		G = 215,
+		B = 0,
+		Alpha = 40,
+		Size = FireDash.SpellRange*2,
+		BlitMode = GFX_BLIT_Additive,
+		Rotation = PV_Step(10, 0, 1),
+		Attach = ATTACH_Back | ATTACH_MoveRelative
 		
-		for(var i = 0; i < 360; i++)
-		{
-			if(GBackSolid(cx + x + Sin(i, 5), cy + y + Cos(i, 5)))
-				solidcheck = true;
-		}
-	
-		if (solidcheck)
-		{
-			Sound("UI::Error", false, 50, clonk->GetOwner());
-			return 0;
-		}
-		
-		if (Sqrt(x**2 + y**2) > Special3Spell.SpellRange)
-		{
-			var a = Angle(0,0, x, y, 10);
-			var newx = Sin(a, Special3Spell.SpellRange, 10);
-			var newy = -Cos(a, Special3Spell.SpellRange, 10);
-			clonk->LaunchSpell(Special3Spell, newx, newy, newx, newy);
-			
-			return 1;
-		}
-		
-		clonk->LaunchSpell(Special3Spell, x, y, x, y);
-		return 1;
-	}
-	
-	return 0;
+	};
+	return CastSpellWithSpellRange(clonk, x, y, released, mouseclick, abletocast, cooldown, props, Special3Spell);
 }
 
 func JumpEffect(object clonk, dir)
@@ -204,4 +162,19 @@ func FxFireHitTimer(object target, proplist effect, int time)
 global func AddFireHitEffect()
 {
 	this->AddEffect("FireHit", this, 20, 1, nil, FireMan);
+}
+
+func CastSpellWithSpellRangeCondition(object clonk, int x, int y, bool released, bool mouseclick, bool abletocast, bool cooldown, proplist props, id spell)
+{
+		var solidcheck = true;
+		var cx = clonk->GetX();
+		var cy = clonk->GetY();
+		
+		for(var i = 0; i < 360; i++)
+		{
+			if(GBackSolid(cx + x + Sin(i, 5), cy + y + Cos(i, 5)))
+				solidcheck = false;
+		}
+		
+		return solidcheck;
 }

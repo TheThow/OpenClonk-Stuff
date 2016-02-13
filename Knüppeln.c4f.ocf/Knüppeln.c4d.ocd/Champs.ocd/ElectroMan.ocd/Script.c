@@ -36,46 +36,19 @@ func Special2(object clonk, int x, int y, bool released, bool mouseclick, bool a
 
 func Special3(object clonk, int x, int y, bool released, bool mouseclick, bool abletocast, bool cooldown)
 {
-	if(!released && !mouseclick)
+	var props =
 	{
-		var props =
-		{
-			R = 150,
-			G = 215,
-			B = 255,
-			Alpha = 40,
-			Size = Special3Spell.SpellRange*2,
-			BlitMode = GFX_BLIT_Additive,
-			Rotation = PV_Step(10, 0, 1),
-			Attach = ATTACH_Back | ATTACH_MoveRelative
-			
-		};
-		clonk->ShowSpellRange(clonk, Special3Spell, props);
-	}
-	
-	if(released && !mouseclick)
-	{
-		clonk->CancelShowSpellRange();
-	}
-
-	if(!released && mouseclick && abletocast)
-	{
-		if (Sqrt(x**2 + y**2) > Special3Spell.SpellRange)
-		{
-			var a = Angle(0,0, x, y, 10);
-			var newx = Sin(a, Special3Spell.SpellRange, 10);
-			var newy = -Cos(a, Special3Spell.SpellRange, 10);
-			clonk->LaunchSpell(Special3Spell, newx, newy, newx, newy);
-			
-			return 1;
-		}
+		R = 150,
+		G = 215,
+		B = 255,
+		Alpha = 40,
+		Size = Special3Spell.SpellRange*2,
+		BlitMode = GFX_BLIT_Additive,
+		Rotation = PV_Step(10, 0, 1),
+		Attach = ATTACH_Back | ATTACH_MoveRelative
 		
-		clonk->LaunchSpell(Special3Spell, x, y, x, y);
-		
-		return 1;
-	}
-	
-	return 0;
+	};
+	return CastSpellWithSpellRange(clonk, x, y, released, mouseclick, abletocast, cooldown, props, Special3Spell);
 }
 
 func JumpEffect(object clonk, dir)
