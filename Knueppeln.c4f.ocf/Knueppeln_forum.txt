@@ -24,7 +24,7 @@ Duration in frames
 [b]Electro Man[/b]
 <insert epic description>
 
-Electro Shot    [i]Mana: 20 Damage: 15 Range: - Duration: - B
+Electro Shot    [i]Mana: 15 Damage: 15 Range: - Duration: - B
 Launches a fast traveling projectile.[/i]
 
 Electro Orb   [i] Mana: 30 Damage: 20 Range: ? Duration: 200 A B C
@@ -37,21 +37,21 @@ Hold R and click within the range indicator to launch the attack at your mouse p
 [b]Fire Man[/b]
 <insert epic description>
 
-Fire Shot    [i]Mana: 20 Damage: 20 Range: - Duration: - B
+Fire Shot    [i]Mana: 22 Damage: 20 Range: - Duration: - B
 Launches a projectile that will leave flames when hitting a target / the ground.[/i]
 
-Fire Nado    [i]Mana: 30 Damage: 30 Range: - Duration: 70 A B C
+Fire Nado    [i]Mana: 30 Damage: 30 Range: - Duration: 70 A C
 Launches a tornado that will damage enemies and push away spells that can be blocked. Leaves flames when disappearing.[/i]
 
 Fire Dash    [i]Mana: 45 Damage: 20 + 40 Range: 180 Duration: - C
-Click somewhere within the range indicator and your clonk turns into a fireball that flies to your mouse position damaging everything on its way and exploding upon reaching the target location.
+Click somewhere within the range indicator and your clonk turns into a fireball that flies to your mouse position damaging everything on its way and exploding upon reaching the target location. Also leaves flames.
 You cannot aim while charging.[/i]
 
 
 [b]Earth Man[/b]
 <insert epic description>
 
-Earth Projectile  [i]Mana: 20 Damage: 20 Range: - Duration: - B
+Earth Projectile  [i]Mana: 22 Damage: 20 Range: - Duration: - B
 Launches a ballistic projectile that will bounce off the ground once.[/i]
 
 Earth Wall    [i]Mana: 35 Damage: - Range: 100 Duration: 220 
@@ -104,7 +104,7 @@ Instantaneously teleports you to another location. Enemies touched by the ray wi
 [b]Ice Man[/b] - contributed by Zapper
 <insert epic description>
 
-Ice Ball    [i]Mana: 25 Damage: 18 Range: 200 Duration: - B
+Ice Ball    [i]Mana: 22 Damage: 18 Range: 200 Duration: - B
 Launches a projectile that will explode after a time or when it hits.[/i]
 
 Ice Shards  [i]Mana: 30 Damage: 20 Range: - Duration: - B C
@@ -142,6 +142,7 @@ Rotation    Every player gets the same champion[/i]
 - Maybe a system to ban champions / Limit them if there are too many some day
 - Some sort of ghost cam for eliminated players that can do stuff. (can't put my concept into words)
 - More decoration for the existing maps... where can i steal some?!
+- A coop adventure... but I'm too lazy for that.
 
 
 [h]Special Thanks[/h]
@@ -150,8 +151,8 @@ Zapper for helping with a lot of stuff.
 
 
 
-"Is very good" - [i]Random internet guy (2016)[/i]
-"10/10 would buy again" - [i]boni (2016)[/i]
+"Is very good" - [i]Random guy from the internet (2016)[/i]
+"10/10 would buy again" - [i]boni (1992)[/i]
 
 
 

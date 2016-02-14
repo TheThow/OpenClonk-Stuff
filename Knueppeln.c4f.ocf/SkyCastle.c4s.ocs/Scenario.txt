@@ -31,4 +31,4 @@ Wind=50,10,40,80
 
 [Definition]
 Definition1=Objects.ocd
-Definition2=Knüppeln.c4d.ocd
+Definition2=Knueppeln.c4d.ocd

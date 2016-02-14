@@ -12,7 +12,7 @@ local HomeCallSize = 12;
 local AttackSize = 20;
 
 local DischargeSize = 35;
-local ChargeDur = 10;
+local ChargeDur = 15;
 local DischargeDamage = 35;
 
 local ShieldDur = 120;

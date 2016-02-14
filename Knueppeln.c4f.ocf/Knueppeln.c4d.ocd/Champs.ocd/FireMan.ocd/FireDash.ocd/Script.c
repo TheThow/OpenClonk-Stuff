@@ -193,6 +193,7 @@ func FxFireDashStop(object target, proplist effect, int reason, bool temporary)
 		target->WeaponDamage(o, effect.SpellDamage2);
 	}
 	
+	target->CastObjects(Flame, RandomX(6,8), RandomX(10,25));
 	//effect.marker->RemoveObject();
 	//effect.clonk->MakeHitable(true);
 

@@ -2,7 +2,7 @@
 local Speed = 60;
 local Type = "none";
 
-local ManaCost = 25;
+local ManaCost = 22;
 local SpellDamage = 15;
 
 func Initialize()
