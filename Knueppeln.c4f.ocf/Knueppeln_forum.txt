@@ -91,12 +91,27 @@ Your ball damages everything near it after a small delay.[/i]
 [b]Laser Man[/b] - contributed by Zapper
 <insert epic description>
 
+Small Ray   [i]Mana: 10 Damage: 10 Range: 150 Duration: - B
+Places a small laser ray that will fire after a second.[/i]
+
+Laser Ray   [i]Mana: 25 Damage: 15 Range: 200 Duration: - B C
+Fires a bouncing laser ray after charging.[/i]
+
+Laser Blink [i]Mana: 30 Damage: 1 Range: 200 Duration: - B C
+Instantaneously teleports you to another location. Enemies touched by the ray will be tumbled.[/i]
 
 
 [b]Ice Man[/b] - contributed by Zapper
 <insert epic description>
 
+Ice Ball    [i]Mana: 25 Damage: 18 Range: 200 Duration: - B
+Launches a projectile that will explode after a time or when it hits.[/i]
 
+Ice Shards  [i]Mana: 30 Damage: 20 Range: - Duration: - B C
+Spawns three ice shards that circle around you. Activate again to fire the blue shard with a ballistic trajectory.[/i]
+
+Hail Storm    [i]Mana: 50 Damage: 20 Range: - Duration: - B C
+Spawns 6 ice shards that work like described above.[/i]
 
 
 [h]Szenario Parameters[/h]
