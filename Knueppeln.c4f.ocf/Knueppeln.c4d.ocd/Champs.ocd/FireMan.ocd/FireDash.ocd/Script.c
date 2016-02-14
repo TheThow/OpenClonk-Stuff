@@ -115,7 +115,7 @@ func FxFireDashTimer(object target, proplist effect, int time)
 			o->Fling(0, -5);
 			AddEffect("DashCD", o, 20, 10);
 			o->AddFireHitEffect();
-			WeaponDamage(o, effect.SpellDamage1);
+			target->WeaponDamage(o, effect.SpellDamage1);
 		}
 		
 	}
@@ -175,6 +175,9 @@ func FxFireDashStop(object target, proplist effect, int reason, bool temporary)
 	if(temporary)
 		return;
 	
+	target->Unstuck();
+	target->SetObjectLayer(nil);
+	
 	target->SetAction("Jump");
 	ExplosionEffect(effect.Size2, target->GetX(), target->GetY(),0,0,0);
 	
@@ -185,14 +188,13 @@ func FxFireDashStop(object target, proplist effect, int reason, bool temporary)
 			
 		var angle = Angle(GetX(), GetY(), o->GetX(), o->GetY());
 		
+		o->AddFireHitEffect();
 		o->Fling(Sin(angle, 8), -Cos(angle, 8));
-		AddFireHitEffect(o);
-		WeaponDamage(o, effect.SpellDamage2);
+		target->WeaponDamage(o, effect.SpellDamage2);
 	}
 	
 	//effect.marker->RemoveObject();
 	//effect.clonk->MakeHitable(true);
-	effect.clonk->Unstuck();
-	effect.clonk->SetObjectLayer(nil);
+
 }
 
