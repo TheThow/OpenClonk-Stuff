@@ -179,14 +179,43 @@ func InitChamp(clonk)
 		
 	};
 	
+	var dummy = CreateObject(Dummy, 0, 0, clonk->GetOwner());
+	dummy->SetAction("HangOnto", clonk);
+	dummy.Visibility = VIS_Owner;
+	
 	for(var i = 0; i < 360; i++)
 	{
 		var x = Sin(i, MaxRange, 1);
 		var y = -Cos(i, MaxRange, 1);
-		clonk->CreateParticle("Flash", x, y, 0, 0, 0, props);
+		dummy->CreateParticle("Flash", x, y, 0, 0, 0, props);
 	}
 	
+	var eff = AddEffect("Range", clonk, 1, 1, nil, BallsMan);
+	eff.d = dummy;
+}
+
+func FxRangeTimer(target, fx)
+{
+	if(fx.d->Contained())
+	{
+		fx.d->Exit();
+		fx.d->SetAction("HangOnto", target);
+	}
 	
+	if(fx.d->GetAction() != "HangOnto")
+	{
+		fx.d->SetAction("HangOnto", target);
+	}
 	
+	if(!target)
+		return -1;
+}
+
+func FxRangeStop(object target, proplist fx, int reason, bool temp)
+{
+	if(temp)
+		return;
+	
+	fx.d->RemoveObject();
 }
 
