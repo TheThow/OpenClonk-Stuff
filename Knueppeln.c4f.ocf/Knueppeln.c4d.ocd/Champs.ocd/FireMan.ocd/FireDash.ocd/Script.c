@@ -186,7 +186,7 @@ func FxFireDashStop(object target, proplist effect, int reason, bool temporary)
 		if(o->GetOwner() == target->GetOwner())
 			continue;
 			
-		var angle = Angle(GetX(), GetY(), o->GetX(), o->GetY());
+		var angle = Angle(target->GetX(), target->GetY(), o->GetX(), o->GetY());
 		
 		o->AddFireHitEffect();
 		o->Fling(Sin(angle, 8), -Cos(angle, 8));
