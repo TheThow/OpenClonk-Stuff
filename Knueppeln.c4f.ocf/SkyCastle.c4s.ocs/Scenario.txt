@@ -29,6 +29,6 @@ Climate=0,10,0,10
 YearSpeed=0,0,0,100
 Wind=50,10,40,80
 
-[Definition]
+[Definitions]
 Definition1=Objects.ocd
 Definition2=Knueppeln.c4d.ocd
