@@ -24,7 +24,7 @@ Duration in frames
 [b]Electro Man[/b]
 <insert epic description>
 
-Electro Shot    [i]Mana: 15 Damage: 15 Range: - Duration: - B
+Electro Shot    [i]Mana: 18 Damage: 15 Range: - Duration: - B
 Launches a fast traveling projectile.[/i]
 
 Electro Orb   [i] Mana: 30 Damage: 20 Range: ? Duration: 200 A B C
@@ -38,7 +38,7 @@ Hold R and click within the range indicator to launch the attack at your mouse p
 <insert epic description>
 
 Fire Shot    [i]Mana: 22 Damage: 20 Range: - Duration: - B
-Launches a projectile that will leave flames when hitting a target / the ground.[/i]
+Launches a projectile that will explode and leave flames when hitting a target / the ground.[/i]
 
 Fire Nado    [i]Mana: 30 Damage: 30 Range: - Duration: 70 A C
 Launches a tornado that will damage enemies and push away spells that can be blocked. Leaves flames when disappearing.[/i]
@@ -52,7 +52,7 @@ You cannot aim while charging.[/i]
 <insert epic description>
 
 Earth Projectile  [i]Mana: 22 Damage: 20 Range: - Duration: - B
-Launches a ballistic projectile that will bounce off the ground once.[/i]
+Launches a ballistic projectile that will bounce off the ground once and explode on contact with enemies.[/i]
 
 Earth Wall    [i]Mana: 35 Damage: - Range: 100 Duration: 220 
 Creates a solid wall that absorbs up to 50 damage when clicking within the range indicator.[/i]

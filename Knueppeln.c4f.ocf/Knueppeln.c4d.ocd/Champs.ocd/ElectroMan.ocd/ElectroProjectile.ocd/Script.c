@@ -6,7 +6,7 @@ local pB = 255;
 local Speed = 75;
 local SpellDamage = 15;
 local Size = 20;
-local ManaCost = 20;
+local ManaCost = 18;
 
 func InitEffect()
 {
