@@ -1,7 +1,5 @@
 #appendto Clonk
 
-local Champ_Def = [ElectroMan, FireMan, LaserMan, IceMan, EarthMan, NinjaMan, BallsMan];
-
 local MaxEnergy = 100000;
 local MaxMagic = 100000;
 
@@ -33,7 +31,10 @@ func Construction()
 	
 	var interval = 5;
 	if(SCENPAR_IncreasedManaReg == 2)
+	{
 		interval = 3;
+		BLOCK_CD = 25;
+	}
 	
 	AddEffect("ManaRegen", this, 20, interval, this, Clonk);
 	AddEffect("AutoHeal", this, 20, 40*3, this, Clonk);

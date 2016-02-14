@@ -10,7 +10,7 @@ local ManaCost = 25;
 /*
 clonk	calling clonk
 x		mouse x
-y		mosue y
+y		mouse y
 */
 func Launch(object clonk, int x, int y)
 {

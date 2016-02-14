@@ -1,3 +1,10 @@
+global func getChampions()
+{
+	var Champ_Def = [ElectroMan, FireMan, LaserMan, IceMan, EarthMan, NinjaMan, BallsMan];
+	return Champ_Def;
+}
+
+
 global func DrawLightningSmall(fromX, fromY, toX, toY, props)
 {
 	props = props ??

@@ -21,17 +21,17 @@ func ChooseMenu()
 	//				["Light Man", LightMan]
 	//			 ];
 	
-	var champs = Champ_Def;
+	var champs = getChampions();
 	
 	if(FindObject(Find_ID(Rule_RandomChamp)))
 	{
-		var i = Random(GetLength(Champ_Def));
-		var u = Random(GetLength(Champ_Def));
+		var i = Random(GetLength(champs));
+		var u = Random(GetLength(champs));
 		
 		while(u == i)
-			u = Random(GetLength(Champ_Def));
+			u = Random(GetLength(champs));
 		
-		champs = [Champ_Def[i], Champ_Def[u]];
+		champs = [champs[i], champs[u]];
 	}
 
 	var menu = 
