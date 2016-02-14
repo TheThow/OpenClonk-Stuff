@@ -17,7 +17,7 @@ local Special3Spell = BallDischarge;
 local Special1Cooldown = 12;
 local Special2Cooldown = 40;
 
-local MaxRange = 250;
+local MaxRange = 275;
 
 func Special1(object clonk, int x, int y, bool released, bool mouseclick, bool abletocast, bool cooldown)
 {
@@ -178,14 +178,12 @@ func InitChamp(clonk)
 		Attach = ATTACH_Back | ATTACH_MoveRelative
 		
 	};
-	//clonk->ShowSpellRange(clonk, nil, nil);
-	//clonk->CancelShowSpellRange();
 	
 	for(var i = 0; i < 360; i++)
 	{
 		var x = Sin(i, MaxRange, 1);
 		var y = -Cos(i, MaxRange, 1);
-		clonk.RangeDummy->CreateParticle("Flash", x, y, 0, 0, 0, props);
+		clonk->CreateParticle("Flash", x, y, 0, 0, 0, props);
 	}
 	
 	

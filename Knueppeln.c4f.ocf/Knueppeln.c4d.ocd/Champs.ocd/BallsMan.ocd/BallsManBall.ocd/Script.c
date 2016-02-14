@@ -8,7 +8,8 @@
 local SpellDamage = 20;
 local Speed = 60;
 
-local Size = 12;
+local HomeCallSize = 12;
+local AttackSize = 20;
 
 local DischargeSize = 35;
 local ChargeDur = 10;
@@ -292,7 +293,7 @@ func FxHomeCallTimer(object target, proplist fx, int time)
 	SetXDir((GetXDir() + (txdir - GetXDir())/2));
 	SetYDir((GetYDir() + (tydir - GetYDir())/2));
 	
-	CheckForEnemies();
+	CheckForEnemies(HomeCallSize);
 	
 	ox=GetX();
 	oy=GetY();
@@ -389,14 +390,14 @@ func FxMoveToTimer(object target, proplist fx, int time)
 	{
 		SetXDir(0);
 		SetYDir(0);
-		CheckForEnemies();
+		CheckForEnemies(AttackSize);
 		Idle();
 		
 		
 		var flashparticle =
 		{
 			Alpha = 100,
-			Size = Size * 2,
+			Size = AttackSize * 2,
 			R = pR,
 			G = pG,
 			B = pB,
@@ -436,7 +437,7 @@ func MoveToPos(x, y, add)
 }
 
 
-func CheckForEnemies()
+func CheckForEnemies(Size)
 {
 	for(var o in FindObjects(Find_Distance(Size), Find_Func("CanBeHit")))
 	{
