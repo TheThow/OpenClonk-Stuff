@@ -78,11 +78,19 @@ func FxCheckEnemiesTimer(object target, proplist effect, int time)
 		}
 		
 		var angle = Angle(GetX(), GetY(), o->GetX(), o->GetY());
+		AddEffect("DeathRockCD", o, 1, 30);
+		Sound("Hits::GeneralHit1", false, 50);
+		
+		if(o->GetID() != Clonk)
+		{
+			var speed = Distance(0, 0, o->GetXDir(), o->GetYDir());
+			o->SetVelocity(angle, speed);
+			continue;
+		}
+		
 		o->Fling(Sin(angle, 5), -Cos(angle, 5));
 		o->AddEarthHitEffect();
-		AddEffect("DeathRockCD", o, 1, 30);
 		WeaponDamage(o, SpellDamage);
-		Sound("Hits::GeneralHit1", false, 50);
 	}
 }
 

@@ -17,6 +17,11 @@ OverloadTextures
 82=FlatBrick-brick_2_light
 83=Tunnel-brick_2
 84=Brick-brick_2_light
+85=FlatBrick-concrete1
+86=FlatTunnel-concrete1_dark
+87=FlatTunnel-concrete2
+88=Tunnel-concrete1_dark
+89=Tunnel-concrete2
 1=Acid-acid
 2=Amethyst-amethyst
 3=Ashes-ashes

@@ -13,13 +13,13 @@ Q/E/R = Special abilities of your champion
 
 [h]Champions[/h]
 
-A = You can aim while charging
+[tt]A = You can aim while charging
 B = Can be blocked
 C = Needs to charge
 
 Range in pixels
-Duration in frames
-
+Duration in frames[/tt]
+ 
 
 [b]Electro Man[/b]
 <insert epic description>
@@ -27,26 +27,27 @@ Duration in frames
 Electro Shot    [i]Mana: 20 Damage: 15 Range: - Duration: - B
 Launches a fast traveling projectile.[/i]
 
-Electro Orb   [i] Mana: 30 Damage: 20 Range: ? Duration: 200 A B C
+Electro Orb    [i] Mana: 30 Damage: 20 Range: ? Duration: 200 A B C
 Launches an orb that will return to you after a while, damaging everything on its path. (Can hit the same clonk twice)[/i]
 
-Thunder Strike   [i] Mana: 50 Damage: 50 Range: 275 Duration: - C 
+Thunder Strike    [i] Mana: 50 Damage: 50 Range: 275 Duration: - C 
 Hold R and click within the range indicator to launch the attack at your mouse position. After a short delay it will damage everything in its reach.[/i]
-
+ 
 
 [b]Fire Man[/b]
 <insert epic description>
+Immune to flames.
 
-Fire Shot    [i]Mana: 22 Damage: 20 Range: - Duration: - B
+Fire Shot      [i]Mana: 22 Damage: 20 Range: - Duration: - B
 Launches a projectile that will explode and leave flames when hitting a target / the ground.[/i]
 
-Fire Nado    [i]Mana: 30 Damage: 30 Range: - Duration: 70 A C
+Fire Nado      [i]Mana: 30 Damage: 30 Range: - Duration: 70 A C
 Launches a tornado that will damage enemies and push away spells that can be blocked. Leaves flames when disappearing.[/i]
 
-Fire Dash    [i]Mana: 45 Damage: 20 + 40 Range: 180 Duration: - C
+Fire Dash      [i]Mana: 45 Damage: 20 + 40 Range: 180 Duration: - C
 Click somewhere within the range indicator and your clonk turns into a fireball that flies to your mouse position damaging everything on its way and exploding upon reaching the target location. Also leaves flames.
 You cannot aim while charging.[/i]
-
+ 
 
 [b]Earth Man[/b]
 <insert epic description>
@@ -57,12 +58,13 @@ Launches a ballistic projectile that will bounce off the ground once and explode
 Earth Wall    [i]Mana: 35 Damage: - Range: 100 Duration: 220 
 Creates a solid wall that absorbs up to 50 damage when clicking within the range indicator.[/i]
 
-Big Rock    [i]Mana: 50 Damage: 35 Range: - Duration: 200 A C
+Big Rock      [i]Mana: 50 Damage: 35 Range: - Duration: 200 A C
 Launches a giant rock that bounces around the battlefield, damaging everything on its way.[/i]
-
+ 
 
 [b]Ninja Man[/b]
 <insert epic description>
+Increased movement speed
 
 Poison Dart    [i]Mana: 18 Damage: 12 Range: - Duration: 100 B
 Launches a ballistic projectile that will reduce your targets vision for a short duration[/i]
@@ -72,7 +74,7 @@ Turns your clonk invisible for a short period of time.[/i]
 
 Critical Strike    [i]Mana: 40 Damage: 50 Range: - Duration: - A C
 Strong meele attack that flings your targets across the map[/i]
-
+ 
 
 [b]Balls Man[/b]
 <insert epic description>
@@ -80,51 +82,51 @@ Strong meele attack that flings your targets across the map[/i]
 Attack Order    [i]Mana: 10 Damage: 20 Range: 275 Duration: 100 B
 Your ball moves to your mouse position damaging enemies on the target location.[/i]
 
-Home Call     [i]Mana: 25 Damage: 20 Range: - Duration: 100 B
+Home Call    [i]Mana: 25 Damage: 20 Range: - Duration: 100 B
 Your ball moves with increased speed back to you damaging everything on its path. 
 Upon reaching you it grants you a shield that absorbs 15 damage.[/i]
 
-Discharge    [i]Mana: 35 Damage: 40 Range: - Duration: - C
+Discharge      [i]Mana: 35 Damage: 40 Range: - Duration: - C
 Your ball damages everything near it after a small delay.[/i]
-
+ 
 
 [b]Laser Man[/b] - contributed by Zapper
 <insert epic description>
 
-Small Ray   [i]Mana: 10 Damage: 10 Range: 150 Duration: - B
+Small Ray      [i]Mana: 10 Damage: 10 Range: 150 Duration: - B
 Places a small laser ray that will fire after a second.[/i]
 
-Laser Ray   [i]Mana: 25 Damage: 15 Range: 200 Duration: - B C
+Laser Ray      [i]Mana: 25 Damage: 15 Range: 200 Duration: - B C
 Fires a bouncing laser ray after charging.[/i]
 
-Laser Blink [i]Mana: 30 Damage: 1 Range: 200 Duration: - B C
+Laser Blink    [i]Mana: 30 Damage: 1 Range: 200 Duration: - B C
 Instantaneously teleports you to another location. Enemies touched by the ray will be tumbled.[/i]
-
+ 
 
 [b]Ice Man[/b] - contributed by Zapper
 <insert epic description>
 
-Ice Ball    [i]Mana: 22 Damage: 18 Range: 200 Duration: - B
+Ice Ball      [i]Mana: 22 Damage: 18 Range: 200 Duration: - B
 Launches a projectile that will explode after a time or when it hits.[/i]
 
-Ice Shards  [i]Mana: 30 Damage: 20 Range: - Duration: - B C
+Ice Shards    [i]Mana: 30 Damage: 20 Range: - Duration: - B C
 Spawns three ice shards that circle around you. Activate again to fire the blue shard with a ballistic trajectory.[/i]
 
 Hail Storm    [i]Mana: 50 Damage: 20 Range: - Duration: - B C
 Spawns 6 ice shards that work like described above.[/i]
+ 
 
-
-[h]Szenario Parameters[/h]
+[h]Scenario Parameters[/h]
 
 [b]Champ Selection[/b]
 [i]
 Normal      Choose from all the champions
 Random      Choose between two random champions
 Rotation    Every player gets the same champion[/i]
-
+ 
 
 [b]Relaunchs[/b]    [i]- Amount -[/i]
-
+ 
 
 [b]Incr. Mana Reg.[/b]    [i]Faster mana regeneration and shorter block cooldown.[/i]
 
@@ -149,11 +151,12 @@ Rotation    Every player gets the same champion[/i]
 
 Zapper for helping with a lot of stuff.
 
-
+ 
+ 
 
 "Is very good" - [i]Random guy from the internet (2016)[/i]
 "10/10 would buy again" - [i]boni (1992)[/i]
 
-
-
+ 
+ 
 I'm always happy to receive feedback.

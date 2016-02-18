@@ -269,6 +269,19 @@ func Hit()
 func Death(int killed_by)
 {
 	CastObjects(Flesh, 8, 50);
+	
+	var props = {
+		Size = PV_Linear(PV_Random(2, 4), 0),
+		CollisionVertex = 500,
+		OnCollision = PC_Stop(),
+		ForceY = PV_Gravity(300),
+		R = 128,
+		G = 0,
+		B = 0
+	};
+	
+	CreateParticle("Flash", 0, 0, PV_Random(-40, 40), PV_Random(-40, 30), 80, props, 35);
+	
 	//CastPXS("Blood", 50, 30);
 	Sound("kill", false, 100);
 	
@@ -281,7 +294,9 @@ func Death(int killed_by)
 	}
 	
 	if(this)
+	{
 		FadeOut(30, true);
+	}
 	
 	return _inherited(killed_by);
 }

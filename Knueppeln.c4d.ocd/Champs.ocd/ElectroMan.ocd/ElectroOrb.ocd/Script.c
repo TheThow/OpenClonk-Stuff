@@ -168,11 +168,11 @@ func FxComebackTimer(object target, proplist effect, int time)
 	
 	var angle = Angle(GetX(), GetY(), Target->GetX(), Target->GetY(), 10);
 	
-	var txdir = Sin(angle, Speed, 10);
-	var tydir = -Cos(angle, Speed, 10);
+	var txdir = Sin(angle, Speed*10, 10);
+	var tydir = -Cos(angle, Speed*10, 10);
 	
-	SetXDir((GetXDir() + (txdir - GetXDir())/10));
-	SetYDir((GetYDir() + (tydir - GetYDir())/10));
+	SetXDir((GetXDir(100) + (txdir - GetXDir(100))/10), 100);
+	SetYDir((GetYDir(100) + (tydir - GetYDir(100))/10), 100);
 	
 	if(ObjectDistance(this, Target) < Size)
 		RemoveObject();

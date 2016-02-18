@@ -38,8 +38,22 @@ func FxDrawBloodTimer(object target, proplist effect, int time)
 func Hit()
 {
 	Sound("splash*", false, 10);
+	
+	var props = {
+		Size = PV_Linear(PV_Random(2, 4), 0),
+		CollisionVertex = 500,
+		OnCollision = PC_Stop(),
+		ForceY = PV_Gravity(300),
+		R = 128,
+		G = 0,
+		B = 0
+	};
+	
+	CreateParticle("Flash", 0, 0, PV_Random(-40, 40), PV_Random(-40, 30), 80, props, 15);
+	
 	//CastPXS("Blood", 25, 10);
 	RemoveObject();
+	
 }
 
 func CanDrawOn(x, y)
