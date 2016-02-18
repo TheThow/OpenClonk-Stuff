@@ -49,7 +49,7 @@ func Hit()
 		B = 0
 	};
 	
-	CreateParticle("Flash", 0, 0, PV_Random(-40, 40), PV_Random(-40, 30), 80, props, 15);
+	CreateParticle("Flash", 0, 0, PV_Random(-40, 40), PV_Random(-40, 30), 100, props, 15);
 	
 	//CastPXS("Blood", 25, 10);
 	RemoveObject();

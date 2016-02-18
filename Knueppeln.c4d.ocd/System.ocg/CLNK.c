@@ -280,7 +280,7 @@ func Death(int killed_by)
 		B = 0
 	};
 	
-	CreateParticle("Flash", 0, 0, PV_Random(-40, 40), PV_Random(-40, 30), 80, props, 35);
+	CreateParticle("Flash", 0, 0, PV_Random(-40, 40), PV_Random(-40, 30), 100, props, 35);
 	
 	//CastPXS("Blood", 50, 30);
 	Sound("kill", false, 100);
