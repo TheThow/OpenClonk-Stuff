@@ -288,8 +288,8 @@ func FxHomeCallTimer(object target, proplist fx, int time)
 	fx.x = master->GetX();
 	fx.y = master->GetY();
 	var angle = Angle(GetX(), GetY(), fx.x, fx.y, 10);
-	var txdir = Sin(angle, Speed + 10, 10);
-	var tydir = -Cos(angle, Speed + 10, 10);
+	var txdir = Sin(angle, Speed + 12, 10);
+	var tydir = -Cos(angle, Speed + 12, 10);
 	SetXDir((GetXDir() + (txdir - GetXDir())/2));
 	SetYDir((GetYDir() + (tydir - GetYDir())/2));
 	

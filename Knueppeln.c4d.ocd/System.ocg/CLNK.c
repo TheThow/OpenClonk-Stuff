@@ -33,7 +33,7 @@ func Construction()
 	if(SCENPAR_IncreasedManaReg == 2)
 	{
 		interval = 3;
-		BLOCK_CD = 25;
+		BLOCK_CD = 22;
 	}
 	
 	AddEffect("ManaRegen", this, 20, interval, this, Clonk);

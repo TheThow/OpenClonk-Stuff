@@ -17,7 +17,7 @@ local Special3Spell = BallDischarge;
 local Special1Cooldown = 12;
 local Special2Cooldown = 40;
 
-local MaxRange = 275;
+local MaxRange = 300;
 
 func Special1(object clonk, int x, int y, bool released, bool mouseclick, bool abletocast, bool cooldown)
 {
