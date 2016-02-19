@@ -1,6 +1,6 @@
 #include Projectile
 
-local SpellDamage = 20;
+local SpellDamage = 25;
 local Speed = 60;
 
 func InitEffect()

@@ -12,7 +12,7 @@ func Initialize()
 	CreateObject(Rule_KillLogs);
 	CheckScenarioParameters();
 	SetSkyParallax(0, 15, 15, nil, nil, 1, 1);
-	SetSkyAdjust(RGB(20,20,20));
+	SetSkyAdjust(RGB(100,100,100));
 	InitClouds();
 	AddEffect("Raining", nil, 1, 1);
 }

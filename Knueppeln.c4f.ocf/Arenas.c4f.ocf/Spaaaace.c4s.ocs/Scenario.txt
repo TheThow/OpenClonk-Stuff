@@ -2,7 +2,6 @@
 Icon=19
 Title=Spaaaace.c4s
 Version=8
-NoInitialize=true
 
 [Definitions]
 Definition2=Knueppeln.c4d.ocd
