@@ -14,6 +14,8 @@ local Special1Spell = FireProjectile;
 local Special2Spell = FireNado;
 local Special3Spell = FireDash;
 
+local Special2Cooldown = 30;
+
 func Special1(object clonk, int x, int y, bool released, bool mouseclick, bool abletocast, bool cooldown)
 {
 	if(!released && !mouseclick && abletocast && !cooldown)
