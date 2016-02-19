@@ -38,7 +38,7 @@ Hold R and click within the range indicator to launch the attack at your mouse p
 <insert epic description>
 Immune to flames.
 
-Fire Shot      [i]Mana: 22 Damage: 20 Range: - Duration: - B
+Fire Shot      [i]Mana: 22 Damage: 22 Range: - Duration: - B
 Launches a projectile that will explode and leave flames when hitting a target / the ground.[/i]
 
 Fire Nado      [i]Mana: 30 Damage: 30 Range: - Duration: 70 A C
