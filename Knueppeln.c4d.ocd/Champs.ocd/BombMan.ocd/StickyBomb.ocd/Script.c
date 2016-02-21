@@ -52,7 +52,7 @@ func StickTo()
 	{
 		if (target->GetOwner() == GetOwner()) continue;
 		SetAction("Attach", target);
-		RemoveTimer("StickTo");
+		Hit();
 		return;
 	}
 }
@@ -85,7 +85,8 @@ func BlowUp()
 	while (radius > 10)
 	{
 		var obj = CreateObject(Rock, x, y, GetController());
-		obj->Explode(radius, nil, dmg);
+		obj->ExplosionEffect(radius, 0, 0, 100);
+		obj->Explode(radius, true, dmg);
 		
 		radius /= 2;
 		dmg = 2 * dmg / 3;
@@ -98,7 +99,7 @@ func BlowUp()
 func Blocked(object clonk)
 {
 	if (GetCategory() != C4D_StaticBack) return;
-	if (!Hostile(GetController(), clonk->GetOwner()) return;
+	if (!Hostile(GetController(), clonk->GetOwner())) return;
 	CreateParticle("SphereSpark", PV_Random(-5, 5), PV_Random(-5, 5), PV_Random(-20, 20), PV_Random(-20, 20), PV_Random(20, 100), 30);
 	RemoveObject();
 }
