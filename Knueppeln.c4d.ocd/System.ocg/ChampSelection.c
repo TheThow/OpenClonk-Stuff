@@ -71,7 +71,7 @@ func ChooseMenu()
 			selector =
 			{
 				Priority = 1,
-				BackgroundColor = {Std = 0, Hover = 0x50ff0000},
+				BackgroundColor = {Std = 0, Hover = 0x50ff0000, Nope = 0x50ffff00},
 				
 				OnMouseIn = 
 					[ 
@@ -107,7 +107,7 @@ func SelectChamp(data, int player, int ID, int subwindowID, object target)
 
 	if(FindObject(Find_Func("UseTeamExclusiveChampions")))
 	{
-		var banned = GetTeamChampions(GetPlayerTeam(GetOwner()));
+		var banned = GetBannedTeamChampions(GetPlayerTeam(GetOwner()));
 		
 		for(var c in banned)
 		{
@@ -131,5 +131,20 @@ func SelectChamp(data, int player, int ID, int subwindowID, object target)
 		var relauncher = Contained();
 		if (relauncher)
 			relauncher->~RelaunchClonk();
+	}
+	
+	UpdateAllSelectionMenus();
+}
+
+func UpdateSelectionMenu()
+{
+	if(FindObject(Find_Func("UseTeamExclusiveChampions")))
+	{
+		var banned = GetBannedTeamChampions(GetPlayerTeam(GetOwner()));
+		
+		for(var c in banned)
+		{
+			//GuiUpdateTag("Nope", choosemenu_id, c);
+		}
 	}
 }

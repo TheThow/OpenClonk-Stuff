@@ -1,6 +1,14 @@
 static team_exclusiveChampions;
 static lastChosenChampion;
 
+global func UpdateAllSelectionMenus()
+{
+	for(var o in FindObjects(Find_ID(Clonk), Find_OCF(OCF_Alive)))
+	{
+		o->UpdateSelectionMenu();
+	}
+}
+
 global func SetLastChosenChampion(int plr, id champ)
 {
 	if(lastChosenChampion == nil)
@@ -49,7 +57,7 @@ global func ResetTeamExclusiveChamps()
 	}
 }
 
-global func GetTeamChampions(int teamid)
+global func GetBannedTeamChampions(int teamid)
 {
 	return team_exclusiveChampions[teamid -1];
 }

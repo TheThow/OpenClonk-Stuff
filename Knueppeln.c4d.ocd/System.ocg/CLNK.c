@@ -50,12 +50,6 @@ func IsAiming() { return true; }
 
 public func ObjectControl(int plr, int ctrl, int x, int y, int strength, bool repeat, bool release)
 {	
-	if (plr != GetOwner())
-	{
-		Log("%s (%s) got event of %s", GetPlayerName(GetOwner()), GetName(), GetPlayerName(plr));
-		return false;
-	}
-	
 	if (ctrl == CON_Interact && release == false && !Contained())
 	{
 		if(!GetEffect("BlockingCD", this))
