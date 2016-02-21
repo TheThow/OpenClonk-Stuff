@@ -7,6 +7,7 @@ local Speed = 30;
 local BlastRadius = 30;
 local BlastDamage = 15;
 
+local Plane = 600;
 
 func Construction()
 {
