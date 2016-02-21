@@ -27,6 +27,7 @@ local pause = false;
 func Initialize()
 {
 	InitTeamExclusiveChamps(2);
+	InitScoreboard();
 	
 	team_score = CreateArray(2);
 
@@ -79,6 +80,12 @@ func FxGoalCheckTimer(object target, proplist effect, int time)
 		b->RemoveObject();
 		ScoreEffect(target);
 		pause = true;
+		
+		Scoreboard->SetData(effect.enemy, "score", team_score[effect.enemy - 1]);
+		
+		DoScoreboardShow(1);
+		Schedule(nil, Format("DoScoreboardShow(-1)"), 35 * MIME_ShowBoardTime);
+		
 		
 		if (team_score[effect.enemy - 1] == GameCall("ScoreToWin"))
 		{
@@ -202,4 +209,22 @@ protected func RelaunchPlayer(int plr, int killer)
 	DoScoreboardShow(1, plr + 1);
 	Schedule(this,Format("DoScoreboardShow(-1, %d)", plr + 1), 35 * MIME_ShowBoardTime);
 	return; // _inherited(plr, killer, ...);
+}
+
+
+global func InitScoreboard()
+{
+	Scoreboard->Init(
+	[
+	 {key = "team", title = "", sorted = true, priority = 200, default = ""},
+	 {key = "score", title = "Score", priority = 100, default = ""}]
+	);
+	
+	for(var i = 1; i <= 2; i++)
+	{
+		var team_id = i;
+		Scoreboard->NewEntry(team_id, GetTaggedTeamName(i));
+		Scoreboard->SetData(team_id, "team", "", team_id);
+		Scoreboard->SetData(team_id, "score", 0);
+	}
 }
