@@ -1,7 +1,11 @@
 
-global func SpawnProtection()
+global func SpawnProtection(int dur)
 {
-	AddEffect("SpawnProtection", this, 20, 1);
+	if(!dur)
+		dur = 120;
+	
+	var fx = AddEffect("SpawnProtection", this, 20, 1);
+	fx.dur = dur;
 }
 
 global func FxSpawnProtectionStart(object target, proplist effect, int temporary)
@@ -31,7 +35,7 @@ global func FxSpawnProtectionStart(object target, proplist effect, int temporary
 
 global func FxSpawnProtectionTimer(object target, proplist effect, int time)
 {
-	if(time > 120)
+	if(time > effect.dur)
 		return -1;
 }
 

@@ -1,0 +1,13 @@
+[Teams]
+LastTeamID=2
+
+  [Team]
+  id=1
+  Name=Left
+  Color=4294180864
+
+  [Team]
+  id=2
+  Name=Not Left
+  Color=4278241280
+  MaxPlayer=1

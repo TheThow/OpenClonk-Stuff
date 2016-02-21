@@ -76,24 +76,28 @@ func FxFireNadoTimer(object target, proplist effect, int time)
 {
 	for(var o in FindObjects(Find_InRect(-size_x/2, -size_y/2, size_x, size_y), Find_Or(Find_Func("IsReflectable"), Find_Func("CanBeHit"))))
 	{
-		if (o->GetID() == Clonk)
-		{
-			if(!GetEffect("NadoCD", o) && o->GetOwner() != GetOwner())
-			{
-				o->Fling(0, -5);
-				o->AddFireHitEffect();
-				AddEffect("NadoCD", o, 20, 20);
-				WeaponDamage(o, SpellDamage);
-			}
-		}
+		if(GetEffect("NadoCD", o))
+			continue;
+		
+		AddEffect("NadoCD", o, 20, 20);
 		
 		if( o->~IsReflectable())
 		{
-			var speed = o->GetID().Speed;
+			var speed = Distance(0, 0, o->GetXDir(), o->GetYDir());
 			var angle = RandomX(-20,20);
 			
 			o->SetVelocity(angle, speed);
+			
+			continue;
 		}
+	
+		if(o->GetOwner() != GetOwner())
+		{
+			o->Fling(0, -5);
+			o->AddFireHitEffect();
+			WeaponDamage(o, SpellDamage);
+		}
+
 	}
 	
 	var detail = size_y*2;

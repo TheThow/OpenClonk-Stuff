@@ -11,7 +11,7 @@ local Description = "$Description$";
 local ManaCost = 45;
 local SpellRange = 180;
 
-local Size1 = 25;
+local Size1 = 22;
 local Size2 = 40;
 local SpellDamage1 = 20;
 local SpellDamage2 = 40;

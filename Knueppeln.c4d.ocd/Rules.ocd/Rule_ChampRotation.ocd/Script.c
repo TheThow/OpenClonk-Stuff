@@ -10,7 +10,7 @@ local plr_index;
 
 func Initialize()
 {
-	champs = ShuffleArray(getChampions());
+	champs = ShuffleArray(GetChampions());
 	plr_index = CreateArray(GetPlayerCount());
 }
 

@@ -15,13 +15,7 @@ func SelectChampion()
 
 func ChooseMenu()
 {
-	//var champs = [
-	//				["Electro Man", ElectroMan],
-	//				["Fire Man", FireMan],
-	//				["Light Man", LightMan]
-	//			 ];
-	
-	var champs = getChampions();
+	var champs = GetChampions();
 	
 	if(FindObject(Find_ID(Rule_RandomChamp)))
 	{
@@ -74,7 +68,7 @@ func ChooseMenu()
 			icon = {Priority = 10, Symbol = champ, Right = "+4em", Bottom = "+4em"},
 			text = {Priority = 10, Left = "+5em", Style = GUI_TextVCenter, Text = champ.Name},
 			
-			selector = // only visible for host
+			selector =
 			{
 				Priority = 1,
 				BackgroundColor = {Std = 0, Hover = 0x50ff0000},
@@ -85,7 +79,7 @@ func ChooseMenu()
 						GuiAction_SetTag("Hover")
 					],
 			
-				OnMouseOut = { Hover = GuiAction_SetTag("Std")},
+				OnMouseOut = GuiAction_SetTag("Std"),
 				
 				OnClick = GuiAction_Call(this, "SelectChamp", [champ]),
 			},
@@ -110,11 +104,32 @@ func ChampUpdateDesc(data, int player, int ID, int subwindowID, object target)
 func SelectChamp(data, int player, int ID, int subwindowID, object target)
 {
 	ChampType = data[0];
-	
+
+	if(FindObject(Find_Func("UseTeamExclusiveChampions")))
+	{
+		var banned = GetTeamChampions(GetPlayerTeam(GetOwner()));
+		
+		for(var c in banned)
+		{
+			if(c == ChampType)
+			{
+				Sound("Error", true, 50, player);
+				return false;
+			}
+		}
+		RemoveTeamChamp(GetPlayerTeam(GetOwner()), ChampType);
+	}
+
 	ChampType->InitChamp(this);
 	
 	this->CancelMenu();
-	var relauncher = Contained();
-	if (relauncher)
-		relauncher->~RelaunchClonk();
+	
+	SetLastChosenChampion(player, ChampType);
+	
+	if(!FindObject(Find_Func("NoRelaunchReleaseOnSelection")))
+	{
+		var relauncher = Contained();
+		if (relauncher)
+			relauncher->~RelaunchClonk();
+	}
 }

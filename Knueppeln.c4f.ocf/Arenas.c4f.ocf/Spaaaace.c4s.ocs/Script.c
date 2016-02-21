@@ -18,25 +18,25 @@ func Initialize()
 
 func CreateEnvironment()
 {
-	var o = CreateObjectAbove(GravityThing, 148, 694);
+	var o = CreateObjectAbove(GravityThing, 173, 694);
 	o->CreatePartner();
 	o.partner->SetPosition(o->GetX(), o->GetY() - 50);
 	
-	o = CreateObjectAbove(GravityThing, 708, 695);
+	o = CreateObjectAbove(GravityThing, 733, 695);
 	o->CreatePartner();
 	o.partner->SetPosition(o->GetX(), o->GetY() - 50);
 	
-	o = CreateObjectAbove(GravityThing, 402, 518);
+	o = CreateObjectAbove(GravityThing, 427, 518);
 	o->CreatePartner();
 	o.partner->SetPosition(o->GetX() + 125, o->GetY());
 	
-	o = CreateObjectAbove(GravityThing, 400, 711);
+	o = CreateObjectAbove(GravityThing, 425, 711);
 	o->CreatePartner();
 	o.partner->SetPosition(o->GetX() + 125, o->GetY());
 	
-	o = CreateObjectAbove(GravityThing, 685, 610);
+	o = CreateObjectAbove(GravityThing, 710, 610);
 	o->CreatePartner();
-	o.partner->SetPosition(660, 550);
+	o.partner->SetPosition(685, 550);
 }
 
 func InitializePlayer(int plr, int iX, int iY, object pBase, int iTeam)
@@ -88,11 +88,11 @@ protected func OnPlayerRelaunch(int plr)
 	SpawnPlayer(plr);
 	
 	return;
-}
+} 
 
 global func GetRandomSpawn()
 {
-	var spawns = [[465,605],[370,500],[560,500],[315,685],[600,685],[810,595]];
+	var spawns = [[490,605],[395,500],[585,500],[340,685],[625,685],[835,595]];
 	var rand = Random(GetLength(spawns));
 	return spawns[rand];
 }

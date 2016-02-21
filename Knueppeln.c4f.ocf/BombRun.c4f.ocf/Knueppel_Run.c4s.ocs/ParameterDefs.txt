@@ -1,0 +1,43 @@
+[ParameterDef]
+ID=ScoreToWin
+Default=3
+LeagueValue=3
+Name=$ScoreName$
+Description=$ScoreDesc$
+
+	[Options]
+		
+		[Option]
+		Name=3
+		Description=3
+		Value=3
+		
+		[Option]
+		Name=5
+		Description=5
+		Value=5
+		
+		[Option]
+		Name=7
+		Description=7
+		Value=7
+		
+[ParameterDef]
+ID=IncreasedManaReg
+Default=1
+LeagueValue=1
+Name=$ManaRegName$
+Description=$ManaRegDesc$
+
+	[Options]
+		
+		[Option]
+		Name=Off
+		Description=Off
+		Value=1
+		
+		[Option]
+		Name=On
+		Description=On
+		Value=2
+		

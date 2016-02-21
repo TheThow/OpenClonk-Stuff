@@ -11,7 +11,7 @@ local BLOCK_CD = 35;
 local BLOCK_DUR = 5;
 local BLOCK_RANGE = 25;
 
-local JUMP_MANA = 9;
+local JUMP_MANA = 10;
 local MaxContentsCount = 1;
 
 local healthregen_base = 100;
@@ -30,7 +30,7 @@ func Construction()
 	special_active =  [0, 0, 0, 0];
 	
 	var interval = 5;
-	if(SCENPAR_IncreasedManaReg == 2)
+	if(FindObject(Find_ID(Rule_FastMana)))
 	{
 		interval = 3;
 		BLOCK_CD = 22;
@@ -273,14 +273,14 @@ func Death(int killed_by)
 	var props = {
 		Size = PV_Linear(PV_Random(2, 4), 0),
 		CollisionVertex = 500,
-		OnCollision = PC_Stop(),
+		OnCollision = PC_Bounce(200),
 		ForceY = PV_Gravity(300),
 		R = 128,
 		G = 0,
 		B = 0
 	};
 	
-	CreateParticle("Flash", 0, 0, PV_Random(-40, 40), PV_Random(-40, 30), 100, props, 35);
+	CreateParticle("Flash", 0, 0, PV_Random(-60, 60), PV_Random(-60, 30), 140, props, 45);
 	
 	//CastPXS("Blood", 50, 30);
 	Sound("kill", false, 100);
@@ -303,7 +303,7 @@ func Death(int killed_by)
 
 func FxManaRegenTimer()
 {
-	DoMagicEnergy(1);
+	DoMagicEnergy(12, true, 100);
 	return 0;
 }
 
@@ -520,7 +520,13 @@ func IsCharging()
 
 func CanCast()
 {
-	if(Contained() || GetAction() == "Tumble" || IsCharging() || GetAction() == "Float" || GetEffect("SpawnProtection", this) || !ChampType->CanCast(this))
+	if(Contained() || 
+		GetAction() == "Tumble" || 
+		IsCharging() || 
+		GetAction() == "Float" || 
+		GetEffect("SpawnProtection", this) || 
+		!ChampType->CanCast(this) ||
+		IsCarryingHeavy())
 		return false;
 	return true;
 }

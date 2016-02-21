@@ -14,15 +14,15 @@ local Special1Spell = IceProjectile;
 local Special2Spell = IceShard;
 local Special3Spell = IceShardUltimate;
 
-func Special1(object clonk, int x, int y, bool released, bool mouseclick, bool abletocast)
+func Special1(object clonk, int x, int y, bool released, bool mouseclick, bool abletocast, bool cooldown)
 {
-	if(!released && !mouseclick && abletocast)
+	if(!released && !mouseclick && abletocast && !cooldown)
 		clonk->LaunchSpell(IceProjectile, x, y, 0, 0);
 }
 
-func Special2(object clonk, int x, int y, bool released, bool mouseclick, bool abletocast)
+func Special2(object clonk, int x, int y, bool released, bool mouseclick, bool abletocast,  bool cooldown)
 {
-	if (released || mouseclick) return;
+	if (released || mouseclick || cooldown) return;
 	
 	var existing = FindObject(Find_ID(IceShard), Find_Owner(clonk->GetOwner()), Find_Category(C4D_StaticBack), Find_Func("GetProperty", "is_selected"));
 	if (existing)
@@ -42,9 +42,9 @@ func Special2(object clonk, int x, int y, bool released, bool mouseclick, bool a
 	}
 }
 
-func Special3(object clonk, int x, int y, bool released, bool mouseclick, bool abletocast)
+func Special3(object clonk, int x, int y, bool released, bool mouseclick, bool abletocast, bool cooldown)
 {
-	if (released || mouseclick) return;
+	if (released || mouseclick || cooldown) return;
 	
 	var existing = FindObject(Find_ID(IceShardUltimate), Find_Owner(clonk->GetOwner()), Find_Category(C4D_StaticBack), Find_Func("GetProperty", "is_selected"));
 	if (existing)

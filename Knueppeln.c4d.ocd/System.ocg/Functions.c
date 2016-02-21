@@ -1,4 +1,60 @@
-global func getChampions()
+static team_exclusiveChampions;
+static lastChosenChampion;
+
+global func SetLastChosenChampion(int plr, id champ)
+{
+	if(lastChosenChampion == nil)
+		lastChosenChampion = CreateArray(GetPlayerCount());
+		
+	lastChosenChampion[plr] = champ;
+}
+
+global func GetLastChosenChampion(int plr)
+{
+	if(lastChosenChampion == nil)
+		return nil;
+		
+	return lastChosenChampion[plr];
+}
+
+global func InitTeamExclusiveChamps(int teamcount)
+{
+	team_exclusiveChampions = CreateArray(2);
+	
+	for(var i = 0; i < GetLength(team_exclusiveChampions); i++)
+	{
+		team_exclusiveChampions[i] = [];
+	}
+}
+
+global func RemoveTeamChamp(int teamid, id ChampType)
+{
+	var banned = team_exclusiveChampions[teamid -1];
+	var newb = CreateArray(GetLength(banned) +1);
+	
+	for(var i = 0; i < GetLength(banned); i++)
+	{
+		newb[i] = banned[i];
+	}
+	
+	newb[GetLength(newb) - 1] = ChampType;
+	team_exclusiveChampions[teamid -1] = newb;
+}
+
+global func ResetTeamExclusiveChamps()
+{
+	for(var i = 0; i < GetLength(team_exclusiveChampions); i++)
+	{
+		team_exclusiveChampions[i] = [];
+	}
+}
+
+global func GetTeamChampions(int teamid)
+{
+	return team_exclusiveChampions[teamid -1];
+}
+
+global func GetChampions()
 {
 	var Champ_Def = [ElectroMan, FireMan, LaserMan, IceMan, EarthMan, NinjaMan, BallsMan];
 	return Champ_Def;

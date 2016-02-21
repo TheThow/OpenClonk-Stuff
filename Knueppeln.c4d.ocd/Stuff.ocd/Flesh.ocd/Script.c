@@ -42,7 +42,7 @@ func Hit()
 	var props = {
 		Size = PV_Linear(PV_Random(2, 4), 0),
 		CollisionVertex = 500,
-		OnCollision = PC_Stop(),
+		OnCollision = PC_Bounce(200),
 		ForceY = PV_Gravity(300),
 		R = 128,
 		G = 0,
