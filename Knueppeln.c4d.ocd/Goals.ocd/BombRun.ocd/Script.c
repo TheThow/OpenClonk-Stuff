@@ -40,6 +40,7 @@ func Initialize()
 	var fxl = AddEffect("GoalCheck", leftgoal, 1, 1, this);
 	fxl.teamid = 1;
 	fxl.enemy = 2;
+	leftgoal->CreateObject(PortalWall,0,0,-1)->CreateWall();
 	
 	pos = GameCall("RightGoalPos");
 	rightgoal = CreateObject(Dummy, pos[0], pos[1], -1);
@@ -47,6 +48,8 @@ func Initialize()
 	var fxr = AddEffect("GoalCheck", rightgoal, 1, 1, this);
 	fxr.teamid = 2;
 	fxr.enemy = 1;
+	rightgoal->CreateObject(PortalWall,0,0,-1)->CreateWall();
+	
 	
 	SpawnBall();
 }
@@ -217,8 +220,8 @@ global func InitScoreboard()
 {
 	Scoreboard->Init(
 	[
-	 {key = "team", title = "", sorted = true, priority = 200, default = ""},
-	 {key = "score", title = "Score", priority = 100, default = ""}]
+	 	{key = "team", title = "", sorted = true, priority = 200, default = ""},
+	 	{key = "score", title = "Score", priority = 100, default = ""}]
 	);
 	
 	for(var i = 1; i <= 2; i++)

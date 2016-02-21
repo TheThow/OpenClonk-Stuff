@@ -15,7 +15,7 @@ func Initialize()
 
 func BallPos()
 {
-	return [LandscapeWidth()/2, 300];
+	return [LandscapeWidth()/2, 230];
 }
 
 func InitClouds()
@@ -77,14 +77,14 @@ protected func OnPlayerRelaunch(int plr)
 
 global func GetRandomLeftSpawn()
 {
-	var spawns = [[325,300]];
+	var spawns = [[325,230]];
 	var rand = Random(GetLength(spawns));
 	return spawns[rand];
 }
 
 global func GetRandomRightSpawn()
 {
-	var spawns = [[LandscapeWidth()-325,300]];
+	var spawns = [[LandscapeWidth()-325,230]];
 	var rand = Random(GetLength(spawns));
 	return spawns[rand];
 }
@@ -110,10 +110,10 @@ func KillsToRelaunch() { return 0; }
 
 func LeftGoalPos()
 {
-	return [75, 250];
+	return [75, 180];
 }
 
 func RightGoalPos()
 {
-	return [LandscapeWidth() - 75, 250];
+	return [LandscapeWidth() - 75, 180];
 }

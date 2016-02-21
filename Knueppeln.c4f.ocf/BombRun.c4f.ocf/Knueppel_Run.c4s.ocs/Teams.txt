@@ -10,4 +10,3 @@ LastTeamID=2
   id=2
   Name=Not Left
   Color=4278241280
-  MaxPlayer=1

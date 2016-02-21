@@ -1,5 +1,8 @@
-ScoreName=Socre to win
+ScoreName=Score to win
 ScoreDesc=How many times a team has to score to win
 
 ManaRegName=Increased Mana Regeneration
 ManaRegDesc=Guess what
+
+InstaGibName=InstaGib
+InstaGibDesc=One hit kills.
