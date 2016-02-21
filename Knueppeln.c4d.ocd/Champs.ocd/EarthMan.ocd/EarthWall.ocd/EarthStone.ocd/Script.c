@@ -125,7 +125,7 @@ func FxParticlesDamage(object target, proplist effect, int damage, int cause)
 	return 0;
 }
 
-func IsHitable()
+func CanBeHit()
 {
 	return true;
 }

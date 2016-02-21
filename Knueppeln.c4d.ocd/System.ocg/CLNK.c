@@ -242,14 +242,22 @@ func JumpEffect(dir)
 
 func ControlLeftDouble()
 {
-  	SetXDir(-40);
+	var penality = 0;
+	if(IsCarryingHeavy())
+		penality = 10;
+		
+  	SetXDir(-40 + penality);
   	SetYDir(GetYDir() - 15);
   	return true;
 }
 
 func ControlRightDouble()
 {
-  	SetXDir(40);
+	var penality = 0;
+	if(IsCarryingHeavy())
+		penality = 10;
+
+  	SetXDir(40 - penality);
   	SetYDir(GetYDir() - 15);
   	return true;
 }

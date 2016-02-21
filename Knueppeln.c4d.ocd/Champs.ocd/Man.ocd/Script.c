@@ -84,6 +84,11 @@ func CanCastSpecial3(object clonk)
 	return true;
 }
 
+func CleanUp(object clonk)
+{
+
+}
+
 func CastSpellWithSpellRange(object clonk, int x, int y, bool released, bool mouseclick, bool abletocast, bool cooldown, proplist props, id spell)
 {
 	if(!released && !mouseclick)

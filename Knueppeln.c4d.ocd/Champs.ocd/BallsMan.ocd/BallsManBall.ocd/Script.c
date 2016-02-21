@@ -196,7 +196,6 @@ func FxDischargeStop(object target, proplist effect, int reason, bool temporary)
 			var x = Sin(i, r + RandomX(-2, 2));
 			var y = -Cos(i, r + RandomX(-2, 2));
 			
-			
 			CreateParticle("StarSpark", x, y, 0, 0, 25, props, 2);
 		}
 	}

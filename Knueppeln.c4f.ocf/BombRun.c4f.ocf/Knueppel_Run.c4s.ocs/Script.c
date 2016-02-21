@@ -72,6 +72,7 @@ protected func OnPlayerRelaunch(int plr)
 	SpawnPlayer(plr, 3);
 	var clonk = GetCrew(plr);
 	clonk.ChampType = GetLastChosenChampion(plr);
+	clonk.ChampType->InitChamp(clonk);
 	return;
 }
 

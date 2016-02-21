@@ -207,7 +207,7 @@ func FxRangeTimer(target, fx)
 		fx.d->SetAction("HangOnto", target);
 	}
 	
-	if(!target)
+	if(!target || target.ChampType != BallsMan)
 		return -1;
 }
 
@@ -217,5 +217,11 @@ func FxRangeStop(object target, proplist fx, int reason, bool temp)
 		return;
 	
 	fx.d->RemoveObject();
+}
+
+func CleanUp(object clonk)
+{
+	if(clonk.Ball)
+		clonk.Ball->KillBall();
 }
 

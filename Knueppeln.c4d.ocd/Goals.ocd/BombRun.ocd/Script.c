@@ -26,6 +26,8 @@ local pause = false;
 
 func Initialize()
 {
+	AddEffect("DefMana", nil, 1, 4, nil);
+
 	InitTeamExclusiveChamps(2);
 	InitScoreboard();
 	
@@ -52,6 +54,20 @@ func Initialize()
 	
 	
 	SpawnBall();
+}
+
+
+global func FxDefManaTimer()
+{
+	for(var o in FindObjects(Find_ID(Clonk)))
+	{
+		var plr = o->GetOwner();
+		if(GetPlayerTeam(plr) == 1 && o->GetX() < LandscapeWidth()/2)
+			o->DoMagicEnergy(1);
+			
+		if(GetPlayerTeam(plr) == 2 && o->GetX() > LandscapeWidth()/2)
+			o->DoMagicEnergy(1);
+	}
 }
 
 func UseTeamExclusiveChampions() { return true; }
@@ -109,6 +125,7 @@ func FxGoalCheckTimer(object target, proplist effect, int time)
 			for(var i = 0; i < GetPlayerCount(); i++)
 			{
 				ScheduleCall(this, "ResetPlayer", 120, 0, GetPlayerByIndex(i));
+				ScheduleCall(this, "Set", 120);
 			}
 		}
 	}
@@ -116,9 +133,17 @@ func FxGoalCheckTimer(object target, proplist effect, int time)
 
 func ResetPlayer(plr)
 {
+	GetCrew(plr).ChampType->CleanUp(GetCrew(plr));
 	GameCall("SpawnPlayer", plr, 10);
 	ScheduleCall(GetCrew(plr), "SelectChampion", 15, 0);
-	DoEnergy(100, GetCrew(plr));
+	GetCrew(plr)->DoEnergy(100);
+	
+}
+
+func Set()
+{
+	rightgoal->CreateObject(PortalWall,0,0,-1)->CreateWall();
+	leftgoal->CreateObject(PortalWall,0,0,-1)->CreateWall();
 	pause = false;
 }
 

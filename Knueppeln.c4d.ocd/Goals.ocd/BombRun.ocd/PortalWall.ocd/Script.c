@@ -25,9 +25,9 @@ func CreateWall(int hp)
 	
 	stones = CreateArray(360/10);
 	
-	for(var i = 0; i < 360; i+=10)
+	for(var i = 0; i < 360; i+=8)
 	{
-		var stone = CreateObject(EarthStone, Cos(i, 40), Sin(i, 60), -1);
+		var stone = CreateObject(EarthStone, Cos(i, 80), Sin(i, 80), -1);
 		stones[i] = stone;
 		if(stone)
 			stone->SetMaster(this);
