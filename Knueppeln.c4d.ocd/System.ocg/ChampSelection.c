@@ -62,7 +62,7 @@ func ChooseMenu()
 		index += 1;
 		var subm =
 		{
-			ID = champ,
+			ID = 100 + index,
 			Priority = index,
 			Bottom = "+4em",
 			icon = {Priority = 10, Symbol = champ, Right = "+4em", Bottom = "+4em"},
@@ -141,9 +141,11 @@ func UpdateSelectionMenu()
 	if(FindObject(Find_Func("UseTeamExclusiveChampions")))
 	{
 		var banned = GetBannedTeamChampions(GetPlayerTeam(GetOwner()));
-		
+		var possible = GetChampions();
 		for(var c in banned)
 		{
+			var champ_index = GetIndexOf(possible, c) + 101;
+			GuiUpdate({BackgroundColor = 0x50ffff00}, choosemenu_id, champ_index, nil);
 			//GuiUpdateTag("Nope", choosemenu_id, c);
 		}
 	}
