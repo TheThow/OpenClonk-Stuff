@@ -10,6 +10,13 @@ func SelectChampion()
 		PlayerMessage(GetOwner(), "%s", type.Name);
 		return;
 	}
+	
+	if(FindObject(Find_ID(Rule_InstaGib)))
+	{
+		SelectChamp([InstaGibMan], GetOwner());
+		return;
+	}
+	
 	ChooseMenu();
 }
 
@@ -105,7 +112,7 @@ func SelectChamp(data, int player, int ID, int subwindowID, object target)
 {
 	ChampType = data[0];
 
-	if(FindObject(Find_Func("UseTeamExclusiveChampions")))
+	if(FindObject(Find_Func("UseTeamExclusiveChampions")) && !FindObject(Find_ID(Rule_InstaGib)))
 	{
 		var banned = GetBannedTeamChampions(GetPlayerTeam(GetOwner()));
 		

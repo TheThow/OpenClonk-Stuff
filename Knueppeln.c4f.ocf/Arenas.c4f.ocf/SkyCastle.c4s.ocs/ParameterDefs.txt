@@ -70,3 +70,22 @@ Description=$ManaRegDesc$
 		Description=On
 		Value=2
 		
+[ParameterDef]
+ID=InstaGib
+Default=1
+LeagueValue=1
+Name=$InstaGibName$
+Description=$InstaGibDesc$
+
+	[Options]
+		
+		[Option]
+		Name=Off
+		Description=Off
+		Value=1
+		
+		[Option]
+		Name=On
+		Description=On
+		Value=2
+		

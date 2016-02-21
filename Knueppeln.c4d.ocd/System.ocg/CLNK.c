@@ -33,7 +33,7 @@ func Construction()
 	if(FindObject(Find_ID(Rule_FastMana)))
 	{
 		interval = 3;
-		BLOCK_CD = 22;
+		BLOCK_CD = 20;
 	}
 	
 	AddEffect("ManaRegen", this, 20, interval, this, Clonk);

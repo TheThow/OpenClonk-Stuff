@@ -75,7 +75,7 @@ func FxGoalCheckTimer(object target, proplist effect, int time)
 	
 	if(b)
 	{
-		Log("Team: %s scored!", GetTaggedTeamName(effect.enemy));
+		Log("Team %s scored!", GetTaggedTeamName(effect.enemy));
 		team_score[effect.enemy - 1]++;
 		b->RemoveObject();
 		ScoreEffect(target);
@@ -115,6 +115,7 @@ func ResetPlayer(plr)
 {
 	GameCall("SpawnPlayer", plr, 10);
 	ScheduleCall(GetCrew(plr), "SelectChampion", 15, 0);
+	DoEnergy(100, GetCrew(plr));
 	pause = false;
 }
 

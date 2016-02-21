@@ -9,3 +9,6 @@ RelaunchDesc=How many times a player will relaunch.
 
 ManaRegName=Increased Mana Regeneration
 ManaRegDesc=Guess what
+
+InstaGibName=InstaGib
+InstaGibDesc=One hit kills.

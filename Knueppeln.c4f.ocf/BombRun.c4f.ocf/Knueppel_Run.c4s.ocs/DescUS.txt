@@ -1,11 +1,12 @@
-Knüppeln.c4s
+Knüppel Run.c4s
 
-An arena inside a fucking volcano.
+A bomb run scenario inside a fucking volcano.
 
 
-About Knüppeln:
+About Bomb Run:
 
-Choose your champion at the beginning / at each respawn and knüppel your enemies to death!
+Each level has a ball that starts in the middle of the playing field. Your team scores by getting the ball through the enemy team's hoop.
+Each champion can only be chosen once per team per round. You have to stick with your champion till the end of a round.
 
 Controls:
 Double W/A/S/D mid air = Double jump

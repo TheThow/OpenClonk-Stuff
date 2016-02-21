@@ -75,7 +75,7 @@ func HitObject(obj)
 	if(obj->~CanBeHit() == false)
 		return;
 	AddEffect("PoisonDart", obj, 1, 100, nil, GetID());
-	obj->DoEnergy(-SpellDamage);
+	WeaponDamage(obj, SpellDamage);
 	Sound("Hits::ProjectileHitLiving?", false, 50);
 	HitEffect();
 }
