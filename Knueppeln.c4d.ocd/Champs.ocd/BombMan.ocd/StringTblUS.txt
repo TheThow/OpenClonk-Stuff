@@ -1,0 +1,2 @@
+Name=Bomb Man
+Description=He blows. \n\nQ = Sticky Bomb \nE = Detonate \nR = Bombplosion \n\nContributed by Zapper
