@@ -33,6 +33,8 @@ func Special2(object clonk, int x, int y, bool released, bool mouseclick, bool a
 		{
 			other[0].is_selected = true;
 		}
+		for (var shard in other)
+			shard.offset += shard.angle_distance;
 		return;
 	}
 	
@@ -55,6 +57,8 @@ func Special3(object clonk, int x, int y, bool released, bool mouseclick, bool a
 		{
 			other[0].is_selected = true;
 		}
+		for (var shard in other)
+			shard.offset += shard.angle_distance;
 		return;
 	}
 	

@@ -45,6 +45,7 @@ func ChargeStop(proplist params)
 	{
 		var other = CreateObject(GetID(), 0, 0, GetController());
 		other->Init(a * i, Radius);
+		other.angle_distance = a;
 		other.number = -i;
 		other.Target = this.Target;
 	}
@@ -80,7 +81,7 @@ func FxIntInFlightTimer(target, fx, int time)
 {
 	if (!Target) return RemoveObject();
 
-	angle = 5 * time + offset;
+	angle = 5 * (FrameCounter()) + offset + 23 * Target->ObjectNumber();
 	var radius = Min(time, this.Radius / 2);
 	var lifetime = 7;
 	if (is_selected)
