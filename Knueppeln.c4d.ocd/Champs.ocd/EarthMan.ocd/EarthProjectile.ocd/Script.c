@@ -14,7 +14,6 @@ local trailparticles;
 
 func Initialize()
 {
-	SetRDir(10);
 	trailparticles =
 	{
 		Size = PV_Linear(PV_Random(7, 12),0),

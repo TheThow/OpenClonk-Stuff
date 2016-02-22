@@ -1,6 +1,12 @@
 static team_exclusiveChampions;
 static lastChosenChampion;
 
+global func GetChampions()
+{
+	var Champ_Def = [ElectroMan, FireMan, LaserMan, IceMan, EarthMan, NinjaMan, BallsMan];
+	return Champ_Def;
+}
+
 global func UpdateAllSelectionMenus()
 {
 	for(var o in FindObjects(Find_ID(Clonk), Find_OCF(OCF_Alive)))
@@ -60,12 +66,6 @@ global func ResetTeamExclusiveChamps()
 global func GetBannedTeamChampions(int teamid)
 {
 	return team_exclusiveChampions[teamid -1];
-}
-
-global func GetChampions()
-{
-	var Champ_Def = [ElectroMan, FireMan, LaserMan, IceMan, EarthMan, NinjaMan, BallsMan, BombMan];
-	return Champ_Def;
 }
 
 

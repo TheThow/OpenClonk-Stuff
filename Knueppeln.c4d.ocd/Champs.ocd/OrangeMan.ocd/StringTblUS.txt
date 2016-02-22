@@ -1,0 +1,2 @@
+Name=Orange Man
+Description=He sure likes orange. \n\nQ = Electro Shot \nE = Electro Orb \nR = Thunder Strike

@@ -2,7 +2,7 @@
 Icon=19
 Title=Knueppel Run.c4s
 Version=8
-MaxPlayer=14
+MaxPlayer=12
 
 [Definitions]
 Definition2=Knueppeln.c4d.ocd

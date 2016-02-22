@@ -1,0 +1,13 @@
+[DefCore]
+id=SlowField
+Version=5,2,0,1
+Category=C4D_StaticBack
+Width=8
+Height=8
+Offset=-4,-4
+Value=1
+Mass=10
+Components=SlowField=1
+Projectile=1
+Rotate=1
+
