@@ -19,7 +19,7 @@ func Launch(object clonk, int x, int y)
 	var angle = Angle(0, 0, x, y, 10);
 	var xdir = Sin(angle, Speed, 10);
 	var ydir = -Cos(angle, Speed, 10);
-	SetSpeed(xdir, ydir);
+	SetSpeed(clonk->GetXDir() + xdir, clonk->GetYDir() + ydir);
 	Target = clonk;
 	SetController(clonk->GetController());
 	SoundAt("Hits::BucketHit*", nil, nil, 70, nil, nil, RandomX(-50, 50));
@@ -39,6 +39,14 @@ func Launch(object clonk, int x, int y)
 	};
 	AddTimer("Particles", 2);
 	AddTimer("StickTo", 2);
+	
+	var bombs = FindObjects(Find_ID(GetID()), Find_Owner(GetOwner()), Sort_Func("ObjectNumber"));
+	var to_kill = Max(0, GetLength(bombs) - 12);
+	while (to_kill > 0)
+	{
+		bombs[to_kill - 1]->Remove();
+		to_kill -= 1;
+	}
 }
 
 func Particles()
@@ -101,6 +109,11 @@ func Blocked(object clonk)
 {
 	if (GetCategory() != C4D_StaticBack) return;
 	if (!Hostile(GetController(), clonk->GetOwner())) return;
+	Remove();
+}
+
+func Remove()
+{
 	CreateParticle("SphereSpark", PV_Random(-5, 5), PV_Random(-5, 5), PV_Random(-20, 20), PV_Random(-20, 20), PV_Random(20, 100), this.spark_particle, 30);
 	RemoveObject();
 }
