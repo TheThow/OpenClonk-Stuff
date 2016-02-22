@@ -57,6 +57,8 @@ public func ObjectControl(int plr, int ctrl, int x, int y, int strength, bool re
 			AddEffect("Blocking", this, 1, 1, this, GetID());
 			AddEffect("BlockingCD", this, 1, BLOCK_CD);
 		}
+		
+		return true;
 	}
 	
 	if (ctrl == CON_QuickSwitch)

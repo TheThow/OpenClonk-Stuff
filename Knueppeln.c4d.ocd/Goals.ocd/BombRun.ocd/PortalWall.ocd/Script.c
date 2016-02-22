@@ -20,6 +20,28 @@ local team;
 func Initialize()
 {
 	AddEffect("SlowHeal", this, 1, 15, this);
+	AddEffect("CheckWipf", this, 1, 5, this);
+}
+
+func FxCheckWipfTimer()
+{
+	if(!bar)
+		return;
+
+	if(CheckWipf())
+		bar->SetBarColor(GetTeamColor(team));
+	else
+		bar->SetBarColor(RGB(100, 100, 100));
+}
+
+func CheckWipf()
+{
+	if(FindObject(Find_ID(Goal_BombRun.ballID), Find_Distance(Size*2 + 50)))
+	{
+		return true;
+	}
+	
+	return false;
 }
 
 func FxSlowHealTimer()
@@ -56,7 +78,7 @@ func CreateWall(int teamid, int size, int hp)
 		y = - 120,
 	};
 	bar = CreateProgressBar(GUI_SimpleProgressBar, MaxHP, HP, nil, -1, offset);
-	
+
 	stones = CreateArray(360/10);
 	
 	for(var i = 0; i < 360; i+=8)
@@ -80,6 +102,9 @@ func GotDamage(int dmg, int plr)
 		return;
 		
 	if(GetPlayerTeam(plr) == team)
+		return;
+	
+	if(!CheckWipf())
 		return;
 
 	HP = HP + dmg/1000;
