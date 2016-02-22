@@ -32,6 +32,13 @@ local ox;
 local oy;
 local rangedummy;
 
+local moveparticle;
+local moveparticle2;
+local movetrailparticles;
+local followtrailparticles;
+local hometrailparticles;
+local hometrailparticles2;
+
 func Initialize()
 {
 	SetAction("Travel");
@@ -57,6 +64,67 @@ func Initialize()
 			
 		};
 	rangedummy->CreateParticle("Shockwave2", 0, 0, 0, 0, 0, props, 1);
+	
+	moveparticle =
+	{
+		Alpha = 100,
+		Size = AttackSize * 2,
+		R = pR,
+		G = pG,
+		B = pB,
+		Rotation = PV_Random(0,360),
+		BlitMode = GFX_BLIT_Additive,
+	};
+	
+	moveparticle2 =
+	{
+		Size = PV_Linear(2,0),
+		BlitMode = GFX_BLIT_Additive,
+		R = pR,
+		G = pG,
+		B = pB,
+		Attach=ATTACH_Back,
+	};
+	
+	movetrailparticles =
+	{
+		Size = PV_Linear(5,0),
+		BlitMode = GFX_BLIT_Additive,
+		R = pR,
+		G = pG,
+		B = pB,
+		Attach=ATTACH_Back,
+	};
+	
+	followtrailparticles =
+	{
+		Size = PV_Linear(5,0),
+		BlitMode = GFX_BLIT_Additive,
+		R = 50,
+		G = 50,
+		B = 50,
+		Attach=ATTACH_Back,
+	};
+	
+	hometrailparticles =
+	{
+		Size = PV_Linear(5,0),
+		BlitMode = GFX_BLIT_Additive,
+		R = 0,
+		G = 255,
+		B = 255,
+		Attach=ATTACH_Back,
+	};
+	
+	hometrailparticles2 =
+	{
+		Size = PV_Linear(2,0),
+		BlitMode = GFX_BLIT_Additive,
+		R = 0,
+		G = 255,
+		B = 255,
+		Attach=ATTACH_Back,
+	};
 }
 
 func SetMaster(object clonk)
@@ -224,17 +292,8 @@ func FxFollowMasterTimer(object target, proplist effect, int time)
 
 	MoveToPos(master->GetX(), master->GetY() - 15);
 	
-	var trailparticles2 =
-	{
-		Size = PV_Linear(5,0),
-		BlitMode = GFX_BLIT_Additive,
-		R = 50,
-		G = 50,
-		B = 50,
-		Attach=ATTACH_Back,
-	};
 	
-	DrawParticleLine("Flash", 0, 0, ox-GetX(), oy-GetY(), 1, 0, 0, 15, trailparticles2);
+	DrawParticleLine("Flash", 0, 0, ox-GetX(), oy-GetY(), 1, 0, 0, 15, followtrailparticles);
 	ox=GetX();
 	oy=GetY();
 }
@@ -253,34 +312,14 @@ func FxHomeCallTimer(object target, proplist fx, int time)
 		oy=GetY();
 		return;
 	}
-		
-	var trailparticles =
-	{
-		Size = PV_Linear(5,0),
-		BlitMode = GFX_BLIT_Additive,
-		R = 0,
-		G = 255,
-		B = 255,
-		Attach=ATTACH_Back,
-	};
 	
-	DrawParticleLine("Flash", 0, 0, ox-GetX(), oy-GetY(), 1, 0, 0, 15, trailparticles);
-	
-	var trailparticles2 =
-	{
-		Size = PV_Linear(2,0),
-		BlitMode = GFX_BLIT_Additive,
-		R = 0,
-		G = 255,
-		B = 255,
-		Attach=ATTACH_Back,
-	};
+	DrawParticleLine("Flash", 0, 0, ox-GetX(), oy-GetY(), 1, 0, 0, 15, hometrailparticles);
 	
 	if(time%7 == 0)
 	{
 		for(var i = 0; i < 360; i+=5)
 		{
-			CreateParticle("Flash", Sin(i, 3), -Cos(i, 5), 0, 0, 10, trailparticles2, 2);
+			CreateParticle("Flash", Sin(i, 3), -Cos(i, 5), 0, 0, 10, hometrailparticles2, 2);
 		}
 	}
 
@@ -347,35 +386,14 @@ func FxMoveToTimer(object target, proplist fx, int time)
 		oy=GetY();
 		return;
 	}
-		
-	var trailparticles =
-	{
-		Size = PV_Linear(5,0),
-		BlitMode = GFX_BLIT_Additive,
-		R = pR,
-		G = pG,
-		B = pB,
-		Attach=ATTACH_Back,
-	};
 	
-	DrawParticleLine("Flash", 0, 0, ox-GetX(), oy-GetY(), 1, 0, 0, 15, trailparticles);
-	
-	
-	var trailparticles2 =
-	{
-		Size = PV_Linear(2,0),
-		BlitMode = GFX_BLIT_Additive,
-		R = pR,
-		G = pG,
-		B = pB,
-		Attach=ATTACH_Back,
-	};
-	
+	DrawParticleLine("Flash", 0, 0, ox-GetX(), oy-GetY(), 1, 0, 0, 15, movetrailparticles);
+
 	if(time%7 == 0)
 	{
 		for(var i = 0; i < 360; i+=5)
 		{
-			CreateParticle("Flash", Sin(i, 3), -Cos(i, 5), 0, 0, 10, trailparticles2, 2);
+			CreateParticle("Flash", Sin(i, 3), -Cos(i, 5), 0, 0, 10, moveparticle2, 2);
 		}
 	}
 
@@ -392,18 +410,7 @@ func FxMoveToTimer(object target, proplist fx, int time)
 		CheckForEnemies(AttackSize);
 		Idle();
 		
-		
-		var flashparticle =
-		{
-			Alpha = 100,
-			Size = AttackSize * 2,
-			R = pR,
-			G = pG,
-			B = pB,
-			Rotation = PV_Random(0,360),
-			BlitMode = GFX_BLIT_Additive,
-		};
-		CreateParticle("StarSpark", 0, 0, 0, 0, 10, flashparticle, 5);
+		CreateParticle("StarSpark", 0, 0, 0, 0, 10, moveparticle, 5);
 		
 		return -1;
 	}

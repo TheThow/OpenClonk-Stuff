@@ -19,11 +19,19 @@ local a2 = 0;
 local Speed = 35;
 local Durr = 70;
 local Charge_Dur = 15;
+local firetrailparticles;
 
 func Initialize()
 {
 	SetAction("Travel");
 	SetClrModulation(RGBa(0,0,0,0));
+	
+	firetrailparticles =
+	{
+		Prototype = Particles_FireTrail(),
+		Size = PV_Linear(8,0),
+		OnCollision=nil,
+	};
 }
 
 func Launch(object clonk, int x, int y)
@@ -59,13 +67,6 @@ func ChargeEffect(proplist params)
 
 	for(var i = 0; i < cnt; i++)
 	{
-		var firetrailparticles =
-		{
-			Prototype = Particles_FireTrail(),
-			Size = PV_Linear(8,0),
-			OnCollision=nil,
-		};
-	
 		var r = 360/cnt * i;
 		CreateParticle("Fire", Sin(r + a2, 20), -Cos(r + a2, 20), PV_Random(-2,2), PV_Random(-2,2), 30, firetrailparticles, 3);
 	}

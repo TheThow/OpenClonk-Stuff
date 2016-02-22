@@ -17,10 +17,30 @@ local Charge_dur = 15;
 
 local angle_prec = 10;
 
+local inner;
+local outer;
+
 func Initialize()
 {
 	SetAction("Travel");
 	SetClrModulation(RGBa(0,0,0,0));
+	
+	inner =
+	{
+		Size = PV_Linear(1,0),
+		BlitMode = GFX_BLIT_Additive,
+		R = 255,
+		G = 255,
+		B = 255,
+	};
+	outer =
+	{
+		Size = PV_Linear(2,0),
+		BlitMode = GFX_BLIT_Additive,
+		R = 0,
+		G = 255,
+		B = 255,
+	};
 }
 
 func Launch(object clonk, int x, int y)
@@ -76,34 +96,18 @@ func ChargeStop(proplist params)
 	sword->PlayAnimation(animation_sword, 10, Anim_Linear(0, 0, GetAnimationLength(animation_sword), length, ANIM_Remove), Anim_Const(1000));
 	
 	var range = 60;
-	
-	var props2 =
-	{
-		Size = PV_Linear(1,0),
-		BlitMode = GFX_BLIT_Additive,
-		R = 255,
-		G = 255,
-		B = 255,
-	};
-		var props =
-	{
-		Size = PV_Linear(2,0),
-		BlitMode = GFX_BLIT_Additive,
-		R = 0,
-		G = 255,
-		B = 255,
-	};
+
 	for(var i = a - (range-10)*10; i < a + (range-10)*10; i++)
 	{
 		var x = Sin(i, SpellRange - 4, 10);
 		var y = -Cos(i, SpellRange - 4, 10);
-		clonk->CreateParticle("Flash", x, y, 0, 0, 20, props, 2);
+		clonk->CreateParticle("Flash", x, y, 0, 0, 20, outer, 2);
 	}
 	for(var i = a - (range-10)*10; i < a + (range-10)*10; i++)
 	{
 		var x = Sin(i, SpellRange - 5, 10);
 		var y = -Cos(i, SpellRange - 5, 10);
-		clonk->CreateParticle("Flash", x, y, 0, 0, 20, props2, 2);
+		clonk->CreateParticle("Flash", x, y, 0, 0, 20, inner, 2);
 	}
 	
 	var eff = AddEffect("CheckHit", clonk, 1,1, nil, GetID());

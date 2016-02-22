@@ -52,7 +52,7 @@ func GotDamage(int dmg)
 	HP = HP + dmg/1000;
 	
 	if(HP <= 0)
-		Destroy();
+		ScheduleCall(this, "Destroy", 1);
 	
 	if(this)
 		AddEffect("DamageCD", this, 20, 1);

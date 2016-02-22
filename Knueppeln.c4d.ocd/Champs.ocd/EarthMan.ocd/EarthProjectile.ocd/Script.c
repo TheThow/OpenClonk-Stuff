@@ -10,9 +10,19 @@ local ManaCost = 25;
 
 local counter = 0;
 
+local trailparticles;
+
 func Initialize()
 {
 	SetRDir(10);
+	trailparticles =
+	{
+		Size = PV_Linear(PV_Random(7, 12),0),
+		BlitMode = GFX_BLIT_Additive,
+		R = pR,
+		G = pG,
+		B = pB,
+	};
 }
 
 func InitEffect()
@@ -25,15 +35,6 @@ func InitEffect()
 
 func TravelEffect(int time)
 {
-	var trailparticles =
-	{
-		Size = PV_Linear(PV_Random(7, 12),0),
-		BlitMode = GFX_BLIT_Additive,
-		R = pR,
-		G = pG,
-		B = pB,
-	};
-	
 	CreateParticle("Flash", PV_Random(-3,3), PV_Random(-3,3), PV_Random(-7,7), PV_Random(-7,7), 10, trailparticles, 7);
 }
 

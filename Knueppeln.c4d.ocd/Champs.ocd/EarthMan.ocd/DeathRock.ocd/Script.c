@@ -10,6 +10,8 @@ local Size = 20;
 
 local LifeTime = 200;
 local rotation = 0;
+local sharpflame;
+local lightning;
 
 private func Construction()
 {
@@ -18,6 +20,30 @@ private func Construction()
   	//SetProperty("MeshTransformation", Trans_Mul(Trans_Scale(1000,1000,1000),Trans_Rotate(RandomX(0,359),0,1,0), Trans_Rotate(RandomX(0,359), 1, 0, 0)));
   	SetClrModulation(RGBa(255,255,255,0));
   	SetAction("Travel");
+	
+	sharpflame =
+	{
+		Size = 10,
+		R = 50,
+		G = 255,
+		B = 50,
+		Alpha = PV_Linear(60, 0),
+		Rotation = PV_Random(0, 360),
+		Phase = PV_Random(0, 5),
+		OnCollision = 0,
+		BlitMode = GFX_BLIT_Additive,
+	};
+	
+	lightning =
+	{
+		Prototype = Particles_ElectroSpark2(),
+		Size = PV_Linear(PV_Random(3,7),0),
+		BlitMode = GFX_BLIT_Additive,
+		Rotation = PV_Random(0,360),
+		R = 50,
+		G = 255,
+		B = 50,
+	};
 }
 
 func Launch(object clonk, int x, int y)
@@ -119,7 +145,14 @@ func ChargeEffect(proplist params)
 	{
 		if(!Random(5))
 		{
-			var props =
+			
+			x = x + Sin(i, Size/3 + RandomX(-2, 2));
+			y = y - Cos(i, Size/3 + RandomX(-2, 2));
+			
+			var xdir = Sin(i + 180, 15);
+			var ydir = -Cos(i + 180, 15);
+			
+			var lightningprops =
 			{
 				Size = PV_Linear(5,4),
 				R = 50, G = 255, B = 50,
@@ -129,44 +162,14 @@ func ChargeEffect(proplist params)
 				Rotation = i + 180,
 			};
 			
-			x = x + Sin(i, Size/3 + RandomX(-2, 2));
-			y = y - Cos(i, Size/3 + RandomX(-2, 2));
-			
-			var xdir = Sin(i + 180, 15);
-			var ydir = -Cos(i + 180, 15);
-			
-			CreateParticle("Lightning", x, y, xdir, ydir, 10, props, 1);
+			CreateParticle("Lightning", x, y, xdir, ydir, 10, lightningprops, 1);
 		}
 	}
 }
 
 func FxParticlesTimer(object target, proplist effect, int time)
 {
-	var sharpflame =
-	{
-		Size = 10,
-		R = 50,
-		G = 255,
-		B = 50,
-		Alpha = PV_Linear(60, 0),
-		Rotation = PV_Random(0, 360),
-		Phase = PV_Random(0, 5),
-		OnCollision = 0,
-		BlitMode = GFX_BLIT_Additive,
-	};
-	
 	CreateParticle("FireSharp", PV_Random(-15, 15), PV_Random(-15, 15), RandomX(-1, 1), PV_Random(-1,-2), 20, sharpflame, 4);
-	
-	var lightning =
-	{
-		Prototype = Particles_ElectroSpark2(),
-		Size = PV_Linear(PV_Random(3,7),0),
-		BlitMode = GFX_BLIT_Additive,
-		Rotation = PV_Random(0,360),
-		R = 50,
-		G = 255,
-		B = 50,
-	};
 	
 	CreateParticle("Lightning", RandomX(-12, 12), RandomX(-12, 12), 0, 0, 10, lightning, 2);
 }

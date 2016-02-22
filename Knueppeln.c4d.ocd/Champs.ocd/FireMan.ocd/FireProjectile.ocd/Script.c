@@ -2,6 +2,7 @@
 
 local SpellDamage = 22;
 local Speed = 60;
+local firetrailparticles;
 
 func InitEffect()
 {
@@ -23,16 +24,17 @@ func InitEffect()
 		
 	};
 	CreateParticle("Shockwave", 0, 0, 0, 0, 0, lightparticle);
-}
-
-func TravelEffect(int time)
-{
-	var firetrailparticles =
+	
+	firetrailparticles =
 	{
 		Prototype = Particles_FireTrail(),
 		Size = PV_Linear(10,0),
 		BlitMode = GFX_BLIT_Additive,
 	};
+}
+
+func TravelEffect(int time)
+{
 	CreateParticle("Fire", 0, 0, PV_Random(-7,7), PV_Random(-7,7), 10, firetrailparticles, 3);
 }
 

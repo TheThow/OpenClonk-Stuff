@@ -21,6 +21,9 @@ local team_score;
 
 local leftgoal;
 local rightgoal;
+local leftshield;
+local rightshield;
+local shieldradius;
 
 local pause = false;
 
@@ -39,21 +42,24 @@ func Initialize()
 	var pos = GameCall("LeftGoalPos");
 	leftgoal = CreateObject(Dummy, pos[0], pos[1], -1);
 	leftgoal.Visibility = VIS_All;
-	var fxl = AddEffect("GoalCheck", leftgoal, 1, 1, this);
+	var fxl = AddEffect("GoalCheck", leftgoal, 1, 1, this, nil, 1, 2);
 	fxl.teamid = 1;
 	fxl.enemy = 2;
-	leftgoal->CreateObject(PortalWall,0,0,-1)->CreateWall();
+	leftshield = leftgoal->CreateObject(PortalWall,0,0,-1);
+	leftshield->CreateWall(1, 80, 100);
 	
 	pos = GameCall("RightGoalPos");
 	rightgoal = CreateObject(Dummy, pos[0], pos[1], -1);
 	rightgoal.Visibility = VIS_All;
-	var fxr = AddEffect("GoalCheck", rightgoal, 1, 1, this);
+	var fxr = AddEffect("GoalCheck", rightgoal, 1, 1, this, nil, 2, 1);
 	fxr.teamid = 2;
 	fxr.enemy = 1;
-	rightgoal->CreateObject(PortalWall,0,0,-1)->CreateWall();
-	
+	rightshield = rightgoal->CreateObject(PortalWall,0,0,-1);
+	rightshield->CreateWall(2, 80, 100);
 	
 	SpawnBall();
+	
+	
 }
 
 
@@ -74,21 +80,26 @@ func UseTeamExclusiveChampions() { return true; }
 
 func NoRelaunchReleaseOnSelection() { return true; }
 
-func FxGoalCheckTimer(object target, proplist effect, int time)
+func FxGoalCheckStart(object target, proplist effect, int temporary, var1, var2)
 {
-	var clr = GetTeamColor(effect.teamid);
+	var clr = GetTeamColor(var1);
 	var rgba = SplitRGBaValue(clr);
-	
-	var props = {
+
+	effect.particles = {
 		R = rgba[0],
 		G = rgba[1],
 		B = rgba[2],
 		Size = 5,
 		Alpha = PV_Linear(255, 0)
 	};
+}
+
+func FxGoalCheckTimer(object target, proplist effect, int time)
+{
+
 	effect.angle += 3;
-	target->CreateParticle("Flash", Cos(effect.angle, 15), Sin(effect.angle, 30), 0, 0, 50, props, 1);
-	target->CreateParticle("Flash", Cos(effect.angle - 180, 15), Sin(effect.angle - 180, 30), 0, 0, 50, props, 1);
+	target->CreateParticle("Flash", Cos(effect.angle, 15), Sin(effect.angle, 30), 0, 0, 50, effect.particles, 1);
+	target->CreateParticle("Flash", Cos(effect.angle - 180, 15), Sin(effect.angle - 180, 30), 0, 0, 50, effect.particles, 1);
 	
 	var b = (target->FindObject(Find_ID(ballID), Find_InRect(-12, -30, 24, 60)));
 	
@@ -125,7 +136,7 @@ func FxGoalCheckTimer(object target, proplist effect, int time)
 			for(var i = 0; i < GetPlayerCount(); i++)
 			{
 				ScheduleCall(this, "ResetPlayer", 120, 0, GetPlayerByIndex(i));
-				ScheduleCall(this, "Set", 120);
+				ScheduleCall(this, "Set", 200);
 			}
 		}
 	}
@@ -142,8 +153,8 @@ func ResetPlayer(plr)
 
 func Set()
 {
-	rightgoal->CreateObject(PortalWall,0,0,-1)->CreateWall();
-	leftgoal->CreateObject(PortalWall,0,0,-1)->CreateWall();
+	leftshield->CreateWall(1, 80, 100);
+	rightshield->CreateWall(2, 80, 100);
 	pause = false;
 }
 

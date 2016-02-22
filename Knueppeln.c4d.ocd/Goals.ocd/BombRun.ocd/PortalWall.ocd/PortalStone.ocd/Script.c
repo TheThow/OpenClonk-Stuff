@@ -14,28 +14,16 @@ local lightning;
 
 func Initialize()
 {
-	SetSolidMask();
-	if(GBackSolid())
-	{
-		RemoveObject();
-		return 0;
-	}
-	SetSolidMask(0,0,10,10);
-	
 	var random = Random(5);
 	if(random)
 	{
 		SetGraphics(Format("%d", random));
 	}
-	SetR(Random(360));
+	var r = Random(360);
+	SetR(r);
 	SetRDir(2);
 	SetAction("Travel");
-	AddEffect("Particles", this, 20, 1, this);
-	
-	for(var o in FindObjects(Find_OCF(OCF_Alive), Find_Distance(10)))
-	{
-		o->Unstuck();
-	}
+	AddEffect("Particles", this, 20, 2, this);
 	
 	var smoke = 
 	{
@@ -83,9 +71,8 @@ func SetMaster(master)
 
 func FxParticlesTimer(object target, proplist effect, int time)
 {
-	CreateParticle("FireSharp", RandomX(-5, 5), RandomX(-5, 5), RandomX(-1, 1), PV_Random(-1,-2), 20, sharpflame, 1);
-	
-	CreateParticle("Lightning", RandomX(-5, 5), RandomX(-5, 5), 0, 0, 10, lightning, 2);
+	//CreateParticle("FireSharp", RandomX(-5, 5), RandomX(-5, 5), RandomX(-1, 1), PV_Random(-1,-2), 20, sharpflame, 1);
+	//CreateParticle("Lightning", RandomX(-5, 5), RandomX(-5, 5), 0, 0, 10, lightning, 2);
 }
 
 func FxParticlesStop(object target, proplist effect, int reason, bool temporary)
@@ -126,7 +113,7 @@ func FxParticlesDamage(object target, proplist effect, int damage, int cause)
 {
 	if(Master)
 		Master->GotDamage(damage);
-		
+	
 	return 0;
 }
 
@@ -134,6 +121,15 @@ func CanBeHit()
 {
 	return true;
 }
+
+/*
+func Damage(int change, int cause, int by_player)
+{
+	if(Master)
+		Master->GotDamage(change, by_player);
+		
+	DoEnergy(change);
+}*/
 
 local ActMap = {
 

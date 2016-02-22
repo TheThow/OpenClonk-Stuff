@@ -12,6 +12,8 @@ local counter = 0;
 local ox;
 local oy;
 
+local trailparticles;
+local trailparticles2;
 func Initialize()
 {
 }
@@ -23,11 +25,8 @@ func InitEffect()
 	SetLightColor(RGB(200, 215, 255));
 	ox=GetX();
 	oy=GetY();
-}
-
-func TravelEffect(int time)
-{
-	var trailparticles =
+	
+	trailparticles =
 	{
 		Size = PV_Linear(PV_Random(2, 3),0),
 		BlitMode = GFX_BLIT_Additive,
@@ -36,9 +35,7 @@ func TravelEffect(int time)
 		B = pB,
 	};
 	
-	CreateParticle("Flash", PV_Random(-3,3), PV_Random(-3,3), PV_Random(-7,7), PV_Random(-7,7), 10, trailparticles, 2);
-	
-	var trailparticles2 =
+	trailparticles2 =
 	{
 		Size = PV_Linear(PV_Random(2, 4),0),
 		BlitMode = GFX_BLIT_Additive,
@@ -46,6 +43,12 @@ func TravelEffect(int time)
 		G = 50,
 		B = 50,
 	};
+	
+}
+
+func TravelEffect(int time)
+{
+	CreateParticle("Flash", PV_Random(-3,3), PV_Random(-3,3), PV_Random(-7,7), PV_Random(-7,7), 10, trailparticles, 2);
 	
 	//CreateParticle("Flash", 0, 0, 0, 0, 10, trailparticles2, 2);
 	DrawParticleLine("Flash", 0, 0, ox-GetX(), oy-GetY(), 1, 0, 0, 10, trailparticles2);
