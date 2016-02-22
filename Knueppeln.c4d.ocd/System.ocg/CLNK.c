@@ -244,7 +244,7 @@ func ControlLeftDouble()
 {
 	var penality = 0;
 	if(IsCarryingHeavy())
-		penality = 10;
+		penality = 12;
 		
   	SetXDir(-40 + penality);
   	SetYDir(GetYDir() - 15);
@@ -255,7 +255,7 @@ func ControlRightDouble()
 {
 	var penality = 0;
 	if(IsCarryingHeavy())
-		penality = 10;
+		penality = 12;
 
   	SetXDir(40 - penality);
   	SetYDir(GetYDir() - 15);
@@ -292,16 +292,23 @@ func Death(int killed_by)
 	if(RangeDummy)
 	{
 		RangeDummy->ClearParticles();
-		RemoveObject(RangeDummy);
+		RangeDummy->RemoveObject();
 	}
+		
+	if(FindContents(Sword))
+		FindContents(Sword)->RemoveObject();
 	
-	if(this)
-	{
-		FadeOut(30, true);
-	}
+	AddEffect("RemoveBody", this, 1, 80, this);
 	
 	return _inherited(killed_by);
 }
+
+func FxRemoveBodyStop(target)
+{
+	if(target)
+		target->RemoveObject();
+}
+
 
 func FxManaRegenTimer()
 {

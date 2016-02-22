@@ -1,6 +1,6 @@
 [ParameterDef]
 ID=ScoreToWin
-Default=5
+Default=3
 LeagueValue=5
 Name=$ScoreName$
 Description=$ScoreDesc$

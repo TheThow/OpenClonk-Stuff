@@ -109,10 +109,11 @@ func FxParticlesStop(object target, proplist effect, int reason, bool temporary)
 	CreateParticle("Smoke", PV_Random(-5,5), PV_Random(-5,5), PV_Random(-15, 15), PV_Random(-15, 15), 30, smoke, 15);
 }
 
-func FxParticlesDamage(object target, proplist effect, int damage, int cause)
+func FxParticlesDamage(object target, proplist effect, int damage, int cause, int by)
 {
 	if(Master)
-		Master->GotDamage(damage);
+		Master->GotDamage(damage, by);
+	
 	
 	return 0;
 }

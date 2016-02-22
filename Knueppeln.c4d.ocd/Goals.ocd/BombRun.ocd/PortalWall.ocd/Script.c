@@ -8,6 +8,7 @@
 local ManaCost = 35;
 
 local stones;
+local MaxHP = 100;
 local HP = 100;
 local Size = 80;
 
@@ -18,25 +19,43 @@ local team;
 
 func Initialize()
 {
-	bar = CreateObject(Library_Bars, 0, 0, -1);
-	bar->SetBarOffset(0, -50, 100);
-	bar->SetBarDimensions(200, 50, 100);
+	AddEffect("SlowHeal", this, 1, 15, this);
+}
+
+func FxSlowHealTimer()
+{
+	if(bar && HP < MaxHP)
+	{
+		HP++;
+		bar->SetValue(HP);
+	}
 }
 
 func CreateWall(int teamid, int size, int hp)
 {
 	if(hp)
+	{
+		MaxHP = hp;
 		HP = hp;
-	
+	}
 	if(size)
 		Size = size;
-	
+		
+	if(bar)
+		bar->RemoveObject();
+
 	team = teamid;
 		
 	if(stones != nil)
 	{
 		Destroy();
 	}
+	
+	var offset = {
+		x = 0,
+		y = - 120,
+	};
+	bar = CreateProgressBar(GUI_SimpleProgressBar, MaxHP, HP, nil, -1, offset);
 	
 	stones = CreateArray(360/10);
 	
@@ -45,7 +64,7 @@ func CreateWall(int teamid, int size, int hp)
 		var stone = CreateObject(PortalStone, Cos(i, Size), Sin(i, Size), -1);
 		var clr = GetTeamColor(teamid);
 		var rgba = SplitRGBaValue(clr);
-		stone->SetClrModulation(RGBa(rgba[0], rgba[1], rgba[2], 128));
+		stone->SetClrModulation(RGBa(rgba[0], rgba[1], rgba[2], 100));
 		
 		stones[i] = stone;
 		if(stone)
@@ -57,7 +76,10 @@ func CreateWall(int teamid, int size, int hp)
 
 func GotDamage(int dmg, int plr)
 {
-	if(GetEffect("DamageCD", this))
+	if(GetEffect(Format("DamageCD%d", plr), this))
+		return;
+		
+	if(GetPlayerTeam(plr) == team)
 		return;
 
 	HP = HP + dmg/1000;
@@ -65,8 +87,10 @@ func GotDamage(int dmg, int plr)
 	if(HP <= 0)
 		ScheduleCall(this, "Destroy", 1);
 	
+	bar->SetValue(HP);
+	
 	if(this)
-		AddEffect("DamageCD", this, 20, 5);
+		AddEffect(Format("DamageCD%d", plr), this, 20, 6);
 }
 
 func Destroy()
@@ -77,6 +101,9 @@ func Destroy()
 			s->RemoveObject();
 	}
 	Sound("Fire::BlastLiquid2");
+	
+	if(bar)
+		bar->RemoveObject();
 }
 
 func FxRemoveStop(object target, proplist effect, int reason, bool temporary)
