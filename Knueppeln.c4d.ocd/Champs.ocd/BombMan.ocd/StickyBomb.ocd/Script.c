@@ -101,7 +101,7 @@ func Blocked(object clonk)
 {
 	if (GetCategory() != C4D_StaticBack) return;
 	if (!Hostile(GetController(), clonk->GetOwner())) return;
-	CreateParticle("SphereSpark", PV_Random(-5, 5), PV_Random(-5, 5), PV_Random(-20, 20), PV_Random(-20, 20), PV_Random(20, 100), 30);
+	CreateParticle("SphereSpark", PV_Random(-5, 5), PV_Random(-5, 5), PV_Random(-20, 20), PV_Random(-20, 20), PV_Random(20, 100), this.spark_particle, 30);
 	RemoveObject();
 }
 
