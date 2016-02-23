@@ -6,10 +6,18 @@
 */
 
 local partner;
+local props;
 
 func Initialize()
 {
 	AddEffect("Particles", this, 1, 1 ,this);
+	props = {
+		Size = PV_Linear(PV_Random(3, 5),0),
+		BlitMode = GFX_BLIT_Additive,
+		R = 50,
+		G = 255,
+		B = 50,
+	};
 }
 
 func CreatePartner()
@@ -23,14 +31,6 @@ func FxParticlesTimer()
 	{
 		return;
 	}
-	
-	var props = {
-		Size = PV_Linear(PV_Random(3, 5),0),
-		BlitMode = GFX_BLIT_Additive,
-		R = 50,
-		G = 255,
-		B = 50,
-	};
 	
 	
 	var dist = Distance(GetX(), GetY(), partner->GetX(), partner->GetY());

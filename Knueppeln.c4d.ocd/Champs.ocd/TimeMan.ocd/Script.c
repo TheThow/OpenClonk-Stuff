@@ -10,16 +10,19 @@
 local Description = "$Description$";
 local Name = "$Name$";
 
-local Special1Spell = ElectroProjectile;
-local Special2Spell = PlasmaSpear;
+local Special1Spell = TimeProjectile;
+local Special2Spell = TimeTravel;
 local Special3Spell = SlowField;
+
+local Special2Cooldown = 20;
+local Special3Cooldown = 200;
 
 func Special1(object clonk, int x, int y, bool released, bool mouseclick, bool abletocast, bool cooldown)
 {
 	if(!released && !mouseclick && abletocast && !cooldown)
 	{
-		clonk->LaunchSpell(Special1Spell, x, y, 0, 0);
-		return 1;
+		if(clonk->LaunchSpell(Special1Spell, x, y, 0, 0))
+			return 1;
 	}
 	return 0;
 }
@@ -28,8 +31,8 @@ func Special2(object clonk, int x, int y, bool released, bool mouseclick, bool a
 {
 	if(!released && !mouseclick && abletocast && !cooldown)
 	{
-		clonk->LaunchSpell(Special2Spell, x, y, 0, 0);
-		return 1;
+		if(clonk->LaunchSpell(Special2Spell, x, y, 0, 0))
+			return 1;
 	}
 	return 0;
 }
@@ -127,12 +130,8 @@ func BlockEffect(object clonk, range)
 	
 }
 
-func ShowRange()
-{
 
-}
-
-func FxElectroHitTimer(object target, proplist effect, int time)
+func FxTimeHitTimer(object target, proplist effect, int time)
 {
 	var lightning =
 	{
@@ -140,9 +139,9 @@ func FxElectroHitTimer(object target, proplist effect, int time)
 		Size = PV_Linear(PV_Random(2,5),0),
 		BlitMode = GFX_BLIT_Additive,
 		Rotation = PV_Random(0,360),
-		R = 175,
-		G = 215,
-		B = 255,
+		R = 255,
+		G = 150,
+		B = 50,
 		Attach = ATTACH_Front | ATTACH_MoveRelative,
 	};
 	
@@ -152,7 +151,7 @@ func FxElectroHitTimer(object target, proplist effect, int time)
 		return -1;
 }
 
-global func AddElectroHitEffect()
+global func AddTimeHitEffect()
 {
-	this->AddEffect("ElectroHit", this, 20, 1, nil, ElectroMan);
+	this->AddEffect("TimeHit", this, 20, 1, nil, TimeMan);
 }

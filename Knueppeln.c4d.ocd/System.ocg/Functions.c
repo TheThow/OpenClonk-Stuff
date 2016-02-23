@@ -3,7 +3,7 @@ static lastChosenChampion;
 
 global func GetChampions()
 {
-	var Champ_Def = [ElectroMan, FireMan, LaserMan, IceMan, EarthMan, NinjaMan, BallsMan, BombMan];
+	var Champ_Def = [TimeMan, ElectroMan, FireMan, LaserMan, IceMan, EarthMan, NinjaMan, BallsMan, BombMan];
 	return Champ_Def;
 }
 
@@ -18,7 +18,7 @@ global func UpdateAllSelectionMenus()
 global func SetLastChosenChampion(int plr, id champ)
 {
 	if(lastChosenChampion == nil)
-		lastChosenChampion = CreateArray(GetPlayerCount());
+		lastChosenChampion = CreateArray(GetPlayerCount()*2);
 		
 	lastChosenChampion[plr] = champ;
 }

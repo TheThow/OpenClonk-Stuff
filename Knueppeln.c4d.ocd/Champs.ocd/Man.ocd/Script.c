@@ -101,7 +101,7 @@ func CastSpellWithSpellRange(object clonk, int x, int y, bool released, bool mou
 		clonk->CancelShowSpellRange();
 	}
 
-	if(!released && mouseclick && abletocast)
+	if(!released && mouseclick && abletocast && !cooldown)
 	{
 		if(!CastSpellWithSpellRangeCondition(clonk, x, y, released, mouseclick, abletocast, cooldown, props, spell))
 		{
@@ -114,14 +114,15 @@ func CastSpellWithSpellRange(object clonk, int x, int y, bool released, bool mou
 			var a = Angle(0,0, x, y, 10);
 			var newx = Sin(a, spell.SpellRange, 10);
 			var newy = -Cos(a, spell.SpellRange, 10);
-			clonk->LaunchSpell(spell, newx, newy, newx, newy);
 			
-			return 1;
+			if(clonk->LaunchSpell(spell, newx, newy, newx, newy))
+				return 1;
+			
+			return 0;
 		}
 		
-		clonk->LaunchSpell(spell, x, y, x, y);
-		
-		return 1;
+		if(clonk->LaunchSpell(spell, x, y, x, y))
+			return 1;
 	}
 	
 	return 0;

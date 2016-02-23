@@ -1,0 +1,2 @@
+Name=Time Man
+Description=What time is it? \n\nQ = Electro Shot \nE = Electro Orb \nR = Thunder Strike

@@ -35,8 +35,9 @@ func Special1(object clonk, int x, int y, bool released, bool mouseclick, bool a
 		var param = {
 			ball = clonk.Ball
 		};
-		clonk->LaunchSpell(Special1Spell, x, y, 0, 0, param);
-		return 1;
+		
+		if(clonk->LaunchSpell(Special1Spell, x, y, 0, 0, param))
+			return 1;
 	}
 	return 0;
 }
@@ -48,8 +49,9 @@ func Special2(object clonk, int x, int y, bool released, bool mouseclick, bool a
 		var param = {
 			ball = clonk.Ball
 		};
-		clonk->LaunchSpell(Special2Spell, x, y, 0, 0, param);
-		return 1;
+		
+		if(clonk->LaunchSpell(Special2Spell, x, y, 0, 0, param))
+			return 1;
 	}
 	return 0;
 }
@@ -61,8 +63,9 @@ func Special3(object clonk, int x, int y, bool released, bool mouseclick, bool a
 		var param = {
 			ball = clonk.Ball
 		};
-		clonk->LaunchSpell(Special3Spell, x, y, 0, 0, param);
-		return 1;
+		
+		if(clonk->LaunchSpell(Special3Spell, x, y, 0, 0, param))
+			return 1;
 	}
 	return 0;
 }
@@ -225,3 +228,26 @@ func CleanUp(object clonk)
 		clonk.Ball->KillBall();
 }
 
+func FxBallHitTimer(object target, proplist effect, int time)
+{
+	var props =
+	{
+		Size = PV_Linear(PV_Random(2,5),0),
+		BlitMode = GFX_BLIT_Additive,
+		R = 50,
+		G = 50,
+		B = 255,
+		Attach = ATTACH_Front | ATTACH_MoveRelative,
+		Alpha = PV_Linear(255, 0)
+	};
+	
+	target->CreateParticle("Flash", RandomX(-5, 5), RandomX(-10, 10), 0, 0, 10, props, 2);
+	
+	if(time > 40)
+		return -1;
+}
+
+global func AddBallHitEffect()
+{
+	this->AddEffect("BallHit", this, 20, 1, nil, BallsMan);
+}

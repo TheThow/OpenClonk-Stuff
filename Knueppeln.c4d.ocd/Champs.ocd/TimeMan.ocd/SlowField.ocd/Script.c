@@ -5,7 +5,7 @@
 	@author 
 */
 
-local ManaCost = 40;
+local ManaCost = 35;
 local SpellRange = 275;
 
 
@@ -14,21 +14,11 @@ local currentSize;
 
 local Dur = 120;
 
-local border;
 local r;
 
 func Initialize()
 {
 	currentSize = 0;
-	border = {
-		Size = 5,
-		BlitMode = GFX_BLIT_Additive,
-		R = 150,
-		G = 100,
-		B = 50,
-		Attach=ATTACH_Back,
-	};
-	r=0;
 }
 
 func CenterParticle()
@@ -49,6 +39,7 @@ func Launch(object clonk, int x, int y)
 	AddEffect("Grow", this, 1, 1, this);
 	AddEffect("Slow", this, 1, 1, this);
 	AddEffect("Remove", this, 1, Dur, this);
+	Sound("slowfield", false, 100);
 }
 
 func FxGrowTimer(object target, proplist effect, int time)
@@ -73,12 +64,24 @@ func FxGrowTimer(object target, proplist effect, int time)
 
 func DrawBorder()
 {
+/*
 	for(var i = 0; i < 360; i++)
 	{
 		r+=15;
-		CreateParticle("Flash", Cos(i, currentSize) + Cos(r, Random(5)-5), Sin(i, currentSize) + Sin(r, Random(5)-5), 0, 0, 1, border, 2);
+		CreateParticle("Flash", Cos(i, currentSize), Sin(i, currentSize), 0, 0, 1, border, 2);
 	}
-	r+=10;
+	r+=10;*/
+	r+=3;
+	var border = {
+		Size = currentSize*2,
+		BlitMode = GFX_BLIT_Additive,
+		R = 255,
+		G = 255,
+		B = 255,
+		Attach=ATTACH_Back,
+		Rotation = r,
+	};
+	CreateParticle("CurlyFries", 0, 0, 0, 0, 1, border, 2);
 }
 
 func FxGrowStop(object target, proplist effect, int reason, bool temporary)
@@ -139,8 +142,8 @@ func FxSlowTimer(object target, proplist effect, int time)
 {
 	for(var o in FindObjects(Find_Distance(currentSize)))
 	{
-		//if(o->GetOwner() == GetOwner())
-		//	continue;
+		if(o->GetOwner() == GetOwner() || o->GetID() == TimeProjectile)
+			continue;
 		
 		if(!GetEffect("SlowField", o))
 			AddEffect("SlowField", o, 1, 1, this);

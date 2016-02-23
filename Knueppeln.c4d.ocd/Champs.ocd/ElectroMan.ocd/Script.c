@@ -18,8 +18,8 @@ func Special1(object clonk, int x, int y, bool released, bool mouseclick, bool a
 {
 	if(!released && !mouseclick && abletocast && !cooldown)
 	{
-		clonk->LaunchSpell(Special1Spell, x, y, 0, 0);
-		return 1;
+		if(clonk->LaunchSpell(Special1Spell, x, y, 0, 0))
+			return 1;
 	}
 	return 0;
 }
@@ -28,8 +28,8 @@ func Special2(object clonk, int x, int y, bool released, bool mouseclick, bool a
 {
 	if(!released && !mouseclick && abletocast && !cooldown)
 	{
-		clonk->LaunchSpell(Special2Spell, x, y, 0, 0);
-		return 1;
+		if(clonk->LaunchSpell(Special2Spell, x, y, 0, 0))
+			return 1;
 	}
 	return 0;
 }

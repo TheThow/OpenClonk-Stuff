@@ -1,0 +1,8 @@
+[DefCore]
+id=TimeTravel
+Version=5,2,0,1
+Category=C4D_Vehicle
+Width=8
+Height=8
+Offset=-4,-4
+ClosedContainer=2

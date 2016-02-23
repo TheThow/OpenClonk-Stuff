@@ -17,7 +17,12 @@ local Special3Spell = IceShardUltimate;
 func Special1(object clonk, int x, int y, bool released, bool mouseclick, bool abletocast, bool cooldown)
 {
 	if(!released && !mouseclick && abletocast && !cooldown)
-		clonk->LaunchSpell(StickyBomb, x, y, 0, 0);
+	{
+		if(clonk->LaunchSpell(StickyBomb, x, y, 0, 0))
+			return 1;
+	}
+	
+	return 0;
 }
 
 func Special2(object clonk, int x, int y, bool released, bool mouseclick, bool abletocast,  bool cooldown)
@@ -39,7 +44,10 @@ func Special3(object clonk, int x, int y, bool released, bool mouseclick, bool a
 	if (released || mouseclick || cooldown) return;
 	
 	if(!released && !mouseclick && abletocast && !cooldown)
-		clonk->LaunchSpell(StickyBombUltimate, x, y, 0, 0);
+	{
+		if(clonk->LaunchSpell(StickyBombUltimate, x, y, 0, 0))
+			return 1;
+	}
 }
 
 func JumpEffect(object clonk, dir)

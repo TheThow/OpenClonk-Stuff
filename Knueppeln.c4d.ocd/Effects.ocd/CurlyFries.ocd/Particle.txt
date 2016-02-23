@@ -1,0 +1,3 @@
+[Particle]
+Name=CurlyFries
+Face=0,0,700,700,-350, -350

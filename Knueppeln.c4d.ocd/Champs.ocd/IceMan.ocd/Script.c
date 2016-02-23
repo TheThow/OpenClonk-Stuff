@@ -40,8 +40,11 @@ func Special2(object clonk, int x, int y, bool released, bool mouseclick, bool a
 	
 	if(abletocast)
 	{
-		clonk->LaunchSpell(IceShard, x, y, 0, 0);
+		if(clonk->LaunchSpell(IceShard, x, y, 0, 0))
+			return 1;
 	}
+	
+	return 0;
 }
 
 func Special3(object clonk, int x, int y, bool released, bool mouseclick, bool abletocast, bool cooldown)
@@ -64,8 +67,11 @@ func Special3(object clonk, int x, int y, bool released, bool mouseclick, bool a
 	
 	if(abletocast)
 	{
-		clonk->LaunchSpell(IceShardUltimate, x, y, 0, 0);
+		if(clonk->LaunchSpell(IceShardUltimate, x, y, 0, 0))
+			return 1;
 	}
+	
+	return 0;
 }
 
 func JumpEffect(object clonk, dir)
