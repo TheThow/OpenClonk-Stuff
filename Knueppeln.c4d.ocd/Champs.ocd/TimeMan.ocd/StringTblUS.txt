@@ -1,2 +1,2 @@
 Name=Time Man
-Description=What time is it? \n\nQ = Electro Shot \nE = Electro Orb \nR = Thunder Strike
+Description=What time is it? \n\nQ = Idk \nE = Time Travel \nR = Slowing Field
