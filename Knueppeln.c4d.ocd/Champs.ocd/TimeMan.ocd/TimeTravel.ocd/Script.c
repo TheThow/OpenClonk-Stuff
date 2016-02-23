@@ -157,6 +157,7 @@ func FxTimeTravelTimer(object target, proplist effect, int time)
 		target.TimeTravelMark = nil;
 		target->Exit();
 		target->SetPosition(target->GetX(), target->GetY() + 5);
+		target->Unstuck();
 		RemoveObject();
 	}
 }
