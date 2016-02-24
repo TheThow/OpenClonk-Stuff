@@ -4,9 +4,9 @@ LastTeamID=2
   [Team]
   id=1
   Name=Left
-  Color=4294180864
+  Color=16716947
 
   [Team]
   id=2
   Name=Not Left
-  Color=4278241280
+  Color=65535
