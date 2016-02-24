@@ -1,7 +1,7 @@
 local ManaCost = 10;
 local Speed = 60;
 local SpellRange = 300;
-local Radius = 100;
+local Radius = 150;
 
 func Launch(object clonk, int x, int y)
 {
