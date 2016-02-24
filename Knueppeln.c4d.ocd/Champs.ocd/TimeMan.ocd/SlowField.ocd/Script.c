@@ -9,7 +9,7 @@ local ManaCost = 35;
 local SpellRange = 275;
 
 
-local MaxSize = 65;
+local MaxSize = 50;
 local currentSize;
 
 local Dur = 100;
