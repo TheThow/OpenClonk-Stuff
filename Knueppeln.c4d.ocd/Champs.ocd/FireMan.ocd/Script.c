@@ -118,12 +118,9 @@ func BlockEffect(object clonk, range)
 	}
 }
 
-func FxFireHitTimer(object target, proplist effect, int time)
+func FxFireHitStart(target, fx)
 {
-	if(time > 40 || !target)
-		return -1;
-
-	var chaoticspark =
+	fx.chaoticspark =
 	{
 		Size = PV_Linear(1, 0),
 		ForceX = PV_KeyFrames(10, 0, PV_Random(-6, 6), 333, PV_Random(-6, -6), 666, PV_Random(6, 6), 1000, PV_Random(-6, 6)),
@@ -140,7 +137,7 @@ func FxFireHitTimer(object target, proplist effect, int time)
 		Alpha = PV_Random(100,180),
 		BlitMode = GFX_BLIT_Additive
 	};
-	var sharpflame =
+	fx.sharpflame =
 	{
 		Size = 4,
 		R = 255,
@@ -152,13 +149,19 @@ func FxFireHitTimer(object target, proplist effect, int time)
 		BlitMode = GFX_BLIT_Additive,
 		Attach = ATTACH_Front | ATTACH_MoveRelative
 	};
+}
+
+func FxFireHitTimer(object target, proplist effect, int time)
+{
+	if(time > 40 || !target)
+		return -1;
 	
 	var x = target->GetX();
 	var y = target->GetY();
 	
-	CreateParticle("Magic", PV_Random(x + -5, x+ 5), PV_Random(y + -10, y + 10), PV_Random(25, -25), PV_Random(-25, 12), 50, chaoticspark);
+	CreateParticle("Magic", PV_Random(x + -5, x+ 5), PV_Random(y + -10, y + 10), PV_Random(25, -25), PV_Random(-25, 12), 50, effect.chaoticspark);
 	
-	CreateParticle("FireSharp", RandomX(x + -5, x+ 5), RandomX(y + -10, y + 10), 0, PV_Random(-3,-10), 10, sharpflame, 2);
+	CreateParticle("FireSharp", RandomX(x + -5, x+ 5), RandomX(y + -10, y + 10), 0, PV_Random(-3,-10), 10, effect.sharpflame, 2);
 }
 
 global func AddFireHitEffect()

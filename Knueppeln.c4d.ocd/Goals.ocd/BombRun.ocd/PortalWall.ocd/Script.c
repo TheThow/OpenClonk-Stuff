@@ -29,9 +29,14 @@ func FxCheckWipfTimer()
 		return;
 
 	if(CheckWipf())
-		bar->SetBarColor(GetTeamColor(team));
+	{
+		var rgba = SplitRGBaValue(GetTeamColor(team));
+		bar->SetBarColor(RGBa(rgba[0], rgba[1], rgba[2], 255));
+	}
 	else
+	{
 		bar->SetBarColor(RGB(100, 100, 100));
+	}
 }
 
 func CheckWipf()
@@ -75,10 +80,10 @@ func CreateWall(int teamid, int size, int hp)
 	
 	var offset = {
 		x = 0,
-		y = - 120,
+		y = - Size - 30,
 	};
 	bar = CreateProgressBar(GUI_SimpleProgressBar, MaxHP, HP, nil, -1, offset);
-
+	
 	stones = CreateArray(360/10);
 	
 	for(var i = 0; i < 360; i+=8)

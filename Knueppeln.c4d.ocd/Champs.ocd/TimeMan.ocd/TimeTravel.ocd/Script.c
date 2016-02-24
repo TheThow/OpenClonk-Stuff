@@ -127,8 +127,8 @@ func FxTimeTravelStart(object target, proplist effect, int temporary)
 func FxTimeTravelTimer(object target, proplist effect, int time)
 {
 	var angle = Angle(GetX(), GetY(), pos[0], pos[1]);
-	
-	SetVelocity(angle, Speed);
+	var dist = Distance(GetX(), GetY(), pos[0], pos[1]);
+	SetVelocity(angle, Max(Speed, Min(Speed*2, dist)));
 	
 	effect.cnt +=25;
 	
