@@ -1,5 +1,5 @@
 [DefCore]
-id=StickyBombUltimate
+id=StickyBombMagnet
 Version=6,0
 Category=C4D_StaticBack
 Width=1

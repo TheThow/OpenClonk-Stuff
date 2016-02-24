@@ -1,6 +1,5 @@
 
-local ManaCost = 15;
-local ChargeDuration = 20;
+local ManaCost = 10;
 local Target;
 local Speed = 30;
 
@@ -116,6 +115,37 @@ func Remove()
 {
 	CreateParticle("SphereSpark", PV_Random(-5, 5), PV_Random(-5, 5), PV_Random(-20, 20), PV_Random(-20, 20), PV_Random(20, 100), this.spark_particle, 30);
 	RemoveObject();
+}
+
+func HopTo(int x, int y, int speed)
+{
+	if (GetCategory() == C4D_StaticBack) AddTimer("StickTo", 2);
+	SetCategory(C4D_None);
+	var angle = Angle(GetX(), GetY(), x, y);
+	var surface = GetSurfaceVector();
+	
+	var target_speed_x = Sin(angle, speed);
+	var target_speed_y = -Cos(angle, speed);
+	var surf_speed_x = 0, surf_speed_y = 0;
+	if (surface[0] != 0 || surface[1] != 0)
+	{
+		var surf_angle = Angle(0, 0, surface[0], surface[1]);
+		surf_speed_x = Sin(surf_angle, 10);
+		surf_speed_y = -Cos(surf_angle, 10);
+	}
+	
+	SetSpeed(target_speed_x + surf_speed_x, target_speed_y + surf_speed_y);
+	
+	CreateParticle("Shockwave", 0, 0, 0, 0, 30, this.wave_particle, 1);
+	Sound("Ball::ball_blocked", false, 50, nil, nil, nil, Random(200));
+	AddEffect("Trail", this, 1, 1, this);
+}
+
+func FxTrailTimer(object target, effect fx, int time)
+{
+	if (time > 38) return FX_Execute_Kill;
+	CreateParticle("SphereSpark", PV_Random(-5, 5), PV_Random(-5, 5), PV_Random(-10, 10), PV_Random(-10, 10), PV_Random(20, 30), this.spark_particle, 2);
+	return FX_OK;
 }
 
 local ActMap = {

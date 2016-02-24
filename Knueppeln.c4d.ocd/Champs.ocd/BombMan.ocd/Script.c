@@ -10,15 +10,14 @@
 local Name = "$Name$";
 local Description = "$Description$";
 
-local Special1Spell = IceProjectile;
-local Special2Spell = IceShard;
-local Special3Spell = IceShardUltimate;
+local Special1Spell = StickyBomb;
+local Special3Spell = StickyBombMagnet;
 
 func Special1(object clonk, int x, int y, bool released, bool mouseclick, bool abletocast, bool cooldown)
 {
 	if(!released && !mouseclick && abletocast && !cooldown)
 	{
-		if(clonk->LaunchSpell(StickyBomb, x, y, 0, 0))
+		if(clonk->LaunchSpell(Special1Spell, x, y, 0, 0))
 			return 1;
 	}
 	
@@ -41,13 +40,17 @@ func Special2(object clonk, int x, int y, bool released, bool mouseclick, bool a
 
 func Special3(object clonk, int x, int y, bool released, bool mouseclick, bool abletocast, bool cooldown)
 {
-	if (released || mouseclick || cooldown) return;
-	
-	if(!released && !mouseclick && abletocast && !cooldown)
+	var props =
 	{
-		if(clonk->LaunchSpell(StickyBombUltimate, x, y, 0, 0))
-			return 1;
-	}
+		Alpha = 40,
+		Size = Special3Spell.SpellRange*2,
+		BlitMode = GFX_BLIT_Additive,
+		Rotation = PV_Step(10, 0, 1),
+		Attach = ATTACH_Back | ATTACH_MoveRelative
+		
+	};
+	props = Particles_Colored(props, GetPlayerColor(clonk->GetOwner()));
+	return CastSpellWithSpellRange(clonk, x, y, released, mouseclick, abletocast, cooldown, props, Special3Spell);
 }
 
 func JumpEffect(object clonk, dir)
