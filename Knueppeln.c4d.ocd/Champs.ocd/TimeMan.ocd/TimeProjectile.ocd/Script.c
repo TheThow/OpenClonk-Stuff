@@ -15,7 +15,7 @@ local trailparticles;
 
 func InitEffect()
 {
-	Sound("time_shot", false, 30);
+	Sound("time_shot", false, 50);
 	SetLightRange(30, 70);
 	SetLightColor(RGB(200, 215, 255));
 	

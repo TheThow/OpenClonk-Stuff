@@ -14,14 +14,6 @@ local lightning;
 
 func Initialize()
 {
-	var random = Random(5);
-	if(random)
-	{
-		SetGraphics(Format("%d", random));
-	}
-	var r = Random(360);
-	SetR(r);
-	SetRDir(2);
 	SetAction("Travel");
 	AddEffect("Particles", this, 20, 2, this);
 	

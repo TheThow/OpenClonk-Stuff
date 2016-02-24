@@ -21,6 +21,7 @@ func Launch(object clonk, int x, int y)
 		clonk.timeposfx = AddEffect("TravelPos", clonk, 1, 1, nil, GetID(), Size);
 		clonk.timeposfx.size = Size;
 		clonk.timeposfx.dur = Dur;
+		Sound("travel_pos", false, 10, clonk->GetOwner());
 		RemoveObject();
 		return 1;
 	}

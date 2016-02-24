@@ -163,6 +163,10 @@ Rotation    Every player gets the same champion[/i]
 - A coop adventure... but I'm too lazy for that.
 
 
+[h]Bugs[/h]
+Openclonk crashes everytime you finish a round.
+
+
 [h]Special Thanks[/h]
 
 Zapper for helping with a lot of stuff.
