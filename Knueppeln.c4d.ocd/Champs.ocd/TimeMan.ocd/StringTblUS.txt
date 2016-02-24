@@ -1,2 +1,2 @@
 Name=Time Man
-Description=What time is it? \n\nQ = Idk \nE = Time Travel \nR = Slowing Field
+Description=What time is it? \n\nQ = Energy Shot \nE = Time Travel \nR = Slowing Field
