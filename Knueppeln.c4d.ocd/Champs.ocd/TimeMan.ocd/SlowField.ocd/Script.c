@@ -5,14 +5,14 @@
 	@author 
 */
 
-local ManaCost = 40;
+local ManaCost = 35;
 local SpellRange = 275;
 
 
 local MaxSize = 65;
 local currentSize;
 
-local Dur = 120;
+local Dur = 100;
 
 local r;
 
@@ -82,6 +82,17 @@ func DrawBorder()
 		Rotation = r,
 	};
 	CreateParticle("CurlyFries", 0, 0, 0, 0, 1, border, 2);
+	/*
+	var border2 = {
+		Size = currentSize*2,
+		BlitMode = GFX_BLIT_Additive,
+		R = 255,
+		G = 255,
+		B = 255,
+		Attach=ATTACH_Back,
+		Rotation = r-30,
+	};
+	CreateParticle("CurlyFries", 0, 0, 0, 0, 1, border2, 2);*/
 }
 
 func FxGrowStop(object target, proplist effect, int reason, bool temporary)

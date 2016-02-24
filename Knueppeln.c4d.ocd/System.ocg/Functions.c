@@ -3,7 +3,7 @@ static lastChosenChampion;
 
 global func GetChampions()
 {
-	var Champ_Def = [TimeMan, ElectroMan, FireMan, LaserMan, IceMan, EarthMan, NinjaMan, BallsMan, BombMan];
+	var Champ_Def = [ElectroMan, FireMan, LaserMan, TimeMan, IceMan, EarthMan, NinjaMan, BallsMan, BombMan];
 	return Champ_Def;
 }
 

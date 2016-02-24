@@ -4,5 +4,10 @@ NoiseNoir				- electro_explosion* (CC BY 3.0)
 Timbre					- vanish* & reappear* (CC BY-NC 3.0) 
 						http://www.freesound.org/people/Timbre/sounds/161777/
 
+OnlyTheGhosts			- mark_hit* (CC BY 3.0) 
+						http://freesound.org/people/OnlyTheGhosts/sounds/251430/
+						
+tcpp					- time_hit* (CC BY 3.0) 
+						http://freesound.org/people/tcpp/sounds/132098/
 
 * changes were made

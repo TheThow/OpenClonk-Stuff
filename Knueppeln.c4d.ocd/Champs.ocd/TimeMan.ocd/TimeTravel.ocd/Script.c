@@ -9,7 +9,7 @@ local ManaCost = 15;
 local SpellDamage = 30;
 local Speed = 100;
 local Size = 25;
-local Dur = 600;
+local Dur = 400;
 
 local pos;
 
@@ -194,8 +194,18 @@ func HitArea()
 	{
 		var angle = Angle(GetX(), GetY(), o->GetX(), o->GetY());
 		o->AddTimeHitEffect();
-		o->Fling(Sin(angle, 5), -Cos(angle, 5));
+		o->Fling(Sin(angle, 5), -Cos(angle, 5) - 2);
 		WeaponDamage(o, SpellDamage);
+		
+		if(!o)
+			continue;
+		
+		if(GetEffect("TimeMark", o))
+		{
+			WeaponDamage(o, TimeProjectile.MarkDamage);
+			RemoveEffect("TimeMark", o);
+		}
+		
 	}
 }
 

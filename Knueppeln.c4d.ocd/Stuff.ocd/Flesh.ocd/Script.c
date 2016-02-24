@@ -32,7 +32,16 @@ func FxDrawBloodTimer(object target, proplist effect, int time)
 		DrawMaterialQuad("BackgroundBlood-gore", x, y, x+1, y, x+1, y+1, x, y+1, true);
 	}
 	
+	if(!GetXDir() && !GetYDir() && !GetEffect("Idle", this))
+		AddEffect("Idle", this, 1, 15, this);
+		
 	return 0;
+}
+
+func FxIdleStop()
+{
+	if(!GetXDir() && !GetYDir() && this)
+		Hit();
 }
 
 func Hit()

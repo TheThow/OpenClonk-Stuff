@@ -189,7 +189,7 @@ func FxFireDashStop(object target, proplist effect, int reason, bool temporary)
 		var angle = Angle(target->GetX(), target->GetY(), o->GetX(), o->GetY());
 		
 		o->AddFireHitEffect();
-		o->Fling(Sin(angle, 8), -Cos(angle, 8));
+		o->Fling(Sin(angle, 8), -Cos(angle, 8) - 2);
 		target->WeaponDamage(o, effect.SpellDamage2);
 	}
 	

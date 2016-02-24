@@ -35,6 +35,14 @@ func InitEffect()
 func TravelEffect(int time)
 {
 	CreateParticle("Flash", PV_Random(-3,3), PV_Random(-3,3), PV_Random(-7,7), PV_Random(-7,7), 10, trailparticles, 7);
+	if(!GetXDir() && !GetYDir() && !GetEffect("Idle", this))
+		AddEffect("Idle", this, 1, 15, this);
+}
+
+func FxIdleStop()
+{
+	if(!GetXDir() && !GetYDir() && this)
+		HitEffect();
 }
 
 func HitEffect()
