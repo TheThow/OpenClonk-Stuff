@@ -89,6 +89,22 @@ Upon reaching you it grants you a shield that absorbs 15 damage.[/i]
 Discharge      [i]Mana: 35 Damage: 40 Range: - Duration: - C
 Your ball damages everything near it after a small delay.[/i]
  
+ 
+[b]Time Man[/b]
+<insert epic description>
+
+Energy Shot    [i]Mana: 15 Damage: 10 Range: - Duration: - B
+Launches a fast traveling projectile that leaves a mark on your target. Hit again to activate that mark and deal an additional 20 damage.
+Not affected by Slowing Field.[/i]
+
+Time Travel   [i] Mana: 2*15 Damage: 30 Range: ? Duration: 400 B
+First activation leaves a time travel marker on your position that lasts 10 seconds. Activate again to travel back to that location and deal damage to anyone near it. 
+As soon as you start traveling the marker will be revealed to other players.
+Time Travel also triggers the energy shot mark.[/i]
+
+Slowing Field    [i] Mana: 40 Damage: 0 Range: 275 Duration: 100 C 
+Hold R and click within the range indicator to create a field that slows everything in its range.[/i]
+ 
 
 [b]Laser Man[/b] - contributed by Zapper
 <insert epic description>
