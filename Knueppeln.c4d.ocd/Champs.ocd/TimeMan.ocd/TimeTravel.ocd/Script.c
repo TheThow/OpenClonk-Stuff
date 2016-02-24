@@ -202,6 +202,7 @@ func HitArea()
 		
 		if(GetEffect("TimeMark", o))
 		{
+			Sound("mark_hit", false, 80);
 			WeaponDamage(o, TimeProjectile.MarkDamage);
 			RemoveEffect("TimeMark", o);
 		}

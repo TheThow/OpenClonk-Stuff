@@ -103,7 +103,7 @@ func FxTimeMarkStart(target, effect)
 
 func FxTimeMarkTimer(target, effect, time)
 {	
-	if(time > 80)
+	if(time > 120)
 		return -1;
 		
 	target->CreateParticle("Flash", 0, 0, 0, 0, 1, effect.props, 2);
