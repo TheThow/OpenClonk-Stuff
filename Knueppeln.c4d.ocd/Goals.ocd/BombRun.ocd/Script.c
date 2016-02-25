@@ -46,7 +46,7 @@ func Initialize()
 	fxl.teamid = 1;
 	fxl.enemy = 2;
 	leftshield = leftgoal->CreateObject(PortalWall,0,0,-1);
-	leftshield->CreateWall(1, 80, 75 + (25 * GetPlayerCount()));
+	leftshield->CreateWall(1, 90, 80, 75 + (25 * GetPlayerCount()));
 	
 	pos = GameCall("RightGoalPos");
 	rightgoal = CreateObject(Dummy, pos[0], pos[1], -1);
@@ -55,7 +55,7 @@ func Initialize()
 	fxr.teamid = 2;
 	fxr.enemy = 1;
 	rightshield = rightgoal->CreateObject(PortalWall,0,0,-1);
-	rightshield->CreateWall(2, 80, 75 + (25 * GetPlayerCount()));
+	rightshield->CreateWall(2, 90, 80, 75 + (25 * GetPlayerCount()));
 	
 	SpawnBall();
 	
@@ -153,8 +153,8 @@ func ResetPlayer(plr)
 
 func Set()
 {
-	leftshield->CreateWall(1, 80, 75 + (25 * GetPlayerCount()));
-	rightshield->CreateWall(2, 80, 75 + (25 * GetPlayerCount()));
+	leftshield->CreateWall(1, 90, 80, 75 + (25 * GetPlayerCount()));
+	rightshield->CreateWall(2, 90, 80, 75 + (25 * GetPlayerCount()));
 	pause = false;
 }
 

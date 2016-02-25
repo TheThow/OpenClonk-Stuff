@@ -94,7 +94,7 @@ func JumpEffect(object clonk, dir)
 		to = 310;
 	}
 
-	Sound("Hits::SoftHit2", false, 30);
+	clonk->Sound("Hits::SoftHit2", false, 30);
 
 	for(var i = from; i < to; i+=5)
 	{

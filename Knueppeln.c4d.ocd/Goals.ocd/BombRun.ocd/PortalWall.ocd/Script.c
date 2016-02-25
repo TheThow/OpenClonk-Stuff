@@ -10,7 +10,8 @@ local ManaCost = 35;
 local stones;
 local MaxHP = 100;
 local HP = 100;
-local Size = 80;
+local Size_x = 80;
+local Size_y = 80;
 
 local SpellRange = 100;
 
@@ -41,7 +42,7 @@ func FxCheckWipfTimer()
 
 func CheckWipf()
 {
-	if(FindObject(Find_ID(Goal_BombRun.ballID), Find_Distance(Size*2 + 50)))
+	if(FindObject(Find_ID(Goal_BombRun.ballID), Find_Distance((Size_x + Size_y) + 50)))
 	{
 		return true;
 	}
@@ -58,16 +59,19 @@ func FxSlowHealTimer()
 	}
 }
 
-func CreateWall(int teamid, int size, int hp)
+func CreateWall(int teamid, int size_x, int size_y, int hp)
 {
 	if(hp)
 	{
 		MaxHP = hp;
 		HP = hp;
 	}
-	if(size)
-		Size = size;
-		
+	if(size_x)
+		Size_x = size_x;
+	
+	if(size_y)
+		Size_y = size_y;
+	
 	if(bar)
 		bar->RemoveObject();
 
@@ -80,7 +84,7 @@ func CreateWall(int teamid, int size, int hp)
 	
 	var offset = {
 		x = 0,
-		y = - Size - 30,
+		y = - Size_y - 30,
 	};
 	bar = CreateProgressBar(GUI_SimpleProgressBar, MaxHP, HP, nil, -1, offset);
 	
@@ -88,7 +92,7 @@ func CreateWall(int teamid, int size, int hp)
 	
 	for(var i = 0; i < 360; i+=8)
 	{
-		var stone = CreateObject(PortalStone, Cos(i, Size), Sin(i, Size), -1);
+		var stone = CreateObject(PortalStone, Cos(i, Size_x), Sin(i, Size_y), -1);
 		var clr = GetTeamColor(teamid);
 		var rgba = SplitRGBaValue(clr);
 		stone->SetClrModulation(RGBa(rgba[0], rgba[1], rgba[2], 100));

@@ -70,7 +70,7 @@ func JumpEffect(object clonk, dir)
 		to = 310;
 	}
 
-	Sound("electro_shot", false, 20, nil, nil, nil, 200);
+	clonk->Sound("electro_shot", false, 20, nil, nil, nil, 200);
 
 	for(var i = from; i < to; i+=5)
 	{

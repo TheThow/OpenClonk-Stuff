@@ -77,7 +77,7 @@ func JumpEffect(object clonk, dir)
 		to = 310;
 	}
 
-	Sound("Fire::Inflame", false, 30);
+	clonk->Sound("Fire::Inflame", false, 30);
 
 	for(var i = from; i < to; i+=5)
 	{

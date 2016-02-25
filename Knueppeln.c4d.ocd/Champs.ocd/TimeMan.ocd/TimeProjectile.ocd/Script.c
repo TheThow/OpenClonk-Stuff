@@ -68,7 +68,6 @@ func Hit()
 		{
 			MarkHit();
 			flag = true;
-			RemoveEffect("TimeMark", o);
 		}
 		
 		if(!o)
@@ -143,7 +142,7 @@ func MarkHit()
 	{
 		o->AddTimeHitEffect();
 		var angle = Angle(GetX(), GetY(), o->GetX(), o->GetY());
-		o->Fling(Sin(angle, 5), -Cos(angle, 5));
+		o->Fling(Sin(angle, 4), -Cos(angle, 4) + 1);
 		WeaponDamage(o, MarkDamage);
 	}
 	

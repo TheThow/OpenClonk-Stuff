@@ -96,7 +96,7 @@ func JumpEffect(object clonk, dir)
 		to = 310;
 	}
 
-	Sound("Ball::ball_jump", false, 30);
+	clonk->Sound("Ball::ball_jump", false, 30);
 
 	for(var i = from; i < to; i+=5)
 	{
@@ -228,9 +228,9 @@ func CleanUp(object clonk)
 		clonk.Ball->KillBall();
 }
 
-func FxBallHitTimer(object target, proplist effect, int time)
+func FxBallHitStart(target, effect)
 {
-	var props =
+	effect.props =
 	{
 		Size = PV_Linear(PV_Random(2,5),0),
 		BlitMode = GFX_BLIT_Additive,
@@ -240,8 +240,11 @@ func FxBallHitTimer(object target, proplist effect, int time)
 		Attach = ATTACH_Front | ATTACH_MoveRelative,
 		Alpha = PV_Linear(255, 0)
 	};
-	
-	target->CreateParticle("Flash", RandomX(-5, 5), RandomX(-10, 10), 0, 0, 10, props, 2);
+}
+
+func FxBallHitTimer(object target, proplist effect, int time)
+{
+	target->CreateParticle("Flash", RandomX(-5, 5), RandomX(-10, 10), 0, 0, 10, effect.props, 2);
 	
 	if(time > 40)
 		return -1;

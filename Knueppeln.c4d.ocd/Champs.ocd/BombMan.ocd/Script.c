@@ -78,7 +78,7 @@ func JumpEffect(object clonk, dir)
 		to = 310;
 	}
 
-	Sound("Fire::Inflame", false, 30, nil, nil, nil, 200);
+	clonk->Sound("Fire::Inflame", false, 30, nil, nil, nil, 200);
 	
 	var trailparticles =
 	{

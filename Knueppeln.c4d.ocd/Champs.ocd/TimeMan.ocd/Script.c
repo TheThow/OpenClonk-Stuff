@@ -80,7 +80,7 @@ func JumpEffect(object clonk, dir)
 		to = 310;
 	}
 
-	Sound("time_hit", false, 30);
+	clonk->Sound("time_hit", false, 30);
 
 	for(var i = from; i < to; i+=5)
 	{

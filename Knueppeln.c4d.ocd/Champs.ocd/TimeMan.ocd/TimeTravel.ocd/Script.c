@@ -9,7 +9,7 @@ local ManaCost = 15;
 local SpellDamage = 30;
 local Speed = 100;
 local Size = 25;
-local Dur = 400;
+local Dur = 600;
 
 local pos;
 
@@ -21,7 +21,7 @@ func Launch(object clonk, int x, int y)
 		clonk.timeposfx = AddEffect("TravelPos", clonk, 1, 1, nil, GetID(), Size);
 		clonk.timeposfx.size = Size;
 		clonk.timeposfx.dur = Dur;
-		Sound("travel_pos", false, 10, clonk->GetOwner());
+		clonk->Sound("travel_pos", false, 30, clonk->GetOwner());
 		RemoveObject();
 		return 1;
 	}
@@ -205,7 +205,6 @@ func HitArea()
 		{
 			Sound("mark_hit", false, 80);
 			WeaponDamage(o, TimeProjectile.MarkDamage);
-			RemoveEffect("TimeMark", o);
 		}
 		
 	}

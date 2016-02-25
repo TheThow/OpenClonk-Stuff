@@ -59,7 +59,7 @@ func FxGrowTimer(object target, proplist effect, int time)
 	DrawBorder();
 	
 	if(currentSize < MaxSize)
-		currentSize+=3;
+		currentSize+=2;
 }
 
 func DrawBorder()

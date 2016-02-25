@@ -2,9 +2,9 @@
 id=PortalStone
 Version=6,0
 Category=C4D_Living
-Width=10
-Height=10
-Offset=-5,-5
-SolidMask=0,0,10,10
+Width=12
+Height=12
+Offset=-6,-6
+SolidMask=0,0,12,12
 NoStabilize=1
 Rotate=1
