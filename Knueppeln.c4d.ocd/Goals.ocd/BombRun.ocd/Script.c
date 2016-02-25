@@ -45,7 +45,8 @@ func Initialize()
 	var fxl = AddEffect("GoalCheck", leftgoal, 1, 1, this, nil, 1, 2);
 	fxl.teamid = 1;
 	fxl.enemy = 2;
-	leftshield = leftgoal->CreateObject(PortalWall,0,0,-1);
+	var spos = GameCall("LeftShieldPos");
+	leftshield = CreateObject(PortalWall,spos[0],spos[1],-1);
 	leftshield->CreateWall(1, 90, 80, 75 + (25 * GetPlayerCount()));
 	
 	pos = GameCall("RightGoalPos");
@@ -54,7 +55,8 @@ func Initialize()
 	var fxr = AddEffect("GoalCheck", rightgoal, 1, 1, this, nil, 2, 1);
 	fxr.teamid = 2;
 	fxr.enemy = 1;
-	rightshield = rightgoal->CreateObject(PortalWall,0,0,-1);
+	spos = GameCall("RightShieldPos");
+	rightshield = CreateObject(PortalWall,spos[0],spos[1],-1);
 	rightshield->CreateWall(2, 90, 80, 75 + (25 * GetPlayerCount()));
 	
 	SpawnBall();

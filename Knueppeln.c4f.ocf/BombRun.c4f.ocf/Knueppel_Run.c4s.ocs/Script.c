@@ -114,7 +114,17 @@ func LeftGoalPos()
 	return [75, 180];
 }
 
+func LeftShieldPos()
+{
+	return [75, 180];
+}
+
 func RightGoalPos()
+{
+	return [LandscapeWidth() - 75, 180];
+}
+
+func RightShieldPos()
 {
 	return [LandscapeWidth() - 75, 180];
 }

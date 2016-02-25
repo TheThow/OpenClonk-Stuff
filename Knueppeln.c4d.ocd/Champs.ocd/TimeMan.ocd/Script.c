@@ -130,6 +130,12 @@ func BlockEffect(object clonk, range)
 	
 }
 
+func CleanUp(object clonk)
+{
+	if(clonk.TimeTravelMark)
+		clonk.TimeTravelMark = nil;
+}
+
 
 func FxTimeHitTimer(object target, proplist effect, int time)
 {

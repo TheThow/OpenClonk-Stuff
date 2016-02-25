@@ -102,7 +102,7 @@ First activation leaves a time travel marker on your position that lasts 10 seco
 As soon as you start traveling the marker will be revealed to other players.
 Time Travel also triggers the energy shot mark.[/i]
 
-Slowing Field    [i] Mana: 40 Damage: - Range: 275 Duration: 100 C 
+Slowing Field    [i] Mana: 40 Damage: - Range: 275 Duration: 100
 Hold R and click within the range indicator to create a field that slows everything in its range.[/i]
  
 
@@ -149,14 +149,11 @@ Rotation    Every player gets the same champion[/i]
 
 [h]ToDo (unsorted)[/h]
 
-- Make some effects look better
-- Better feedback of what spells do
 - More sounds so every spell sounds different
 - Do something on right click (preferably some sort of second melee attack - some people suggested a taunt menu)
-- Different (team) game modes (I think Bomb-Run would be great)
+- Different (team) game modes (Next: Domination)
 - Special items (Maybe guest appearances from other packs if there were any(?). Caedes!)
 - More maps
-- Moar champions
 - Maybe a system to ban champions / Limit them if there are too many some day
 - Some sort of ghost cam for eliminated players that can do stuff. (can't put my concept into words)
 - More decoration for the existing maps... where can i steal some?!
@@ -164,7 +161,7 @@ Rotation    Every player gets the same champion[/i]
 
 
 [h]Bugs[/h]
-Openclonk crashes everytime you finish a round.
+OpenClonk crashes every time you finish a round.
 
 
 [h]Special Thanks[/h]
