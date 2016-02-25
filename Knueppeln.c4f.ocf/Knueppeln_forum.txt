@@ -130,7 +130,20 @@ Spawns three ice shards that circle around you. Activate again to fire the blue 
 
 Hail Storm    [i]Mana: 50 Damage: 20 Range: - Duration: - B C
 Spawns 6 ice shards that work like described above.[/i]
- 
+
+
+[b]Bomb Man[/b] - contributed by Zapper
+<insert epic description>
+
+Sticky Bomb   [i]Mana: 10 Damage: 20 Range: - Duration: - B
+Throws a sticky bomb that sticks to material or Clonks.[/i]
+
+Blow Up       [i]Mana: - Damage: - Range: - Duration: -
+Blows up all existing sticky bombs.[/i]
+
+Bomb Magnet   [i]Mana: 10 Damage: - Range: 300 Duration: -
+Click on a position to let all nearby bombs jump towards it.[/i]
+
 
 [h]Scenario Parameters[/h]
 
