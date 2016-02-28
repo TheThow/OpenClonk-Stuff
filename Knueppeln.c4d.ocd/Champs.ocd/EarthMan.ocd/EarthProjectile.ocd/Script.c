@@ -68,7 +68,7 @@ func HitEffect()
 	};
 	CreateParticle("StarSpark", 0, 0, 0, 0, 7, sphereparticle, 4);
 	
-	for(var o in FindObjects(Find_Distance(SpellDamage), Find_Func("CanBeHit")))
+	for(var o in FindObjects(Find_Distance(SpellDamage), Find_Func("CanBeHit", this)))
 	{
 		o->AddEarthHitEffect();
 	}

@@ -75,7 +75,7 @@ func ChargeEffect(proplist params)
 
 func FxFireNadoTimer(object target, proplist effect, int time)
 {
-	for(var o in FindObjects(Find_InRect(-size_x/2, -size_y/2, size_x, size_y), Find_Or(Find_Func("IsReflectable"), Find_Func("CanBeHit"))))
+	for(var o in FindObjects(Find_InRect(-size_x/2, -size_y/2, size_x, size_y), Find_Or(Find_Func("IsReflectable"), Find_Func("CanBeHit", this))))
 	{
 		if(GetEffect("NadoCD", o))
 			continue;

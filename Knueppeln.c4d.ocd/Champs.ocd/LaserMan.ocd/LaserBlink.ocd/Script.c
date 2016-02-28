@@ -100,7 +100,7 @@ func Launch(object clonk, int x, int y)
 
 public func HitObject(obj)
 {
-	if(obj->~CanBeHit() == false)
+	if(obj->~CanBeHit(this) == false)
 		return;
 	obj->AddLaserHitEffect();
 	obj->Fling(0, -4, nil, true);

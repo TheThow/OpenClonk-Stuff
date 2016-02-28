@@ -239,7 +239,7 @@ func FxDischargeStop(object target, proplist effect, int reason, bool temporary)
 	};
 	CreateParticle("StarSpark", 0, 0, 0, 0, 10, flashparticle, 5);
 	
-	for(var o in FindObjects(Find_Distance(DischargeSize), Find_Func("CanBeHit")))
+	for(var o in FindObjects(Find_Distance(DischargeSize), Find_Func("CanBeHit", this)))
 	{
 		var angle = Angle(GetX(), GetY(), o->GetX(), o->GetY());
 		o->AddBallHitEffect();
@@ -445,7 +445,7 @@ func MoveToPos(x, y, add)
 
 func CheckForEnemies(Size)
 {
-	for(var o in FindObjects(Find_Distance(Size), Find_Func("CanBeHit")))
+	for(var o in FindObjects(Find_Distance(Size), Find_Func("CanBeHit", this)))
 	{
 		if(o->GetOwner() == GetOwner() || GetEffect("BallHitCD", o))
 			continue;

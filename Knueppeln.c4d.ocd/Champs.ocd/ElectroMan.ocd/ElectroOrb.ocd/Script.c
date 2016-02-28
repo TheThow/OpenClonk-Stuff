@@ -234,7 +234,7 @@ func OrbEffect()
 
 func CheckForEnemies()
 {
-	for(var o in FindObjects(Find_Distance(Size), Find_Func("CanBeHit")))
+	for(var o in FindObjects(Find_Distance(Size), Find_Func("CanBeHit", this)))
 	{
 		if(o->GetOwner() == GetOwner())
 			continue;

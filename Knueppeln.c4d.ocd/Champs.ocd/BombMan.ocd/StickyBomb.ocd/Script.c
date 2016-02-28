@@ -56,7 +56,7 @@ func Particles()
 
 func StickTo()
 {
-	for (var target in FindObjects(Find_AtPoint(), Find_Func("CanBeHit")))
+	for (var target in FindObjects(Find_AtPoint(), Find_Func("CanBeHit", this)))
 	{
 		if (target->GetOwner() == GetOwner()) continue;
 		SetAction("Attach", target);

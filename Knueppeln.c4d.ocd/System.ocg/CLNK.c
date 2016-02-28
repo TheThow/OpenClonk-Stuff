@@ -574,7 +574,7 @@ func CancelShowSpellRange()
 	}
 }
 
-func CanBeHit()
+func CanBeHit(object from)
 {
 	if(GetEffect("Unhitable", this))
 		return false;
@@ -584,6 +584,26 @@ func CanBeHit()
 	
 	if(!GetAlive())
 		return false;
+	
+	if(from && GetPlayerTeam(GetOwner()) && FindObject(Find_ID(Rule_NoFriendlyFire)))
+	{
+		if(GetPlayerTeam(GetOwner()) == GetPlayerTeam(from->GetOwner()))
+			return false;
+	}
+	
+	return true;
+}
+
+func IsProjectileTarget(object from)
+{
+	if(!GetAlive())
+		return false;
+
+	if(from && GetPlayerTeam(GetOwner()) && FindObject(Find_ID(Rule_NoFriendlyFire)))
+	{
+		if(GetPlayerTeam(GetOwner()) == GetPlayerTeam(from->GetOwner()))
+			return false;
+	}
 	
 	return true;
 }

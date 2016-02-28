@@ -191,7 +191,7 @@ func HitArea()
 	};
 	CreateParticle("StarSpark", 0, 0, PV_Random(-80,80), PV_Random(-80, 80), 80, particles, 35);
 	
-	for(var o in FindObjects(Find_Distance(Size), Find_Func("CanBeHit"), Find_Not(Find_Func("IsBlocking"))))
+	for(var o in FindObjects(Find_Distance(Size), Find_Func("CanBeHit", this), Find_Not(Find_Func("IsBlocking"))))
 	{
 		var angle = Angle(GetX(), GetY(), o->GetX(), o->GetY());
 		o->AddTimeHitEffect();

@@ -59,7 +59,7 @@ func Hit()
 {
 	HitEffect();
 	
-	for(var o in FindObjects(Find_Distance(Size), Find_Func("CanBeHit")))
+	for(var o in FindObjects(Find_Distance(Size), Find_Func("CanBeHit", this)))
 	{
 		o->AddTimeHitEffect();
 		var flag = false;
@@ -138,7 +138,7 @@ func MarkHit()
 		this->CreateTimeTrail(20, RandomX(-140, 140), 0, 0, nil);
 	}
 	
-	for(var o in FindObjects(Find_Distance(Size*2), Find_Func("CanBeHit")))
+	for(var o in FindObjects(Find_Distance(Size*2), Find_Func("CanBeHit", this)))
 	{
 		o->AddTimeHitEffect();
 		var angle = Angle(GetX(), GetY(), o->GetX(), o->GetY());

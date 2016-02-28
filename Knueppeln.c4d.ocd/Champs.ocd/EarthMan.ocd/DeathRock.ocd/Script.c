@@ -96,7 +96,7 @@ func FxGrowthTimer()
 
 func FxCheckEnemiesTimer(object target, proplist effect, int time)
 {
-	for(var o in FindObjects(Find_Distance(20), Find_Or(Find_Func("IsReflectable"), Find_Func("CanBeHit"))))
+	for(var o in FindObjects(Find_Distance(20), Find_Or(Find_Func("IsReflectable"), Find_Func("CanBeHit", this))))
 	{
 		if(GetEffect("DeathRockCD", o) || (o->GetOwner() == GetOwner() && time < 30))
 		{
