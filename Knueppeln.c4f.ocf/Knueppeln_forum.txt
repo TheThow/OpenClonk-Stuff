@@ -1,15 +1,15 @@
+Only playable with latest snapshot. 
+
 [h]Knüppeln![/h]
 
 Choose your champion at the beginning / at each respawn and knüppel your enemies to death!
 Each champion has 3 more or less unique abilities.
-
 
 [h]Controls[/h]
 
 Double W/A/S/D mid air = Double jump
 Space = Blocks most spells near you
 Q/E/R = Special abilities of your champion
-
 
 [h]Champions[/h]
 
@@ -83,7 +83,7 @@ Attack Order    [i]Mana: 10 Damage: 20 Range: 275 Duration: 100 B
 Your ball moves to your mouse position damaging enemies on the target location.[/i]
 
 Home Call    [i]Mana: 25 Damage: 20 Range: - Duration: 100 B
-Your ball moves with increased speed back to you damaging everything on its path. 
+Your ball moves back to you with increased speed damaging everything on its path. 
 Upon reaching you it grants you a shield that absorbs 15 damage.[/i]
 
 Discharge      [i]Mana: 35 Damage: 40 Range: - Duration: - C
@@ -97,7 +97,7 @@ Energy Shot    [i]Mana: 15 Damage: 10 Range: - Duration: - B
 Launches a fast traveling projectile that leaves a mark on your target. Hit again to activate that mark and deal an additional 20 damage.
 Not affected by Slowing Field.[/i]
 
-Time Travel   [i] Mana: 2*15 Damage: 30 Range: ? Duration: 600 B
+Time Travel   [i] Mana: 2*15 Damage: 30 Range: - Duration: 400 B
 First activation leaves a time travel marker on your position that lasts 10 seconds. Activate again to travel back to that location and deal damage to anyone near it. 
 As soon as you start traveling the marker will be revealed to other players.
 Time Travel also triggers the energy shot mark.[/i]
@@ -130,7 +130,7 @@ Spawns three ice shards that circle around you. Activate again to fire the blue 
 
 Hail Storm    [i]Mana: 50 Damage: 20 Range: - Duration: - B C
 Spawns 6 ice shards that work like described above.[/i]
-
+ 
 
 [b]Bomb Man[/b] - contributed by Zapper
 <insert epic description>
@@ -144,6 +144,12 @@ Blows up all existing sticky bombs.[/i]
 Bomb Magnet   [i]Mana: 10 Damage: - Range: 300 Duration: -
 Click on a position to let all nearby bombs jump towards it.[/i]
 
+[h]Game modes[/h]
+
+[b]Bomb Run[/b]
+Each level has a ball that starts in the middle of the playing field. Your team scores by getting the ball through the enemy team's hoop.
+Each champion can only be chosen once per team per round. You have to stick with your champion till the end of a round.
+You get increased mana regeneration on your half of the map.
 
 [h]Scenario Parameters[/h]
 
@@ -158,7 +164,9 @@ Rotation    Every player gets the same champion[/i]
  
 
 [b]Incr. Mana Reg.[/b]    [i]Faster mana regeneration and shorter block cooldown.[/i]
+ 
 
+[b]Instagib[/b]      [i]Kill with one shot[/i]  
 
 [h]ToDo (unsorted)[/h]
 
@@ -172,10 +180,8 @@ Rotation    Every player gets the same champion[/i]
 - More decoration for the existing maps... where can i steal some?!
 - A coop adventure... but I'm too lazy for that.
 
-
 [h]Bugs[/h]
 OpenClonk crashes every time you finish a round.
-
 
 [h]Special Thanks[/h]
 
