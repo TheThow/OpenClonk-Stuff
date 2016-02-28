@@ -608,6 +608,17 @@ func IsProjectileTarget(object from)
 	return true;
 }
 
+func OnShockwaveHit(level, x, y, cause_plr)
+{
+	if(cause_plr != -1 && cause_plr != GetOwner() && GetPlayerTeam(GetOwner()) && FindObject(Find_ID(Rule_NoFriendlyFire)))
+	{
+		if(GetPlayerTeam(GetOwner()) == GetPlayerTeam(cause_plr))
+			return true;
+	}
+	
+	return false;
+}
+
 func MakeHitable(bool hitable)
 {
 	if(hitable)
