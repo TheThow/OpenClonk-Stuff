@@ -78,49 +78,48 @@ func JumpEffect(object clonk, dir)
 		to = 310;
 	}
 
-	clonk->Sound("Fire::Inflame", false, 30, nil, nil, nil, 200);
+	clonk->Sound("Fire::Inflame", false, 30, nil, nil, nil, -100);
 	
 	var trailparticles =
 	{
-		R = 255,
-		G = 255,
-		B = 255,
-		Size = PV_Linear(PV_Random(4, 6), 0),
+		Size = PV_Linear(0, 20),
+		Alpha = PV_Linear(255, 0),
 		OnCollision = PC_Die(),
 		CollisionVertex = 0,
-		ForceX = PV_Linear(0, PV_Random(-20, 20, 10)),
-		ForceY = PV_Linear(0, PV_Random(-20, 20, 10)),
 		DampingX = 900, DampingY = 900,
 		BlitMode = GFX_BLIT_Additive
 	};
-	
+	trailparticles = Particles_Colored(trailparticles, GetPlayerColor(clonk->GetOwner()));
 	for(var i = from; i < to; i+=5)
 	{
 		var r = 10;
 		var x = Cos(i, r);
 		var y = Sin(i, r);
-		clonk->CreateParticle("StarFlash", x, y, Cos(i, r), Sin(i, r), 60, trailparticles, 10);
+		clonk->CreateParticle("Shockwave", x, y, Cos(i, r), Sin(i, r), 60, trailparticles, 2);
 	}
 }
 
 func BlockEffect(object clonk, int radius)
 {
-	var border = 
+	var trailparticles =
 	{
-		R = 255,
-		G = 255,
-		B = 255,
-		Size = PV_Linear(PV_Random(4, 6), 0),
+		Size = PV_KeyFrames(0, 0, 0, 200, PV_Random(10, 25), 1000, 0),
+		Alpha = PV_Linear(255, 0),
 		OnCollision = PC_Die(),
 		CollisionVertex = 0,
-		ForceX = PV_Linear(0, PV_Random(-10, 10, 10)),
-		ForceY = PV_Linear(0, PV_Random(-10, 10, 10)),
 		DampingX = 900, DampingY = 900,
 		BlitMode = GFX_BLIT_Additive
 	};
+	trailparticles = Particles_Colored(trailparticles, GetPlayerColor(clonk->GetOwner()));
 	
-	for (var angle = 0; angle < 360; angle += 20)
-	{
-		clonk->CreateParticle("StarFlash", Sin(angle + RandomX(-5, 5), radius), -Cos(angle + RandomX(-5, 5), radius), 0, 0, PV_Random(20, 30), border, 16);
-	}
+	clonk->CreateParticle("Shockwave",
+		PV_Sin(PV_Random(0, 360, 0, 1), PV_Random(radius - 1, radius + 1, 0, 2)),
+		PV_Cos(PV_Random(0, 360, 0, 1), PV_Random(radius - 1, radius + 1, 0, 2)),
+		PV_Random(-5, 5), PV_Random(-5, 5), PV_Random(20, 30), trailparticles, 100);
+}
+
+func CleanUp(object clonk)
+{
+	for (var bomb in FindObjects(Find_ID(StickyBomb), Find_Owner(clonk->GetOwner())))
+		bomb->Remove();
 }
