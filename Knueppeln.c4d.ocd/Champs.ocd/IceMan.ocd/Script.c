@@ -145,3 +145,10 @@ func BlockEffect(object clonk, int radius)
 		clonk->CreateParticle("StarFlash", Sin(angle + RandomX(-5, 5), radius), -Cos(angle + RandomX(-5, 5), radius), 0, 0, PV_Random(20, 30), border, 16);
 	}
 }
+
+func CleanUp(object clonk)
+{
+	var shards = FindObjects(Find_ID(IceShard), Find_Owner(clonk->GetOwner()), Find_Category(C4D_StaticBack));
+	for (var shard in shards)
+		shard->RemoveObject();
+}
