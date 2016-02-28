@@ -585,7 +585,7 @@ func CanBeHit(object from)
 	if(!GetAlive())
 		return false;
 	
-	if(from && GetPlayerTeam(GetOwner()) && FindObject(Find_ID(Rule_NoFriendlyFire)))
+	if(from && from->GetOwner() != GetOwner() && GetPlayerTeam(GetOwner()) && FindObject(Find_ID(Rule_NoFriendlyFire)))
 	{
 		if(GetPlayerTeam(GetOwner()) == GetPlayerTeam(from->GetOwner()))
 			return false;
@@ -599,7 +599,7 @@ func IsProjectileTarget(object from)
 	if(!GetAlive())
 		return false;
 
-	if(from && GetPlayerTeam(GetOwner()) && FindObject(Find_ID(Rule_NoFriendlyFire)))
+	if(from && from->GetOwner() != GetOwner() && GetPlayerTeam(GetOwner()) && FindObject(Find_ID(Rule_NoFriendlyFire)))
 	{
 		if(GetPlayerTeam(GetOwner()) == GetPlayerTeam(from->GetOwner()))
 			return false;
