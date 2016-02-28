@@ -130,7 +130,7 @@ public func ObjectControl(int plr, int ctrl, int x, int y, int strength, bool re
   			if(GetMagicEnergy() >= JUMP_MANA)
   			{
   				RemoveEffect("IntControlJumpDouble", this);
-	 			SetYDir(-this.JumpSpeed * GetCon(), 100 * 100);
+	 			ControlUpDouble();
 	 			JumpEffect("Up");
 	 			DoMagicEnergy(-JUMP_MANA);
 	 		}
@@ -241,6 +241,11 @@ func JumpEffect(dir)
 	ChampType->JumpEffect(this, dir);
 }
 
+func ControlUpDouble()
+{
+	SetYDir(-this.JumpSpeed * GetCon(), 100 * 100);
+	return true;
+}
 
 func ControlLeftDouble()
 {
