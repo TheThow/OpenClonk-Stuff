@@ -29,7 +29,7 @@ func FxDrawBloodTimer(object target, proplist effect, int time)
 			continue;
 		}
 		
-		DrawMaterialQuad("BackgroundBlood-gore", x, y, x+1, y, x+1, y+1, x, y+1, true);
+		DrawMaterialQuad("FlatTunnel-gore", x, y, x+1, y, x+1, y+1, x, y+1, true);
 	}
 	
 	if(!GetXDir() && !GetYDir() && !GetEffect("Idle", this))
