@@ -1,5 +1,5 @@
 local ManaCost = 10;
-local Speed = 60;
+local Speed = 80;
 local SpellRange = 300;
 local Radius = 150;
 
@@ -17,9 +17,14 @@ func Launch(object clonk, int x, int y)
 		CreateParticle("SphereSpark", r_x, r_y, -r_x, -r_y, PV_Random(5, 30), particles, 5);
 	}
 	
-	for (var bomb in FindObjects(Find_Distance(Radius), Find_ID(StickyBomb), Find_Owner(GetOwner())))
+	var bombs = FindObjects(Find_Distance(Radius), Find_ID(StickyBomb), Find_Owner(GetOwner()));
+	if (GetLength(bombs) > 0)
 	{
-		bomb->HopTo(GetX(), GetY(), Speed);
+		var modified_speed = Max(Speed - 10 * GetLength(bombs), Speed / 2);
+		for (var bomb in bombs)
+		{
+			bomb->HopTo(GetX(), GetY(), modified_speed);
+		}
 	}
 	RemoveObject();
 }
