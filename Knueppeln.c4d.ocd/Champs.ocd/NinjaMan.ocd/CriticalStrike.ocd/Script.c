@@ -132,7 +132,7 @@ func FxCheckHitTimer(object target, proplist effect, int time)
 	var a = params.new_angle;
 	var range = 60;
 
-	for(var o in FindObjects(Find_Distance(effect.range, target->GetX(), target->GetY()), Find_Func("CanBeHit", this)))
+	for(var o in FindObjects(Find_Distance(effect.range, target->GetX(), target->GetY()), Find_Func("CanBeHit", target)))
 	{
 		if(o->GetOwner() == target->GetOwner())
 			continue;
