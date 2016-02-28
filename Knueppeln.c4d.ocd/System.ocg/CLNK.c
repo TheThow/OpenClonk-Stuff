@@ -278,6 +278,7 @@ func Hit()
 func Death(int killed_by)
 {
 	CastObjects(Flesh, 8, 50);
+	ChampType->CleanUp(this);
 	
 	var props = {
 		Size = PV_Linear(PV_Random(2, 4), 0),
