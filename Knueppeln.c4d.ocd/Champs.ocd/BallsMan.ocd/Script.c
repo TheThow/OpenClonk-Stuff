@@ -224,6 +224,9 @@ func FxRangeStop(object target, proplist fx, int reason, bool temp)
 
 func CleanUp(object clonk)
 {
+	if(GetEffect("Range", clonk))
+		RemoveEffect("Range", clonk);
+		
 	if(clonk.Ball)
 		clonk.Ball->KillBall();
 }

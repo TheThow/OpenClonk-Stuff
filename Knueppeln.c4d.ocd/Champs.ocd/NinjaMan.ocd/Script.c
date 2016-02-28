@@ -150,3 +150,9 @@ func InitChamp(object clonk)
 {
 	clonk->PushActionSpeed("Walk", 250);
 }
+
+func CleanUp(object clonk)
+{
+	//clonk->PushActionSpeed("Walk", 200);
+	clonk.ActMap.Walk.Speed = clonk.Prototype.ActMap.Walk.Speed;
+}
