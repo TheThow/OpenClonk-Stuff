@@ -41,6 +41,25 @@ Description=$ManaRegDesc$
 		Description=On
 		Value=2
 
+[ParameterDef]
+ID=FriendlyFire
+Default=1
+LeagueValue=1
+Name=$FFName$
+Description=$FFDesc$
+
+	[Options]
+		
+		[Option]
+		Name=On
+		Description=On
+		Value=1
+		
+		[Option]
+		Name=Off
+		Description=Off
+		Value=2
+
 
 [ParameterDef]
 ID=InstaGib

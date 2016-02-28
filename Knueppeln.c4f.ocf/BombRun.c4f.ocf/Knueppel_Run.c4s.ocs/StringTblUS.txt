@@ -4,5 +4,8 @@ ScoreDesc=How many times a team has to score to win
 ManaRegName=Increased Mana Regeneration
 ManaRegDesc=Guess what
 
+FFName=Friendly Fire
+FFDesc=Wanna hit your team mates or not?
+
 InstaGibName=InstaGib
 InstaGibDesc=One hit kills.
