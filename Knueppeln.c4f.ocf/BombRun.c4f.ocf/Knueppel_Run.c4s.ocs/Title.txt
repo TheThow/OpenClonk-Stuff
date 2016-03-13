@@ -1,2 +1,0 @@
-DE:Knüppel Run.c4s
-US:Knüppel Run.c4s

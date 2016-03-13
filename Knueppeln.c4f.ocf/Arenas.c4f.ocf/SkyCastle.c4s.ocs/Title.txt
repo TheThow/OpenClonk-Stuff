@@ -1,2 +1,0 @@
-DE:SkyCastle.c4s
-US:SkyCastle.c4s
