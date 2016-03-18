@@ -8,6 +8,7 @@ StructNeedMaterial=1
 
 [Definitions]
 Definition1=Objects.ocd
+Definition2=Medals.ocd
 
 [Player1]
 Crew=Clonk=1
