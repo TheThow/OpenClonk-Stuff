@@ -153,7 +153,8 @@ func FxSlowTimer(object target, proplist effect, int time)
 {
 	for(var o in FindObjects(Find_Distance(currentSize)))
 	{
-		if(o->GetOwner() == GetOwner() && o->GetID() == TimeProjectile)
+		//o->GetOwner() == GetOwner() && 
+		if(o->GetID() == TimeProjectile)
 			continue;
 		
 		if(!GetEffect("SlowField", o))

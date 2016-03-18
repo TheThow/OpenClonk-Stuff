@@ -105,14 +105,8 @@ func FxFireNadoTimer(object target, proplist effect, int time)
 	
 	for(var i = 0; i > -detail; i--)
 	{
-		var firetrailparticles =
-		{
-			Prototype = Particles_FireTrail(),
-			Size = PV_Linear(5,0)
-		};
-	
 		var r = (360 * 3) * i / detail;
-		CreateParticle("Fire", Cos(r + a, size_x * i / detail / 2), size_y/2 + size_y * i / detail, 0, 0, 4, firetrailparticles);
+		CreateParticle("Fire", Cos(r + a, size_x * i / detail / 2), size_y/2 + size_y * i / detail, 0, 0, 2, firetrailparticles);
 		
 		if(time%3)
 			a++;
@@ -143,7 +137,7 @@ func FxFireNadoTimer(object target, proplist effect, int time)
 func FxRemoveStop()
 {
 	Sound("Fire::Spark1", false, 50);
-	CastObjects(Flame, RandomX(3,4), RandomX(10,25));
+	CastObjects(Flame, RandomX(2,4), RandomX(10,25));
 	RemoveObject();
 }
 

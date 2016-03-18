@@ -19,7 +19,7 @@ clonk 			Calling clonk,
 x		 		mouse x, 
 y 				mouse y, 
 released		key/mouse event released, 
-mouseclick 		mouseclick when the special key is held down, 
+mouseclick 		mouseclick when the special key is pressed, 
 abletocast 		clonk is able to cast at the moment, 
 cooldown 		spell is on cooldown
 */

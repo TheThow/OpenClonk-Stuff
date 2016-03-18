@@ -1,0 +1,10 @@
+[Author]
+KKenny / Thow
+
+[Contributions]
+Zapper	-	LaserMan
+Zapper	-	IceMan
+Zapper 	-	BombMan
+
+[Special Thanks]
+Zapper	-	Explaining how OC works
