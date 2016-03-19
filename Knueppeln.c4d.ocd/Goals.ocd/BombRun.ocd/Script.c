@@ -129,7 +129,7 @@ func FxGoalCheckTimer(object target, proplist effect, int time)
 				}
 			}
 			
-			ScheduleCall(nil, "GameOver", 80);
+			ScheduleCall(nil, "GameOver", 160);
 			Sound("UI::Trumpet", true, 100);
 		}
 		else
