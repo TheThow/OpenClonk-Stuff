@@ -360,35 +360,21 @@ func FxStopTumblingTimer()
 	return -1;
 }
 
-func FxBlockingStart()
+func FxBlockingStart(object target, proplist effect)
 {
 	Sound("block", false, 50);
 	
 	ChampType->BlockEffect(this, BLOCK_RANGE);
 	
-	Block();
+	FxBlockingTimer(target, effect, 0);
+	return FX_OK;
 }
 
 func FxBlockingTimer(object target, proplist effect, int time)
 {
-	if(time >= BLOCK_DUR)
+	if (time >= BLOCK_DUR)
 		return -1;
 		
-	Block();
-}
-
-public func IsBlocking()
-{
-	return GetEffect("Blocking", this) != nil;
-}
-
-public func GetBlockingRange()
-{
-	return BLOCK_RANGE;
-}
-
-func Block()
-{
 	for(var o in FindObjects(Find_Distance(BLOCK_RANGE), Find_Func("IsReflectable", this)))
 	{
 		var xdir = o->GetXDir();
@@ -404,9 +390,21 @@ func Block()
         o->SetSpeed(Sin(tangle, speed), -Cos(tangle, speed));
         
         o->~Blocked(this);
+        // Do medal callbacks for this event.
+        Rule_Medals->~PerformMedalCallbacks("OnAttackBlock", this, o, effect);
 	}
+	return FX_OK;
 }
 
+public func IsBlocking()
+{
+	return !!GetEffect("Blocking", this);
+}
+
+public func GetBlockingRange()
+{
+	return BLOCK_RANGE;
+}
 
 func LaunchSpecial1(x, y, released, mouse, abletocast)
 {
