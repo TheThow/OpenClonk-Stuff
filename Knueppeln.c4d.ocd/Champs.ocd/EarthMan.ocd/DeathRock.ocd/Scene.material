@@ -1,4 +1,4 @@
-material Rock
+material DeathRock
 {
 	receive_shadows on
 	technique
