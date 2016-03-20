@@ -391,7 +391,9 @@ func FxBlockingTimer(object target, proplist effect, int time)
         
         o->~Blocked(this);
         // Do medal callbacks for this event.
-        Rule_Medals->~PerformMedalCallbacks("OnAttackBlock", this, o, effect);
+        var medal_def = GetDefinition("Rule_Medals");
+        if (medal_def)
+       		medal_def->~PerformMedalCallbacks("OnAttackBlock", this, o, effect);
 	}
 	return FX_OK;
 }
