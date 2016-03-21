@@ -4,7 +4,7 @@
 local ManaCost = 50;
 local SpellDamage = 35;
 local Speed = 60;
-local Charge_dur = 40;
+local Charge_dur = 30;
 
 local Size = 20;
 
@@ -98,13 +98,13 @@ func FxCheckEnemiesTimer(object target, proplist effect, int time)
 {
 	for(var o in FindObjects(Find_Distance(20), Find_Or(Find_Func("IsReflectable"), Find_Func("CanBeHit", this))))
 	{
-		if(GetEffect("DeathRockCD", o) || (o->GetOwner() == GetOwner() && time < 30))
+		if(GetEffect("DeathRockCD", o) || (o->GetOwner() == GetOwner() && time < 15))
 		{
 			continue;
 		}
 		
 		var angle = Angle(GetX(), GetY(), o->GetX(), o->GetY());
-		AddEffect("DeathRockCD", o, 1, 30);
+		AddEffect("DeathRockCD", o, 1, 15);
 		Sound("Hits::GeneralHit1", false, 50);
 		
 		if(o->GetID() != Clonk)
