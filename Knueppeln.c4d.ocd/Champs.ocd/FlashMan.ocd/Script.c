@@ -12,8 +12,8 @@
 local Description = "$Description$";
 local Name = "$Name$";
 
-local Special1Cooldown = 25;
-local Special2Cooldown = 5;
+local Special1Cooldown = 8;
+local Special2Cooldown = 8;
 local Special3Cooldown = 140;
 
 local Special1Spell = FlashPrisma;

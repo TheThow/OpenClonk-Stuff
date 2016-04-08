@@ -5,8 +5,7 @@ local SpellDamage = 3;
 local Size = 30;
 local ManaCost = 20;
 
-local traveledTime = 0;
-local MaxTravelTime = 180;
+//local MaxTravelTime = 180;
 
 local TravelAngle = 0;
 
@@ -24,23 +23,19 @@ func TravelEffect(int time)
 {
 	var trailparticles =
 	{
-		Size = PV_Linear(PV_Random(10, 22),0),
+		Size = PV_Linear(PV_Random(10, 22),10),
 		BlitMode = GFX_BLIT_Additive,
-		R = 250 - (250 * time) / MaxTravelTime,
+		//R = 250 - (250 * time) / MaxTravelTime,
+		R = PV_Random(20, 180),
 		G = PV_Random(20, 180),
-		B = (250 * time) / MaxTravelTime,
+		//B = (250 * time) / MaxTravelTime,
+		B = PV_Random(20, 180),
+		Alpha = PV_Linear(255,0),
 	};
 	
-	CreateParticle("Flash", PV_Random(-2,2), PV_Random(-2,2), 0, 0, 30, trailparticles);
+	CreateParticle("Flash", PV_Random(-2,2), PV_Random(-2,2), 0, 0, 12, trailparticles);
 	
-	if (time > MaxTravelTime)
-	{
-		TravelAngle = Angle(0,0, GetXDir(), GetYDir());
-		
-		Fireworks();
-		
-		Explode(15);
-	}
+	
 }
 
 func HitObject(obj)
@@ -50,6 +45,7 @@ func HitObject(obj)
 		
 	obj->Fling(RandomX(-7, 7), RandomX(-7,7), nil, true);
 	WeaponDamage(obj, SpellDamage);
+	Explode(15);
 }
 
 func HitDamage(obj)
@@ -63,21 +59,7 @@ func HitDamage(obj)
 
 func Hit(int xdir, int ydir)
 {
-	Bounce(xdir, ydir);
-	Sound("Flash::Glass?");
-}
-
-func Bounce(int xdir, int ydir)
-{
-	var angle = Angle(0, 0, xdir, ydir);
-	
-	var surface = GetSurfaceVector(0, 0);
-	var surface_angle = Angle(0, 0, surface[0], surface[1]);
-	var angle_diff = GetTurnDirection(angle - 180, surface_angle);
-	var new_angle = surface_angle + angle_diff;
-	
-	var speed = Distance(0, 0, xdir, ydir);
-	SetXDir(Sin(new_angle, speed), 100);
-	SetYDir(-Cos(new_angle, speed), 100);
+	Fireworks();
+	Explode(15);
 }
 

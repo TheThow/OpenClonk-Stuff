@@ -1,0 +1,2 @@
+Name=Prisma
+Description=Projectile fires 3 lasers in 3 directions
