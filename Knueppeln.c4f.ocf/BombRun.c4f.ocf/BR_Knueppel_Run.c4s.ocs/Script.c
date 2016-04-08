@@ -9,8 +9,8 @@ func Initialize()
 {
 	CreateObject(Goal_BombRun);
 	CreateObject(Rule_KillLogs);
-	var medal_rule = CreateObject(Rule_Medals);
-	medal_rule->SetLogging(true);
+	// Active the medal rule if loaded.
+	ActivateMedalRule();
 	CheckScenarioParameters();
 	InitClouds();
 }
