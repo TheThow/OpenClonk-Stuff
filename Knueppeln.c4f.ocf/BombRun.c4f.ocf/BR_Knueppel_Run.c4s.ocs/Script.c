@@ -1,5 +1,5 @@
 /**
-	Knüppeln.c4s
+	KnÃ¼ppeln.c4s
 
 	@author KKenny / Thow
 */
@@ -9,6 +9,8 @@ func Initialize()
 {
 	CreateObject(Goal_BombRun);
 	CreateObject(Rule_KillLogs);
+	// Active the medal rule if loaded.
+	ActivateMedalRule();
 	CheckScenarioParameters();
 	InitClouds();
 }

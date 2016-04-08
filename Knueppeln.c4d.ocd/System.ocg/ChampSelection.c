@@ -38,21 +38,26 @@ func ChooseMenu()
 	var menu = 
 	{
 		Player = GetOwner(),
-	
+		Decoration = GUI_MenuDeco,
+		Margin = ["2em", "2em"],
 		list = 
 		{
-			Right = "50%",
-			Margin = ["2em", "2em"],
+			Right = "50%-0.5em",
 			Style = GUI_VerticalLayout,
 			BackgroundColor = RGBa(0, 0, 0, 150)
 		},
 		right = {
 			Target = this,
-			Left = "50%",
-			Margin = ["2em", "2em"],
-			Decoration = GUI_MenuDeco,
+			Left = "50%+0.5em",
 			ID = 1,
-			icon = {Left="50%-4em", Right="50%+4em", Bottom="5em", Top="1em", Symbol=Clonk},
+			icon = 
+			{
+				Left = "50%-4em",
+				Right = "50%+4em",
+				Bottom = "5em",
+				Top = "1em",
+				Symbol = Clonk
+			},
 			textwindow =
 			{
 				Top = "6em",
@@ -60,35 +65,38 @@ func ChooseMenu()
 				Right = "80%",
 				Text = "Select your Champion!"
 			}
+		},
+		separator = {
+			Left = "50%-0.5em",
+			Right = "50%+0.5em",
+			BackgroundColor = RGBa(240, 240, 240, 150)
 		}
 	};
 	
 	var index = 0;
-	for(var champ in champs)
+	for (var champ in champs)
 	{
 		index += 1;
 		var subm =
 		{
 			ID = 100 + index,
 			Priority = index,
-			Bottom = "+4em",
-			icon = {Priority = 10, Symbol = champ, Right = "+4em", Bottom = "+4em"},
-			text = {Priority = 10, Left = "+5em", Style = GUI_TextVCenter, Text = champ.Name},
-			
-			selector =
-			{
-				Priority = 1,
-				BackgroundColor = {Std = 0, Hover = 0x50ff0000, Nope = 0x50ffff00},
-				
-				OnMouseIn = 
-					[ 
-						GuiAction_Call(this, "ChampUpdateDesc", [champ]), 
-						GuiAction_SetTag("Hover")
-					],
-			
-				OnMouseOut = GuiAction_SetTag("Std"),
-				
-				OnClick = GuiAction_Call(this, "SelectChamp", [champ]),
+			Bottom = "+2em",
+			BackgroundColor = {Std = 0, Hover = 0x50ff0000, Nope = 0x50ffff00},
+			OnMouseIn = [ 
+				GuiAction_Call(this, "ChampUpdateDesc", [champ]), 
+				GuiAction_SetTag("Hover")
+			],
+			OnMouseOut = GuiAction_SetTag("Std"),
+			OnClick = GuiAction_Call(this, "SelectChamp", [champ]),
+			icon = {
+				Symbol = champ,
+				Right = "+2em"
+			},
+			text = {
+				Left = "+2.5em", 
+				Style = GUI_TextVCenter, 
+				Text = champ.Name
 			},
 		};
 		GuiAddSubwindow(subm, menu.list);

@@ -1,0 +1,12 @@
+List of medals and their index, all medals should have a unique index between 0 and 254.
+All medals in the official release of the medal rule are listed here. If you want to add
+additional medals yourself, make sure the index of the medal is not conflicting with one
+of the medals in this list.
+
+This is the list of additional medals for Knueppeln.
+
+[Medal List]
+--------------------------------------
+Medal ID              Index     Reward
+--------------------------------------
+Medal_TripleBlock     101         25

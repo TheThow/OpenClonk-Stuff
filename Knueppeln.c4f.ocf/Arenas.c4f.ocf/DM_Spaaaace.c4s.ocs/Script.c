@@ -11,6 +11,8 @@ func Initialize()
 	
 	CreateObject(Goal_LastManStanding);
 	CreateObject(Rule_KillLogs);
+	// Active the medal rule if loaded.
+	ActivateMedalRule();
 	CheckScenarioParameters();
 	
 	CreateEnvironment();

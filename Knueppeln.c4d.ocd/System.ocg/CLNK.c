@@ -360,53 +360,53 @@ func FxStopTumblingTimer()
 	return -1;
 }
 
-func FxBlockingStart()
+func FxBlockingStart(object target, proplist effect)
 {
 	Sound("block", false, 50);
 	
 	ChampType->BlockEffect(this, BLOCK_RANGE);
 	
-	Block();
+	FxBlockingTimer(target, effect, 0);
+	return FX_OK;
 }
 
 func FxBlockingTimer(object target, proplist effect, int time)
 {
-	if(time >= BLOCK_DUR)
-		return -1;
+	if (time >= BLOCK_DUR)
+		return FX_Execute_Kill;
 		
-	Block();
+	for (var obj in FindObjects(Find_Distance(BLOCK_RANGE), Find_Func("IsReflectable", this)))
+	{
+		// Change the objects direction when blocked.
+		var xdir = obj->GetXDir();
+		var ydir = obj->GetYDir();
+		var speed = Sqrt(xdir**2 + ydir**2);
+		var angle = Angle(GetX(), GetY(), obj->GetX(), obj->GetY());
+        obj->SetSpeed(Sin(angle, speed), -Cos(angle, speed));
+        
+        // Set controller of the object to the controller of the blocker for correct kill_tracing.
+        obj->SetController(GetController());
+        
+        // Do callback in object that it got blocked.
+        obj->~Blocked(this);
+        
+        // Do medal callbacks for this event.
+        var medal_def = GetDefinition("Rule_Medals");
+        if (medal_def)
+       		medal_def->~PerformMedalCallbacks("OnAttackBlock", this, obj, effect);
+	}
+	return FX_OK;
 }
 
 public func IsBlocking()
 {
-	return GetEffect("Blocking", this) != nil;
+	return !!GetEffect("Blocking", this);
 }
 
 public func GetBlockingRange()
 {
 	return BLOCK_RANGE;
 }
-
-func Block()
-{
-	for(var o in FindObjects(Find_Distance(BLOCK_RANGE), Find_Func("IsReflectable", this)))
-	{
-		var xdir = o->GetXDir();
-		var ydir = o->GetYDir();
-		
-		//var entryangle = Angle(0,0,xdir,ydir);
-		var objectangle = Angle(GetX(), GetY(), o->GetX(), o->GetY());
-		
-		var speed = Sqrt(xdir**2+ydir**2);
-		
-		//var tangle = 2* ( (objectangle + 90)%360 - entryangle) + entryangle;
-		var tangle = objectangle;
-        o->SetSpeed(Sin(tangle, speed), -Cos(tangle, speed));
-        
-        o->~Blocked(this);
-	}
-}
-
 
 func LaunchSpecial1(x, y, released, mouse, abletocast)
 {

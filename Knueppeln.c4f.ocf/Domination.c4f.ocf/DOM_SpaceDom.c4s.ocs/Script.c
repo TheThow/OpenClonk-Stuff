@@ -7,6 +7,8 @@
 func Initialize()
 {
 	CreateEnvironment();
+	// Active the medal rule if loaded.
+	ActivateMedalRule();
 }
 
 func CreateEnvironment()

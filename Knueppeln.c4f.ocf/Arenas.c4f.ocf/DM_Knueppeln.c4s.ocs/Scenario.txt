@@ -33,3 +33,4 @@ YearSpeed=0,0,0,100
 [Definitions]
 Definition1=Objects.ocd
 Definition2=Knueppeln.c4d.ocd
+Definition3=Medals.ocd

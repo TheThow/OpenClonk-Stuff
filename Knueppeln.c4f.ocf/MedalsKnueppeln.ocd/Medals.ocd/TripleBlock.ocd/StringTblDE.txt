@@ -1,0 +1,2 @@
+Name=Triple Block
+Description=Awarded when you block more than three projectile attacks with the same block.
