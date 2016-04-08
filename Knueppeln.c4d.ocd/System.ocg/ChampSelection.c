@@ -82,23 +82,21 @@ func ChooseMenu()
 			ID = 100 + index,
 			Priority = index,
 			Bottom = "+2em",
-			icon = {Priority = 10, Symbol = champ, Right = "+2em", Bottom = "+2em"},
-			text = {Priority = 10, Left = "+2.5em", Style = GUI_TextVCenter, Text = champ.Name},
-			
-			selector =
-			{
-				Priority = 1,
-				BackgroundColor = {Std = 0, Hover = 0x50ff0000, Nope = 0x50ffff00},
-				
-				OnMouseIn = 
-					[ 
-						GuiAction_Call(this, "ChampUpdateDesc", [champ]), 
-						GuiAction_SetTag("Hover")
-					],
-			
-				OnMouseOut = GuiAction_SetTag("Std"),
-				
-				OnClick = GuiAction_Call(this, "SelectChamp", [champ]),
+			BackgroundColor = {Std = 0, Hover = 0x50ff0000, Nope = 0x50ffff00},
+			OnMouseIn = [ 
+				GuiAction_Call(this, "ChampUpdateDesc", [champ]), 
+				GuiAction_SetTag("Hover")
+			],
+			OnMouseOut = GuiAction_SetTag("Std"),
+			OnClick = GuiAction_Call(this, "SelectChamp", [champ]),
+			icon = {
+				Symbol = champ,
+				Right = "+2em"
+			},
+			text = {
+				Left = "+2.5em", 
+				Style = GUI_TextVCenter, 
+				Text = champ.Name
 			},
 		};
 		GuiAddSubwindow(subm, menu.list);
