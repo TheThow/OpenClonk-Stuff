@@ -1,0 +1,2 @@
+Name=Flash Man
+Description=Rainboooow!!!. \n\nQ = Prisma \nE = Flinger \nR = Super Spectral Lazor! \n\nContributed by K-Pone
