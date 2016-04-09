@@ -9,6 +9,8 @@
 #appendto Medal_Rocketeer
 #appendto Medal_Construction
 #appendto Medal_Plumber
+#appendto Medal_CriticalHit
+#appendto Medal_CrashPilot
 
 // Overloading the IsMedal function to return false suffices.
 public func IsMedal() { return false; }
