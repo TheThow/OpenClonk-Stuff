@@ -22,27 +22,8 @@ func Special1(object clonk, int x, int y, bool released, bool mouseclick, bool a
 
 func Special2(object clonk, int x, int y, bool released, bool mouseclick, bool abletocast,  bool cooldown)
 {
-	if (released || mouseclick || cooldown) return;
-	
-	var existing = FindObject(Find_ID(IceShard), Find_Owner(clonk->GetOwner()), Find_Category(C4D_StaticBack), Find_Func("GetProperty", "is_selected"));
-	if (existing)
-	{
-		existing->FireNow();
-		var other = FindObjects(Find_ID(IceShard), Find_Owner(clonk->GetOwner()), Find_Category(C4D_StaticBack), Sort_Func("GetProperty", "number"));
-		if (GetLength(other))
-		{
-			other[0].is_selected = true;
-		}
-		for (var shard in other)
-			shard.offset += shard.angle_distance;
-		return;
-	}
-	
-	if(abletocast)
-	{
-		if(clonk->LaunchSpell(IceShard, x, y, 0, 0))
-			return 1;
-	}
+	if(!released && !mouseclick && abletocast && !cooldown)
+		clonk->LaunchSpell(Blizzard, x, y, 0, 0);
 	
 	return 0;
 }
@@ -60,8 +41,6 @@ func Special3(object clonk, int x, int y, bool released, bool mouseclick, bool a
 		{
 			other[0].is_selected = true;
 		}
-		for (var shard in other)
-			shard.offset += shard.angle_distance;
 		return;
 	}
 	
