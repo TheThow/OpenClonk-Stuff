@@ -11,13 +11,14 @@ func Initialize()
 	CreateObject(Goal_LastManStanding);
 	CreateObject(Rule_KillLogs);
 	CreateObject(Rule_KillLogs);
-	// Active the medal rule if loaded.
-	ActivateMedalRule();
 	CheckScenarioParameters();
 	SetSkyParallax(0, 15, 15, nil, nil, 1, 1);
 	SetSkyAdjust(RGB(100,100,100));
 	InitClouds();
 	AddEffect("Raining", nil, 1, 1);
+	
+	// Active the medal rule if loaded.
+	ActivateMedalRule();
 }
 
 global func FxRainingTimer()

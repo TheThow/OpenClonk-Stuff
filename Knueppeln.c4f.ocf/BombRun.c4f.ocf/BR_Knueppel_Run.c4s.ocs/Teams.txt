@@ -1,5 +1,6 @@
 [Teams]
 LastTeamID=2
+TeamColors=1
 
   [Team]
   id=1

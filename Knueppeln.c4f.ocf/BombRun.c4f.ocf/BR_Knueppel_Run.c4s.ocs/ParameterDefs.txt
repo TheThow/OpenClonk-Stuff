@@ -43,8 +43,8 @@ Description=$ManaRegDesc$
 
 [ParameterDef]
 ID=FriendlyFire
-Default=1
-LeagueValue=1
+Default=2
+LeagueValue=2
 Name=$FFName$
 Description=$FFDesc$
 

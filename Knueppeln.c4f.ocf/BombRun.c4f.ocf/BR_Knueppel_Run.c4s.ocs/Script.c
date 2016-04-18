@@ -10,9 +10,9 @@ func Initialize()
 	CreateObject(Goal_BombRun);
 	CreateObject(Rule_KillLogs);
 	// Active the medal rule if loaded.
-	ActivateMedalRule();
 	CheckScenarioParameters();
 	InitClouds();
+	ActivateMedalRule();
 }
 
 func BallPos()
