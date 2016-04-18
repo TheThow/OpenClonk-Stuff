@@ -18,7 +18,7 @@ local SpellDamage2 = 35;
 
 local Speed = 30;
 local Dur = 70;
-local Charge_dur = 15;
+local Charge_dur = 25;
 
 local angle_prec = 10;
 
