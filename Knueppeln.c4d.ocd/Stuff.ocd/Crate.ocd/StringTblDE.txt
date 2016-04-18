@@ -1,0 +1,4 @@
+Name=Kiste
+OpenCrate=Kiste öffnen
+CloseCrate=Kiste schließen
+Description=Dient zum Lagern und Transportieren von bis zu fünf Objekten.

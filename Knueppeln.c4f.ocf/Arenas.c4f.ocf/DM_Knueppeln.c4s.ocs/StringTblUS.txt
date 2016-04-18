@@ -12,3 +12,6 @@ ManaRegDesc=Guess what
 
 InstaGibName=InstaGib
 InstaGibDesc=One hit kills.
+
+InstaGibName=Items
+InstaGibDesc=Enable items

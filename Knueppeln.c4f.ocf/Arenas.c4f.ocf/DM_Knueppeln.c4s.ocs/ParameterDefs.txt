@@ -71,6 +71,31 @@ Description=$ManaRegDesc$
 		Value=2
 		
 [ParameterDef]
+ID=Items
+Default=0
+LeagueValue=0
+Name=$ItemsName$
+Description=$ItemsDesc$
+
+	[Options]
+		
+		[Option]
+		Name=None
+		Description=None
+		Value=0
+		
+		[Option]
+		Name=Rare
+		Description=Rare
+		Value=200
+		
+		Option]
+		Name=Common
+		Description=Common
+		Value=100
+
+
+[ParameterDef]
 ID=InstaGib
 Default=1
 LeagueValue=1
