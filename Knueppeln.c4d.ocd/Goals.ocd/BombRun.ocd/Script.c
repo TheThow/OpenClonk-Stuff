@@ -25,6 +25,9 @@ local leftshield;
 local rightshield;
 local shieldradius;
 
+local rightshield_params;
+local leftshield_params;
+
 local pause = false;
 
 func Initialize()
@@ -45,9 +48,8 @@ func Initialize()
 	var fxl = AddEffect("GoalCheck", leftgoal, 1, 1, this, nil, 1, 2);
 	fxl.teamid = 1;
 	fxl.enemy = 2;
-	var spos = GameCall("LeftShieldPos");
-	leftshield = CreateObject(PortalWall,spos[0],spos[1],-1);
-	leftshield->CreateWall(1, 90, 80, 75 + (25 * GetPlayerCount()));
+	leftshield_params = GameCall("LeftShieldParams");
+	leftshield = CreateObject(PortalWall,leftshield_params[0], leftshield_params[1],-1);
 	
 	pos = GameCall("RightGoalPos");
 	rightgoal = CreateObject(Dummy, pos[0], pos[1], -1);
@@ -55,13 +57,12 @@ func Initialize()
 	var fxr = AddEffect("GoalCheck", rightgoal, 1, 1, this, nil, 2, 1);
 	fxr.teamid = 2;
 	fxr.enemy = 1;
-	spos = GameCall("RightShieldPos");
-	rightshield = CreateObject(PortalWall,spos[0],spos[1],-1);
-	rightshield->CreateWall(2, 90, 80, 75 + (25 * GetPlayerCount()));
+	rightshield_params = GameCall("RightShieldParams");
+	rightshield = CreateObject(PortalWall,rightshield_params[0],rightshield_params[1],-1);
 	
 	SpawnBall();
 	
-	
+	ScheduleCall(this, "Set", 80);
 }
 
 
@@ -155,8 +156,8 @@ func ResetPlayer(plr)
 
 func Set()
 {
-	leftshield->CreateWall(1, 90, 80, 75 + (25 * GetPlayerCount()));
-	rightshield->CreateWall(2, 90, 80, 75 + (25 * GetPlayerCount()));
+	leftshield->CreateWall(1, leftshield_params[2], leftshield_params[3], 75 + (25 * GetPlayerCount()));
+	rightshield->CreateWall(2, rightshield_params[2], rightshield_params[3], 75 + (25 * GetPlayerCount()));
 	pause = false;
 }
 
