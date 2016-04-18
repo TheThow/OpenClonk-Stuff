@@ -12,6 +12,8 @@ local MaxEnergy = 100000;
 local sharpflame;
 local lightning;
 
+func IsProjectileTarget(object o) { return true; }
+
 func Initialize()
 {
 	SetSolidMask();

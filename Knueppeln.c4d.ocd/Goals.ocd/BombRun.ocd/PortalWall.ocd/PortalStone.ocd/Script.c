@@ -12,6 +12,8 @@ local MaxEnergy = 100000;
 local sharpflame;
 local lightning;
 
+func IsProjectileTarget(object o) { return true; }
+
 func Initialize()
 {
 	SetAction("Travel");
@@ -105,7 +107,6 @@ func FxParticlesDamage(object target, proplist effect, int damage, int cause, in
 {
 	if(Master)
 		Master->GotDamage(damage, by);
-	
 	
 	return 0;
 }

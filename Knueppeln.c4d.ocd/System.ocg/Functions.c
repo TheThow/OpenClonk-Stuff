@@ -7,6 +7,11 @@ global func GetChampions()
 	return Champ_Def;
 }
 
+global func GetRandomItem()
+{
+	return Boompack;
+}
+
 global func UpdateAllSelectionMenus()
 {
 	for(var o in FindObjects(Find_ID(Clonk), Find_OCF(OCF_Alive)))

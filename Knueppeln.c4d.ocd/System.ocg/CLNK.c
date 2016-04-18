@@ -12,7 +12,7 @@ local BLOCK_DUR = 5;
 local BLOCK_RANGE = 25;
 
 local JUMP_MANA = 10;
-local MaxContentsCount = 1;
+local MaxContentsCount = 2;
 
 local healthregen_base = 100;
 local HEALTHREGEN_MAX = 20;
@@ -61,6 +61,19 @@ public func ObjectControl(int plr, int ctrl, int x, int y, int strength, bool re
 		return true;
 	}
 	
+	if (ctrl == CON_InventoryShiftBackward || ctrl == CON_InventoryShiftForward)
+		return 1;
+	
+	if (ctrl == CON_Throw && !IsCarryingHeavy())
+	{	
+		if(Contents(0))
+		{
+			Contents(0)->~ControlUse(this, x, y);
+			return 1;
+		}
+	}
+	
+	
 	if (ctrl == CON_QuickSwitch)
 	{
 		special_active[1] = !release;
@@ -88,7 +101,7 @@ public func ObjectControl(int plr, int ctrl, int x, int y, int strength, bool re
 	}
 	
 	
-	if (ctrl == CON_Skill3)
+	if (ctrl == CON_NextCrew)
 	{
 		special_active[3] = !release;
 	

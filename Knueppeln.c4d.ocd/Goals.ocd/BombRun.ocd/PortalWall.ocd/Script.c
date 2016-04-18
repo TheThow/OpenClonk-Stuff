@@ -116,7 +116,7 @@ func GotDamage(int dmg, int plr)
 	if(!CheckWipf())
 		return;
 
-	HP = HP + dmg/1000;
+	HP = HP - dmg;
 	
 	if(HP <= 0)
 		ScheduleCall(this, "Destroy", 1);
