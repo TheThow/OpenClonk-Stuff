@@ -109,6 +109,7 @@ func FxCheckEnemiesTimer(object target, proplist effect, int time)
 		
 		if(o->GetID() != Clonk)
 		{
+			WeaponDamage(o, SpellDamage);
 			var speed = Distance(0, 0, o->GetXDir(), o->GetYDir());
 			o->SetVelocity(angle, speed);
 			continue;
