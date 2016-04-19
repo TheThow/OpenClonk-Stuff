@@ -9,3 +9,6 @@ FFDesc=Wanna hit your team mates or not?
 
 InstaGibName=InstaGib
 InstaGibDesc=One hit kills.
+
+ItemsName=Items
+ItemsDesc=Enable items

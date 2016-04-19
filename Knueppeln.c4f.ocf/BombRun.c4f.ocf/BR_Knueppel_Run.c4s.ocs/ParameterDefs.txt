@@ -60,7 +60,7 @@ Description=$ItemsDesc$
 		Description=Rare
 		Value=200
 		
-		Option]
+		[Option]
 		Name=Common
 		Description=Common
 		Value=100
