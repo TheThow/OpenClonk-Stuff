@@ -44,29 +44,43 @@ func ChargeStop(proplist params)
 func FxDoTheChargeStart(object target, effect fx, bool temp)
 {
 	if (temp) return;
-	target->SetAction("Float");
+	// Hack because "Float" disables casting.
+	if (!target.ActMap.Float2)
+	{
+		target.ActMap =
+		{
+			Prototype = target.ActMap,
+			Float2 =
+			{
+				Name = "Float2",
+				NextAction = "Float2",
+				Prototype = target.ActMap.Float
+			}
+		};
+	}
+	target->SetAction("Float2");
 }
 
 func FxDoTheChargeTimer(object target, effect fx, int time)
 {
-	SoundAt("Liquids::Splash*", 0, 0, false, 100, nil, nil, nil, 600);
+	target->SoundAt("Liquids::Splash*", 0, 0, false, 100, nil, nil, nil, 600);
 	
-	if ((ShardCount-- < 0) || (target->GetProcedure() == "Tumble"))
+	if ((fx.obj.ShardCount-- < 0) || ((target->GetAction() != "Float") && (target->GetAction() != "Float2")) || !fx.obj)
 	{
 		return FX_Execute_Kill;
 	}
 
-	var x = Sin(angle, 15);
-	var y = -Cos(angle, 15);
+	var x = Sin(fx.obj.angle, 15);
+	var y = -Cos(fx.obj.angle, 15);
 	var shard = target->CreateObject(IceShard, x, y, target->GetOwner());
-	shard.angle = angle + RandomX(-10, 10);
-	shard.Speed = Speed;
-	shard.BlastDamage = BlastDamage;
-	shard.BlastRadius = BlastRadius;
+	shard.angle = fx.obj.angle + RandomX(-10, 10);
+	shard.Speed = fx.obj.Speed;
+	shard.BlastDamage = fx.obj.BlastDamage;
+	shard.BlastRadius = fx.obj.BlastRadius;
 	shard->FireNow();
 	shard->SetObjDrawTransform(250, 0, 0, 0, 250);
 	RemoveEffect("FlightSparks", shard);
-	AddEffect("SmallFlightSparks", shard, 1, 1, nil, GetID());
+	AddEffect("SmallFlightSparks", shard, 1, 1, nil, Blizzard);
 }
 
 func FxDoTheChargeDamage(object target, effect fx, int damage, int cause)
