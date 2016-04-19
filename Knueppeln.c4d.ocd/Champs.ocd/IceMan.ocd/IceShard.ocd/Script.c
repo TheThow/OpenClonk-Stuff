@@ -144,7 +144,7 @@ public func HitObject(obj)
 
 func IsReflectable()
 {
-	return true;
+	return GetCategory() & C4D_Object;
 }
 
 func Hit()
