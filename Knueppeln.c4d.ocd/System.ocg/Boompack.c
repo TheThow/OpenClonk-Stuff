@@ -1,7 +1,7 @@
 #appendto Boompack
 
 public func IsCarryHeavy() { return false; }
-public func CanBeHit(object o) { return true; }
+public func CanBeHit(object o) { if(Contained())return false; return true; }
 
 func Initialize()
 {
@@ -10,5 +10,15 @@ func Initialize()
 }
 
 func FxCheckDmgTimer() { return 0; }
-func FxCheckDmgDamage() { Fuse(); }
+
+func FxCheckDmgDamage() 
+{ 
+	if(!GetEffect("Flight", this))
+	{ 
+		AddEffect("HitCheck", this, 1, 2, nil, nil); 
+		Fuse(); 
+	}
+
+}
+
 func IsProjectileTarget(object o) { return o->GetID() != Sword; }
