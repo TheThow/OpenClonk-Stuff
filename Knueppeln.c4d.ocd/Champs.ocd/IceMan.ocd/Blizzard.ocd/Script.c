@@ -37,7 +37,8 @@ func ChargeStop(proplist params)
 {
 	SoundAt("Liquids::Splash*", 0, 0, false, 100, nil, nil, nil, -90);
 	
-	AddEffect("DoTheCharge", Target, 1, 6, this);
+	var fx = AddEffect("DoTheCharge", Target, 1, 6, nil, GetID());
+	fx.obj = this;
 }
 
 func FxDoTheChargeStart(object target, effect fx, bool temp)
@@ -73,7 +74,7 @@ func FxDoTheChargeDamage(object target, effect fx, int damage, int cause)
 	if (damage >= 0)
 		return damage;
 
-	RemoveEffect(nil, nil, fx);
+	RemoveEffect(nil, target, fx);
 	
 	return damage;
 }
@@ -85,9 +86,9 @@ func FxDoTheChargeStop(object target, effect fx, int reason, temp)
 	{
 		target->SetAction("Jump");
 	}
-	if (this)
+	if (fx.obj)
 	{
-		RemoveObject();
+		fx.obj->RemoveObject();
 	}
 }
 
