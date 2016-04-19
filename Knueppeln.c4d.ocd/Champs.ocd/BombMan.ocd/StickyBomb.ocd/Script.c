@@ -106,8 +106,8 @@ func BlowUp()
 
 func Blocked(object clonk)
 {
-	if (GetSpeed() != 0) return;
-	if (!Hostile(GetController(), clonk->GetOwner())) return;
+	if (GetCategory() != C4D_StaticBack) return;
+	if (!Hostile(GetOwner(), clonk->GetOwner())) return;
 	Remove();
 }
 
