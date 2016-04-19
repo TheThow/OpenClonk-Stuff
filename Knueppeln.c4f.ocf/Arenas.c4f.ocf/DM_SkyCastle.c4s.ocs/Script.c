@@ -26,6 +26,11 @@ global func FxRainingTimer()
 	CastPXS("Water", 3, 5, Random(LandscapeWidth()), 0);
 }
 
+func GetItemCratePos()
+{
+	return [10 + Random(LandscapeWidth() - 20), 0];
+}
+
 func InitClouds()
 {
 	var cnt = 15;

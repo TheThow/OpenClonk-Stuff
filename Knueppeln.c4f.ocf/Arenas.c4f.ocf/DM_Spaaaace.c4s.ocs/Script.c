@@ -50,6 +50,19 @@ func InitializePlayer(int plr, int iX, int iY, object pBase, int iTeam)
 	return;
 }
 
+func GetItemCratePos()
+{
+	for (var i = 0; i < 100; i++)
+	{
+		var pos = [200 + Random(LandscapeWidth() - 400), 10 + Random(LandscapeHeight() - 450)];
+		
+		if(GBackSolid(pos[0], pos[1]))
+			continue;
+		
+		return pos;
+	}
+}
+
 global func FxSpaaaaceTimer(object target, proplist effect, int time)
 {
 	for(var o in FindObjects(Find_NoContainer()))

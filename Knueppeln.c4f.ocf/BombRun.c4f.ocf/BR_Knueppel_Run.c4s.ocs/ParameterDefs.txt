@@ -23,25 +23,6 @@ Description=$ScoreDesc$
 		Value=7
 		
 [ParameterDef]
-ID=IncreasedManaReg
-Default=1
-LeagueValue=1
-Name=$ManaRegName$
-Description=$ManaRegDesc$
-
-	[Options]
-		
-		[Option]
-		Name=Off
-		Description=Off
-		Value=1
-		
-		[Option]
-		Name=On
-		Description=On
-		Value=2
-
-[ParameterDef]
 ID=FriendlyFire
 Default=2
 LeagueValue=2
@@ -60,6 +41,29 @@ Description=$FFDesc$
 		Description=Off
 		Value=2
 
+[ParameterDef]
+ID=Items
+Default=0
+LeagueValue=0
+Name=$ItemsName$
+Description=$ItemsDesc$
+
+	[Options]
+		
+		[Option]
+		Name=None
+		Description=None
+		Value=0
+		
+		[Option]
+		Name=Rare
+		Description=Rare
+		Value=200
+		
+		Option]
+		Name=Common
+		Description=Common
+		Value=100
 
 [ParameterDef]
 ID=InstaGib

@@ -15,6 +15,11 @@ func Initialize()
 	ActivateMedalRule();
 }
 
+func GetItemCratePos()
+{
+	return [10 + Random(LandscapeWidth() - 20), 50];
+}
+
 func BallPos()
 {
 	return [LandscapeWidth()/2, 230];
