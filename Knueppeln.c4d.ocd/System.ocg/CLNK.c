@@ -66,9 +66,9 @@ public func ObjectControl(int plr, int ctrl, int x, int y, int strength, bool re
 	
 	if (ctrl == CON_Throw && !IsCarryingHeavy())
 	{	
-		if(Contents(0))
+		if(GetItem(1))
 		{
-			Contents(0)->~ControlUse(this, x, y);
+			GetItem(1)->~ControlUse(this, x, y);
 			return 1;
 		}
 	}

@@ -1,0 +1,13 @@
+[DefCore]
+id=Manaberry
+Version=6,0
+Category=C4D_Object
+Width=8
+Height=8
+Offset=-4,-4
+Vertices=3
+VertexX=0,3,-3
+VertexY=0,3,3
+VertexFriction=50,100,100
+Value=10
+Mass=1

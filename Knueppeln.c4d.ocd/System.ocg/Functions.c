@@ -9,7 +9,17 @@ global func GetChampions()
 
 global func GetRandomItem()
 {
-	return Boompack;
+	var util = [Manaberry];
+	var attack = [Boompack]; 
+
+	if(!Random(3))
+	{
+		return util[Random(GetLength(util))];
+	}
+	else
+	{
+		return attack[Random(GetLength(attack))];
+	}
 }
 
 global func UpdateAllSelectionMenus()

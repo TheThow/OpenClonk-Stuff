@@ -1,0 +1,2 @@
+Name=Mana Berry
+Description=Sweet. Sprouts very fast and is difficult to store. Press [Use] to eat the berry.
