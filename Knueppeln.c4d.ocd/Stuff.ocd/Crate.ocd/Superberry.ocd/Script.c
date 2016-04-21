@@ -15,7 +15,7 @@ public func Construction()
 protected func ControlUse(object clonk, int iX, int iY)
 {
 	Sound("Clonk::Action::Munch?");
-	clonk->DoMagicEnergy(50, 1);
+	//clonk->DoMagicEnergy(50, 1);
 	
 	var props = { 
 		DampingX = 950, DampingY = 950,
