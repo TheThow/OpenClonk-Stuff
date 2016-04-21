@@ -9,7 +9,7 @@ global func GetChampions()
 
 global func GetRandomItem()
 {
-	var util = [Manaberry];
+	var util = [Superberry];
 	var attack = [Boompack]; 
 
 	if(!Random(4))
