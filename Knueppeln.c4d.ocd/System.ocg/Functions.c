@@ -12,7 +12,7 @@ global func GetRandomItem()
 	var util = [Manaberry];
 	var attack = [Boompack]; 
 
-	if(!Random(3))
+	if(!Random(4))
 	{
 		return util[Random(GetLength(util))];
 	}
