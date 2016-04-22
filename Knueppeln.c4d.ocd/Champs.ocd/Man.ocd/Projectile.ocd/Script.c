@@ -45,8 +45,11 @@ func Launch(object clonk, int x, int y)
 	}*/
 }
 
-func FxTheEffectStart()
+func FxTheEffectStart(object target, proplist effect, int temporary)
 {
+	if(temporary)
+		return;
+		
 	this->~InitEffect();
 }
 

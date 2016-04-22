@@ -1,2 +1,2 @@
-Name=Manabeere
+Name=Superbeere
 Description=Süßlich. Keimt sehr schnell und ist schlecht zu lagern. Drücke [Benutzen] um die Beere zu essen.
