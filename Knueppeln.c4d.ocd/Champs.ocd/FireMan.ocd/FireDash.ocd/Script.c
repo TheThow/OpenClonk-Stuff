@@ -12,7 +12,7 @@ local ManaCost = 45;
 local SpellRange = 180;
 
 local Size1 = 18;
-local Size2 = 35;
+local Size2 = 40;
 local SpellDamage1 = 15;
 local SpellDamage2 = 35;
 
