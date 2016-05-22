@@ -7,7 +7,7 @@
 
 local ManaCost = 10;
 
-local SpellDamage = 10;
+local SpellDamage = 3;
 local Speed = 25;
 local Durr = 35;
 
@@ -17,7 +17,7 @@ local Name = "$Name$";
 local Description = "$Description$";
 
 local ChargeTime = 38;
-local Length = 150;
+local Length = 40;
 local TargetAngle = 0;
 local shooter;
 
@@ -77,6 +77,8 @@ func FxLasersTimer(target, fx, time)
 		CreateParticle("StarSpark", 0, 0, 0, 0, 10, this.particle_stars, 2);
 		return FX_OK;
 	}
-	this->Call(LaserRay.DoTheLaser, 0, 0, Sin(TargetAngle, Length), -Cos(TargetAngle, Length), TargetAngle, Length, true, true);
+	
+	for (var r = 0; r < 360; r += 20)
+		this->Call(LaserRay.DoTheLaser, 0, 0, Sin(TargetAngle + r, Length), -Cos(TargetAngle + r, Length), TargetAngle + r, Length, true, true);
 	RemoveObject();
 }
