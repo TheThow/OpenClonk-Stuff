@@ -135,7 +135,6 @@ local ActMap = {
 		Length = 1,
 		Delay = 1,
 		FacetBase = 1,
-		StartCall = "Traveling",
 	},
 };
 

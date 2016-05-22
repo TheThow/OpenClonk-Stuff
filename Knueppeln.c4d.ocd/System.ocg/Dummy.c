@@ -15,8 +15,6 @@ local ActMap = {
 		Y = 120,
 		Wdt = 8,
 		Hgt = 20,
-		StartCall = "StartHangOnto",
-		AbortCall = "AbortHangOnto",
 		InLiquidAction = "Swim",
 	},
 
