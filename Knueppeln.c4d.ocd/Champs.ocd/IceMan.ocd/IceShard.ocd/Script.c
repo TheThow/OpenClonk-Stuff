@@ -127,11 +127,11 @@ func FxFlightSparksTimer(target, fx, time)
 
 func FireNow()
 {
-	SetCategory(C4D_Object);
 	SetVelocity(angle, Speed);
 	RemoveEffect("IntInFlight", this);
 	AddEffect("HitCheck", this, 1,1, nil,nil, Target);
 	AddEffect("FlightSparks", this, 1, 1, this);
+	SetCategory(C4D_Object);
 }
 
 public func HitObject(obj)
@@ -144,7 +144,7 @@ public func HitObject(obj)
 
 func IsReflectable()
 {
-	return GetCategory() & C4D_Object;
+	return !!(GetCategory() & C4D_Object);
 }
 
 func Hit()
