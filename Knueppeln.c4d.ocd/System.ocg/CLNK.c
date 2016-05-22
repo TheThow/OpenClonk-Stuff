@@ -333,7 +333,8 @@ func FxRemoveBodyStop(target)
 
 func FxManaRegenTimer()
 {
-	DoMagicEnergy(13, true, 100);
+	if(GetY() > 0)
+		DoMagicEnergy(13, true, 100);
 	return 0;
 }
 
