@@ -1,0 +1,142 @@
+[ParameterDef]
+Name=$MapType$
+Description=$DescMapType$
+ID=MapType
+Default=1
+
+	[Options]
+		
+		[Option]
+		Name=$MapTypeBigIsland$
+		Description=$DescMapTypeBigIsland$
+		Value=0
+		
+		[Option]
+		Name=$MapTypeSpots$
+		Description=$DescMapTypeSpots$
+		Value=1
+
+[ParameterDef]
+Name=$Rounds$
+Description=$DescRounds$
+ID=Rounds
+Default=7
+
+	[Options]
+		
+		[Option]
+		Name=1
+		Value=1
+		
+		[Option]
+		Name=2
+		Value=2
+		
+		[Option]
+		Name=3
+		Value=3
+		
+		[Option]
+		Name=5
+		Value=5
+		
+		[Option]
+		Name=7
+		Value=7
+		
+		[Option]
+		Name=11
+		Value=11
+
+
+[ParameterDef]
+ID=ChampSelection
+Default=1
+LeagueValue=1
+Name=$ChampSelectionName$
+Description=$ChampSelectionDesc$
+
+	[Options]
+		
+		[Option]
+		Name=$ChampSelection1$
+		Description=$ChampSelection1$
+		Value=1
+		
+		[Option]
+		Name=$ChampSelection2$
+		Description=$ChampSelection2$
+		Value=2
+		
+		[Option]
+		Name=$ChampSelection3$
+		Description=$ChampSelection3$
+		Value=3
+		
+[ParameterDef]
+ID=IncreasedManaReg
+Default=1
+LeagueValue=1
+Name=$ManaRegName$
+Description=$ManaRegDesc$
+
+	[Options]
+		
+		[Option]
+		Name=Off
+		Description=Off
+		Value=1
+		
+		[Option]
+		Name=On
+		Description=On
+		Value=2
+		
+[ParameterDef]
+ID=Items
+Default=50
+LeagueValue=50
+Name=$ItemsName$
+Description=$ItemsDesc$
+
+	[Options]
+		
+		[Option]
+		Name=None
+		Description=None
+		Value=0
+		
+		[Option]
+		Name=Rare
+		Description=Rare
+		Value=200
+		
+		[Option]
+		Name=Common
+		Description=Common
+		Value=100
+		
+		[Option]
+		Name=Crazy
+		Description=Crazy
+		Value=50
+
+
+[ParameterDef]
+ID=InstaGib
+Default=1
+LeagueValue=1
+Name=$InstaGibName$
+Description=$InstaGibDesc$
+
+	[Options]
+		
+		[Option]
+		Name=Off
+		Description=Off
+		Value=1
+		
+		[Option]
+		Name=On
+		Description=On
+		Value=2

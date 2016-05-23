@@ -1,0 +1,38 @@
+MapType=Map
+DescMapType=Defines the shape of the landscape.
+MapTypeBigIsland=Big island
+DescMapTypeBigIsland=One central main island with small spots of ice in the air above.
+MapTypeSpots=Small islands
+DescMapTypeSpots=Many small spots of ice in the air.
+Weapons=Weapons
+DescWeapons=Defines which weapons are available for players
+WeaponsClassic=Classic
+DescWeaponsClassic=Bows, spears and clubs available in chests
+WeaponsExplosive=Explosive
+DescWeaponsExplosive=Only grenade lauchers and wind bags available
+Rounds=Number of rounds
+DescRounds=Play for multiple rounds
+Stalemate=Stalemate!
+WinningTeam=Winning team: %s
+RemainingRounds=%d rounds remaining.
+LastRound=Last round!
+Tiebreak=Tiebreak!
+BonusRound=Bonus round!
+
+ChampSelectionName=Champion Selection
+ChampSelectionDesc=You can only choose between two random champions each time you respawn
+ChampSelection1=Normal
+ChampSelection2=Random
+ChampSelection3=Rotation
+
+RelaunchName=Relaunch Count
+RelaunchDesc=How many times a player will relaunch.
+
+ManaRegName=Increased Mana Regeneration
+ManaRegDesc=Guess what
+
+InstaGibName=InstaGib
+InstaGibDesc=One hit kills.
+
+ItemsName=Items
+ItemsDesc=Enable items
