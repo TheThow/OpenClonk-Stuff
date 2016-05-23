@@ -3,6 +3,8 @@
 public func IsCarryHeavy() { return false; }
 public func CanBeHit(object o) { if(Contained())return false; return true; }
 
+local probability = 100;
+
 func Initialize()
 {
 	AddEffect("CheckDmg", this, 1, 100, this);

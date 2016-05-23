@@ -1,5 +1,7 @@
 /*-- Sproutberry --*/
 
+local probability = 30;
+
 protected func Hit()
 {
 	Sound("Hits::SoftHit1");

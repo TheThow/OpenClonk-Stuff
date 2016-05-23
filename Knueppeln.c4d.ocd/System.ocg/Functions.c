@@ -1,5 +1,6 @@
 static team_exclusiveChampions;
 static lastChosenChampion;
+static banned_Champions;
 
 global func GetChampions()
 {
@@ -7,19 +8,48 @@ global func GetChampions()
 	return Champ_Def;
 }
 
-global func GetRandomItem()
+global func GetBannedChampions()
 {
-	var util = [Superberry];
-	var attack = [Boompack]; 
+	if (banned_Champions == nil)
+		return [];
+		
+	return banned_Champions;
+}
 
-	if(!Random(4))
+global func BanChampion(id champ)
+{
+	if (banned_Champions == nil)
+		banned_Champions = [];
+	
+	PushBack(banned_Champions, champ);
+}
+
+global func GetChampionsWithoutBanned()
+{
+	if (banned_Champions == nil)
+		return GetChampions();
+	
+	var champs = [];
+	for (champ in GetChampions())
 	{
-		return util[Random(GetLength(util))];
+		var flag = false;
+	
+		for (champ2 in banned_Champions)
+		{
+			if (champ == champ2)
+			{
+				flag = true;
+				break;
+			}
+		}
+		
+		if (flag)
+			continue;
+		
+		PushBack(champs, champ);
 	}
-	else
-	{
-		return attack[Random(GetLength(attack))];
-	}
+	
+	return champs;
 }
 
 global func UpdateAllSelectionMenus()
@@ -59,7 +89,7 @@ global func InitTeamExclusiveChamps(int teamcount)
 global func RemoveTeamChamp(int teamid, id ChampType)
 {
 	var banned = team_exclusiveChampions[teamid -1];
-	var newb = CreateArray(GetLength(banned) +1);
+	var newb = CreateArray(GetLength(banned) + 1);
 	
 	for(var i = 0; i < GetLength(banned); i++)
 	{
@@ -80,6 +110,9 @@ global func ResetTeamExclusiveChamps()
 
 global func GetBannedTeamChampions(int teamid)
 {
+	if (team_exclusiveChampions == nil)
+		return [];
+	
 	return team_exclusiveChampions[teamid -1];
 }
 

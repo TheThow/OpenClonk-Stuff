@@ -17,20 +17,31 @@ protected func Construction()
 	PlayAnimation("Open", 1, Anim_Linear(0, 0, 1, 20, ANIM_Hold));
 	SetProperty("MeshTransformation",Trans_Rotate(RandomX(20,80),0,1,0));
 	
-	AddEffect("CheckDmg", this, 1, 100, this);
+	AddEffect("CheckDmg", this, 1, 2, this);
 	
 	return _inherited(...);
 }
 
 func FxCheckDmgTimer()
 {
+	if(GBackLiquid())
+	{
+		Pop();
+	}
+
 	return 0;
 }
 
 func FxCheckDmgDamage()
 {
+	Pop();
+}
+
+func Pop()
+{
 	CreateObject(itemID, 0, -6, -1);
 	HitEffect();
+	Sound("Hits::Materials::Wood::WoodHit?", false, 50);
 	RemoveObject();
 }
 
@@ -41,7 +52,7 @@ func HitEffect()
 
 func Hit()
 {
-	Sound("Hits::Materials::Wood::DullWoodHit?");
+	Sound("Hits::Materials::Wood::DullWoodHit?", false, 50);
 }
 
 func SetItemID(id ID)

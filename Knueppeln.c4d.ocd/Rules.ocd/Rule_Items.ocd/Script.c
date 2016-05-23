@@ -17,6 +17,20 @@ func Set(int time)
 	AddEffect("SpawnItems", this, 1, time, this);
 }
 
+global func GetRandomItem()
+{
+	var items = [Superberry, Boompack];
+	var l = [];
+	
+	for (item in items)
+	{
+		for(var i = 0; i < item.probability; i++)
+			PushBack(l, item);
+	}
+	
+	return l[Random(GetLength(l))];
+}
+
 func FxSpawnItemsTimer()
 {
 	if(Random(Max(3, 8 - GetPlayerCount())))

@@ -26,11 +26,14 @@ func ChooseMenu()
 	
 	if(FindObject(Find_ID(Rule_RandomChamp)))
 	{
+		champs = GetChampionsWithoutBanned();
 		var i = Random(GetLength(champs));
 		var u = Random(GetLength(champs));
 		
 		while(u == i)
+		{
 			u = Random(GetLength(champs));
+		}
 		
 		champs = [champs[i], champs[u]];
 	}
@@ -82,7 +85,7 @@ func ChooseMenu()
 			ID = 100 + index,
 			Priority = index,
 			Bottom = "+2em",
-			BackgroundColor = {Std = 0, Hover = 0x50ff0000, Nope = 0x50ffff00},
+			BackgroundColor = {Std = 0, Hover = 0x50ffff00, Nope = 0x50ff0000},
 			OnMouseIn = [ 
 				GuiAction_Call(this, "ChampUpdateDesc", [champ]), 
 				GuiAction_SetTag("Hover")
@@ -104,6 +107,8 @@ func ChooseMenu()
 	
 	choosemenu_id = GuiOpen(menu);
 	this->SetMenu(choosemenu_id, true);
+	
+	UpdateSelectionMenu();
 }
 
 func ChampUpdateDesc(data, int player, int ID, int subwindowID, object target)
@@ -128,11 +133,21 @@ func SelectChamp(data, int player, int ID, int subwindowID, object target)
 		{
 			if(c == ChampType)
 			{
-				Sound("Error", true, 50, player);
+				Sound("UI::Error", true, 50, player);
 				return false;
 			}
 		}
+		
 		RemoveTeamChamp(GetPlayerTeam(GetOwner()), ChampType);
+	}
+	
+	for(var c in GetBannedChampions())
+	{
+		if(c == ChampType)
+		{
+			Sound("UI::Error", true, 50, player);
+			return false;
+		}
 	}
 
 	ChampType->InitChamp(this);
@@ -153,15 +168,23 @@ func SelectChamp(data, int player, int ID, int subwindowID, object target)
 
 func UpdateSelectionMenu()
 {
+	var possible = GetChampions();
+
 	if(FindObject(Find_Func("UseTeamExclusiveChampions")))
 	{
 		var banned = GetBannedTeamChampions(GetPlayerTeam(GetOwner()));
-		var possible = GetChampions();
 		for(var c in banned)
 		{
 			var champ_index = GetIndexOf(possible, c) + 101;
-			GuiUpdate({BackgroundColor = 0x50ffff00}, choosemenu_id, champ_index, nil);
+			GuiUpdate({BackgroundColor = 0x50ff0000}, choosemenu_id, champ_index, nil);
 			//GuiUpdateTag("Nope", choosemenu_id, c);
 		}
+	}
+	
+	for(var c in GetBannedChampions())
+	{
+		var champ_index = GetIndexOf(possible, c) + 101;
+		GuiUpdate({BackgroundColor = 0x50ff0000}, choosemenu_id, champ_index, nil);
+		//GuiUpdateTag("Nope", choosemenu_id, c);
 	}
 }

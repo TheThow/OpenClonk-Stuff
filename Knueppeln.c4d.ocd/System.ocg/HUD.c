@@ -9,7 +9,16 @@ local SymbolContainer;
 
 func Initialize(...)
 {
-	//SymbolContainer = CreateObject(Dummy);
+	CreateSymbols();
+	
+	ShowHUD();
+	AddEffect("UpdateHUD", this, 1, 1, this);
+	
+	return _inherited(...);
+}
+
+func CreateSymbols()
+{
 	QSymbol = CreateObject(HUDSymbol, 0, 0,GetOwner());
 	QSymbol->SetGraphics("Q");
 	//QSymbol->Enter(SymbolContainer);
@@ -23,12 +32,6 @@ func Initialize(...)
 	RSymbol = CreateObject(HUDSymbol, 0, 0,GetOwner());
 	RSymbol->SetGraphics("R");
 	RSymbol.Visiblity = VIS_None;
-	//RSymbol->Enter(SymbolContainer);
-	
-	ShowHUD();
-	AddEffect("UpdateHUD", this, 1, 1, this);
-	
-	return _inherited(...);
 }
 
 func ShowHUD()

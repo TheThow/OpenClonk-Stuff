@@ -94,6 +94,11 @@ Description=$ItemsDesc$
 		Description=Common
 		Value=100
 		
+		[Option]
+		Name=Crazy
+		Description=Crazy
+		Value=50
+		
 [ParameterDef]
 ID=InstaGib
 Default=1
