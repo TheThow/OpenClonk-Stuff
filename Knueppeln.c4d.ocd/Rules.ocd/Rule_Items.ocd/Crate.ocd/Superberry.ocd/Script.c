@@ -1,6 +1,6 @@
 /*-- Sproutberry --*/
 
-local probability = 30;
+local probability = 35;
 
 protected func Hit()
 {
@@ -99,8 +99,6 @@ func FxSuperberryStop(object target, proplist fx, int reason, bool temporary)
 	
 	target->SetClrModulation(RGB(255,255,255));
 }
-
-public func NutritionalValue() { return 5; }
 
 local Name = "$Name$";
 local Description = "$Description$";

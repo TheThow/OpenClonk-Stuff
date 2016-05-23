@@ -8,6 +8,11 @@ func Initialize()
 	g_remaining_rounds = SCENPAR_Rounds;
 	g_winners = [];
 	InitializeRound();
+	
+	BanChampion(FireMan);
+	BanChampion(BombMan);
+	
+	
 	CheckScenarioParameters();
 
 	Scoreboard->Init([
@@ -17,8 +22,6 @@ func Initialize()
 		{key = "death", title = "", sorted = false, default = "", priority = 0},
 	]);
 	
-	BanChampion(FireMan);
-	BanChampion(BombMan);
 }
 
 func GetItemCratePos()

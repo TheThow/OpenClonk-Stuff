@@ -1,0 +1,2 @@
+Name=Monster Ball
+Description=Wertvoller Klunker
