@@ -113,7 +113,7 @@ func DoTheLaser(from_x, from_y, to_x, to_y, angle, max_length, no_bounce, stop_a
 
 	if (stop_at_target)
 	{
-		var object_hit = FindObject(Find_OnLine(from_x, from_y, to_x, to_y), Find_OCF(OCF_Alive), Find_Exclude(this.shooter), Find_Func("CanBeHit", this));
+		var object_hit = FindObject(Find_OnLine(from_x, from_y, to_x, to_y), Find_Exclude(this.shooter), Find_Func("CanBeHit", this));
 		if (object_hit)
 		{
 			to_x = object_hit->GetX() - GetX();
@@ -156,7 +156,7 @@ func DoTheLaser(from_x, from_y, to_x, to_y, angle, max_length, no_bounce, stop_a
 	CreateParticle("StarSpark", to_x, to_y, 0, 0, 10, this.particle_stars, 10);
 	DrawParticleLine("RaySpark", from_x, from_y, to_x, to_y, 4, 0, 0, 10, this.particle_ray);
 	
-	for (var obj in FindObjects(Find_OnLine(from_x, from_y, to_x, to_y), Find_OCF(OCF_Alive), Find_Exclude(this.shooter), Find_Func("CanBeHit", this)))
+	for (var obj in FindObjects(Find_OnLine(from_x, from_y, to_x, to_y), Find_Exclude(this.shooter), Find_Func("CanBeHit", this)))
 	{
 		CreateParticle("StarSpark", AbsX(obj->GetX()), AbsY(obj->GetY()), 0, 0, 10, this.particle_stars, 2);
 		this->HitObject(obj);
