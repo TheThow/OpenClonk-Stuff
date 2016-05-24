@@ -9,8 +9,8 @@ func Initialize()
 	g_winners = [];
 	InitializeRound();
 	
-	BanChampion(FireMan);
-	BanChampion(BombMan);
+	//BanChampion(FireMan);
+	//BanChampion(BombMan);
 	
 	
 	CheckScenarioParameters();
@@ -23,6 +23,15 @@ func Initialize()
 	]);
 	
 }
+
+global func BlastFree(x, y, level, cause_plr) 
+{
+	if (this == FireProjectile || this == StickyBomb || this == EarthProjectile)
+		return false;
+	
+	return _inherited(x, y, level, cause_plr);
+}
+
 
 func GetItemCratePos()
 {
