@@ -26,6 +26,10 @@ func Launch(object clonk, int x, int y)
 	Target = clonk;
 	
 	SetController(clonk->GetController());
+	this.Visibility = VIS_None;
+	
+	var fx = CreateEffect(IceShard.ChargeEffect, 1, 1);
+	fx.ChargeDuration = ChargeDuration;
 }
 
 func ChargeInterrupted()

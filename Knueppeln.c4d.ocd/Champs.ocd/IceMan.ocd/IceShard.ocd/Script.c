@@ -14,6 +14,34 @@ local number = 0;
 local offset = 0;
 local angle;
 
+local ChargeEffect = new Effect
+{
+	Construction = func()
+	{
+		this.particles = 
+		{
+			R = 255,
+			G = 255,
+			B = 255,
+			Size = PV_Linear(PV_Random(2, 3), 0),
+			OnCollision = PC_Die(),
+			CollisionVertex = 0,
+			ForceX = PV_Linear(0, PV_Random(-10, 10, 10)),
+			ForceY = PV_Linear(0, PV_Random(-10, 10, 10)),
+			DampingX = 900, DampingY = 900,
+			BlitMode = GFX_BLIT_Additive
+		};
+	},
+	Timer = func(int time)
+	{
+		var r = time / 3;
+		this.Target->CreateParticle("StarSpark", PV_Random(-r, r), PV_Random(-r, r), 0, 0, PV_Random(60, 300), this.particles, 3);
+		if (time > this.ChargeDuration)
+			return FX_Execute_Kill;
+		return FX_OK;
+	}
+}
+
 func Construction()
 {
 	SetCategory(C4D_StaticBack);
@@ -28,6 +56,10 @@ func Launch(object clonk, int x, int y)
 	clonk->Charge(this, "ChargeStop", ChargeDuration, params);
 	Target = clonk;
 	SetController(clonk->GetController());
+	this.Visibility = VIS_None;
+	
+	var fx = CreateEffect(ChargeEffect, 1, 1);
+	fx.ChargeDuration = ChargeDuration;
 }
 
 func ChargeInterrupted()
@@ -37,6 +69,7 @@ func ChargeInterrupted()
 
 func ChargeStop(proplist params)
 {
+	this.Visibility = VIS_All;
 	Sound("Liquids::Splash*", false, 100, nil, nil, nil, 200);
 	
 	var a = 360 / ShardCount;
