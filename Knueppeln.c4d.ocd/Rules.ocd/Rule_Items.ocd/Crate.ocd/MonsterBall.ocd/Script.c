@@ -18,6 +18,7 @@ local trailparticles;
 
 local probability = 45;
 
+func IsKnueppelItem() { return true; }
 
 func InitEffect()
 {

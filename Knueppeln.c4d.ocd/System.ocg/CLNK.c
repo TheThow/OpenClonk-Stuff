@@ -68,8 +68,15 @@ public func ObjectControl(int plr, int ctrl, int x, int y, int strength, bool re
 	{	
 		if(GetItem(1))
 		{
-			GetItem(1)->~ControlUse(this, x, y);
-			return 1;
+			if(GetItem(1)->~IsKnueppelItem())
+			{
+				GetItem(1)->~ControlUse(this, x, y);
+			}
+			else
+			{
+				ObjectCommand("Throw", GetItem(1), x, y);
+			}
+			return true;
 		}
 	}
 	

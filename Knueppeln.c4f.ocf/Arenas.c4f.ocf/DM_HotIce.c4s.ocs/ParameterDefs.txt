@@ -75,8 +75,8 @@ Description=$ChampSelectionDesc$
 		
 [ParameterDef]
 ID=IncreasedManaReg
-Default=1
-LeagueValue=1
+Default=2
+LeagueValue=2
 Name=$ManaRegName$
 Description=$ManaRegDesc$
 

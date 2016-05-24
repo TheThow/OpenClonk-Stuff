@@ -2,6 +2,8 @@
 
 local probability = 35;
 
+func IsKnueppelItem() { return true; }
+
 protected func Hit()
 {
 	Sound("Hits::SoftHit1");

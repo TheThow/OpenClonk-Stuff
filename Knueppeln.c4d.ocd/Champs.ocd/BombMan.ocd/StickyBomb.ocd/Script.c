@@ -92,7 +92,7 @@ func BlowUp()
 	
 	while (radius > 10)
 	{
-		var obj = CreateObject(Rock, x, y, GetController());
+		var obj = CreateObject(StickyBomb, x, y, GetController());
 		obj->ExplosionEffect(radius, 0, 0, 100);
 		obj->Explode(radius, true, dmg);
 		

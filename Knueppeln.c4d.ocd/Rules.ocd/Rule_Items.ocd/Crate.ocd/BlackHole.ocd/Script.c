@@ -2,6 +2,8 @@
 
 local probability = 15;
 
+func IsKnueppelItem() { return true; }
+
 protected func Construction()
 {
 	var graphic = Random(5);

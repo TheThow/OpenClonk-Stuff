@@ -24,3 +24,4 @@ func FxCheckDmgDamage()
 }
 
 func IsProjectileTarget(object o) { return o->GetID() != Sword; }
+func IsKnueppelItem() { return true; }
