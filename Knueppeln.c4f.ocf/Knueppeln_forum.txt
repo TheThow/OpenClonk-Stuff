@@ -1,36 +1,34 @@
 Only playable with latest snapshot. 
 
+
 [h]Knüppeln![/h]
 
 Choose your champion at the beginning / at each respawn and knüppel your enemies to death!
 Each champion has 3 more or less unique abilities.
 
+
 [h]Controls[/h]
 
+Left click = Sword attack
+Right click = Use/Throw item
 Double W/A/S/D mid air = Double jump
 Space = Blocks most spells near you
 Q/E/R = Special abilities of your champion
 
+
 [h]Champions[/h]
 
-[tt]A = You can aim while charging
-B = Can be blocked
-C = Needs to charge
-
-Range in pixels
-Duration in frames[/tt]
- 
 
 [b]Electro Man[/b]
 <insert epic description>
 
-Electro Shot    [i]Mana: 18 Damage: 15 Range: - Duration: - B
+Electro Shot
 Launches a fast traveling projectile.[/i]
 
-Electro Orb    [i] Mana: 30 Damage: 20 Range: ? Duration: 200 A B C
+Electro Orb
 Launches an orb that will return to you after a while, damaging everything on its path. (Can hit the same clonk twice)[/i]
 
-Thunder Strike    [i] Mana: 50 Damage: 50 Range: 275 Duration: - C 
+Thunder Strike
 Hold R and click within the range indicator to launch the attack at your mouse position. After a short delay it will damage everything in its reach.[/i]
  
 
@@ -38,13 +36,13 @@ Hold R and click within the range indicator to launch the attack at your mouse p
 <insert epic description>
 Immune to flames.
 
-Fire Shot      [i]Mana: 22 Damage: 22 Range: - Duration: - B
+Fire Shot
 Launches a projectile that will explode and leave flames when hitting a target / the ground.[/i]
 
-Fire Nado      [i]Mana: 30 Damage: 30 Range: - Duration: 70 A C
+Fire Nado
 Launches a tornado that will damage enemies and push away spells that can be blocked. Leaves flames when disappearing.[/i]
 
-Fire Dash      [i]Mana: 45 Damage: 20 + 40 Range: 180 Duration: - C
+Fire Dash
 Click somewhere within the range indicator and your clonk turns into a fireball that flies to your mouse position damaging everything on its way and exploding upon reaching the target location. Also leaves flames.
 You cannot aim while charging.[/i]
  
@@ -52,13 +50,13 @@ You cannot aim while charging.[/i]
 [b]Earth Man[/b]
 <insert epic description>
 
-Earth Projectile  [i]Mana: 22 Damage: 20 Range: - Duration: - B
+Earth Projectile
 Launches a ballistic projectile that will bounce off the ground once and explode on contact with enemies.[/i]
 
-Earth Wall    [i]Mana: 35 Damage: - Range: 100 Duration: 220 
+Earth Wall
 Creates a solid wall that absorbs up to 50 damage when clicking within the range indicator.[/i]
 
-Big Rock      [i]Mana: 50 Damage: 35 Range: - Duration: 200 A C
+Big Rock
 Launches a giant rock that bounces around the battlefield, damaging everything on its way.[/i]
  
 
@@ -66,82 +64,82 @@ Launches a giant rock that bounces around the battlefield, damaging everything o
 <insert epic description>
 Increased movement speed
 
-Poison Dart    [i]Mana: 18 Damage: 12 Range: - Duration: 100 B
+Poison Dart
 Launches a ballistic projectile that will reduce your targets vision for a short duration[/i]
 
-Shadow Walk    [i]Mana: 35 Damage: - Range: - Duration: 100
+Shadow Walk
 Turns your clonk invisible for a short period of time.[/i]
 
-Critical Strike    [i]Mana: 40 Damage: 50 Range: - Duration: - A C
+Critical Strike
 Strong meele attack that flings your targets across the map[/i]
  
 
 [b]Balls Man[/b]
 <insert epic description>
 
-Attack Order    [i]Mana: 10 Damage: 20 Range: 275 Duration: 100 B
+Attack Order
 Your ball moves to your mouse position damaging enemies on the target location.[/i]
 
-Home Call    [i]Mana: 25 Damage: 20 Range: - Duration: 100 B
+Home Call
 Your ball moves back to you with increased speed damaging everything on its path. 
 Upon reaching you it grants you a shield that absorbs 15 damage.[/i]
 
-Discharge      [i]Mana: 35 Damage: 40 Range: - Duration: - C
+Discharge
 Your ball damages everything near it after a small delay.[/i]
  
  
 [b]Time Man[/b]
 <insert epic description>
 
-Energy Shot    [i]Mana: 15 Damage: 10 Range: - Duration: - B
+Energy Shot
 Launches a fast traveling projectile that leaves a mark on your target. Hit again to activate that mark and deal an additional 20 damage.
 Not affected by Slowing Field.[/i]
 
-Time Travel   [i] Mana: 2*15 Damage: 30 Range: - Duration: 400 B
+Time Travel
 First activation leaves a time travel marker on your position that lasts 10 seconds. Activate again to travel back to that location and deal damage to anyone near it. 
 As soon as you start traveling the marker will be revealed to other players.
 Time Travel also triggers the energy shot mark.[/i]
 
-Slowing Field    [i] Mana: 40 Damage: - Range: 275 Duration: 100
+Slowing Field 
 Hold R and click within the range indicator to create a field that slows everything in its range.[/i]
  
 
 [b]Laser Man[/b] - contributed by Zapper
 <insert epic description>
 
-Small Ray      [i]Mana: 10 Damage: 10 Range: 150 Duration: - B
+Small Ray
 Places a small laser ray that will fire after a second.[/i]
 
-Laser Ray      [i]Mana: 25 Damage: 15 Range: 200 Duration: - B C
+Laser Ray
 Fires a bouncing laser ray after charging.[/i]
 
-Laser Blink    [i]Mana: 30 Damage: 1 Range: 200 Duration: - B C
+Laser Blink
 Instantaneously teleports you to another location. Enemies touched by the ray will be tumbled.[/i]
  
 
 [b]Ice Man[/b] - contributed by Zapper
 <insert epic description>
 
-Ice Ball      [i]Mana: 22 Damage: 18 Range: 200 Duration: - B
+Ice Ball
 Launches a projectile that will explode after a time or when it hits.[/i]
 
-Ice Shards    [i]Mana: 30 Damage: 20 Range: - Duration: - B C
+Ice Shards
 Spawns three ice shards that circle around you. Activate again to fire the blue shard with a ballistic trajectory.[/i]
 
-Hail Storm    [i]Mana: 50 Damage: 20 Range: - Duration: - B C
+Hail Storm
 Spawns 6 ice shards that work like described above.[/i]
  
 
 [b]Bomb Man[/b] - contributed by Zapper
 <insert epic description>
 
-Sticky Bomb   [i]Mana: 10 Damage: 20 Range: - Duration: - B
+Sticky Bomb
 Throws a sticky bomb that sticks to material or Clonks.[/i]
 
-Blow Up       [i]Mana: - Damage: - Range: - Duration: -
+Blow Up 
 Blows up all existing sticky bombs.[/i]
 
-Bomb Magnet   [i]Mana: 10 Damage: - Range: 300 Duration: -
+Bomb Magnet
 Click on a position to let all nearby bombs jump towards it.[/i]
 
 [h]Game modes[/h]
@@ -167,21 +165,33 @@ Rotation    Every player gets the same champion[/i]
  
 
 [b]Instagib[/b]      [i]Kill with one shot[/i]  
+ 
+
+[b]Items[/b]      [i]Enables item spawns[/i]
+[i]
+Boompack
+Black hole
+Rubber ducky of doom
+Monster ball
+Super berry
+[/i]  
+
 
 [h]ToDo (unsorted)[/h]
 
 - More sounds so every spell sounds different
-- Do something on right click (preferably some sort of second melee attack - some people suggested a taunt menu)
 - Different (team) game modes (Next: Domination)
-- Special items (Maybe guest appearances from other packs if there were any(?). Caedes!)
 - More maps
 - Maybe a system to ban champions / Limit them if there are too many some day
 - Some sort of ghost cam for eliminated players that can do stuff. (can't put my concept into words)
 - More decoration for the existing maps... where can i steal some?!
 - A coop adventure... but I'm too lazy for that.
+- A parcour scenario
+
 
 [h]Bugs[/h]
-OpenClonk crashes every time you finish a round.
+OpenClonk crashes almost every time you finish a round.
+
 
 [h]Special Thanks[/h]
 
