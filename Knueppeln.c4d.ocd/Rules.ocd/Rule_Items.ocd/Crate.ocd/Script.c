@@ -12,6 +12,8 @@ func Initialize()
 	itemID = GetRandomItem();
 }
 
+func CanBeSucked() { return true; }
+
 protected func Construction()
 {
 	PlayAnimation("Open", 1, Anim_Linear(0, 0, 1, 20, ANIM_Hold));

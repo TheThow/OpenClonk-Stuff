@@ -11,6 +11,8 @@ local Description = "$Description$";
 local randX = 10;
 local randY = 10;
 
+func CanBeSucked() { return true; }
+
 func Initialize()
 {
 	SetClrModulation(RGB(128,0,0));
@@ -29,7 +31,7 @@ func FxDrawBloodTimer(object target, proplist effect, int time)
 			continue;
 		}
 		
-		DrawMaterialQuad("FlatTunnel-gore", x, y, x+1, y, x+1, y+1, x, y+1, true);
+		DrawMaterialQuad("FlatTunnel-gore", x, y, x+1, y, x+1, y+1, x, y+1, DMQ_Sub);
 	}
 	
 	if(!GetXDir() && !GetYDir() && !GetEffect("Idle", this))

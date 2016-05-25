@@ -13,6 +13,8 @@ local rotation = 0;
 local sharpflame;
 local lightning;
 
+func CanBeSucked() { return true; }
+
 private func Construction()
 {
 	rotation = Random(360);

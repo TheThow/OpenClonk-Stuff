@@ -39,6 +39,8 @@ local followtrailparticles;
 local hometrailparticles;
 local hometrailparticles2;
 
+func CannotBeSucked() { return true; }
+
 func Initialize()
 {
 	SetAction("Travel");

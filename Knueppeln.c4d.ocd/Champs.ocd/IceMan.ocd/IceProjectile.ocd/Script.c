@@ -6,6 +6,8 @@ local SpellDamage = 18;
 local Radius = 30;
 local trail_particles;
 
+func CanBeSucked() { return true; }
+
 func InitEffect()
 {
 	Sound("Fire::Fireball", false, 100, nil, nil, nil, 200);

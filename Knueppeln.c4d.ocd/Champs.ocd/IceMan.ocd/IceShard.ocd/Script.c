@@ -42,6 +42,8 @@ local ChargeEffect = new Effect
 	}
 }
 
+func CanBeSucked() { return true; }
+
 func Construction()
 {
 	SetCategory(C4D_StaticBack);

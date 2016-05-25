@@ -35,6 +35,8 @@ func Initialize()
 	plr_hit = CreateArray(GetPlayerCount());
 }
 
+func CanBeSucked() { return true; }
+
 func Launch(object clonk, int x, int y)
 {
 	var params = {

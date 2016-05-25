@@ -21,6 +21,8 @@ local Durr = 70;
 local Charge_Dur = 15;
 local firetrailparticles;
 
+func CanBeSucked() { return true; }
+
 func Initialize()
 {
 	SetAction("Travel");

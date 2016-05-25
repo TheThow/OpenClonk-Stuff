@@ -23,7 +23,7 @@ local probability = 15;
 local MaxSize = 100;
 local size = 0;
 local MaxRange = 500;
-local Duration = 240;
+local Duration = 260;
 
 func Initialize()
 {
@@ -52,7 +52,7 @@ func Initialize()
 
 func InitEffect()
 {
-	SetLightRange(30, 70);
+	SetLightRange(50, 100);
 	SetLightColor(RGB(255, 0, 0));
 	ox=GetX();
 	oy=GetY();
@@ -110,8 +110,6 @@ func TravelEffect()
 
 func Hit()
 {
-	
-	
 	if(!thrown)
 	{
 		Sound("Hits::Materials::Glass::GlassHit*", false, 50);
@@ -147,7 +145,7 @@ func Hit()
 	};
 	
 	var r = Random(360);
-	var d = 300;
+	var d = 500;
 	DrawParticleLine("Flash", Cos(r, d), Sin(r, d), Cos(r + 180, d), Sin(r + 180, d), 1, 0, 0, 50, prop2);
 	DrawParticleLine("Flash", Cos(r+90, d), Sin(r+90, d), Cos(r-90, d), Sin(r-90, d), 1, 0, 0, 50, prop2);
 	
@@ -158,6 +156,7 @@ func Hit()
 
 func StartBlackHole()
 {
+	Sound("blackhole", false, 50);
 	AddEffect("Grow", this, 1, 1, this);
 	AddEffect("Suck", this, 1, 1, this);
 }
@@ -174,7 +173,7 @@ func FxSuckTimer(target, fx, time)
 	CreateParticle("Flash", x, y, Sin(angle + 180, 150), -Cos(angle + 180, 150), 30, flyparticles, 1);
 	
 	
-	for(var obj in FindObjects(Find_Distance(MaxRange), Find_Or(Find_Category(C4D_Living), Find_Category(C4D_Object), Find_Category(C4D_Vehicle))))
+	for(var obj in FindObjects(Find_Not(Find_Func("CannotBeSucked")), Find_NoContainer(), Find_Distance(MaxRange), Find_Or(Find_Category(C4D_Living), Find_Category(C4D_Object), Find_Func("CanBeSucked"))))
 	{
 		var dist = Distance(GetX(), GetY(), obj->GetX(), obj->GetY());
 		var strength = MaxRange/(dist+1) * 12 / 10;
@@ -183,7 +182,7 @@ func FxSuckTimer(target, fx, time)
 		if(obj->GetID() == Clonk && (obj->GetAction() == "Walk" || obj->GetAction() == "Scale"))
 		{
 			obj->SetAction("Jump");
-			obj->SetPosition(obj->GetX(), obj->GetY() - 1);
+			obj->SetPosition(obj->GetX(), obj->GetY() - 2);
 		}
 		
 		obj->AddVelocity(angle, strength);

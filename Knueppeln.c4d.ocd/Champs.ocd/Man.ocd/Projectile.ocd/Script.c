@@ -12,6 +12,8 @@ func Initialize()
 	SetClrModulation(RGBa(0,0,0,0));
 }
 
+func CanBeSucked() { return true; }
+
 func IsReflectable()
 {
 	return true;
