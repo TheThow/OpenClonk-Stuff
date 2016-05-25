@@ -297,7 +297,9 @@ func Hit()
 
 func Death(int killed_by)
 {
-	CastObjects(Flesh, 8, 50);
+	if(!Scenario->~NoFlesh())
+		CastObjects(Flesh, 8, 50);
+		
 	ChampType->CleanUp(this);
 	
 	var props = {

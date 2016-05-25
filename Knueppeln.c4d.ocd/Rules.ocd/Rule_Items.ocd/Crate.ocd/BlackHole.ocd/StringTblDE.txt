@@ -1,2 +1,2 @@
-Name=Eisenerz
-Description=Rohmaterial für Metallproduktion in der Schmelze.
+Name=Black Hole
+Description=It's black

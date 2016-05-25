@@ -52,6 +52,25 @@ global func GetChampionsWithoutBanned()
 	return champs;
 }
 
+// Sets an objects's speed and its direction, doesn't it?
+// Can set either speed or angle of velocity, or both
+global func AddVelocity(int angle, int speed, int precAng, int precSpd)
+{
+	if(!precSpd) precSpd = 10;
+	if(!precAng) precAng = 1;
+	if(!speed)
+		speed = Distance(0,0, GetXDir(precSpd), GetYDir(precSpd));
+	if(!angle)
+		angle = Angle(0,0, GetXDir(precSpd), GetYDir(precSpd), precAng);
+		
+	var x_dir = this->GetXDir() + Sin(angle, speed, precAng);
+	var y_dir = this->GetYDir() - Cos(angle, speed, precAng);
+
+	SetXDir(x_dir, precSpd);
+	SetYDir(y_dir, precSpd);
+	return;
+}
+
 global func UpdateAllSelectionMenus()
 {
 	for(var o in FindObjects(Find_ID(Clonk), Find_OCF(OCF_Alive)))

@@ -24,6 +24,8 @@ func Initialize()
 	
 }
 
+func NoFlesh() { return true; }
+
 global func BlastFree(x, y, level, cause_plr) 
 {
 	if (this == FireProjectile || this == StickyBomb || this == EarthProjectile)
