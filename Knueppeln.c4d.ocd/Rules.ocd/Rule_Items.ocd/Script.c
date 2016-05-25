@@ -19,7 +19,7 @@ func Set(int time)
 
 global func GetRandomItem()
 {
-	var items = [Superberry, Boompack, MonsterBall, BlackHole];
+	var items = [Superberry, Boompack, MonsterBall, BlackHole, RubberDucky];
 	var l = [];
 	
 	for (item in items)

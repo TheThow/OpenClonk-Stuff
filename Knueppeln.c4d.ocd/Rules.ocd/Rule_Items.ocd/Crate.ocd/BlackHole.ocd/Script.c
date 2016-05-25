@@ -1,6 +1,6 @@
 /*-- Ore --*/
 
-local probability = 20;
+local probability = 35;
 
 func IsKnueppelItem() { return true; }
 
@@ -113,7 +113,7 @@ func Hit()
 	Collectible = 0;
 	SetCategory(C4D_StaticBack);
 	RemoveEffect("Trail", this);
-	Sound("Items::blackhole_explode", false, 50);
+	Sound("Items::blackhole_explode", false, 100);
 	
 	var flashparticle =
 	{
