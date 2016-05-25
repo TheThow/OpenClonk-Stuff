@@ -72,12 +72,6 @@ func FxTrailTimer(target, fx, time)
 	}
 }
 
-// returns the color of the gem (used for effects)
-func GetGemColor()
-{
-	return RGB(255, 20, 20);
-}
-
 protected func Construction()
 {
 	var graphic = Random(5);
@@ -119,7 +113,7 @@ func Hit()
 	Collectible = 0;
 	SetCategory(C4D_StaticBack);
 	RemoveEffect("Trail", this);
-	Sound("blackhole_explode", false, 50);
+	Sound("Items::blackhole_explode", false, 50);
 	
 	var flashparticle =
 	{
@@ -156,7 +150,7 @@ func Hit()
 
 func StartBlackHole()
 {
-	Sound("blackhole", false, 50);
+	Sound("Items::blackhole", false, 50);
 	AddEffect("Grow", this, 1, 1, this);
 	AddEffect("Suck", this, 1, 1, this);
 }
