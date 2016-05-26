@@ -19,6 +19,8 @@ local cluster;
 
 func IsKnueppelItem() { return true; }
 
+func CanBeSucked() { return true; }
+
 func InitEffect()
 {
 	SetLightRange(30, 70);
