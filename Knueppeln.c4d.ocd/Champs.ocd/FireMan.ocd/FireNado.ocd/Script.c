@@ -139,7 +139,7 @@ func FxFireNadoTimer(object target, proplist effect, int time)
 func FxRemoveStop()
 {
 	Sound("Fire::Spark1", false, 50);
-	CastObjects(Flame, RandomX(2,4), RandomX(10,25));
+	//CastObjects(Flame, RandomX(2,4), RandomX(10,25));
 	RemoveObject();
 }
 
