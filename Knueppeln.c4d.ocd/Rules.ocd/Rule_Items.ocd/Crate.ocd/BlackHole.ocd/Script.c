@@ -178,7 +178,7 @@ func FxSuckTimer(target, fx, time)
 			obj->SetAction("Jump");
 			obj->SetPosition(obj->GetX(), obj->GetY() - 2);
 		}
-		if(obj->GetID() == Clonk && obj->GetY() < GetY() && obj->GetAction() == "Hangle")
+		if(obj->GetID() == Clonk && obj->GetAction() == "Hangle")
 		{
 			obj->SetAction("Jump");
 		}
