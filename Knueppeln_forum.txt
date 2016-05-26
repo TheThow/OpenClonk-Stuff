@@ -107,8 +107,8 @@ Hold R and click within the range indicator to create a field that slows everyth
 [b]Laser Man[/b] - contributed by Zapper
 <insert epic description>
 
-Small Ray
-Places a small laser ray that will fire after a second.[/i]
+Laser Star
+Does laser star things.[/i]
 
 Laser Ray
 Fires a bouncing laser ray after charging.[/i]
@@ -123,8 +123,8 @@ Instantaneously teleports you to another location. Enemies touched by the ray wi
 Ice Ball
 Launches a projectile that will explode after a time or when it hits.[/i]
 
-Ice Shards
-Spawns three ice shards that circle around you. Activate again to fire the blue shard with a ballistic trajectory.[/i]
+Blizzard
+Fires a bunch of ice shards. Ratatatatata![/i]
 
 Hail Storm
 Spawns 6 ice shards that work like described above.[/i]

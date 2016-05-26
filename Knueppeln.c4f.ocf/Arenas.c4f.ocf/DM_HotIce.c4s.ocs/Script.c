@@ -122,7 +122,7 @@ func InitializeRound()
 				CreateObjectAbove([Firestone,IronBomb][Random(Random(3))],pos.x,pos.y-1);
 
 	// The game starts after a delay to ensure that everyone is ready.
-	GUI_Clock->CreateCountdown(8);
+	GUI_Clock->CreateCountdown(5);
 
 	return true;
 }

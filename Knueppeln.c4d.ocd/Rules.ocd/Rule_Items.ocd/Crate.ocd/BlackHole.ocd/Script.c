@@ -20,9 +20,9 @@ local flyparticles;
 
 local probability = 20;
 
-local MaxSize = 100;
+local MaxSize = 60;
 local size = 0;
-local MaxRange = 500;
+local MaxRange = 350;
 local Duration = 260;
 
 func Initialize()
@@ -125,7 +125,7 @@ func Hit()
 		Rotation = PV_Random(0,360),
 		BlitMode = GFX_BLIT_Additive,
 	};
-	CreateParticle("StarSpark", 0, 0, 0, 0, 50, flashparticle, 5);
+	CreateParticle("StarSpark", 0, 0, 0, 0, 60, flashparticle, 5);
 	
 	var prop2 =
 	{
@@ -139,11 +139,11 @@ func Hit()
 	};
 	
 	var r = Random(360);
-	var d = 500;
-	DrawParticleLine("Flash", Cos(r, d), Sin(r, d), Cos(r + 180, d), Sin(r + 180, d), 1, 0, 0, 50, prop2);
-	DrawParticleLine("Flash", Cos(r+90, d), Sin(r+90, d), Cos(r-90, d), Sin(r-90, d), 1, 0, 0, 50, prop2);
+	var d = MaxRange;
+	DrawParticleLine("Flash", Cos(r, d), Sin(r, d), Cos(r + 180, d), Sin(r + 180, d), 1, 0, 0, 60, prop2);
+	DrawParticleLine("Flash", Cos(r+90, d), Sin(r+90, d), Cos(r-90, d), Sin(r-90, d), 1, 0, 0, 60, prop2);
 	
-	ScheduleCall(this, "StartBlackHole", 20, 0);
+	ScheduleCall(this, "StartBlackHole", 50, 0);
 	
 	return true;
 }
@@ -153,6 +153,7 @@ func StartBlackHole()
 	Sound("Items::blackhole", false, 50);
 	AddEffect("Grow", this, 1, 1, this);
 	AddEffect("Suck", this, 1, 1, this);
+	SetClrModulation(RGBa(255, 255, 255, 255));
 }
 
 func FxSuckTimer(target, fx, time)
@@ -164,13 +165,13 @@ func FxSuckTimer(target, fx, time)
 	var y = Sin(r, MaxRange);
 	
 	var angle = Angle(0, 0, x, y);
-	CreateParticle("Flash", x, y, Sin(angle + 180, 150), -Cos(angle + 180, 150), 30, flyparticles, 1);
+	CreateParticle("Flash", x, y, Sin(angle + 180, 100), -Cos(angle + 180, 100), 30, flyparticles, 1);
 	
 	
 	for(var obj in FindObjects(Find_Not(Find_Func("CannotBeSucked")), Find_NoContainer(), Find_Distance(MaxRange), Find_Or(Find_Category(C4D_Living), Find_Category(C4D_Object), Find_Func("CanBeSucked"))))
 	{
 		var dist = Distance(GetX(), GetY(), obj->GetX(), obj->GetY());
-		var strength = (MaxRange/(dist+1) + 1) * 12;
+		var strength = ((MaxRange + 100)/(dist+1) + 1) * 12;
 		var angle = Angle(GetX(), GetY(), obj->GetX(), obj->GetY()) - 180;
 		
 		if(obj->GetID() == Clonk && (obj->GetAction() == "Walk" || obj->GetAction() == "Scale"))
