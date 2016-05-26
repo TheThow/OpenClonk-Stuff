@@ -22,13 +22,13 @@ Q/E/R = Special abilities of your champion
 [b]Electro Man[/b]
 <insert epic description>
 
-Electro Shot
+Electro Shot[i]
 Launches a fast traveling projectile.[/i]
 
-Electro Orb
+Electro Orb[i]
 Launches an orb that will return to you after a while, damaging everything on its path. (Can hit the same clonk twice)[/i]
 
-Thunder Strike
+Thunder Strike[i]
 Hold R and click within the range indicator to launch the attack at your mouse position. After a short delay it will damage everything in its reach.[/i]
  
 
@@ -36,13 +36,13 @@ Hold R and click within the range indicator to launch the attack at your mouse p
 <insert epic description>
 Immune to flames.
 
-Fire Shot
+Fire Shot[i]
 Launches a projectile that will explode and leave flames when hitting a target / the ground.[/i]
 
-Fire Nado
+Fire Nado[i]
 Launches a tornado that will damage enemies and push away spells that can be blocked. Leaves flames when disappearing.[/i]
 
-Fire Dash
+Fire Dash[i]
 Click somewhere within the range indicator and your clonk turns into a fireball that flies to your mouse position damaging everything on its way and exploding upon reaching the target location. Also leaves flames.
 You cannot aim while charging.[/i]
  
@@ -50,13 +50,13 @@ You cannot aim while charging.[/i]
 [b]Earth Man[/b]
 <insert epic description>
 
-Earth Projectile
+Earth Projectile[i]
 Launches a ballistic projectile that will bounce off the ground once and explode on contact with enemies.[/i]
 
-Earth Wall
+Earth Wall[i]
 Creates a solid wall that absorbs up to 50 damage when clicking within the range indicator.[/i]
 
-Big Rock
+Big Rock[i]
 Launches a giant rock that bounces around the battlefield, damaging everything on its way.[/i]
  
 
@@ -64,82 +64,82 @@ Launches a giant rock that bounces around the battlefield, damaging everything o
 <insert epic description>
 Increased movement speed
 
-Poison Dart
+Poison Dart[i]
 Launches a ballistic projectile that will reduce your targets vision for a short duration[/i]
 
-Shadow Walk
+Shadow Walk[i]
 Turns your clonk invisible for a short period of time.[/i]
 
-Critical Strike
+Critical Strike[i]
 Strong meele attack that flings your targets across the map[/i]
  
 
 [b]Balls Man[/b]
 <insert epic description>
 
-Attack Order
+Attack Order[i]
 Your ball moves to your mouse position damaging enemies on the target location.[/i]
 
-Home Call
+Home Call[i]
 Your ball moves back to you with increased speed damaging everything on its path. 
 Upon reaching you it grants you a shield that absorbs 15 damage.[/i]
 
-Discharge
+Discharge[i]
 Your ball damages everything near it after a small delay.[/i]
  
  
 [b]Time Man[/b]
 <insert epic description>
 
-Energy Shot
+Energy Shot[i]
 Launches a fast traveling projectile that leaves a mark on your target. Hit again to activate that mark and deal an additional 20 damage.
 Not affected by Slowing Field.[/i]
 
-Time Travel
+Time Travel[i]
 First activation leaves a time travel marker on your position that lasts 10 seconds. Activate again to travel back to that location and deal damage to anyone near it. 
 As soon as you start traveling the marker will be revealed to other players.
 Time Travel also triggers the energy shot mark.[/i]
 
-Slowing Field 
+Slowing Field [i]
 Hold R and click within the range indicator to create a field that slows everything in its range.[/i]
  
 
 [b]Laser Man[/b] - contributed by Zapper
 <insert epic description>
 
-Laser Star
+Laser Star[i]
 Does laser star things.[/i]
 
-Laser Ray
+Laser Ray[i]
 Fires a bouncing laser ray after charging.[/i]
 
-Laser Blink
+Laser Blink[i]
 Instantaneously teleports you to another location. Enemies touched by the ray will be tumbled.[/i]
  
 
 [b]Ice Man[/b] - contributed by Zapper
 <insert epic description>
 
-Ice Ball
+Ice Ball[i]
 Launches a projectile that will explode after a time or when it hits.[/i]
 
-Blizzard
+Blizzard[i]
 Fires a bunch of ice shards. Ratatatatata![/i]
 
-Hail Storm
+Hail Storm[i]
 Spawns 6 ice shards that work like described above.[/i]
  
 
 [b]Bomb Man[/b] - contributed by Zapper
 <insert epic description>
 
-Sticky Bomb
+Sticky Bomb[i]
 Throws a sticky bomb that sticks to material or Clonks.[/i]
 
-Blow Up 
+Blow Up [i]
 Blows up all existing sticky bombs.[/i]
 
-Bomb Magnet
+Bomb Magnet[i]
 Click on a position to let all nearby bombs jump towards it.[/i]
 
 [h]Game modes[/h]

@@ -40,7 +40,7 @@ local ChargeEffect = new Effect
 			return FX_Execute_Kill;
 		return FX_OK;
 	}
-}
+};
 
 func CanBeSucked() { return true; }
 
