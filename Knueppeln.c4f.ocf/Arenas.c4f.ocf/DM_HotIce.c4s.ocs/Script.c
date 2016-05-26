@@ -26,7 +26,7 @@ func Initialize()
 
 global func BlastFree(x, y, level, cause_plr) 
 {
-	if (this == FireProjectile || this == StickyBomb || this == EarthProjectile)
+	if (this == FireProjectile || this == StickyBomb || this == EarthProjectile || this == FlashFlinger)
 		return false;
 	
 	return _inherited(x, y, level, cause_plr);
