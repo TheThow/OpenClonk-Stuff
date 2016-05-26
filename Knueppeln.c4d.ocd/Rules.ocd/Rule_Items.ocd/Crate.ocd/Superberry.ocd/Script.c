@@ -1,6 +1,6 @@
 /*-- Sproutberry --*/
 
-local probability = 35;
+local probability = 20;
 
 func IsKnueppelItem() { return true; }
 

@@ -170,10 +170,10 @@ Rotation    Every player gets the same champion[/i]
 [b]Items[/b]      [i]Enables item spawns[/i]
 [i]
 Boompack
-Black hole
-Rubber ducky of doom
-Monster ball
-Super berry
+Black Hole
+Rubber Ducky of doom
+Monster Ball
+Super Berry
 [/i]  
 
 
@@ -182,11 +182,10 @@ Super berry
 - More sounds so every spell sounds different
 - Different (team) game modes (Next: Domination)
 - More maps
-- Maybe a system to ban champions / Limit them if there are too many some day
-- Some sort of ghost cam for eliminated players that can do stuff. (can't put my concept into words)
+- Some sort of ghost cam with special abilities for eliminated players.
 - More decoration for the existing maps... where can i steal some?!
 - A coop adventure... but I'm too lazy for that.
-- A parcour scenario
+- A parcour scenario (still lazy)
 
 
 [h]Bugs[/h]

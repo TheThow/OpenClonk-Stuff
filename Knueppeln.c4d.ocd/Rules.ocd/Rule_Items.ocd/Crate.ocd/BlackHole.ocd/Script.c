@@ -1,6 +1,6 @@
 /*-- Ore --*/
 
-local probability = 35;
+local probability = 10;
 
 func IsKnueppelItem() { return true; }
 
@@ -170,7 +170,7 @@ func FxSuckTimer(target, fx, time)
 	for(var obj in FindObjects(Find_Not(Find_Func("CannotBeSucked")), Find_NoContainer(), Find_Distance(MaxRange), Find_Or(Find_Category(C4D_Living), Find_Category(C4D_Object), Find_Func("CanBeSucked"))))
 	{
 		var dist = Distance(GetX(), GetY(), obj->GetX(), obj->GetY());
-		var strength = MaxRange/(dist+1) * 12 / 10;
+		var strength = (MaxRange/(dist+1) + 1) * 12;
 		var angle = Angle(GetX(), GetY(), obj->GetX(), obj->GetY()) - 180;
 		
 		if(obj->GetID() == Clonk && (obj->GetAction() == "Walk" || obj->GetAction() == "Scale"))
@@ -179,7 +179,7 @@ func FxSuckTimer(target, fx, time)
 			obj->SetPosition(obj->GetX(), obj->GetY() - 2);
 		}
 		
-		obj->AddVelocity(angle, strength);
+		obj->AddVelocity(angle, strength, nil, 100);
 	
 		if(dist < size/2)
 		{

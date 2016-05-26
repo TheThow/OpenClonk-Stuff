@@ -10,4 +10,7 @@ OnlyTheGhosts			- mark_hit* (CC BY 3.0)
 tcpp					- time_hit* (CC BY 3.0) 
 						http://freesound.org/people/tcpp/sounds/132098/
 
+ermfilm					- rubberducky* (CC BY 3.0) 
+						http://freesound.org/people/ermfilm/sounds/130013/
+
 * changes were made

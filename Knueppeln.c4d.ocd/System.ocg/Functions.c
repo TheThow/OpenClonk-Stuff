@@ -63,8 +63,8 @@ global func AddVelocity(int angle, int speed, int precAng, int precSpd)
 	if(!angle)
 		angle = Angle(0,0, GetXDir(precSpd), GetYDir(precSpd), precAng);
 		
-	var x_dir = this->GetXDir() + Sin(angle, speed, precAng);
-	var y_dir = this->GetYDir() - Cos(angle, speed, precAng);
+	var x_dir = this->GetXDir(precSpd) + Sin(angle, speed, precAng);
+	var y_dir = this->GetYDir(precSpd) - Cos(angle, speed, precAng);
 
 	SetXDir(x_dir, precSpd);
 	SetYDir(y_dir, precSpd);

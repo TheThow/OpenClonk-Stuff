@@ -14,7 +14,7 @@ local oy;
 
 local trailparticles;
 
-local probability = 35;
+local probability = 20;
 local cluster;
 
 func IsKnueppelItem() { return true; }
