@@ -116,7 +116,7 @@ func Explosion()
 			var obj = CreateObject(GetID(), 0, -5, GetOwner());
 			obj.cluster = true;
 			obj->InitEffect();
-			obj->SetVelocity(RandomX(-35, 35), speed);
+			obj->SetVelocity(RandomX(-40, 40), RandomX(speed - 10, speed + 10));
 			obj.thrown = 1;
 		}
 	}
