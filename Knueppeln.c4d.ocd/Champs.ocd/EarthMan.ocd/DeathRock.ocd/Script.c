@@ -13,7 +13,7 @@ local rotation = 0;
 local sharpflame;
 local lightning;
 
-func CanBeSucked() { return true; }
+func CanBeSucked() { return GetEffect("Life", this); }
 
 private func Construction()
 {

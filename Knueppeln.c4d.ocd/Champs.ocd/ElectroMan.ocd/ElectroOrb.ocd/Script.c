@@ -35,7 +35,7 @@ func Initialize()
 	plr_hit = CreateArray(GetPlayerCount());
 }
 
-func CanBeSucked() { return true; }
+func CanBeSucked() { return GetEffect("ElectroOrb", this); }
 
 func Launch(object clonk, int x, int y)
 {

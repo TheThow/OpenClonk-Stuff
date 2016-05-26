@@ -21,7 +21,7 @@ local Durr = 70;
 local Charge_Dur = 15;
 local firetrailparticles;
 
-func CanBeSucked() { return true; }
+func CanBeSucked() { return GetEffect("FireNado", this); }
 
 func Initialize()
 {
