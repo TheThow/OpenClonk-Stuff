@@ -8,7 +8,7 @@
 local Name = "$Name$";
 local Description = "$Description$";
 
-local ManaCost = 35;
+local ManaCost = 30;
 
 local Dur = 100;
 

@@ -191,7 +191,8 @@ func FxSuckTimer(target, fx, time)
 			{
 				WeaponDamage(obj, 9001);
 			}
-			obj->RemoveObject();
+			if(obj)
+				obj->RemoveObject();
 		}
 	}
 

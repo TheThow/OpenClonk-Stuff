@@ -41,7 +41,7 @@ func FxCheckDmgDamage()
 
 func Pop()
 {
-	CreateObject(itemID, 0, -6, -1);
+	CreateObject(itemID, 0, -itemID->GetDefHeight()/2 + GetDefHeight()/2 - 1, -1);
 	HitEffect();
 	Sound("Hits::Materials::Wood::WoodHit?", false, 50);
 	RemoveObject();

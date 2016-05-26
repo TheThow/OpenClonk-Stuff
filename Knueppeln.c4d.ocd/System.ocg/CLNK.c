@@ -404,6 +404,7 @@ func FxBlockingTimer(object target, proplist effect, int time)
 		var xdir = obj->GetXDir();
 		var ydir = obj->GetYDir();
 		var speed = Sqrt(xdir**2 + ydir**2);
+		speed = Max(5, speed);
 		var angle = Angle(GetX(), GetY(), obj->GetX(), obj->GetY());
         obj->SetSpeed(Sin(angle, speed), -Cos(angle, speed));
         

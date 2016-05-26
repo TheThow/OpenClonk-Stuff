@@ -3,7 +3,7 @@
 public func IsCarryHeavy() { return false; }
 public func CanBeHit(object o) { if(Contained())return false; return true; }
 
-local probability = 45;
+local probability = 35;
 
 func Initialize()
 {

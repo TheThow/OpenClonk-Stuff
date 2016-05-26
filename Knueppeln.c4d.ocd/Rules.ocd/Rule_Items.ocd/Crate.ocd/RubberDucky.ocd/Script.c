@@ -121,14 +121,14 @@ func Explosion()
 		}
 	}
 
-	ExplosionEffect(30);
-	for(var o in FindObjects(Find_Distance(30), Find_Func("CanBeHit", this)))
+	ExplosionEffect(25);
+	for(var o in FindObjects(Find_Distance(25), Find_Func("CanBeHit", this)))
 	{
 			
 		var angle = Angle(GetX(), GetY(), o->GetX(), o->GetY());
 
 		o->Fling(Sin(angle, 8), -Cos(angle, 8) - 2);
-		WeaponDamage(o, 30);
+		WeaponDamage(o, 25);
 	}
 	
 	RemoveObject();
