@@ -70,6 +70,8 @@ func IsReflectable()
 	return true;
 }
 
+func CanBeSucked() { return GetCategory() != C4D_StaticBack; }
+
 func Hit()
 {
 	SetCategory(C4D_StaticBack);
