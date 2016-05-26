@@ -139,7 +139,7 @@ func Hit()
 	};
 	
 	var r = Random(360);
-	var d = MaxRange;
+	var d = 500;
 	DrawParticleLine("Flash", Cos(r, d), Sin(r, d), Cos(r + 180, d), Sin(r + 180, d), 1, 0, 0, 60, prop2);
 	DrawParticleLine("Flash", Cos(r+90, d), Sin(r+90, d), Cos(r-90, d), Sin(r-90, d), 1, 0, 0, 60, prop2);
 	
