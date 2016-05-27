@@ -472,7 +472,7 @@ func LaunchSpell(id ID, int x, int y, int x_off, int y_off, proplist params)
 		return 0;
 	}
 	
-	return 1;
+	return spell;
 }
 
 

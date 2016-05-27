@@ -5,6 +5,8 @@ local Type = "none";
 local ManaCost = 22;
 local SpellDamage = 15;
 
+local shooter;
+
 func Initialize()
 {
 	SetAction("Travel");
@@ -23,9 +25,10 @@ func Launch(object clonk, int x, int y)
 {
 	Type = clonk->GetChampType();
 	var angle = Angle(0,0,x,y, 10);
+	shooter = clonk;
 
 	AddEffect("HitCheck", this, 1,1, nil,nil, clonk);
-	AddEffect("TheEffect", this, 20, 1, this, Projectile);
+	AddEffect("TheEffect", this, 1, 1, this, Projectile);
 
 	SetVelocity(angle, Speed, 10);
 	

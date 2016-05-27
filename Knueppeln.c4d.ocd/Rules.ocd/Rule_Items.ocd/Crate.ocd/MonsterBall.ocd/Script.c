@@ -91,7 +91,7 @@ func Hit()
 	if(!thrown)
 		return;
 	
-	Sound("Items::monsterball", false, 50);
+	Sound("Items::monsterball", false, 100);
 	
 	CreateObject(monsters[Random(GetLength(monsters))], 0, - 5, GetOwner());
 	
