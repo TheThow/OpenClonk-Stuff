@@ -42,11 +42,14 @@ func FxComebackTimer(object target, proplist effect, int time)
 {
 	if(!this)
 		return;
+	
+	if(!shooter)
+		return RemoveObject();
 
 	if(ObjectDistance(this, shooter) < Size)
 		RemoveObject();
 
-	var angle = Angle(GetX(), GetY(), this.shooter->GetX(), this.shooter->GetY(), 10);
+	var angle = Angle(GetX(), GetY(), shooter->GetX(), shooter->GetY(), 10);
 	
 	SetVelocity(angle, Speed + 20, 10);
 }
@@ -59,6 +62,9 @@ func FxPullStart(target, fx)
 
 func FxPullTimer(object target, proplist fx, int time)
 {
+	if(!shooter)
+		return RemoveObject();
+
 	if(0 == shooter->GetXDir() && 0 == shooter->GetYDir())
 	{
 		fx.cnt++;
