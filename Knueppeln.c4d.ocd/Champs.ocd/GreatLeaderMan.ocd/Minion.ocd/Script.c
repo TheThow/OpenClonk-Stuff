@@ -1,4 +1,4 @@
-local ManaCost = 20;
+local ManaCost = 10;
 local Speed = 80;
 local SpellRange = 300;
 local Radius = 150;
@@ -13,7 +13,9 @@ func Launch(object clonk, int x, int y)
 	minion->SetXDir(RandomX(-minioncount, minioncount));
 	minion->SetObjectBlitMode(GFX_BLIT_Mod2);
 	minion->SetClrModulation(clonk->GetColor());
-	minion->CreateContents(Bow);
+	var bow = minion->CreateContents(Bow);
+	bow.animation_set.LoadTime = 15;
+	bow.animation_set.LoadTime2 = 5*15/20;
 	minion->StartAim(minion->Contents());
 	minion->Sound("Clonk::Skin::Alchemist::EvilConfirm*", {pitch = 75});
 	minion.Hurt = nil;
@@ -27,7 +29,8 @@ func Launch(object clonk, int x, int y)
 
 func MinionDeath()
 {
-	Sound("Clonk::Skin::Alchemist::Scream*", {pitch = 75});
+	if ((GetKiller() == GetOwner()) && !Random(3)) Sound("Clonk::Skin::Alchemist::Doubt*", {pitch = 75});
+	else Sound("Clonk::Skin::Alchemist::Scream*", {pitch = 75});
 	var parts = 
 	{
 		Prototype = Particles_Material(RGB(255, 0, 0)),
