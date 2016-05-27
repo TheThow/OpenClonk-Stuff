@@ -3,8 +3,8 @@
 local pR = 150;
 local pG = 150;
 local pB = 150;
-local Speed = 80;
-local SpellDamage = 10;
+local Speed = 90;
+local SpellDamage = 1;
 local Size = 10;
 local ManaCost = 25;
 local LifeTime = 25;
@@ -34,28 +34,37 @@ func FxLifeStop()
 {
 	if(!GetEffect("Pull", this))
 	{
-		while(RemoveVertex());
 		AddEffect("Comeback", this, 1, 1, this);
 	}
 }
 
 func FxComebackTimer(object target, proplist effect, int time)
 {
+	if(!this)
+		return;
+
 	if(ObjectDistance(this, shooter) < Size)
 		RemoveObject();
 
-	var angle = Angle(GetX(), GetY(), shooter->GetX(), shooter->GetY(), 10);
+	var angle = Angle(GetX(), GetY(), this.shooter->GetX(), this.shooter->GetY(), 10);
 	
 	SetVelocity(angle, Speed + 20, 10);
 }
 
-func FxPullTimer(object target, proplist effect, int time)
+func FxPullStart(target, fx)
 {
-	var angle = Angle(shooter->GetX(), shooter->GetY(), GetX(), GetY(), 10);
-	shooter->SetAction("Jump");
-	shooter->SetVelocity(angle, Speed + 20, 10);
+	fx.xdir = 0;
+	fx.ydir = 0;
+}
+
+func FxPullTimer(object target, proplist fx, int time)
+{
+	if(0 == shooter->GetXDir() && 0 == shooter->GetYDir())
+	{
+		fx.cnt++;
+	}
 	
-	if(ObjectDistance(this, shooter) < Size)
+	if(ObjectDistance(this, shooter) < Size || (0 == shooter->GetXDir() && 0 == shooter->GetYDir() && fx.cnt == 2))
 	{
 		if(shooter->GetAction() == "Tumble")
 			shooter->SetAction("Jump");
@@ -77,11 +86,16 @@ func FxPullTimer(object target, proplist effect, int time)
 		shooter->SetXDir(shooter->GetXDir()/3);
 		shooter->SetYDir(shooter->GetYDir()/3);
 				
-		RemoveObject();
+		return RemoveObject();
 	}
 	
-	if(this && time > LifeTime*2)
-		RemoveObject();
+	if(time > LifeTime*2)
+		return RemoveObject();
+		
+	var angle = Angle(shooter->GetX(), shooter->GetY(), GetX(), GetY(), 10);
+	shooter->SetAction("Jump");
+	shooter->SetVelocity(angle, Speed + 20, 10);
+		
 }
 
 func TravelEffect(int time)
@@ -96,6 +110,9 @@ public func HitObject(obj)
 	
 	if(hit)
 		return;
+		
+	if (GetEffect("Comeback", this))
+		RemoveEffect("Comeback", this);
 	
 	hit = true;
 	Sound("Hits::ProjectileHitLiving?", false, 50);
@@ -125,6 +142,9 @@ func IsReflectable() { return true; }
 
 func Hit()
 {
+	if (GetEffect("Comeback", this))
+		RemoveEffect("Comeback", this);
+
 	Sound("hooksnap", false, 50);
 	SetXDir(0);
 	SetYDir(0);
