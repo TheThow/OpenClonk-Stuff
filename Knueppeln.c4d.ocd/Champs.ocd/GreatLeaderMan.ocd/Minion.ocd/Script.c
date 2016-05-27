@@ -18,6 +18,7 @@ func Launch(object clonk, int x, int y)
 	minion->Sound("Clonk::Skin::Alchemist::EvilConfirm*", {pitch = 75});
 	minion.Hurt = nil;
 	minion.MaxEnergy = 3000;
+	minion->DoEnergy(3);
 	minion.Death = this.MinionDeath;
 	minion.CatchBlow = this.MinionCatchBlow;
 	minion.IsMinion = true;
