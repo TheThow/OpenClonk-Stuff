@@ -109,7 +109,7 @@ func HitEffect()
 
 func Trigger()
 {
-	if(!GetEffect("Pull"))
+	if(!GetEffect("Pull", this) && !GetEffect("Comeback", this))
 		Hit();
 }
 
