@@ -86,10 +86,12 @@ func TravelEffect()
 
 func Hit()
 {
-	Sound("Hits::Materials::Glass::GlassHit*");
+	Sound("Hits::Materials::Glass::GlassHit*", false, 50);
 	
 	if(!thrown)
 		return;
+	
+	Sound("Items::monsterball", false, 50);
 	
 	CreateObject(monsters[Random(GetLength(monsters))], 0, - 5, GetOwner());
 	

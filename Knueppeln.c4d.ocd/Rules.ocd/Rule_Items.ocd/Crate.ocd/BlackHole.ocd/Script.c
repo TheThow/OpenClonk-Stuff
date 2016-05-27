@@ -20,9 +20,9 @@ local flyparticles;
 
 local probability = 20;
 
-local MaxSize = 60;
+local MaxSize = 50;
 local size = 0;
-local MaxRange = 350;
+local MaxRange = 300;
 local Duration = 260;
 
 func Initialize()
@@ -171,7 +171,7 @@ func FxSuckTimer(target, fx, time)
 	for(var obj in FindObjects(Find_Not(Find_Func("CannotBeSucked")), Find_NoContainer(), Find_Distance(MaxRange), Find_Or(Find_Category(C4D_Living), Find_Category(C4D_Object), Find_Func("CanBeSucked"))))
 	{
 		var dist = Distance(GetX(), GetY(), obj->GetX(), obj->GetY());
-		var strength = ((MaxRange + 100)/(dist+1) + 1) * 12;
+		var strength = ((MaxRange)/(dist+1) + 1) * 12;
 		var angle = Angle(GetX(), GetY(), obj->GetX(), obj->GetY()) - 180;
 		
 		if(obj->GetID() == Clonk && (obj->GetAction() == "Walk" || obj->GetAction() == "Scale"))
