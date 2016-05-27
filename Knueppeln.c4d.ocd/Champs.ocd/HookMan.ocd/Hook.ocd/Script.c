@@ -3,8 +3,8 @@
 local pR = 150;
 local pG = 150;
 local pB = 150;
-local Speed = 75;
-local SpellDamage = 15;
+local Speed = 80;
+local SpellDamage = 10;
 local Size = 10;
 local ManaCost = 25;
 local LifeTime = 25;
@@ -14,7 +14,7 @@ local hit;
 
 func InitEffect()
 {
-	Sound("electro_shot", false, 100);
+	Sound("Objects::Weapons::WeaponSwing1", false, 100);
 	SetLightRange(30, 70);
 	SetLightColor(RGB(150, 150, 150));
 
@@ -74,6 +74,9 @@ func FxPullTimer(object target, proplist effect, int time)
 			shooter->SetAction("Scale");
 		}
 		
+		shooter->SetXDir(shooter->GetXDir()/3);
+		shooter->SetYDir(shooter->GetYDir()/3);
+				
 		RemoveObject();
 	}
 	
@@ -95,10 +98,10 @@ public func HitObject(obj)
 		return;
 	
 	hit = true;
-
+	Sound("Hits::ProjectileHitLiving?", false, 50);
 	WeaponDamage(obj, SpellDamage);
 	var angle = Angle(obj->GetX(), obj->GetY(), shooter->GetX(), shooter->GetY(), 10);
-	obj->Fling(Sin(angle, 6, 10), -Cos(angle, 6, 10));
+	obj->Fling(Sin(angle, 2, 10), -Cos(angle, 2, 10));
 	Hit();
 }
 
@@ -122,6 +125,7 @@ func IsReflectable() { return true; }
 
 func Hit()
 {
+	Sound("hooksnap", false, 50);
 	SetXDir(0);
 	SetYDir(0);
 	AddEffect("Pull", this, 1, 1, this);
