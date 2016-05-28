@@ -47,8 +47,6 @@ func Special2(object clonk, int x, int y, bool released, bool mouseclick, bool a
 
 func Special3(object clonk, int x, int y, bool released, bool mouseclick, bool abletocast, bool cooldown)
 {
-	return;
-
 	if(!released && !mouseclick && abletocast && !cooldown)
 	{
 		if(clonk->LaunchSpell(Special3Spell, x, y, 0, 0))

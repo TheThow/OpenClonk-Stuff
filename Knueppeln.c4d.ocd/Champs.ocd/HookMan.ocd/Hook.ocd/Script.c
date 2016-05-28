@@ -116,7 +116,7 @@ func FxPullTimer(object target, proplist fx, int time)
 	if(time > LifeTime*2)
 		return RemoveObject();
 		
-	
+	fx.angle = Angle(shooter->GetX(), shooter->GetY(), GetX(), GetY(), 10);
 	shooter->SetAction("Jump");
 	shooter->SetVelocity(fx.angle, Speed + 20, 10);
 	

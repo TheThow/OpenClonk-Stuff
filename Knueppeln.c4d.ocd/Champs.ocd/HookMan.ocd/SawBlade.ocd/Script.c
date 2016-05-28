@@ -130,18 +130,39 @@ func FxTravelTimer(target, fx)
 	var x = GetX();
 	var y = GetY();
 	
-	if(!GBackSolid(0, step) && (GBackSolid(step, 0) || GBackSolid(-step, 0)))
+	if(!GBackSolid(0, step) && (GBackSolid(step, 0) || GBackSolid(-step, 0)) && fx.v != -1)
 		fx.v = 1;
 	else
-		fx.v = 0;
+	{
+		if(fx.v == 1)
+			fx.v = 0;
+	}
 	
-	if(!GBackSolid(0, -step) && (GBackSolid(step, 0) || GBackSolid(-step, 0)))
+	if(!GBackSolid(0, -step) && (GBackSolid(step, 0) || GBackSolid(-step, 0)) && fx.v != 1)
 		fx.v = -1;
 	else
-		fx.v = 0;
+	{
+		if(fx.v == -1)
+			fx.v = 0;
+	}
 	
 	if(GBackSolid(step*2 * -fx.dir, step*2) && CheckCrossFree(step))
 		fx.v = 1;
+	
+	if(GBackSolid(step*2 * -fx.dir, -step*2) && CheckCrossFree(step))
+	{
+		x -= step;
+		fx.v=0;
+	}
+	
+	if(GBackSolid(step*2 * fx.dir, -step*2) && CheckCrossFree(step))
+		fx.v = -1;
+		
+	if(GBackSolid(step*2 * fx.dir, step*2) && CheckCrossFree(step))
+	{
+		x += step;
+		fx.v=0;
+	}
 	
 	if(GBackSolid(step * fx.dir, 0) && GBackSolid(0, step))
 	{
