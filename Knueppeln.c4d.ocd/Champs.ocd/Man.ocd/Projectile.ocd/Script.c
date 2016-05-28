@@ -26,11 +26,9 @@ func Launch(object clonk, int x, int y)
 	Type = clonk->GetChampType();
 	var angle = Angle(0,0,x,y, 10);
 	shooter = clonk;
-
+	SetVelocity(angle, Speed, 10);
 	AddEffect("HitCheck", this, 1,1, nil,nil, clonk);
 	AddEffect("TheEffect", this, 1, 1, this, Projectile);
-
-	SetVelocity(angle, Speed, 10);
 	
 	/*
 	if (Type == "Electro")

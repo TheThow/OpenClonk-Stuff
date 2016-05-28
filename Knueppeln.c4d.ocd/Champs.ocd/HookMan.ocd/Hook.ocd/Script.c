@@ -4,13 +4,14 @@ local pR = 150;
 local pG = 150;
 local pB = 150;
 local Speed = 90;
-local SpellDamage = 1;
+local SpellDamage = 3;
 local Size = 10;
-local ManaCost = 25;
-local LifeTime = 25;
+local ManaCost = 22;
+local LifeTime = 22;
 
 local trailparticles;
 local hit;
+local hookprt;
 
 func InitEffect()
 {
@@ -26,6 +27,20 @@ func InitEffect()
 		B = pB,
 		Attach=ATTACH_Front
 	};
+	
+	var angle = Angle(0, 0, GetXDir(), GetYDir());
+	
+	hookprt = 
+	{
+		Size = 8,
+		R = pR,
+		G = pG,
+		B = pB,
+		Attach=ATTACH_Front|ATTACH_MoveRelative,
+		Rotation = angle
+	};
+	
+	
 	AddEffect("Life", this, 1, LifeTime, this);
 	hit = false;
 }
@@ -47,17 +62,18 @@ func FxComebackTimer(object target, proplist effect, int time)
 		return RemoveObject();
 
 	if(ObjectDistance(this, shooter) < Size)
-		RemoveObject();
+		return RemoveObject();
 
 	var angle = Angle(GetX(), GetY(), shooter->GetX(), shooter->GetY(), 10);
 	
-	SetVelocity(angle, Speed + 20, 10);
+	SetVelocity(angle, Speed + 40, 10);
 }
 
 func FxPullStart(target, fx)
 {
-	fx.xdir = 0;
-	fx.ydir = 0;
+	fx.x = -10;
+	fx.y = -10;
+	fx.angle = Angle(shooter->GetX(), shooter->GetY(), GetX(), GetY(), 10);
 }
 
 func FxPullTimer(object target, proplist fx, int time)
@@ -65,12 +81,14 @@ func FxPullTimer(object target, proplist fx, int time)
 	if(!shooter)
 		return RemoveObject();
 
-	if(0 == shooter->GetXDir() && 0 == shooter->GetYDir())
+	var dist = Distance(fx.x, fx.y, shooter->GetX(), shooter->GetY()); 
+	
+	if(dist < 5)
 	{
 		fx.cnt++;
 	}
 	
-	if(ObjectDistance(this, shooter) < Size || (0 == shooter->GetXDir() && 0 == shooter->GetYDir() && fx.cnt == 2))
+	if(ObjectDistance(this, shooter) < Size || (dist < 5 && fx.cnt == 2))
 	{
 		if(shooter->GetAction() == "Tumble")
 			shooter->SetAction("Jump");
@@ -88,9 +106,9 @@ func FxPullTimer(object target, proplist fx, int time)
 			shooter->SetYDir(0);
 			shooter->SetAction("Scale");
 		}
-		
-		shooter->SetXDir(shooter->GetXDir()/3);
-		shooter->SetYDir(shooter->GetYDir()/3);
+	
+		shooter->SetXDir(shooter->GetXDir(1000)/27, 100);
+		shooter->SetYDir(shooter->GetYDir(1000)/27, 100);
 				
 		return RemoveObject();
 	}
@@ -98,14 +116,22 @@ func FxPullTimer(object target, proplist fx, int time)
 	if(time > LifeTime*2)
 		return RemoveObject();
 		
-	var angle = Angle(shooter->GetX(), shooter->GetY(), GetX(), GetY(), 10);
+	
 	shooter->SetAction("Jump");
-	shooter->SetVelocity(angle, Speed + 20, 10);
+	shooter->SetVelocity(fx.angle, Speed + 20, 10);
+	
+	fx.x = shooter->GetX();
+	fx.y = shooter->GetY();
 		
 }
 
 func TravelEffect(int time)
 {
+	if(!shooter)
+		return RemoveObject();
+	
+	ClearParticles();
+	CreateParticle("Hook", GetXDir()/15, GetYDir()/15, 0, 0, 0, hookprt, 1);
 	DrawParticleLine("Shockwave2", 0, 0, shooter->GetX() - GetX() + shooter->GetXDir()/10, shooter->GetY() - GetY() + shooter->GetYDir()/10, 5, 0, 0, 1, trailparticles);
 }
 
@@ -122,9 +148,9 @@ public func HitObject(obj)
 	
 	hit = true;
 	Sound("Hits::ProjectileHitLiving?", false, 50);
-	WeaponDamage(obj, SpellDamage);
 	var angle = Angle(obj->GetX(), obj->GetY(), shooter->GetX(), shooter->GetY(), 10);
 	obj->Fling(Sin(angle, 2, 10), -Cos(angle, 2, 10));
+	WeaponDamage(obj, SpellDamage);
 	Hit();
 }
 
@@ -137,6 +163,18 @@ func Trigger()
 {
 	if(!GetEffect("Pull", this) && !GetEffect("Comeback", this))
 		Hit();
+	
+	var props =
+	{
+		//Prototype = Particles_ElectroSpark2(),
+		Size = PV_Linear(10,0),
+		R = 150,
+		G = 150,
+		B = 150,
+	};
+	var r = 10;
+	for(var i = 0; i < 360; i+= 5)
+		CreateParticle("Flash", 0, 0, Cos(i, r + RandomX(-1,1)), Sin(i, r + RandomX(-1, 1)), 10, props);
 }
 
 func Destroy()
@@ -150,7 +188,9 @@ func Hit()
 {
 	if (GetEffect("Comeback", this))
 		RemoveEffect("Comeback", this);
-
+	
+	SetCategory(C4D_StaticBack);
+	
 	Sound("hooksnap", false, 50);
 	SetXDir(0);
 	SetYDir(0);

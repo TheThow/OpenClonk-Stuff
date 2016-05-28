@@ -11,8 +11,10 @@ local Description = "$Description$";
 local Name = "$Name$";
 
 local Special1Spell = Hook;
-local Special2Spell = ElectroOrb;
+local Special2Spell = ExplosiveHook;
 local Special3Spell = ThunderStrike;
+
+local Special1Cooldown = 30;
 
 func Special1(object clonk, int x, int y, bool released, bool mouseclick, bool abletocast, bool cooldown)
 {
@@ -45,6 +47,8 @@ func Special2(object clonk, int x, int y, bool released, bool mouseclick, bool a
 
 func Special3(object clonk, int x, int y, bool released, bool mouseclick, bool abletocast, bool cooldown)
 {
+	return 0;
+
 	var props =
 	{
 		R = 150,
@@ -86,7 +90,7 @@ func JumpEffect(object clonk, dir)
 		to = 310;
 	}
 
-	Sound("electro_shot", false, 30);
+	Sound("hookjump", false, 30);
 
 	for(var i = from; i < to; i+=5)
 	{
@@ -98,16 +102,16 @@ func JumpEffect(object clonk, dir)
 		
 		var trailparticles =
 		{
-			Prototype = Particles_ElectroSpark2(),
+			//Prototype = Particles_ElectroSpark2(),
 			Size = PV_Linear(10,0),
 			Rotation = angle,
 			R = 150,
-			G = 215,
-			B = 255,
+			G = 150,
+			B = 150,
 			OnCollision = PC_Bounce(),
 		};
 	
-		CreateParticle("Lightning", x, y, Cos(i, r), Sin(i, r), 10, trailparticles);
+		CreateParticle("Shockwave", x, y, Cos(i, r + RandomX(-1,1)), Sin(i, r + RandomX(-1, 1)), 10, trailparticles);
 	}
 }
 
@@ -123,45 +127,14 @@ func BlockEffect(object clonk, range)
 		
 		var trailparticles =
 		{
-			Prototype = Particles_ElectroSpark2(),
 			Size = PV_Linear(15,0),
 			Rotation = angle,
 			R = 150,
-			G = 215,
-			B = 255,
+			G = 150,
+			B = 150,
 		};
 	
-		CreateParticle("Lightning", x, y, 0, 0, 10, trailparticles);
+		CreateParticle("Shockwave", x, y, 0, 0, 10, trailparticles);
 	}
 	
-}
-
-func ShowRange()
-{
-
-}
-
-func FxElectroHitTimer(object target, proplist effect, int time)
-{
-	var lightning =
-	{
-		Prototype = Particles_ElectroSpark2(),
-		Size = PV_Linear(PV_Random(2,5),0),
-		BlitMode = GFX_BLIT_Additive,
-		Rotation = PV_Random(0,360),
-		R = 175,
-		G = 215,
-		B = 255,
-		Attach = ATTACH_Front | ATTACH_MoveRelative,
-	};
-	
-	target->CreateParticle("Lightning", RandomX(-5, 5), RandomX(-10, 10), 0, 0, 10, lightning, 2);
-	
-	if(time > 40)
-		return -1;
-}
-
-global func AddElectroHitEffect()
-{
-	this->AddEffect("ElectroHit", this, 20, 1, nil, ElectroMan);
 }
