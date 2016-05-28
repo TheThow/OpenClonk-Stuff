@@ -10,14 +10,26 @@
 local Name = "$Name$";
 local Description = "$Description$";
 
-local Special1Spell = GreatLeaderMan_Minion;
+local Special3Spell = GreatLeaderMan_Minion;
 local Special2Spell = AimAndFire;
+local Special1Spell = Barrage;
 
 func Special1(object clonk, int x, int y, bool released, bool mouseclick, bool abletocast, bool cooldown)
 {
 	if(!released && !mouseclick && abletocast && !cooldown)
 	{
 		if(clonk->LaunchSpell(Special1Spell, x, y, 0, 0))
+			return 1;
+	}
+	
+	return 0;
+}
+
+func Special3(object clonk, int x, int y, bool released, bool mouseclick, bool abletocast, bool cooldown)
+{
+	if(!released && !mouseclick && abletocast && !cooldown)
+	{
+		if(clonk->LaunchSpell(Special3Spell, x, y, 0, 0))
 			return 1;
 	}
 	
@@ -37,11 +49,6 @@ func Special2(object clonk, int x, int y, bool released, bool mouseclick, bool a
 	};
 	props = Particles_Colored(props, GetPlayerColor(clonk->GetOwner()));
 	return CastSpellWithSpellRange(clonk, x, y, released, mouseclick, abletocast, cooldown, props, Special2Spell);
-}
-
-func Special3(object clonk, int x, int y, bool released, bool mouseclick, bool abletocast, bool cooldown)
-{
-	return;
 }
 
 func JumpEffect(object clonk, dir)
