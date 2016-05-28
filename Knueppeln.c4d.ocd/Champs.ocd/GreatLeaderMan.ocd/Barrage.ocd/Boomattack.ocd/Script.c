@@ -40,7 +40,7 @@ private func FxFlightRotationTimer(object _this, effect, int time)
 
 private func FxFlightTimer(object _this, effect fx, int time)
 {
-	var current_angle = GetR();
+	var current_angle = Angle(0, 0, GetXDir(), GetYDir());
 	// Attack!
 	var x = GetX();
 	var y = GetY();
@@ -59,7 +59,7 @@ private func FxFlightTimer(object _this, effect fx, int time)
 	{
 		var angle = Angle(x, y, fx.target->GetX(), fx.target->GetY());
 		var dir = GetTurnDirection(current_angle, angle);
-		SetVelocity(current_angle + BoundBy(dir, -2, 2), this.speed);
+		SetVelocity(current_angle + BoundBy(dir, -4, 4), this.speed);
 	}
 	SetR(Angle(0, 0, GetXDir(), GetYDir()));
 	var x = -Sin(GetR(), 5);
@@ -97,7 +97,11 @@ public func OnUnmount(clonk)
 
 /* Contact / Explosion */
 
-public func IsProjectileTarget(target,shooter) { return true; }
+public func IsProjectileTarget(object projectile)
+{
+	return (projectile->GetID() != GetID()) || Hostile(GetController(), projectile->GetController());
+}
+
 public func OnProjectileHit(object shot) { return DoFireworks(shot->GetController()); }
 
 public func ContactBottom() { return Hit(); }
