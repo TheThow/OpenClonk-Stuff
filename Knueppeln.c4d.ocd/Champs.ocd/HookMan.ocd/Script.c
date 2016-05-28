@@ -12,7 +12,7 @@ local Name = "$Name$";
 
 local Special1Spell = Hook;
 local Special2Spell = ExplosiveHook;
-local Special3Spell = ThunderStrike;
+local Special3Spell = SawBlade;
 
 local Special1Cooldown = 30;
 
@@ -47,21 +47,14 @@ func Special2(object clonk, int x, int y, bool released, bool mouseclick, bool a
 
 func Special3(object clonk, int x, int y, bool released, bool mouseclick, bool abletocast, bool cooldown)
 {
-	return 0;
+	return;
 
-	var props =
+	if(!released && !mouseclick && abletocast && !cooldown)
 	{
-		R = 150,
-		G = 215,
-		B = 255,
-		Alpha = 40,
-		Size = Special3Spell.SpellRange*2,
-		BlitMode = GFX_BLIT_Additive,
-		Rotation = PV_Step(10, 0, 1),
-		Attach = ATTACH_Back | ATTACH_MoveRelative
-		
-	};
-	return CastSpellWithSpellRange(clonk, x, y, released, mouseclick, abletocast, cooldown, props, Special3Spell);
+		if(clonk->LaunchSpell(Special3Spell, x, y, 0, 0))
+			return 1;
+	}
+	return 0;
 }
 
 func JumpEffect(object clonk, dir)
