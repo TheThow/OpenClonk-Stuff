@@ -161,8 +161,11 @@ func HitEffect()
 
 func Trigger()
 {
-	if(!GetEffect("Pull", this) && !GetEffect("Comeback", this))
-		Hit();
+	// || GetEffect("Comeback", this)
+	if(GetEffect("Pull", this))
+		return;
+		
+	Hit();
 	
 	var props =
 	{

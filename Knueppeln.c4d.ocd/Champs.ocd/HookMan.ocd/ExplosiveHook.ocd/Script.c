@@ -3,7 +3,7 @@
 local pR = 200;
 local pG = 100;
 local pB = 0;
-local Speed = 70;
+local Speed = 75;
 local SpellDamage = 25;
 local Size = 10;
 local ManaCost = 25;
@@ -36,24 +36,25 @@ func InitEffect()
 		Attach=ATTACH_Front
 	};
 
+	var angle = Angle(0, 0, GetXDir(), GetYDir());
+
 	trailparticles =
 	{
 		Size = 5,
 		R = pR,
 		G = pG,
 		B = pB,
+		Stretch = PV_Linear(1500, 1500),
+		Rotation = angle,
 		Attach=ATTACH_Front
 	};
-	
-	
-	var angle = Angle(0, 0, GetXDir(), GetYDir());
-	
+
 	var hookprt = 
 	{
 		Size = 8,
-		R = pR,
-		G = pG,
-		B = pB,
+		R = 255,
+		G = 60,
+		B = 0,
 		Attach=ATTACH_Front|ATTACH_MoveRelative,
 		Rotation = angle
 	};
@@ -76,7 +77,6 @@ func FxLifeStop()
 {
 	if(!this)
 		return;
-	Sound("Hits::Materials::Metal::LightMetalHit1", false, 50);
 	Destroy();
 }
 
@@ -87,7 +87,8 @@ func TravelEffect(int time)
 	
 	//CreateParticle("Shockwave2", 0, 0, 0, 0, 0, trailparticles, 1);
 	
-	dummy->DrawParticleLine("Shockwave2", GetX(), GetY(), oldx , oldy, 5, 0, 0, 0, trailparticles);
+	//dummy->DrawParticleLine("Shockwave2", GetX(), GetY(), oldx , oldy, 5, 0, 0, 0, trailparticles);
+	dummy->CreateParticle("Shockwave2", GetX(), GetY(), 0 , 0, 0, trailparticles, 1);
 	oldx = GetX();
 	oldy = GetY();
 	PushBack(arr, [GetX(), GetY()]);
@@ -102,6 +103,8 @@ public func HitObject(obj)
 
 func DestroyEffect()
 {
+	Sound("Hits::Materials::Metal::LightMetalHit1", false, 50);
+
 	var destroyprt =
 	{
 		Size = 5,
@@ -110,6 +113,8 @@ func DestroyEffect()
 		G = pG,
 		B = pB,
 		ForceY = GetGravity(),
+		Stretch = PV_Linear(1500, 1500),
+		Rotation = PV_Step(10, PV_Random(0, 360), 1),
 		OnCollision = PC_Bounce(),
 	};
 
@@ -119,23 +124,6 @@ func DestroyEffect()
 	}
 }
 
-func Trigger()
-{
-	if(!GetEffect("Pull", this) && !GetEffect("Comeback", this))
-		Hit();
-	
-	var props =
-	{
-		//Prototype = Particles_ElectroSpark2(),
-		Size = PV_Linear(10,0),
-		R = 150,
-		G = 150,
-		B = 150,
-	};
-	var r = 10;
-	for(var i = 0; i < 360; i+= 5)
-		CreateParticle("Flash", 0, 0, Cos(i, r + RandomX(-1,1)), Sin(i, r + RandomX(-1, 1)), 10, props);
-}
 
 func Destroy()
 {
@@ -158,11 +146,22 @@ func Hit(xdir, ydir)
 	var hookprt = 
 	{
 		Size = 8,
+		R = 255,
+		G = 60,
+		B = 0,
+		Attach=ATTACH_Front|ATTACH_MoveRelative,
+		Rotation = angle
+	};
+	
+		trailparticles =
+	{
+		Size = 5,
 		R = pR,
 		G = pG,
 		B = pB,
-		Attach=ATTACH_Front|ATTACH_MoveRelative,
-		Rotation = angle
+		Stretch = PV_Linear(1500, 1500),
+		Rotation = angle,
+		Attach=ATTACH_Front
 	};
 	
 	CreateParticle("Hook", GetXDir()/15, GetYDir()/15, 0, 0, 0, hookprt, 1);
@@ -183,6 +182,17 @@ func Blocked()
 		Rotation = angle
 	};
 	CreateParticle("Hook", GetXDir()/15, GetYDir()/15, 0, 0, 0, hookprt, 1);
+	
+		trailparticles =
+	{
+		Size = 5,
+		R = pR,
+		G = pG,
+		B = pB,
+		Stretch = PV_Linear(1500, 1500),
+		Rotation = angle,
+		Attach=ATTACH_Front
+	};
 }
 
 func Bounce(int xdir, int ydir)
