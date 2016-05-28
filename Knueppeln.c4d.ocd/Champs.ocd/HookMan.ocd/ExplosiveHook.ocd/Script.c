@@ -3,7 +3,7 @@
 local pR = 200;
 local pG = 100;
 local pB = 0;
-local Speed = 75;
+local Speed = 70;
 local SpellDamage = 25;
 local Size = 10;
 local ManaCost = 25;
@@ -20,6 +20,8 @@ local oldy;
 local dummy;
 
 local arr;
+
+func CanBeSucked() { return true; }
 
 func InitEffect()
 {
