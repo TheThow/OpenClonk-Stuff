@@ -133,8 +133,8 @@ func FxCheckEnemiesTimer(object target, proplist effect, int time)
 		{
 			var speed = Distance(0, 0, o->GetXDir(), o->GetYDir());
 			o->SetVelocity(angle, speed);
+			o->~Blocked(this);
 			WeaponDamage(o, SpellDamage);
-			o->Blocked(this);
 			continue;
 		}
 		

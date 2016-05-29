@@ -19,6 +19,8 @@ local trailparticles;
 local probability = 25;
 
 func IsKnueppelItem() { return true; }
+func CanBeSucked() { return true; }
+func IsReflectable() { return true; }
 
 func InitEffect()
 {
