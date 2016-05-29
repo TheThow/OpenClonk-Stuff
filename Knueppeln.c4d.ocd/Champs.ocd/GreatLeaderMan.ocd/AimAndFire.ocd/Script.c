@@ -41,6 +41,7 @@ func Launch(object clonk, int x, int y)
 		if (!bow->Contents())
 		{
 			var arrow = bow->CreateContents(Arrow);
+			AddEffect("Traveling", arrow, 1, 1, nil, GetID());
 			arrow->SetStackCount(1);
 			arrow->SetObjDrawTransform(500, 0, 0, 0, 500);
 			arrow.Collectible = false;
@@ -52,5 +53,27 @@ func Launch(object clonk, int x, int y)
 		bow->ControlUseStop(minion);
 	}
 	RemoveObject();
+}
+
+func FxTravelingStart(target, fx)
+{
+	fx.ox = target->GetX();
+	fx.oy = target->GetY();
+	fx.prt =
+	{
+		Size = PV_Linear(4,0),
+		BlitMode = GFX_BLIT_Additive,
+		R = 50,
+		G = 50,
+		B = 50,
+	};
+}
+
+func FxTravelingTimer(target, fx)
+{
+	//CreateParticle("Flash", 0, 0, 0, 0, 10, trailparticles2, 2);
+	DrawParticleLine("Flash", target->GetX(), target->GetY(), fx.ox, fx.oy, 1, 0, 0, 10, fx.prt);
+	fx.ox=target->GetX();
+	fx.oy=target->GetY();
 }
 
