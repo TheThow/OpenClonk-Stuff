@@ -2,9 +2,9 @@
 
 
 local ManaCost = 40;
-local SpellDamage = 35;
+local SpellDamage = 30;
 local Speed = 60;
-local Charge_dur = 30;
+local Charge_dur = 35;
 
 local Size = 20;
 
@@ -80,11 +80,11 @@ func ChargeStop(proplist params)
 {
 	SetAction("Idle");
 	var angle = params.new_angle;
-	SetVelocity(angle, Speed, 10);
+	SetVelocity(angle, Speed-10, 10);
 	
 	Sound("sawblade_launch", false, 100);
 	
-	AddEffect("CheckEnemies", this, 20,1, this);
+	AddEffect("CheckEnemies", this, 1,1, this);
 	
 	SetLightRange(30, 70);
 	SetLightColor(RGB(150, 150, 150));
@@ -126,7 +126,7 @@ func FxCheckEnemiesTimer(object target, proplist effect, int time)
 		}
 		
 		var angle = Angle(GetX(), GetY(), o->GetX(), o->GetY());
-		AddEffect("SawBladeCD", o, 1, 15);
+		AddEffect("SawBladeCD", o, 1, 25);
 		Sound("Objects::Weapons::WeaponHit*", false, 50);
 		
 		if(o->GetID() != Clonk)
@@ -134,6 +134,7 @@ func FxCheckEnemiesTimer(object target, proplist effect, int time)
 			var speed = Distance(0, 0, o->GetXDir(), o->GetYDir());
 			o->SetVelocity(angle, speed);
 			WeaponDamage(o, SpellDamage);
+			o->Blocked(this);
 			continue;
 		}
 		
@@ -159,8 +160,8 @@ func Hit(xdir, ydir)
 	{
 		Sound("hooksnap", false, 50, nil, nil, nil, 70);
 		var fx = AddEffect("Travel", this, 1, 1, this);
-		if(GetXDir())
-			fx.dir = GetXDir() / Abs(GetXDir());
+		if(xdir)
+			fx.dir = xdir / Abs(xdir);
 		else
 			fx.dir = 1;
 			
@@ -181,16 +182,18 @@ func Hit(xdir, ydir)
 		SetAction("Travel");
 		SetXDir(0);
 		SetYDir(0);
-		RemoveVertex(0);
 		
-		if(GBackSolid(-1,0))
-			SetPosition(GetX()-1, GetY());
-		else if(GBackSolid(0,-1))
-			SetPosition(GetX(), GetY()-1);
-		else if(GBackSolid(1,0))
-			SetPosition(GetX()+1, GetY());
-		else
-			SetPosition(GetX(), GetY()+1);
+		if(!GBackSolid())
+		{
+			if(GBackSolid(-1,0))
+				SetPosition(GetX()-1, GetY());
+			else if(GBackSolid(0,-1))
+				SetPosition(GetX(), GetY()-1);
+			else if(GBackSolid(1,0))
+				SetPosition(GetX()+1, GetY());
+			else
+				SetPosition(GetX(), GetY()+1);
+		}
 	}
 }
 
@@ -325,6 +328,7 @@ func CheckCrossFree(int step)
 
 func IsValidPixel(x, y, step)
 {
+	step=2;
 	return GBackSolid(x,y) && (!GBackSolid(x+step,y) || !GBackSolid(x-step, y) || !GBackSolid(x, y+step) || !GBackSolid(x, y-step));
 }
 
