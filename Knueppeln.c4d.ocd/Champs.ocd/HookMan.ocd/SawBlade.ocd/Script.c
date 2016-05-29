@@ -82,7 +82,7 @@ func ChargeStop(proplist params)
 	var angle = params.new_angle;
 	SetVelocity(angle, Speed, 10);
 	
-	Sound("Fire::BlastLiquid3", false, 100);
+	Sound("sawblade_launch", false, 100);
 	
 	AddEffect("CheckEnemies", this, 20,1, this);
 	
@@ -118,7 +118,7 @@ func FxRotateTimer(target, fx)
 
 func FxCheckEnemiesTimer(object target, proplist effect, int time)
 {
-	for(var o in FindObjects(Find_Distance(20), Find_Not(Find_ID(Hook)), Find_Or(Find_Func("IsReflectable"), Find_Func("CanBeHit", this))))
+	for(var o in FindObjects(Find_Distance(Size), Find_Not(Find_ID(Hook)), Find_Or(Find_Func("IsReflectable"), Find_Func("CanBeHit", this))))
 	{
 		if(GetEffect("SawBladeCD", o) || (o->GetOwner() == GetOwner() && time < 15))
 		{
