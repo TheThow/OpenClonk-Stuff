@@ -18,7 +18,6 @@ func InitEffect()
 	Sound("Objects::Weapons::WeaponSwing1", false, 100);
 	SetLightRange(30, 70);
 	SetLightColor(RGB(150, 150, 150));
-	Sound("sawloop", false, 20, nil, 0);
 
 	trailparticles =
 	{
