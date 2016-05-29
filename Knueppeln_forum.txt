@@ -103,6 +103,21 @@ Time Travel also triggers the energy shot mark.[/i]
 Slowing Field [i]
 Hold R and click within the range indicator to create a field that slows everything in its range.[/i]
  
+ 
+
+[b]Hook Man[/b]
+<insert epic description>
+
+Hook[i]
+Sends out a hook that will connect to enemy clonks or the landscape and pulls you to your target. Activate again mid air to connect to the background.[/i]
+
+Explosive Hook[i]
+Sends out a hook that will explode on contact with enemies.[/i]
+
+Sawblade[i]
+Launches a sawblade that will travel around the landscape. Hit it with your hook to make it jump![/i]
+ 
+ 
 
 [b]Laser Man[/b] - contributed by Zapper
 <insert epic description>

@@ -1,2 +1,2 @@
 Name=Hook Man
-Description=Wanna hook up? \n\nQ = Electro Shot \nE = Electro Orb \nR = Thunder Strike
+Description=Wanna hook up? \n\nQ = Hook \nE = Explosive Hook \nR = Sawblade
