@@ -224,9 +224,14 @@ func DestroyEffect()
 
 }
 
-func IsReflectable() { return true; }
+func IsReflectable(clonk) 
+{ 	
+	if(GetOwner() == clonk->GetOwner())
+		return false;
+	return true; 
+}
 
-func Blocked()
+func Blocked(clonk)
 {
 	DestroyEffect();
 	Destroy();
