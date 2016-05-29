@@ -172,6 +172,11 @@ func Hit(xdir, ydir)
 		if(fx.dir == -1)
 			fx.angle = 180;
 		
+		if	(ydir < 0)
+			fx.angle -= 45 * fx.dir;
+		else if(ydir > 0)
+			fx.angle += 45 * fx.dir;
+		
 		snapped = true;
 		SetAction("Travel");
 		SetXDir(0);
