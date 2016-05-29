@@ -12,5 +12,8 @@ tcpp					- time_hit* (CC BY 3.0)
 
 ermfilm					- rubberducky* (CC BY 3.0) 
 						http://freesound.org/people/ermfilm/sounds/130013/
+						
+adharca					- sawblade_destroyed (CC BY 3.0) 
+						http://freesound.org/people/adharca/sounds/278171/
 
 * changes were made

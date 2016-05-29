@@ -129,6 +129,17 @@ func TravelEffect(int time)
 {
 	if(!shooter)
 		return RemoveObject();
+	var obj = FindObject(Find_ID(SawBlade), Find_AtPoint());
+	if(obj)
+	{
+		if(GetEffect("Travel", obj))
+		{
+			obj->HitByHook(this);
+			DestroyEffect();
+			Destroy();
+			return;
+		}
+	}
 	
 	ClearParticles();
 	CreateParticle("Hook", GetXDir()/15, GetYDir()/15, 0, 0, 0, hookprt, 1);
@@ -137,11 +148,21 @@ func TravelEffect(int time)
 
 public func HitObject(obj)
 {
+	if(obj->~CanBeHit(this) == false)
+		return;
+
 	if(obj == shooter)
 		return;
 	
 	if(hit)
 		return;
+		
+	if(obj->GetID() == SawBlade)
+	{
+		DestroyEffect();
+		Destroy();
+		return;
+	}
 		
 	if (GetEffect("Comeback", this))
 		RemoveEffect("Comeback", this);
@@ -185,7 +206,31 @@ func Destroy()
 	RemoveObject();
 }
 
+func DestroyEffect()
+{
+	Sound("Hits::Materials::Metal::LightMetalHit1", false, 50);
+
+	var destroyprt =
+	{
+		Size = 5,
+		Alpha = PV_Linear(255, 0),
+		R = pR,
+		G = pG,
+		B = pB,
+		ForceY = GetGravity(),
+	};
+	
+	DrawParticleLine("Shockwave2", 0, 0, shooter->GetX() - GetX() + shooter->GetXDir()/10, shooter->GetY() - GetY() + shooter->GetYDir()/10, 5, PV_Random(-5,5), PV_Random(-15, 5), 20, destroyprt);
+
+}
+
 func IsReflectable() { return true; }
+
+func Blocked()
+{
+	DestroyEffect();
+	Destroy();
+}
 
 func Hit()
 {

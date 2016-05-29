@@ -98,6 +98,9 @@ func TravelEffect(int time)
 
 public func HitObject(obj)
 {
+	if(obj->~CanBeHit(this) == false)
+		return;
+
 	dummy->RemoveObject();
 	DestroyEffect();
 	Explode(SpellDamage);
