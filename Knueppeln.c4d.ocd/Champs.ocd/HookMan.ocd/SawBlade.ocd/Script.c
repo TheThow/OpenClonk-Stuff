@@ -177,6 +177,15 @@ func Hit(xdir, ydir)
 		SetXDir(0);
 		SetYDir(0);
 		RemoveVertex(0);
+		
+		if(GBackSolid(-1,0))
+			SetPosition(GetX()-1, GetY());
+		else if(GBackSolid(0,-1))
+			SetPosition(GetX(), GetY()-1);
+		else if(GBackSolid(1,0))
+			SetPosition(GetX()+1, GetY());
+		else
+			SetPosition(GetX(), GetY()+1);
 	}
 }
 
