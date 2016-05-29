@@ -27,6 +27,8 @@ func Initialize()
 		OnCollision = PC_Bounce(),
 	};
 	snapped = false;
+	
+	
 }
 
 func HitByHook(hook)
@@ -95,6 +97,7 @@ func ChargeStop(proplist params)
 		SetRDir(-15);
 	
 	SetClrModulation(RGBa(255,255,255,255));
+	Sound("sawloop", false, 20, nil, 1);
 }
 
 func FxCheckEnemiesTimer(object target, proplist effect, int time)
