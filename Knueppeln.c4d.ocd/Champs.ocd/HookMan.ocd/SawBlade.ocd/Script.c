@@ -98,6 +98,22 @@ func ChargeStop(proplist params)
 	
 	SetClrModulation(RGBa(255,255,255,255));
 	Sound("sawloop", false, 20, nil, 1);
+	
+	AddEffect("Rotate", this, 1, 1, this);
+}
+
+func FxRotateStart(target, fx, temp)
+{
+	if(temp)
+		return;
+	
+	fx.dir = 1;
+}
+
+func FxRotateTimer(target, fx)
+{
+	if(this)
+		SetR(GetR() + 15 * fx.dir);
 }
 
 func FxCheckEnemiesTimer(object target, proplist effect, int time)
@@ -115,9 +131,9 @@ func FxCheckEnemiesTimer(object target, proplist effect, int time)
 		
 		if(o->GetID() != Clonk)
 		{
-			WeaponDamage(o, SpellDamage);
 			var speed = Distance(0, 0, o->GetXDir(), o->GetYDir());
 			o->SetVelocity(angle, speed);
+			WeaponDamage(o, SpellDamage);
 			continue;
 		}
 		
@@ -148,6 +164,9 @@ func Hit(xdir, ydir)
 		else
 			fx.dir = 1;
 			
+		var rfx = GetEffect("Rotate", this);
+			rfx.dir = fx.dir;
+			
 		fx.v = 0;
 		fx.angle = 0;
 		if(fx.dir == -1)
@@ -168,7 +187,7 @@ func FxTravelTimer(target, fx)
 	var x = GetX();
 	var y = GetY();
 	
-	SetR(GetR() + 15 * fx.dir);
+	//SetR(GetR() + 15 * fx.dir);
 	
 	for(var i = 0; i < 180; i+=5)
 	{
@@ -191,6 +210,13 @@ func FxTravelTimer(target, fx)
 			fx.angle = Angle(0, 0, nx, ny) - 90;
 			break;
 		}
+	}
+	
+	if(!GBackSolid())
+	{
+		snapped = 0;
+		SetAction("Idle");
+		return -1;
 	}
 	
 	
