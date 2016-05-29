@@ -91,10 +91,10 @@ func ChargeStop(proplist params)
 	
 	AddEffect("Life", this, 20, LifeTime, this);
 
-	if(GetXDir() > 0)
+	/*if(GetXDir() > 0)
 		SetRDir(15);
 	else
-		SetRDir(-15);
+		SetRDir(-15);*/
 	
 	SetClrModulation(RGBa(255,255,255,255));
 	Sound("sawloop", false, 20, nil, 1);
@@ -113,7 +113,7 @@ func FxRotateStart(target, fx, temp)
 func FxRotateTimer(target, fx)
 {
 	if(this)
-		SetR(GetR() + 15 * fx.dir);
+		SetR(GetR() + 25 * fx.dir);
 }
 
 func FxCheckEnemiesTimer(object target, proplist effect, int time)
