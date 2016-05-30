@@ -72,8 +72,8 @@ Description=$ManaRegDesc$
 		
 [ParameterDef]
 ID=Items
-Default=0
-LeagueValue=0
+Default=100
+LeagueValue=100
 Name=$ItemsName$
 Description=$ItemsDesc$
 
