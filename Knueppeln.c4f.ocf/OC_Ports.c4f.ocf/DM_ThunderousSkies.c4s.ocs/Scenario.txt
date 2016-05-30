@@ -1,7 +1,8 @@
 [Head]
-Icon=19
-Title=Knueppeln.c4s
+Title=Overcast
 Version=8
+Difficulty=60
+MinPlayer=2
 
 [Definitions]
 Definition2=Knueppeln.c4d.ocd
@@ -19,16 +20,13 @@ Mode=Melee
 [Player4]
 
 [Landscape]
-VegetationLevel=100,0,0,100
-InEarthLevel=0,0,0,100
-Sky=Clouds1;Default
+Sky=Clouds1
 BottomOpen=1
-TopOpen=0
-MapWidth=80,0,64,10000
+MapWidth=100,0,64,10000
 MapHeight=50,0,40,10000
-Phase=0,0,0,100
-Period=0,0,0,100
 
 [Weather]
-Climate=0,10,0,100
-YearSpeed=0,0,0,100
+Climate=0,0,0,0
+StartSeason=0,0,0,0
+YearSpeed=0,0,0,0
+Wind=1,100,-100,100

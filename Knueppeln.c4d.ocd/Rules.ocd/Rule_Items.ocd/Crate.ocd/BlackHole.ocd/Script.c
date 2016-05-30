@@ -153,7 +153,7 @@ func StartBlackHole()
 	Sound("Items::blackhole", false, 50);
 	AddEffect("Grow", this, 1, 1, this);
 	AddEffect("Suck", this, 1, 1, this);
-	SetClrModulation(RGBa(255, 255, 255, 255));
+	SetClrModulation(RGBa(255, 255, 255, 0));
 }
 
 func FxSuckTimer(target, fx, time)

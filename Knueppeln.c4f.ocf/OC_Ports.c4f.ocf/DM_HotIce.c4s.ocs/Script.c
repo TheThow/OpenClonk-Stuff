@@ -26,7 +26,7 @@ func Initialize()
 
 global func BlastFree(x, y, level, cause_plr, bla) 
 {
-	if (this == FireProjectile || this == StickyBomb || this == EarthProjectile || this == FlashFlinger || this == ExplosiveHook || this == Boomattack)
+	if (this != Boompack && this != Firestone && this != IronBomb)
 		return false;
 	
 	return _inherited(x, y, level, cause_plr, bla);
@@ -35,7 +35,7 @@ global func BlastFree(x, y, level, cause_plr, bla)
 
 func GetItemCratePos()
 {
-	return [10 + Random(LandscapeWidth() - 20), 50];
+	return [50 + Random(LandscapeWidth() - 100), 50];
 }
 
 // Resets the scenario, redrawing the map.
