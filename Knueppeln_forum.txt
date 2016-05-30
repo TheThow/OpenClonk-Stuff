@@ -155,6 +155,20 @@ Blows up all existing sticky bombs.[/i]
 Bomb Magnet[i]
 Click on a position to let all nearby bombs jump towards it.[/i]
 
+
+[b]Great Leader Man[/b] - contributed by Zapper
+<insert epic description>
+
+Rocket Peon[i]
+Launches a homing rocket that explodes on contact.[/i]
+
+Aim & Fire[i]
+All existing minions will shoot an arrow at the target location.[/i]
+
+Spawn Peon[i]
+Spawns a new minion at your location.[/i]
+
+
 [h]Game modes[/h]
 
 [b]Bomb Run[/b]
