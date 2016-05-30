@@ -1,2 +1,2 @@
 Name=Great Leader Man
-Description=Makes Knüppeln great again. \n\nQ = Peon \nE = Aim and Fire \nR = ??? \n\nContributed by Zapper
+Description=Makes Knüppeln great again. \n\nQ = Rocket Peon \nE = Aim and Fire \nR = Spawn Peon \n\nContributed by Zapper
