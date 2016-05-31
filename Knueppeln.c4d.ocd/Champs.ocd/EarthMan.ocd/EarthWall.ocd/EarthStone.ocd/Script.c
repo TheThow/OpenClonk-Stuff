@@ -137,6 +137,8 @@ func CanBeHit()
 	return true;
 }
 
+func IsWallElement() { return true; }
+
 local ActMap = {
 
 	Travel = {

@@ -127,17 +127,23 @@ func FxCheckEnemiesTimer(object target, proplist effect, int time)
 		
 		var angle = Angle(GetX(), GetY(), o->GetX(), o->GetY());
 		AddEffect("SawBladeCD", o, 1, 25);
-		Sound("Objects::Weapons::WeaponHit*", false, 50);
+		
 		
 		if(!o->GetAlive())
 		{
+			if(o->~IsWallElement())
+				continue;
+			
 			var speed = Distance(0, 0, o->GetXDir(), o->GetYDir());
 			o->SetVelocity(angle, speed);
 			o->~Blocked(this);
 			WeaponDamage(o, SpellDamage);
+			
+			Sound("Hits::GeneralHit*", false, 50);
 			continue;
 		}
 		
+		Sound("Objects::Weapons::WeaponHit*", false, 50);
 		o->Fling(Sin(angle, 8), -Cos(angle, 8));
 		WeaponDamage(o, SpellDamage);
 	}

@@ -116,6 +116,8 @@ func CanBeHit()
 	return true;
 }
 
+func IsWallElement() { return true; }
+
 /*
 func Damage(int change, int cause, int by_player)
 {
