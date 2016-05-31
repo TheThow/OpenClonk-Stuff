@@ -129,7 +129,7 @@ func FxCheckEnemiesTimer(object target, proplist effect, int time)
 		AddEffect("SawBladeCD", o, 1, 25);
 		Sound("Objects::Weapons::WeaponHit*", false, 50);
 		
-		if(o->GetID() != Clonk)
+		if(!o->GetAlive())
 		{
 			var speed = Distance(0, 0, o->GetXDir(), o->GetYDir());
 			o->SetVelocity(angle, speed);

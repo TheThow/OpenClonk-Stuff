@@ -109,7 +109,7 @@ func FxCheckEnemiesTimer(object target, proplist effect, int time)
 		AddEffect("DeathRockCD", o, 1, 15);
 		Sound("Hits::GeneralHit1", false, 50);
 		
-		if(o->GetID() != Clonk)
+		if(!o->GetAlive())
 		{
 			WeaponDamage(o, SpellDamage);
 			var speed = Distance(0, 0, o->GetXDir(), o->GetYDir());
