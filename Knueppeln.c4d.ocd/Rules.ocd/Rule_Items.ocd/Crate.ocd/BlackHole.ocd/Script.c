@@ -143,6 +143,7 @@ func Hit()
 	DrawParticleLine("Flash", Cos(r, d), Sin(r, d), Cos(r + 180, d), Sin(r + 180, d), 1, 0, 0, 60, prop2);
 	DrawParticleLine("Flash", Cos(r+90, d), Sin(r+90, d), Cos(r-90, d), Sin(r-90, d), 1, 0, 0, 60, prop2);
 	
+	SetClrModulation(RGBa(255, 255, 255, 0));
 	ScheduleCall(this, "StartBlackHole", 50, 0);
 	
 	return true;
@@ -153,7 +154,6 @@ func StartBlackHole()
 	Sound("Items::blackhole", false, 50);
 	AddEffect("Grow", this, 1, 1, this);
 	AddEffect("Suck", this, 1, 1, this);
-	SetClrModulation(RGBa(255, 255, 255, 0));
 }
 
 func FxSuckTimer(target, fx, time)

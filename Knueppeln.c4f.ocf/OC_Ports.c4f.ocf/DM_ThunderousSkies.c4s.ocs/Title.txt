@@ -1,2 +1,1 @@
-DE:Donnernde Himmel
-US:Thunderous skies
+US:DM_ThunderousSkies.c4s

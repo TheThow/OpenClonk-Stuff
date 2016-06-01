@@ -5,6 +5,7 @@ Version=8
 
 [Definitions]
 Definition2=Knueppeln.c4d.ocd
+Definition3=Medals.ocd
 
 [Game]
 Mode=Melee

@@ -71,6 +71,9 @@ func FxTravelingStart(target, fx)
 
 func FxTravelingTimer(target, fx)
 {
+	if(target->Contained())
+		return;
+		
 	//CreateParticle("Flash", 0, 0, 0, 0, 10, trailparticles2, 2);
 	DrawParticleLine("Flash", target->GetX(), target->GetY(), fx.ox, fx.oy, 1, 0, 0, 10, fx.prt);
 	fx.ox=target->GetX();
