@@ -21,6 +21,7 @@ func CreateSymbols()
 {
 	QSymbol = CreateObject(HUDSymbol, 0, 0,GetOwner());
 	QSymbol->SetGraphics("Q");
+	QSymbol.Visibility = VIS_None;
 	//QSymbol->Enter(SymbolContainer);
 	
 	
