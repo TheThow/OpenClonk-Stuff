@@ -150,9 +150,12 @@ public func ObjectControl(int plr, int ctrl, int x, int y, int strength, bool re
   			if(GetMagicEnergy() >= JUMP_MANA)
   			{
   				RemoveEffect("IntControlJumpDouble", this);
-	 			ControlUpDouble();
-	 			JumpEffect("Up");
-	 			DoMagicEnergy(-JUMP_MANA);
+	 			var ok = ControlUpDouble();
+	 			if(ok)
+	 			{
+		 			JumpEffect("Up");
+		 			DoMagicEnergy(-JUMP_MANA);
+		 		}
 	 		}
 			else
 			{
@@ -175,12 +178,15 @@ public func ObjectControl(int plr, int ctrl, int x, int y, int strength, bool re
   		 	if(GetMagicEnergy() >= JUMP_MANA)
   			{
 	    		RemoveEffect("IntControlLeftDouble", this);
-	    		ControlLeftDouble();
-	    		JumpEffect("Left");
-	    		DoMagicEnergy(-JUMP_MANA);
-	    		
-	    		if(GetDir() == DIR_Right)
-					FlipDir();
+	    		var ok = ControlLeftDouble();
+	    		if(ok)
+		    	{
+		    		JumpEffect("Left");
+		    		DoMagicEnergy(-JUMP_MANA);
+		    		
+		    		if(GetDir() == DIR_Right)
+						FlipDir();
+				}
     		}
     		else
 			{
@@ -204,12 +210,16 @@ public func ObjectControl(int plr, int ctrl, int x, int y, int strength, bool re
   			if(GetMagicEnergy() >= JUMP_MANA)
   			{
     			RemoveEffect("IntControlRightDouble", this);
-    			ControlRightDouble();
-    			JumpEffect("Right");
-    			DoMagicEnergy(-JUMP_MANA);
+    			var ok = ControlRightDouble();
     			
-    			if(GetDir() == DIR_Left)
-					FlipDir();
+    			if (ok)
+    			{
+	    			JumpEffect("Right");
+	    			DoMagicEnergy(-JUMP_MANA);
+	    			
+	    			if(GetDir() == DIR_Left)
+						FlipDir();
+				}
     		}
       		else
 			{

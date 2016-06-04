@@ -67,7 +67,7 @@ protected func Initialize()
 
 func GetItemCratePos()
 {
-	return [50 + Random(LandscapeWidth() - 100), 50];
+	return [100 + Random(LandscapeWidth() - 200), 50];
 }
 
 public func ApplyChanneledWindEffects(x, y, w, h, bottom)

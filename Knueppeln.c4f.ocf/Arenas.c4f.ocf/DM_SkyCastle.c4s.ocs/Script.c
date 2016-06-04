@@ -28,7 +28,7 @@ global func FxRainingTimer()
 
 func GetItemCratePos()
 {
-	return [10 + Random(LandscapeWidth() - 20), 0];
+	return [100 + Random(LandscapeWidth() - 200), 0];
 }
 
 func InitClouds()

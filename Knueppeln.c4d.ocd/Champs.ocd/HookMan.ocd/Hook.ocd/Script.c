@@ -143,7 +143,7 @@ func TravelEffect(int time)
 	
 	ClearParticles();
 	CreateParticle("Hook", GetXDir()/15, GetYDir()/15, 0, 0, 0, hookprt, 1);
-	DrawParticleLine("Shockwave2", 0, 0, shooter->GetX() - GetX() + shooter->GetXDir()/10, shooter->GetY() - GetY() + shooter->GetYDir()/10, 5, 0, 0, 1, trailparticles);
+	DrawParticleLine("Shockwave2", GetXDir()/15, GetYDir()/15, shooter->GetX() - GetX() + shooter->GetXDir()/10, shooter->GetY() - GetY() + shooter->GetYDir()/10, 5, 0, 0, 1, trailparticles);
 }
 
 public func HitObject(obj)
@@ -156,13 +156,6 @@ public func HitObject(obj)
 	
 	if(hit)
 		return;
-		
-	if(obj->GetID() == SawBlade)
-	{
-		DestroyEffect();
-		Destroy();
-		return;
-	}
 		
 	if (GetEffect("Comeback", this))
 		RemoveEffect("Comeback", this);

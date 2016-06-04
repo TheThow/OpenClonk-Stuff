@@ -17,7 +17,7 @@ func Initialize()
 
 func GetItemCratePos()
 {
-	return [10 + Random(LandscapeWidth() - 20), 50];
+	return [RandomX(LandscapeWidth()/2 - 300, LandscapeWidth()/2 + 300), 50];
 }
 
 func BallPos()

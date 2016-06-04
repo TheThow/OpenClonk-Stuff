@@ -35,7 +35,7 @@ global func BlastFree(x, y, level, cause_plr, bla)
 
 func GetItemCratePos()
 {
-	return [50 + Random(LandscapeWidth() - 100), 50];
+	return [100 + Random(LandscapeWidth() - 200), 50];
 }
 
 // Resets the scenario, redrawing the map.

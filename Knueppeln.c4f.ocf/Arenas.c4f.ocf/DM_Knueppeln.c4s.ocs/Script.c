@@ -28,7 +28,7 @@ func InitClouds()
 
 func GetItemCratePos()
 {
-	return [10 + Random(LandscapeWidth() - 20), 50];
+	return [100 + Random(LandscapeWidth() - 200), 50];
 }
 
 func InitializePlayer(int plr, int iX, int iY, object pBase, int iTeam)
