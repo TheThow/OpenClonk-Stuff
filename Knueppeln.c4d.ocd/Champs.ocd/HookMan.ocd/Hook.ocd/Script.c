@@ -69,10 +69,15 @@ func FxComebackTimer(object target, proplist effect, int time)
 	SetVelocity(angle, Speed + 40, 10);
 }
 
-func FxPullStart(target, fx)
+func FxPullStart(target, fx, temp)
 {
+	if(temp)
+		return;
+
 	fx.x = -10;
 	fx.y = -10;
+	fx.ox = shooter->GetX();
+	fx.oy = shooter->GetY();
 	fx.angle = Angle(shooter->GetX(), shooter->GetY(), GetX(), GetY(), 10);
 }
 
@@ -87,8 +92,10 @@ func FxPullTimer(object target, proplist fx, int time)
 	{
 		fx.cnt++;
 	}
+	var cd1 = Distance(GetX(), GetY(), fx.ox, fx.oy); 
+	var cd2 = Distance(shooter->GetX(), shooter->GetY(), fx.ox, fx.oy); 
 	
-	if(ObjectDistance(this, shooter) < Size || (dist < 5 && fx.cnt == 2))
+	if(cd1-cd2 < Size || (dist < 5 && fx.cnt == 2))
 	{
 		if(shooter->GetAction() == "Tumble")
 			shooter->SetAction("Jump");
@@ -116,7 +123,7 @@ func FxPullTimer(object target, proplist fx, int time)
 	if(time > LifeTime*2)
 		return RemoveObject();
 		
-	fx.angle = Angle(shooter->GetX(), shooter->GetY(), GetX(), GetY(), 10);
+	//fx.angle = Angle(shooter->GetX(), shooter->GetY(), GetX(), GetY(), 10);
 	shooter->SetAction("Jump");
 	shooter->SetVelocity(fx.angle, Speed + 20, 10);
 	

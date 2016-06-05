@@ -8,7 +8,8 @@ func Initialize()
 	g_remaining_rounds = SCENPAR_Rounds;
 	g_winners = [];
 	InitializeRound();
-	
+	CreateObject(Rule_KillLogs, 0, 0, -1);
+	CreateObject(Rule_Gravestones, 0, 0, -1);
 	//BanChampion(FireMan);
 	//BanChampion(BombMan);
 	
@@ -43,8 +44,30 @@ func ResetRound()
 {
 	// Retrieve all Clonks.
 	var clonks = [];
-	for (var clonk in FindObjects(Find_OCF(OCF_CrewMember)))
+	/*for (var clonk in FindObjects(Find_OCF(OCF_CrewMember)))
 	{
+		var container = clonk->Contained();
+		if (container)
+		{
+			clonk->Exit();
+			container->RemoveObject();
+		}
+		else
+		{
+			// Players not waiting for a relaunch get a new Clonk to prevent
+			// status effects from carrying over to the next round.
+			var new_clonk = CreateObject(clonk->GetID(), 0, 0, clonk->GetOwner());
+			new_clonk->GrabObjectInfo(clonk);
+			clonk = new_clonk;
+		}
+		PushBack(clonks, clonk);
+		clonk->SetObjectStatus(C4OS_INACTIVE);
+	}*/
+	
+	for (var i = 0; i < GetPlayerCount(); i++)
+	{
+		var clonk = GetCrew(GetPlayerByIndex(i));
+		
 		var container = clonk->Contained();
 		if (container)
 		{

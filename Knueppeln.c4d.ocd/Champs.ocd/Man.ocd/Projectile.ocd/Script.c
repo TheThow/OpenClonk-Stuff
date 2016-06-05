@@ -1,6 +1,5 @@
 
 local Speed = 60;
-local Type = "none";
 
 local ManaCost = 22;
 local SpellDamage = 15;
@@ -23,7 +22,6 @@ func IsReflectable()
 
 func Launch(object clonk, int x, int y)
 {
-	Type = clonk->GetChampType();
 	var angle = Angle(0,0,x,y, 10);
 	shooter = clonk;
 	SetVelocity(angle, Speed, 10);
