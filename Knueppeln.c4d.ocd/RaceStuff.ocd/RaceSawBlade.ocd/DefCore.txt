@@ -1,0 +1,15 @@
+[DefCore]
+id=RaceSawBlade
+Version=6,0
+Category=C4D_Vehicle
+Width=40
+Height=40
+Offset=-20,-20
+Vertices=1
+VertexX=0
+VertexY=0
+Mass=1
+Rotate=1
+NoStabilize=1
+StretchGrowth=1
+IncompleteActivity=1

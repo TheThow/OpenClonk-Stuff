@@ -1,0 +1,15 @@
+[DefCore]
+id=RaceHook
+Version=6,0
+Category=C4D_Vehicle
+Width=2
+Height=2
+Offset=-1,-1
+Picture=0,0,64,64
+Vertices=1
+VertexX=1
+VertexY=1
+VertexFriction=40,40
+Mass=14
+StretchGrowth=1
+Rotate=1
