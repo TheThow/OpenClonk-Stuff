@@ -68,20 +68,32 @@ func ResetRound()
 	{
 		var clonk = GetCrew(GetPlayerByIndex(i));
 		
-		var container = clonk->Contained();
-		if (container)
+		if(clonk != nil)
 		{
-			clonk->Exit();
-			container->RemoveObject();
+			
+			var container = clonk->Contained();
+			if (container)
+			{
+				clonk->Exit();
+				container->RemoveObject();
+			}
+			else
+			{
+				// Players not waiting for a relaunch get a new Clonk to prevent
+				// status effects from carrying over to the next round.
+				var new_clonk = CreateObject(clonk->GetID(), 0, 0, clonk->GetOwner());
+				new_clonk->GrabObjectInfo(clonk);
+				clonk = new_clonk;
+			}
 		}
 		else
 		{
-			// Players not waiting for a relaunch get a new Clonk to prevent
-			// status effects from carrying over to the next round.
-			var new_clonk = CreateObject(clonk->GetID(), 0, 0, clonk->GetOwner());
-			new_clonk->GrabObjectInfo(clonk);
+			var new_clonk = CreateObject(Clonk, 0, 0, GetPlayerByIndex(i));
+			new_clonk->MakeCrewMember(GetPlayerByIndex(i));
 			clonk = new_clonk;
+			clonk->DoEnergy(100);
 		}
+		
 		PushBack(clonks, clonk);
 		clonk->SetObjectStatus(C4OS_INACTIVE);
 	}

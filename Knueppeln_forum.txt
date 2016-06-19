@@ -154,7 +154,7 @@ Blows up all existing sticky bombs.[/i]
 
 Bomb Magnet[i]
 Click on a position to let all nearby bombs jump towards it.[/i]
-
+ 
 
 [b]Great Leader Man[/b] - contributed by Zapper
 <insert epic description>

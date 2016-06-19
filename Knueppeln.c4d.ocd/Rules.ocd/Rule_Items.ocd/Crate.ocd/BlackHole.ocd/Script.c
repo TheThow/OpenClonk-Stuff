@@ -1,7 +1,5 @@
 /*-- Ore --*/
 
-local probability = 10;
-
 func IsKnueppelItem() { return true; }
 
 local Collectible = 1;
@@ -197,7 +195,7 @@ func FxSuckTimer(target, fx, time)
 		}
 	}
 
-	if (time > Duration)
+	if (time > Duration && Duration != 0)
 	{
 		var black =
 		{
