@@ -24,7 +24,6 @@ func PreviewMode()
 	SetCategory(C4D_StaticBack);
 	SetClrModulation(RGBa(255, 255, 255, 128));
 	this.Visibility = VIS_Owner;
-	this.Collectible = false;
 	AddEffect("Preview", this, 1, 1, this);
 }
 
@@ -61,17 +60,26 @@ public func ControlUseStop(object clonk, int x, int y)
 		var obj = this->TakeObject();
 		obj->SetPosition(preview_object->GetX(), preview_object->GetY());
 		obj->Constructed();
+		obj.Collectible = 0;
 	}
 	
-	//preview_object->RemoveObject();
+	preview_object->RemoveObject();
 	return true;
 }
 
 public func ControlUseCancel(object clonk, int x, int y)
 {
+	/*if(preview_object)
+		preview_object->RemoveObject();*/
+	AddEffect("RemovePreview", this, 1, 1, this);
+	return true;
+}
+
+//Workaround
+func FxRemovePreviewStop()
+{
 	if(preview_object)
 		preview_object->RemoveObject();
-	return true;
 }
 
 func Constructed()
