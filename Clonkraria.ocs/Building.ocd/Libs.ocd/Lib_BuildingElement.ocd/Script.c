@@ -124,13 +124,14 @@ private func DrawPreviewLine(int from_x, int from_y, int to_x, int to_y)
 		y += ydir * build_grid_y;
 	}
 	
+	var original_blocks = blocks;
 	while (blocks < GetLength(preview_objects))
 	{
 		if (preview_objects[blocks])
 			preview_objects[blocks]->RemoveObject();
 		blocks++;
 	}
-	SetLength(preview_objects, blocks);
+	SetLength(preview_objects, original_blocks);
 }
 
 private func CreatePreviewObject()
