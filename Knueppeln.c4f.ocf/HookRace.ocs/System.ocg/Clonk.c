@@ -11,6 +11,11 @@ func ControlUpDouble()
 	return 0;
 }
 
+func ControlDownDouble()
+{
+	return 0;
+}
+
 func ControlLeftDouble()
 {
 	return 0;

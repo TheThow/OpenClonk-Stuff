@@ -101,9 +101,9 @@ func FxPullTimer(object target, proplist fx, int time)
 
 	var dist = Distance(fx.x, fx.y, shooter->GetX(), shooter->GetY()); 
 	
-	if(dist < 5)
+	if(dist < 5 && time > 2)
 	{
-		fx.cnt++;
+		fx.cnt++;x
 	}
 	
 	var cd1 = Distance(GetX(), GetY(), fx.ox, fx.oy); 

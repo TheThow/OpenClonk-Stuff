@@ -17,6 +17,13 @@ func Initialize()
 {
 	SetClrModulation(RGB(128,0,0));
 	AddEffect("DrawBlood", this, 1, 1, this);
+	AddEffect("Life", this, 1, 400, this);
+}
+
+func FxLifeStop()
+{
+	if(this)
+		Hit();
 }
 
 func FxDrawBloodTimer(object target, proplist effect, int time)
