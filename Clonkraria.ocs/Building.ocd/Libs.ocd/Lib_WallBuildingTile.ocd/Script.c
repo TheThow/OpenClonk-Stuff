@@ -9,7 +9,7 @@
 
 local Name = "$Name$";
 local Description = "$Description$";
-local Plane = 200;
+local Plane = 50;
 
 func IsWallBuildingTile() { return true; }
 

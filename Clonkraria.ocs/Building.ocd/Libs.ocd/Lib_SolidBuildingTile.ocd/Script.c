@@ -9,7 +9,7 @@
 
 local Name = "$Name$";
 local Description = "$Description$";
-local Plane = 300;
+local Plane = 200;
 
 local tile_mode = TILE_MODE_LINE;
 
