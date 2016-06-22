@@ -26,6 +26,7 @@ local tile_mode = TILE_MODE_SINGLE;
 
 func IsBuildingElement() { return true; }
 func HoldingEnabled() { return true; }
+func IsPreview() { if(GetEffect("Preview", this)) return true; return false; }
 
 public func Construction()
 {
@@ -42,7 +43,7 @@ func PreviewMode()
 
 func FxPreviewTimer()
 {
-	if(BuildingCondition())
+	if(PreviewBuildingCondition(this))
 		SetClrModulation(RGBa(255, 255, 255, 128));
 	else
 		SetClrModulation(RGBa(255, 0, 0, 128));
@@ -172,6 +173,11 @@ func Destroy()
 func BuildingCondition()
 {
 	return true;
+}
+
+func PreviewBuildingCondition(object caller)
+{
+	return BuildingCondition();
 }
 
 func GetRightX(int x)
