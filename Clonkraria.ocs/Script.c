@@ -18,4 +18,6 @@ func CreateEnvironment()
 	obj->CreateContents(Tile_WallWood, 48*5);
 	obj->CreateContents(Pickaxe, 5);
 	obj->CreateContents(Shovel, 5);
+	obj->CreateContents(Dynamite, 50);
+	obj->CreateContents(Firestone, 50);
 }
