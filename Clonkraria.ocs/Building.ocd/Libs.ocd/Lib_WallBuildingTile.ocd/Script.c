@@ -18,7 +18,9 @@ func BuildingCondition()
 	if (FindObject(Find_AtRect(-GetObjWidth()/2, -GetObjHeight()/2, GetObjWidth(), GetObjHeight()), Find_Exclude(this)))
 		return false;
 
-	if (!GBackSolid() && FindObject(Find_Exclude(this), Find_Func("IsBuildingTile"), Find_Or(Find_InRect(-9, -2, 18, 4), Find_InRect(-2, -9, 4, 18))))
+	if (!GBackSolid() && FindObject(Find_Exclude(this), Find_Func("IsBuildingTile"), 
+		Find_Or(Find_OnLine(-GetObjWidth()/2-1, 0, GetObjWidth()/2+1, 0), Find_OnLine(0, -GetObjHeight()/2-1, 0, GetObjHeight()/2+2))))
+		//Find_Or(Find_AtRect(-GetObjWidth()/2-1, -GetObjHeight()/2, GetObjWidth()+2, GetObjHeight()), Find_AtRect(-GetObjWidth()/2, -GetObjHeight()/2-1, GetObjWidth(), GetObjHeight()+2))))
 		return true;
 	
 	return false;
