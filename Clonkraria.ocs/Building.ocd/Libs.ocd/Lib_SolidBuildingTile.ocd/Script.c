@@ -10,6 +10,7 @@
 local Name = "$Name$";
 local Description = "$Description$";
 
+local tile_mode = TILE_MODE_LINE;
 
 func IsSolidBuildingTile() { return true; }
 
