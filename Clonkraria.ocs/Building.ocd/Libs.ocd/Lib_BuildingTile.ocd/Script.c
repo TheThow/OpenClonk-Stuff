@@ -55,7 +55,7 @@ func PreviewBuildingCondition(object caller)
 	if (BuildingCondition())
 		return true;
 	
-	if(GBackSolid())
+	if (VerticesStuck() == GetVertexNum()+1)
 		return false;
 	
 	for(var obj in FindObjects(Find_Exclude(this), Find_Or(Find_OnLine(-GetObjWidth()/2-1, 0, GetObjWidth()/2+1, 0), Find_OnLine(0, -GetObjHeight()/2-1, 0, GetObjHeight()/2+2))

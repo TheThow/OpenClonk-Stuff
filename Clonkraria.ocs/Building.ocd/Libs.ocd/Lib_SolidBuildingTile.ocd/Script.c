@@ -34,6 +34,46 @@ func Constructed()
 			
 			mat = GetMaterial(x,y);
 		}
+		
+		mat = nil;
+		for(var y = -GetObjHeight(); y < -GetObjHeight()/2+1; y++)
+		{
+			if (!GBackSolid(x, y) && mat == nil)
+				break;
+			
+			if (!GBackSolid(x, y))
+				DrawMaterialQuad(MaterialName(mat), GetX() + x, GetY() + y, GetX() + x + 1, GetY() + y, GetX() + x + 1, GetY() + y + 1, GetX() + x, GetY() + y + 1);
+			
+			mat = GetMaterial(x,y);
+		}
+	}
+	
+	
+	for (var y = -GetObjHeight()/2; y < GetObjHeight()/2; y++)
+	{
+		var mat = nil;
+		for(var x = -GetObjWidth(); x < -GetObjWidth()/2+1; x++)
+		{
+			if (!GBackSolid(x, y) && mat == nil)
+				break;
+			
+			if (!GBackSolid(x, y))
+				DrawMaterialQuad(MaterialName(mat), GetX() + x, GetY() + y, GetX() + x + 1, GetY() + y, GetX() + x + 1, GetY() + y + 1, GetX() + x, GetY() + y + 1);
+			
+			mat = GetMaterial(x,y);
+		}
+		
+		mat = nil;
+		for(var x = GetObjWidth(); x > GetObjWidth()/2-1; x--)
+		{
+			if (!GBackSolid(x, y) && mat == nil)
+				break;
+			
+			if (!GBackSolid(x, y))
+				DrawMaterialQuad(MaterialName(mat), GetX() + x, GetY() + y, GetX() + x + 1, GetY() + y, GetX() + x + 1, GetY() + y + 1, GetX() + x, GetY() + y + 1);
+			
+			mat = GetMaterial(x,y);
+		}
 	}
 	
 	return _inherited();
@@ -41,7 +81,7 @@ func Constructed()
 
 func BuildingCondition()
 {
-	if(GBackSolid())
+	if (VerticesStuck() == GetVertexNum()+1)
 		return false;
 	
 	if (FindObject(Find_AtRect(-GetObjWidth()/2, -GetObjHeight()/2, GetObjWidth(), GetObjHeight()), Find_Exclude(this), Find_Not(Find_Func("IsPreview")), Find_Not(Find_Func("IsWallBuildingTile"))))
