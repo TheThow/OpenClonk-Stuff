@@ -5,9 +5,9 @@
 	@author 
 */
 
-local ManaCost = 55;
+local ManaCost = 35;
 
-local SpellDamage = 60;
+local SpellDamage = 42;
 local Speed = 25;
 local Durr = 35;
 
@@ -16,7 +16,7 @@ local Size = 15;
 local Name = "$Name$";
 local Description = "$Description$";
 
-local ChargeDuration = 28;
+local ChargeDuration = 25;
 
 local MaxLength = 250;
 local TargetAngle = 0;
