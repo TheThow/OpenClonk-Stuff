@@ -26,8 +26,8 @@ VegetationLevel=100,0
 InEarth=Rock=1;Gold=1;Dynamite=2;Loam=2
 InEarthLevel=65
 Sky=Clouds1;Default
-MapWidth=80
-MapHeight=80
+MapWidth=200
+MapHeight=150
 Amplitude=10,10
 Phase=50,50
 Period=10,10

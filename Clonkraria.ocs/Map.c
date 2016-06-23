@@ -14,11 +14,11 @@ protected func InitializeMap(proplist map)
 	// Retrieve the settings according to the MapSize setting.
 	var map_size;
 	if (SCENPAR_MapSize == 1)
-		map_size = [100, 75]; 
+		map_size = [200, 125]; 
 	if (SCENPAR_MapSize == 2)
-		map_size = [125, 90];
+		map_size = [325, 175];
 	if (SCENPAR_MapSize == 3)
-		map_size = [150, 105];
+		map_size = [450, 225];
 	
 	// Set the map size.
 	map->Resize(map_size[0], map_size[1]);

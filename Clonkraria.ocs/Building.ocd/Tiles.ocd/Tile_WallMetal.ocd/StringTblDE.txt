@@ -1,0 +1,2 @@
+Name=Brick
+Description=Ein solides Stück Baumaterial.

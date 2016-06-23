@@ -12,6 +12,5 @@ protected func Hit(x, y)
 	return true;
 }
 
-local Components = {Rock = 1};
+local Components = {Wood = 1};
 public func IsToolProduct() { return true; }
-public func IsTool() { return true; }

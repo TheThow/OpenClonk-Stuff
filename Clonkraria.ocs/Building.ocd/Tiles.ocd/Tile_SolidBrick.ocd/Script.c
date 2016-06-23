@@ -13,3 +13,4 @@ protected func Hit(x, y)
 }
 
 local Components = {Rock = 1};
+public func IsToolProduct() { return true; }
