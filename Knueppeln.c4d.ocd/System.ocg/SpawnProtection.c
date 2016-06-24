@@ -39,6 +39,11 @@ global func FxSpawnProtectionTimer(object target, proplist effect, int time)
 		return -1;
 }
 
+global func FxSpawnProtectionDamage()
+{
+	return 0;
+}
+
 global func FxSpawnProtectionStop(object target, proplist effect, int reason, bool temporary)
 {
 	if(temporary)
