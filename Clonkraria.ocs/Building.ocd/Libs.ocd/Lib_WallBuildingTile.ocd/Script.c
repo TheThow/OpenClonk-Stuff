@@ -9,7 +9,7 @@
 
 local Name = "$Name$";
 local Description = "$Description$";
-local Plane = 50;
+local Plane = 5;
 
 local previous_mat;
 
@@ -27,6 +27,9 @@ func Constructed()
 	
 	DrawMaterialQuad("Tunnel-tunnel", 
 		x-w, y-h, x+w, y-h, x+w, y+h, x-w, y+h, DMQ_Sub);*/
+	
+	//DrawMap(0,0,LandscapeWidth(), LandscapeHeight()/2, "map Tunnel{overlay{mat = Tunnel;};};");
+	
 	return _inherited();
 }
 

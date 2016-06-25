@@ -13,7 +13,7 @@ local Description = "$Description$";
 
 local tile_mode = TILE_MODE_VERTICAL_LINE;
 
-local Plane = 51;
+local Plane = 10;
 
 
 func IsPillarBuildingTile() { return true; }
