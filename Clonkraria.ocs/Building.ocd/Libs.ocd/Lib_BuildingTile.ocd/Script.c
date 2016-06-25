@@ -21,7 +21,7 @@ local build_grid_x = 10;
 local build_grid_y = 10;
 
 func IsBuildingTile() { return true; }
-func CanBeHitByPickaxe() { return true; }
+func CanBeHitByPickaxe() { if (GetCategory() == C4D_StaticBack) return true; return false; }
 
 func Construction()
 {

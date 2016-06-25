@@ -81,7 +81,7 @@ func Constructed()
 
 func BuildingCondition()
 {
-	if (VerticesStuck() == GetVertexNum()+1)
+	if (VerticesStuckSemi() == GetVertexNum()+1)
 		return false;
 	
 	if (FindObject(Find_AtRect(-GetObjWidth()/2, -GetObjHeight()/2, GetObjWidth(), GetObjHeight()), Find_Exclude(this), Find_Not(Find_Func("IsPreview")), Find_Not(Find_Func("IsWallBuildingTile"))))
