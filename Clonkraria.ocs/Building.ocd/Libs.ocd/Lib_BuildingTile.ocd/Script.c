@@ -50,7 +50,7 @@ func OnHitByPickaxe()
 	Destruct();
 }
 
-func PreviewBuildingCondition(object caller)
+func PreviewBuildingCondition(callers)
 {
 	if (BuildingCondition())
 		return true;
@@ -61,10 +61,23 @@ func PreviewBuildingCondition(object caller)
 	for(var obj in FindObjects(Find_Exclude(this), Find_Or(Find_OnLine(-GetObjWidth()/2-1, 0, GetObjWidth()/2+1, 0), Find_OnLine(0, -GetObjHeight()/2-1, 0, GetObjHeight()/2+2))
 			,Find_Func("IsPreview"), Find_ID(GetID()), Find_Owner(GetController())))
 	{
-		if(obj == caller)
+		
+		var flag = 0;
+		for(var caller in callers)
+		{
+			if(obj == caller)
+			{
+				flag = 1;
+				break;
+			}
+		}
+		
+		if (flag)
 			continue;
 		
-		if(obj->PreviewBuildingCondition(this))
+		PushBack(callers, this);
+		
+		if(obj->PreviewBuildingCondition(callers))
 			return true;
 	}
 	

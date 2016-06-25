@@ -43,7 +43,7 @@ func PreviewMode()
 
 func FxPreviewTimer()
 {
-	if(PreviewBuildingCondition(this))
+	if(PreviewBuildingCondition([this]))
 		SetClrModulation(RGBa(255, 255, 255, 128));
 	else
 		SetClrModulation(RGBa(255, 0, 0, 128));
@@ -176,7 +176,7 @@ func BuildingCondition()
 	return true;
 }
 
-func PreviewBuildingCondition(object caller)
+func PreviewBuildingCondition(callers)
 {
 	return BuildingCondition();
 }
