@@ -88,6 +88,9 @@ private func Destroy()
 
 public func OnBecomeUnstable()
 {
+	var pillar = FindObject(Find_AtPoint(0, -build_grid_y), Find_Category(C4D_StaticBack), Find_Func("IsPillarBuildingTile"));
+	if (pillar) pillar->Destroy();
+	
 	if (this && this.no_propagation) return;
 	for (var neighbour in GetNeighbours())
 		if (neighbour) neighbour->CheckSupport();
