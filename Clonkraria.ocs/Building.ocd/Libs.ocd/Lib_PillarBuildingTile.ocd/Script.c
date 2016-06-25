@@ -20,6 +20,9 @@ func BuildingCondition()
 
 	if (VerticesStuckSemi() == GetVertexNum()+1)
 		return false;
+	
+	if (!FindObject(Find_AtPoint(0, GetObjHeight()), Find_Or(Find_Func("IsSolidBuildingTile"), Find_Func("IsPillarBuildingTile"))))
+		return false;
 
 	if (FindObject(Find_Exclude(this), Find_Func("IsWallBuildingTile"), Find_Not(Find_Func("IsPreview")),
 		Find_AtPoint()))
