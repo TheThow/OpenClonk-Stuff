@@ -11,6 +11,9 @@ local Name = "$Name$";
 local Description = "$Description$";
 
 
+local tile_mode = TILE_MODE_VERTICAL_LINE;
+
+
 func IsPillarBuildingTile() { return true; }
 
 func BuildingCondition()

@@ -21,7 +21,8 @@ local preview_objects;
 
 static const TILE_MODE_SINGLE = 1;
 static const TILE_MODE_LINE = 2;
-static const TILE_MODE_RECTANGLE = 3;
+static const TILE_MODE_VERTICAL_LINE = 3;
+static const TILE_MODE_RECTANGLE = 4;
 local tile_mode = TILE_MODE_SINGLE;
 
 func IsBuildingElement() { return true; }
@@ -69,6 +70,8 @@ public func ControlUseHolding(object clonk, int x, int y)
 		preview_objects[0]->SetPosition(tx, ty);
 	else if (tile_mode == TILE_MODE_LINE)
 		DrawPreviewLine(starting_point_x, starting_point_y, clonk->GetX() + x, clonk->GetY() + y);
+	else if (tile_mode == TILE_MODE_VERTICAL_LINE)
+		DrawPreviewLine(starting_point_x, starting_point_y, starting_point_x, clonk->GetY() + y);
 	return true;
 }
 
@@ -133,6 +136,7 @@ private func DrawPreviewLine(int from_x, int from_y, int to_x, int to_y)
 	}
 	SetLength(preview_objects, original_blocks);
 }
+
 
 private func CreatePreviewObject()
 {
