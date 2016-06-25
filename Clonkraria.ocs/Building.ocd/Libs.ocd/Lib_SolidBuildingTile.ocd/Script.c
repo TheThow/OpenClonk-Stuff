@@ -102,7 +102,8 @@ func BuildingCondition()
 func Destruct()
 {
 	SetSolidMask();
-	return _inherited();
+	_inherited();
+	OnBecomeUnstable();
 }
 
 private func Destroy()
@@ -119,6 +120,73 @@ private func Destroy()
 	Sound("Hits::Materials::Rock::Rockfall*");
 	RemoveObject();
 } 
+
+public func Destruction()
+{
+	if (!(GetCategory() & C4D_StaticBack)) return;
+	OnBecomeUnstable();
+}
+
+public func OnBecomeUnstable()
+{
+	if (this.no_propagation) return;
+	for (var neighbour in GetNeighbours())
+		if (neighbour) neighbour->CheckSupport();
+}
+
+public func CheckSupport()
+{
+	var x_pos = [-build_grid_x, build_grid_x, 0, 0];
+	var y_pos = [0, 0, -build_grid_y, build_grid_y];
+	
+	this.damage_cycle = FrameCounter();
+	var has_support = false;
+	var neighbour_tiles = [this];
+	for (var i = 0; i < GetLength(neighbour_tiles); ++i)
+	{
+		var current = neighbour_tiles[i];
+		if (!current) continue;
+		
+		for (var neighbour in current->GetNeighbours(this.damage_cycle))
+		{
+			neighbour.damage_cycle = this.damage_cycle;
+			//if (ObjectDistance(this, neighbour) < 100)
+			PushBack(neighbour_tiles, neighbour);
+			
+			for (var x in x_pos)
+			{
+				for (var y in y_pos)
+				{
+					if (neighbour->GBackSolid(x, y) && (neighbour->GetMaterial(x, y) != Material("Vehicle")))
+					{
+						has_support = true;
+						break;
+					} 
+				}
+				if (has_support)
+					break;
+			}
+			if (has_support) break;
+		}
+		
+		if (has_support) break;
+	}
+	
+	for (var neighbour in neighbour_tiles)
+	{
+		if (!neighbour) continue;
+		
+		if (!has_support)
+		{
+			neighbour.no_propagation = true;
+			neighbour->Destroy();
+		}
+		else
+		{
+			neighbour.damage_cycle = nil;
+		}
+	}
+}
 
 /*-- Damage Handling --*/
 
@@ -182,11 +250,11 @@ public func Damage(int change, int cause, int cause_plr)
 private func GetNeighbours(ignore_damage_cycle)
 {
 	var blocks = [];
-	var x_pos = [-1, -1, 0, 0];
+	var x_pos = [-1, +1, 0, 0];
 	var y_pos = [0, 0, -1, 1];
 	for (var i = 0; i < 4; ++i)
 	{
-		var block = FindObject(Find_AtPoint(x_pos[i] * build_grid_x, y_pos[i] * build_grid_y), Find_Func("IsSolidBuildingTile"));
+		var block = FindObject(Find_AtPoint(x_pos[i] * build_grid_x, y_pos[i] * build_grid_y), Find_Func("IsSolidBuildingTile"), Find_Category(C4D_StaticBack));
 		if (!block) continue;
 		if (block.damage_cycle != nil && block.damage_cycle == ignore_damage_cycle) continue;
 		PushBack(blocks, block);
