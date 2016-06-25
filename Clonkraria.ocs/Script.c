@@ -13,13 +13,13 @@ func InitializePlayer(iPlr)
 {
 	var clonk = GetCrew(iPlr);
 	var obj = clonk->CreateObject(Lorry, 0, 0, -1);
-	obj->CreateContents(Tile_SolidBrick, 48*10);
-	obj->CreateContents(Tile_WallBrick, 48*10);
-	obj->CreateContents(Tile_SolidWood, 48*10);
-	obj->CreateContents(Tile_WallWood, 48*10);
-	obj->CreateContents(Tile_SolidMetal, 48*10);
-	obj->CreateContents(Tile_WallMetal, 48*10);
-	obj->CreateContents(Tile_PillarWood, 48*5);
+	obj->CreateContents(Tile_SolidBrick)->SetStackCount(999);
+	obj->CreateContents(Tile_WallBrick)->SetStackCount(999);
+	obj->CreateContents(Tile_SolidWood)->SetStackCount(999);
+	obj->CreateContents(Tile_WallWood)->SetStackCount(999);
+	obj->CreateContents(Tile_SolidMetal)->SetStackCount(999);
+	obj->CreateContents(Tile_WallMetal)->SetStackCount(999);
+	obj->CreateContents(Tile_PillarWood)->SetStackCount(999);
 	obj->CreateContents(Pickaxe, 5);
 	obj->CreateContents(Shovel, 5);
 	obj->CreateContents(Dynamite, 50);
