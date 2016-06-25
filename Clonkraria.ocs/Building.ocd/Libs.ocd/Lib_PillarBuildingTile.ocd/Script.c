@@ -36,3 +36,52 @@ func BuildingCondition()
 	
 	return false;
 }
+
+func Destruct()
+{
+	_inherited();
+	OnBecomeUnstable();
+}
+
+private func Destroy()
+{
+	SetCategory(C4D_None);
+	OnBecomeUnstable();
+	
+	var particles = 
+	{
+		Size = PV_KeyFrames(0, 0, 0, 100, PV_Random(0, 2), 1000, 3),
+		R = PV_Random(100, 150, nil, 1), G = PV_Random(100, 150, nil, 1), B = PV_Random(100, 150, nil, 1),
+		Alpha = PV_Linear(255, 0),
+		ForceY = PV_Gravity(200),
+		CollisionVertex = 0,
+		Stretch = PV_Random(2000, 4000),
+		Rotation = PV_Random(-10, 10)
+	};
+	CreateParticle("SmokeDirty", PV_Random(-build_grid_x, +build_grid_x), PV_Random(-build_grid_y, +build_grid_y), PV_Random(-15, 15), PV_Random(-2, 2), PV_Random(10, 30), particles, 50);
+	Sound("Hits::Materials::Rock::Rockfall*");
+	RemoveObject();
+} 
+
+public func OnBecomeUnstable()
+{
+	if (this && this.no_propagation) return;
+	
+	var position_y = -build_grid_y;
+	while (true)
+	{
+		var tile = FindObject(Find_AtPoint(0, position_y), Find_Category(C4D_StaticBack), Find_Func("IsPillarBuildingTile"));
+		if (tile)
+		{
+			tile.no_propagation = true;
+			tile->Destroy();
+		}
+		else
+		{
+			tile = FindObject(Find_AtPoint(0, position_y), Find_Category(C4D_StaticBack), Find_Func("IsSolidBuildingTile"));
+			if (tile) tile->OnBecomeUnstable();
+			break;
+		}
+		position_y -= build_grid_y;
+	}
+}
