@@ -5,7 +5,7 @@
 	@author 
 */
 
-#include Lib_PillarBuildingTile;
+#include Lib_PillarBuildingTile
 
 local Name = "$Name$";
 local Description = "$Description$";

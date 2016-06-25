@@ -196,14 +196,14 @@ private func GetNeighbours(ignore_damage_cycle)
 
 private func UpdateDamageDisplay()
 {
-	ClearParticles("Fire", this);
+	ClearParticles();
 	var particles = 
 	{
 		R = PV_Random(0, 50), G = PV_Random(0, 50), B = PV_Random(0, 50),
 		Rotation = PV_Random(0, 360),
-		Stretch = PV_Random(0, 3000),
-		Size = PV_Random(0, 2),
+		Stretch = PV_Random(0, 4000),
+		Size = PV_Random(0, 3),
 		Attach = ATTACH_Front | ATTACH_MoveRelative
 	};
-	CreateParticle("Fire", PV_Random(-3, 3), PV_Random(-3, 3), 0, 0, 0, particles, 3 * GetDamage() / 2);
+	CreateParticle("Fire", PV_Random(-4, 4), PV_Random(-4, 4), 0, 0, 0, particles, 3 * GetDamage() / 2);
 }
