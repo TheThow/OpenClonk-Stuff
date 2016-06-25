@@ -16,20 +16,22 @@ local tile_mode = TILE_MODE_VERTICAL_LINE;
 
 func IsPillarBuildingTile() { return true; }
 
+func Constructed()
+{
+	AdjustSurroundingMaterial(true, true, false, false);
+	return _inherited();
+}
+
 func BuildingCondition()
 {
-	if (FindObject(Find_AtPoint(), Find_Func("IsPillarBuildingTile"), Find_Exclude(this)))
+	if (FindObject(Find_Not(Find_Func("IsPreview")), Find_AtPoint(), Find_Not(Find_Func("IsWallBuildingTile")), Find_Func("IsBuildingTile"), Find_Exclude(this)))
 		return false;
 
 	if (VerticesStuckSemi() == GetVertexNum()+1)
 		return false;
 	
-	if (!FindObject(Find_AtPoint(0, GetObjHeight()), Find_Or(Find_Func("IsSolidBuildingTile"), Find_Func("IsPillarBuildingTile"))))
-		return false;
-
-	if (FindObject(Find_Exclude(this), Find_Func("IsWallBuildingTile"), Find_Not(Find_Func("IsPreview")),
-		Find_AtPoint()))
-		//Find_Or(Find_AtRect(-GetObjWidth()/2-1, -GetObjHeight()/2, GetObjWidth()+2, GetObjHeight()), Find_AtRect(-GetObjWidth()/2, -GetObjHeight()/2-1, GetObjWidth(), GetObjHeight()+2))))
+	if (FindObject(Find_AtPoint(0, GetObjHeight()), Find_Not(Find_Func("IsPreview")), Find_Or(Find_Func("IsSolidBuildingTile"), Find_Func("IsPillarBuildingTile"))) 
+		|| GBackSolid(0, (GetObjHeight())))
 		return true;
 	
 	return false;

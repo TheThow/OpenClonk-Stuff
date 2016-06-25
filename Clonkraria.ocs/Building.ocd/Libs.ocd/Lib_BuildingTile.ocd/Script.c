@@ -83,3 +83,73 @@ func PreviewBuildingCondition(callers)
 	
 	return false;
 }
+
+func AdjustSurroundingMaterial(up, down, left, right)
+{
+	for (var x = -GetObjWidth()/2; x < GetObjWidth()/2; x++)
+	{
+		var mat = nil;
+		if(up)
+		{
+			for(var y = GetObjHeight(); y > GetObjHeight()/2-1; y--)
+			{
+				if (!GBackSolid(x, y) && mat == nil)
+					break;
+				
+				if (!GBackSolid(x, y))
+					DrawMaterialQuad(MaterialName(mat), GetX() + x, GetY() + y, GetX() + x + 1, GetY() + y, GetX() + x + 1, GetY() + y + 1, GetX() + x, GetY() + y + 1);
+				
+				mat = GetMaterial(x,y);
+			}
+		}
+		
+		if(down)
+		{
+			mat = nil;
+			for(var y = -GetObjHeight(); y < -GetObjHeight()/2; y++)
+			{
+				if (!GBackSolid(x, y) && mat == nil)
+					break;
+				
+				if (!GBackSolid(x, y))
+					DrawMaterialQuad(MaterialName(mat), GetX() + x, GetY() + y, GetX() + x + 1, GetY() + y, GetX() + x + 1, GetY() + y + 1, GetX() + x, GetY() + y + 1);
+				
+				mat = GetMaterial(x,y);
+			}
+		}
+	}
+	
+	
+	for (var y = -GetObjHeight()/2; y < GetObjHeight()/2; y++)
+	{
+		var mat = nil;
+		if(left)
+		{
+			for(var x = -GetObjWidth(); x < -GetObjWidth()/2+1; x++)
+			{
+				if (!GBackSolid(x, y) && mat == nil)
+					break;
+				
+				if (!GBackSolid(x, y))
+					DrawMaterialQuad(MaterialName(mat), GetX() + x, GetY() + y, GetX() + x + 1, GetY() + y, GetX() + x + 1, GetY() + y + 1, GetX() + x, GetY() + y + 1);
+				
+				mat = GetMaterial(x,y);
+			}
+		}
+		
+		if(right)
+		{
+			mat = nil;
+			for(var x = GetObjWidth(); x > GetObjWidth()/2-1; x--)
+			{
+				if (!GBackSolid(x, y) && mat == nil)
+					break;
+				
+				if (!GBackSolid(x, y))
+					DrawMaterialQuad(MaterialName(mat), GetX() + x, GetY() + y, GetX() + x + 1, GetY() + y, GetX() + x + 1, GetY() + y + 1, GetX() + x, GetY() + y + 1);
+				
+				mat = GetMaterial(x,y);
+			}
+		}
+	}
+}

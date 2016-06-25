@@ -20,62 +20,7 @@ func IsSolidBuildingTile() { return true; }
 func Constructed()
 {
 	SetSolidMask(0,0,GetObjWidth(),GetObjHeight());
-	
-	for (var x = -GetObjWidth()/2; x < GetObjWidth()/2; x++)
-	{
-		var mat = nil;
-		for(var y = GetObjHeight(); y > GetObjHeight()/2-1; y--)
-		{
-			if (!GBackSolid(x, y) && mat == nil)
-				break;
-			
-			if (!GBackSolid(x, y))
-				DrawMaterialQuad(MaterialName(mat), GetX() + x, GetY() + y, GetX() + x + 1, GetY() + y, GetX() + x + 1, GetY() + y + 1, GetX() + x, GetY() + y + 1);
-			
-			mat = GetMaterial(x,y);
-		}
-		
-		mat = nil;
-		for(var y = -GetObjHeight(); y < -GetObjHeight()/2+1; y++)
-		{
-			if (!GBackSolid(x, y) && mat == nil)
-				break;
-			
-			if (!GBackSolid(x, y))
-				DrawMaterialQuad(MaterialName(mat), GetX() + x, GetY() + y, GetX() + x + 1, GetY() + y, GetX() + x + 1, GetY() + y + 1, GetX() + x, GetY() + y + 1);
-			
-			mat = GetMaterial(x,y);
-		}
-	}
-	
-	
-	for (var y = -GetObjHeight()/2; y < GetObjHeight()/2; y++)
-	{
-		var mat = nil;
-		for(var x = -GetObjWidth(); x < -GetObjWidth()/2+1; x++)
-		{
-			if (!GBackSolid(x, y) && mat == nil)
-				break;
-			
-			if (!GBackSolid(x, y))
-				DrawMaterialQuad(MaterialName(mat), GetX() + x, GetY() + y, GetX() + x + 1, GetY() + y, GetX() + x + 1, GetY() + y + 1, GetX() + x, GetY() + y + 1);
-			
-			mat = GetMaterial(x,y);
-		}
-		
-		mat = nil;
-		for(var x = GetObjWidth(); x > GetObjWidth()/2-1; x--)
-		{
-			if (!GBackSolid(x, y) && mat == nil)
-				break;
-			
-			if (!GBackSolid(x, y))
-				DrawMaterialQuad(MaterialName(mat), GetX() + x, GetY() + y, GetX() + x + 1, GetY() + y, GetX() + x + 1, GetY() + y + 1, GetX() + x, GetY() + y + 1);
-			
-			mat = GetMaterial(x,y);
-		}
-	}
-	
+	AdjustSurroundingMaterial(true, true, true, true);
 	return _inherited();
 }
 
