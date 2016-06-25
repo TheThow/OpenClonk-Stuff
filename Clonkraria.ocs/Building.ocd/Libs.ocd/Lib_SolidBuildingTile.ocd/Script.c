@@ -79,12 +79,28 @@ func Constructed()
 	return _inherited();
 }
 
+func PreviewBuildingCondition(caller)
+{
+	if (FindObject(Find_AtRect(-GetObjWidth()/2, -GetObjHeight()/2, GetObjWidth(), GetObjHeight()), 
+		Find_Exclude(this), 
+		Find_Not(Find_Category(C4D_Object)),
+		Find_Not(Find_Func("IsPreview")), 
+		Find_Not(Find_Func("IsWallBuildingTile"))))
+		return false;
+		
+	return _inherited(caller);
+}
+
 func BuildingCondition()
 {
 	if (VerticesStuckSemi() == GetVertexNum()+1)
 		return false;
 	
-	if (FindObject(Find_AtRect(-GetObjWidth()/2, -GetObjHeight()/2, GetObjWidth(), GetObjHeight()), Find_Exclude(this), Find_Not(Find_Func("IsPreview")), Find_Not(Find_Func("IsWallBuildingTile"))))
+	if (FindObject(Find_AtRect(-GetObjWidth()/2, -GetObjHeight()/2, GetObjWidth(), GetObjHeight()), 
+		Find_Exclude(this), 
+		Find_Not(Find_Category(C4D_Object)),
+		Find_Not(Find_Func("IsPreview")), 
+		Find_Not(Find_Func("IsWallBuildingTile"))))
 		return false;
 
 	if ((GBackSolid(-(GetObjWidth()), 0) || GBackSolid(GetObjWidth(), 0) || GBackSolid(0, (GetObjHeight())) || GBackSolid(0,-(GetObjHeight()))))
