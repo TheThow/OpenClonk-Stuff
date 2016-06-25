@@ -124,6 +124,10 @@ func Destruct()
 
 private func Destroy()
 {
+	SetCategory(C4D_None);
+	SetSolidMask();
+	OnBecomeUnstable();
+	
 	var particles = 
 	{
 		Size = PV_KeyFrames(0, 0, 0, 100, PV_Random(3, 5), 1000, 3),
@@ -137,25 +141,16 @@ private func Destroy()
 	RemoveObject();
 } 
 
-public func Destruction()
-{
-	if (!(GetCategory() & C4D_StaticBack)) return;
-	OnBecomeUnstable();
-}
-
 public func OnBecomeUnstable()
 {
-	if (this.no_propagation) return;
+	if (this && this.no_propagation) return;
 	for (var neighbour in GetNeighbours())
 		if (neighbour) neighbour->CheckSupport();
 }
 
 public func CheckSupport()
 {
-	var x_pos = [-build_grid_x, build_grid_x, 0, 0];
-	var y_pos = [0, 0, -build_grid_y, build_grid_y];
-	
-	this.damage_cycle = FrameCounter();
+	this.already_found = true;
 	var has_support = false;
 	var neighbour_tiles = [this];
 	for (var i = 0; i < GetLength(neighbour_tiles); ++i)
@@ -163,26 +158,18 @@ public func CheckSupport()
 		var current = neighbour_tiles[i];
 		if (!current) continue;
 		
-		for (var neighbour in current->GetNeighbours(this.damage_cycle))
+		for (var neighbour in current->GetNeighbours(true))
 		{
-			neighbour.damage_cycle = this.damage_cycle;
+			neighbour.already_found = true;
 			//if (ObjectDistance(this, neighbour) < 100)
 			PushBack(neighbour_tiles, neighbour);
 			
-			for (var x in x_pos)
+			if ((neighbour->GBackSolid(0, build_grid_y) && (neighbour->GetMaterial(0, build_grid_y) != Material("Vehicle")))
+			|| (neighbour->FindObject(Find_AtPoint(0, build_grid_y), Find_Category(C4D_StaticBack), Find_Func("IsPillarBuildingTile"))))
 			{
-				for (var y in y_pos)
-				{
-					if (neighbour->GBackSolid(x, y) && (neighbour->GetMaterial(x, y) != Material("Vehicle")))
-					{
-						has_support = true;
-						break;
-					} 
-				}
-				if (has_support)
-					break;
-			}
-			if (has_support) break;
+				has_support = true;
+				break;
+			} 
 		}
 		
 		if (has_support) break;
@@ -199,7 +186,7 @@ public func CheckSupport()
 		}
 		else
 		{
-			neighbour.damage_cycle = nil;
+			neighbour.already_found = nil;
 		}
 	}
 }
@@ -223,7 +210,7 @@ public func Damage(int change, int cause, int cause_plr)
 		var deminishing_damage = change / 2;
 		if (GetDamage() > this.HitPoints)
 			deminishing_damage += (GetDamage() - this.HitPoints) * 2;
-		this.damage_cycle = FrameCounter();
+		this.already_found = true;
 		var neighbour_tiles = [this];
 		for (var i = 0; i < GetLength(neighbour_tiles); ++i)
 		{
@@ -232,9 +219,9 @@ public func Damage(int change, int cause, int cause_plr)
 			var current = neighbour_tiles[i];
 			if (!current) continue;
 			
-			for (var neighbour in current->GetNeighbours(this.damage_cycle))
+			for (var neighbour in current->GetNeighbours(true))
 			{
-				neighbour.damage_cycle = this.damage_cycle;
+				neighbour.already_found = true;;
 				PushBack(neighbour_tiles, neighbour);
 			}
 			
@@ -245,12 +232,15 @@ public func Damage(int change, int cause, int cause_plr)
 			if (current)
 				current.take_direct_damage = false;
 			
-			deminishing_damage -= 5;
+			deminishing_damage -= 4;
+			
+			// A whole column might have been collapsed (including myself).
+			if (!this) break;
 		}
 		
 		for (var neighbour in neighbour_tiles)
 		{
-			if (neighbour) neighbour.damage_cycle = nil;
+			if (neighbour) neighbour.already_found = nil;
 		}
 	}
 	
@@ -263,7 +253,7 @@ public func Damage(int change, int cause, int cause_plr)
 		UpdateDamageDisplay();
 }
 
-private func GetNeighbours(ignore_damage_cycle)
+private func GetNeighbours(bool ignore_cycles)
 {
 	var blocks = [];
 	var x_pos = [-1, +1, 0, 0];
@@ -272,7 +262,7 @@ private func GetNeighbours(ignore_damage_cycle)
 	{
 		var block = FindObject(Find_AtPoint(x_pos[i] * build_grid_x, y_pos[i] * build_grid_y), Find_Func("IsSolidBuildingTile"), Find_Category(C4D_StaticBack));
 		if (!block) continue;
-		if (block.damage_cycle != nil && block.damage_cycle == ignore_damage_cycle) continue;
+		if (block.already_found && ignore_cycles) continue;
 		PushBack(blocks, block);
 	}
 	return blocks;
