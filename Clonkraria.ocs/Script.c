@@ -19,6 +19,7 @@ func InitializePlayer(iPlr)
 	obj->CreateContents(Tile_WallWood, 48*10);
 	obj->CreateContents(Tile_SolidMetal, 48*10);
 	obj->CreateContents(Tile_WallMetal, 48*10);
+	obj->CreateContents(Tile_PillarWood, 48*5);
 	obj->CreateContents(Pickaxe, 5);
 	obj->CreateContents(Shovel, 5);
 	obj->CreateContents(Dynamite, 50);
