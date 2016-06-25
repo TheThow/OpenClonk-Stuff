@@ -11,8 +11,8 @@ local Description = "$Description$";
 local build_offset_x = 0;
 local build_offset_y = 0;
 
-local build_grid_x = 8;
-local build_grid_y = 8;
+local build_grid_x = 10;
+local build_grid_y = 10;
 
 local starting_point_x;
 local starting_point_y;

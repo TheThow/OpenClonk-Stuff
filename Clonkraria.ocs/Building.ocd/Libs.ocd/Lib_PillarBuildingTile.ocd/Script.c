@@ -13,12 +13,15 @@ local Description = "$Description$";
 
 local tile_mode = TILE_MODE_VERTICAL_LINE;
 
+local Plane = 51;
+
 
 func IsPillarBuildingTile() { return true; }
 
 func Constructed()
 {
-	AdjustSurroundingMaterial(true, true, false, false);
+	AdjustSurroundingMaterial(true, false, false, false);
+	//SetObjDrawTransform(1000,0,0,0,1200);
 	return _inherited();
 }
 
@@ -30,8 +33,8 @@ func BuildingCondition()
 	if (VerticesStuckSemi() == GetVertexNum()+1)
 		return false;
 	
-	if (FindObject(Find_AtPoint(0, GetObjHeight()), Find_Not(Find_Func("IsPreview")), Find_Or(Find_Func("IsSolidBuildingTile"), Find_Func("IsPillarBuildingTile"))) 
-		|| GBackSolid(0, (GetObjHeight())))
+	if (FindObject(Find_AtPoint(0, tile_size_y), Find_Not(Find_Func("IsPreview")), Find_Or(Find_Func("IsSolidBuildingTile"), Find_Func("IsPillarBuildingTile"))) 
+		|| GBackSolid(0, (tile_size_y)))
 		return true;
 	
 	return false;
@@ -40,6 +43,7 @@ func BuildingCondition()
 func Destruct()
 {
 	_inherited();
+	SetObjDrawTransform(1000,0,0,0,1000);
 	OnBecomeUnstable();
 }
 

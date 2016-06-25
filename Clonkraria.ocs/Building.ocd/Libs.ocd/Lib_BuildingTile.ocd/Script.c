@@ -14,11 +14,8 @@ func InitialStackCount() { return 4; }
 local Name = "$Name$";
 local Description = "$Description$";
 
-local build_offset_x = 0;
-local build_offset_y = 0;
-
-local build_grid_x = 10;
-local build_grid_y = 10;
+local tile_size_x = 10;
+local tile_size_y = 10;
 
 func IsBuildingTile() { return true; }
 func CanBeHitByPickaxe() { if (GetCategory() == C4D_StaticBack) return true; return false; }
@@ -58,7 +55,7 @@ func PreviewBuildingCondition(callers)
 	if (VerticesStuck() == GetVertexNum()+1)
 		return false;
 	
-	for(var obj in FindObjects(Find_Exclude(this), Find_Or(Find_OnLine(-GetObjWidth()/2-1, 0, GetObjWidth()/2+1, 0), Find_OnLine(0, -GetObjHeight()/2-1, 0, GetObjHeight()/2+2))
+	for(var obj in FindObjects(Find_Exclude(this), Find_Or(Find_OnLine(-tile_size_x/2-1, 0, tile_size_x/2+1, 0), Find_OnLine(0, -tile_size_y/2-1, 0, tile_size_y/2+2))
 			,Find_Func("IsPreview"), Find_ID(GetID()), Find_Owner(GetController())))
 	{
 		
@@ -86,12 +83,12 @@ func PreviewBuildingCondition(callers)
 
 func AdjustSurroundingMaterial(up, down, left, right)
 {
-	for (var x = -GetObjWidth()/2; x < GetObjWidth()/2; x++)
+	for (var x = -tile_size_x/2; x < tile_size_x/2; x++)
 	{
 		var mat = nil;
 		if(up)
 		{
-			for(var y = GetObjHeight(); y > GetObjHeight()/2-1; y--)
+			for(var y = tile_size_y; y > tile_size_y/2-1; y--)
 			{
 				if (!GBackSolid(x, y) && mat == nil)
 					break;
@@ -106,7 +103,7 @@ func AdjustSurroundingMaterial(up, down, left, right)
 		if(down)
 		{
 			mat = nil;
-			for(var y = -GetObjHeight(); y < -GetObjHeight()/2; y++)
+			for(var y = -tile_size_y; y < -tile_size_y/2; y++)
 			{
 				if (!GBackSolid(x, y) && mat == nil)
 					break;
@@ -120,12 +117,12 @@ func AdjustSurroundingMaterial(up, down, left, right)
 	}
 	
 	
-	for (var y = -GetObjHeight()/2; y < GetObjHeight()/2; y++)
+	for (var y = -tile_size_y/2; y < tile_size_y/2; y++)
 	{
 		var mat = nil;
 		if(left)
 		{
-			for(var x = -GetObjWidth(); x < -GetObjWidth()/2+1; x++)
+			for(var x = -tile_size_x; x < -tile_size_x/2+1; x++)
 			{
 				if (!GBackSolid(x, y) && mat == nil)
 					break;
@@ -140,7 +137,7 @@ func AdjustSurroundingMaterial(up, down, left, right)
 		if(right)
 		{
 			mat = nil;
-			for(var x = GetObjWidth(); x > GetObjWidth()/2-1; x--)
+			for(var x = tile_size_x; x > tile_size_x/2-1; x--)
 			{
 				if (!GBackSolid(x, y) && mat == nil)
 					break;
