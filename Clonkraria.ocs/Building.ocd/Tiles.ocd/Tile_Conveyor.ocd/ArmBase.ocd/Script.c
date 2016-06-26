@@ -26,6 +26,19 @@ public func Destruction()
 	CreateParticle("Smoke", 0, 0, PV_Random(-5, 5), PV_Random(-5, 5), PV_Random(0, 10), particles, 40);
 }
 
+static const ConveyorPathOps = new AStarOps
+{
+	distance = func(object start, object goal)
+	{
+		return Abs(start->GetX() - goal->GetX()) + Abs(start->GetY() - goal->GetY());
+	},
+
+	successors = func(object node)
+	{
+		return node->GetNeighbours();
+	}
+};
+
 local MoveEffect = new Effect
 {
 	Timer = func()
@@ -37,30 +50,9 @@ local MoveEffect = new Effect
 		
 		if (!this.current_target)
 		{
-			var final_target_x = this.final_target->GetX();
-			var final_target_y = this.final_target->GetY();
-			var dir_x = BoundBy(final_target_x - current_x, -1, 1);
-			var dir_y = BoundBy(final_target_y - current_y, -1, 1);
-			var points = [];
-			if (dir_x != 0) PushBack(points, [dir_x, 0]);
-			if (dir_y != 0) PushBack(points, [0, dir_y]);
-			
-			PushBack(points, [0, -1]);
-			PushBack(points, [0, 1]);
-			PushBack(points, [1, 0]);
-			PushBack(points, [-1, 0]);
-			var neighbours = this.current_block->GetNeighboursAsMatrix();
-			
-			for (var point in points)
-			{
-				var off_x = point[0];
-				var off_y = point[1];
-				if (off_x == nil || off_y == nil) continue;
-				var neighbour = neighbours[1 + off_x][1 + off_y];
-				if (!neighbour || neighbour == this.last_target) continue;
-				this.current_target = neighbour;
-				break;
-			}
+			// TODO: Don't search for a new path at each step.
+			var path = AStar(this.current_block, this.final_target, ConveyorPathOps);
+			if (path) this.current_target = path[1];
 			if (!this.current_target) return FX_Execute_Kill;
 		}
 		var target_x = this.current_target->GetX();
