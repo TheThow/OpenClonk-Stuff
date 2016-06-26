@@ -51,6 +51,12 @@ func Constructed()
 	AddTimer("CheckObjects", 60 + Random(20));
 }
 
+public func Destroy()
+{
+	RemoveTimer("CheckObjects");
+	return inherited(...);
+}
+
 private func UpdateGraphics(array neighbours)
 {
 	neighbours = neighbours || GetNeighboursAsMatrix();
