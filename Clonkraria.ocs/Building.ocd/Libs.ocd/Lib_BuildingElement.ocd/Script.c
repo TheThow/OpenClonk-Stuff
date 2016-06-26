@@ -121,6 +121,7 @@ private func DrawPreviewLine(int from_x, int from_y, int to_x, int to_y)
 		if (i >= GetLength(preview_objects))
 			block = CreatePreviewObject();
 		else block = preview_objects[i];
+		if (!block) continue;
 		
 		block->SetPosition(x, y);
 				
