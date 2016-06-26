@@ -62,7 +62,7 @@ func Destroy()
 
 func BuildingCondition()
 {
-	if (FindObject(Find_AtPoint(), Find_Func("IsBuildingTile"), Find_Not(Find_Func("IsPillarBuildingTile")), Find_Exclude(this)))
+	if (FindObject(Find_AtPoint(), Find_Func("IsWallBuildingTile"), Find_Exclude(this)))
 		return false;
 
 	if (VerticesStuckSemi() == GetVertexNum()+1)
