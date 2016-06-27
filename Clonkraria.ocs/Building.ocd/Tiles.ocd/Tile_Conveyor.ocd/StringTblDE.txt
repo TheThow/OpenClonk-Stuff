@@ -1,2 +1,0 @@
-Name=Holz Pillar
-Description=

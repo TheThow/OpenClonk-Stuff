@@ -1,4 +1,0 @@
-[DefCore]
-id=Tile_ConveyorArmBase
-Version=6,0
-Category=C4D_StaticBack
