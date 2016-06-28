@@ -457,7 +457,7 @@ func LaunchSpecial1(x, y, released, mouse, abletocast)
 	//!released && !mouse && abletocast && !GetEffect("Special1CD", this) &&
 	var ret = ChampType->Special1(this, x, y, released, mouse, abletocast, GetEffect("Special1CD", this));
 	if(ret)
-		AddEffect("Special1CD", this, 20, ChampType.Special1Cooldown);
+		AddEffect("Special1CD", this, 1, ChampType.Special1Cooldown);
 	
 }
 
@@ -465,19 +465,20 @@ func LaunchSpecial2(int x, int y, released, mouse, abletocast)
 {
 	var ret = ChampType->Special2(this, x, y, released, mouse, abletocast, GetEffect("Special2CD", this));
 	if(ret)
-		AddEffect("Special2CD", this, 20, ChampType.Special2Cooldown);
+		AddEffect("Special2CD", this, 1, ChampType.Special2Cooldown);
 }
 
 func LaunchSpecial3(int x, int y, released, mouse, abletocast)
 {
 	var ret = ChampType->Special3(this, x, y, released, mouse, abletocast, GetEffect("Special3CD", this));
 	if(ret)
-		AddEffect("Special3CD", this, 20, ChampType.Special3Cooldown);
+		AddEffect("Special3CD", this, 1, ChampType.Special3Cooldown);
 }
 
 func LaunchSpell(id ID, int x, int y, int x_off, int y_off, proplist params)
 {
 	var spell = nil;
+	var flag = false;
 
 	if (GetMagicEnergy() >= ID.ManaCost)
 	{
@@ -485,12 +486,16 @@ func LaunchSpell(id ID, int x, int y, int x_off, int y_off, proplist params)
 		spell->SetController(GetOwner());
 		spell->Launch(this, x, y, params);
 		DoMagicEnergy(-ID.ManaCost);
+		flag = true;
 	}
 	else
 	{
 		Sound("UI::Error", 0, 50, GetOwner());
 		return 0;
 	}
+	
+	if (spell == nil)
+		return flag;
 	
 	return spell;
 }
