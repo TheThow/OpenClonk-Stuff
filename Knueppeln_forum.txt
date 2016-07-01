@@ -167,7 +167,20 @@ All existing minions will shoot an arrow at the target location.[/i]
 
 Spawn Peon[i]
 Spawns a new minion at your location.[/i]
+ 
 
+[b]Flash Man[/b] - contributed by K-Pone
+Rainboooow!!!!!
+
+Prisma[i]
+Launches a projectile that fires 3 lasers after 25 frames. Everything that gets hit by the lasers while take damage. Lasers strike through walls.[/i]
+
+Flinger[i]
+Launches a projectile that flings everything it hits around. The projectile explodes with fireworks after 180 frames.[/i]
+
+Super Spectral Lazor[i]
+Fires the Super Spectral Lazor in the direction you aimed. The Lazor strikes through walls.[/i]
+ 
 
 [h]Game modes[/h]
 
