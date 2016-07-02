@@ -53,6 +53,10 @@ local DamageFx = new Effect
 
 local WormyAppearFx = new Effect
 {
+	Start = func()
+	{
+		SoundAt("wormy_dig", Target->GetX(), Target->GetY(), 100);
+	},
 	
 	Timer = func()
 	{
@@ -72,7 +76,7 @@ local WormyAppearFx = new Effect
 				a += 25;
 			head->SetVelocity(a, 100);
 			head->Sound("wormy_sound", false, 90);
-			this.d ->RemoveObject();
+			Target->RemoveObject();
 			return -1;
 		}
 	}
@@ -88,7 +92,6 @@ func Appear(length, x, y)
 	fx.c = length;
 	fx.x = x;
 	fx.y = y;
-	fx.d = dummy;
 	
 	fx.p1 =
 		{
