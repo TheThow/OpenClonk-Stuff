@@ -52,7 +52,7 @@ protected func ControlUse(object clonk, int iX, int iY)
 	fx.dummy.Visibility = VIS_All;
 	fx.dummy.Plane = 600;
 	
-	clonk->Sound("superberry", false, 50, nil, 0);
+	clonk->Sound("superberry?", false, 50, nil, 0);
 	
 	RemoveObject();
 	return true;
