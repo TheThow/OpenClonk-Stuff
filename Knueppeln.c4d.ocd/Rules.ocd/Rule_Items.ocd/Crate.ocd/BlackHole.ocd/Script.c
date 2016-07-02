@@ -163,7 +163,7 @@ func FxSuckTimer(target, fx, time)
 	var y = Sin(r, MaxRange);
 	
 	var angle = Angle(0, 0, x, y);
-	CreateParticle("Flash", x, y, Sin(angle + 180, 100), -Cos(angle + 180, 100), 30, flyparticles, 1);
+	CreateParticle("Flash", x, y, Sin(angle + 180, 100), -Cos(angle + 180, 100), 29, flyparticles, 1);
 	
 	
 	for(var obj in FindObjects(Find_Not(Find_Func("CannotBeSucked")), Find_NoContainer(), Find_Distance(MaxRange), Find_Or(Find_Category(C4D_Living), Find_Category(C4D_Object), Find_Func("CanBeSucked"))))

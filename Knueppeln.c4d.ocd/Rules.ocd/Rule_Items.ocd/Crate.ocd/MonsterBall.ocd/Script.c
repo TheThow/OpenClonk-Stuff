@@ -37,8 +37,6 @@ local SquidFx = new Effect {
 		{
 			var particles =
 			{
-				CollisionVertex = 500,
-				OnCollision = PC_Stop(),
 				ForceY = PV_Random(-2, 2),
 				ForceX = PV_Random(-2, 2),
 				DampingX = 900, DampingY = 900,
@@ -155,20 +153,20 @@ func Hit()
 	
 	if (monster == Piranha)
 	{
-		CreateObject(monster, 0, - 5, GetOwner());
+		CreateObject(monster, 0, - 5, -1);
 	}
 	
 	if (monster == Bat)
 	{
 		for (var i = 0; i < 7; i++)
 		{
-			CreateObject(monster, RandomX(-5,5), -5, GetOwner());
+			CreateObject(monster, RandomX(-5,5), -5, -1);
 		}
 	}
 	
 	if (monster == Squid)
 	{
-		var squid = CreateObject(monster, RandomX(-5,5), -15, GetOwner());
+		var squid = CreateObject(monster, RandomX(-5,5), -15, -1);
 		squid->SetCategory(C4D_StaticBack);
 		squid->CreateEffect(SquidFx, 1, 1);
 	}
