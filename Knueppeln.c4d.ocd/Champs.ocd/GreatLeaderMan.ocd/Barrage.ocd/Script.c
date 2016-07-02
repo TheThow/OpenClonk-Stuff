@@ -23,6 +23,7 @@ func Launch(object clonk, int x, int y)
 	rider.Death = this.CallbackRemove;
 	rider->SetObjectBlitMode(GFX_BLIT_Mod2);
 	rider->SetClrModulation(clonk->GetColor());
+	RemoveEffect("UpdateHUD", rider);
 	boompack->OnMount(rider);
 	boompack->Sound("Clonk::Skin::Adventurer::Shock*", {pitch = 75});
 	RemoveObject();

@@ -112,6 +112,7 @@ public func ContactRight() { return Hit(); }
 public func Hit() { return DoFireworks(NO_OWNER); }
 public func HitObject() { return DoFireworks(NO_OWNER); }
 public func FxFlightDamage() { DoFireworks(); }
+public func CanBeHit() { return true; }
 
 private func DoFireworks(int killed_by)
 {
