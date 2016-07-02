@@ -1,0 +1,10 @@
+[DefCore]
+id=WormyMcWormFace
+Version=5,2,0,1
+Category=C4D_StaticBack
+Width=40
+Height=40
+Offset=-20,-20
+Value=1
+Mass=10
+

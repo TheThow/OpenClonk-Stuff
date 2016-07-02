@@ -53,9 +53,9 @@ local SquidFx = new Effect {
 			
 			for (var i = 0; i < 360; i+=2)
 			{
-				dummy->CreateParticle("SmokeThick", 0, 0, Cos(i, RandomX(10,30)), Sin(i, RandomX(10,30)), PV_Random(300, 360), particles, 2);
-				dummy->CreateParticle("SmokeThick", 0, 0, Cos(i, RandomX(40,60)), Sin(i, RandomX(40,60)), PV_Random(300, 360), particles, 2);
-				dummy->CreateParticle("SmokeThick", 0, 0, Cos(i, RandomX(70,100)), Sin(i, RandomX(70,100)), PV_Random(300, 360), particles, 2);
+				dummy->CreateParticle("SmokeThick", 0, 0, Cos(i, RandomX(10,30)), Sin(i, RandomX(10,30)), PV_Random(360, 400), particles, 2);
+				dummy->CreateParticle("SmokeThick", 0, 0, Cos(i, RandomX(30,60)), Sin(i, RandomX(30,60)), PV_Random(360, 400), particles, 2);
+				dummy->CreateParticle("SmokeThick", 0, 0, Cos(i, RandomX(60,100)), Sin(i, RandomX(60,100)), PV_Random(360, 400), particles, 2);
 			}
 			
 			dummy->CreateEffect(MonsterBall.RemoveFx, 1, 400);
@@ -111,7 +111,7 @@ func Initialize()
 	graphics_index = Random(4);
 	if (graphics_index) SetGraphics(Format("%d", graphics_index+1));
 	
-	monsters = [Bat, Piranha, Squid];
+	monsters = [Bat, Piranha, Squid, WormyMcWormFace];
 	
 	thrown = false;
 	
@@ -169,6 +169,11 @@ func Hit()
 		var squid = CreateObject(monster, RandomX(-5,5), -15, -1);
 		squid->SetCategory(C4D_StaticBack);
 		squid->CreateEffect(SquidFx, 1, 1);
+	}
+	
+	if (monster == WormyMcWormFace)
+	{
+		WormyMcWormFace->Appear(10, GetX(), GetY());
 	}
 	
 	
