@@ -1,4 +1,4 @@
-local ManaCost = 15;
+local ManaCost = 20;
 local Speed = 40;
 local MaxTime = 150; 
 
