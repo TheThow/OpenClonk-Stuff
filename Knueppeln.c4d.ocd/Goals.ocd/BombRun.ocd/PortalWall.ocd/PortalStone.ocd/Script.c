@@ -14,6 +14,8 @@ local lightning;
 
 func IsProjectileTarget(object o) { return true; }
 
+func CannotBeSucked() { return true; }
+
 func Initialize()
 {
 	SetAction("Travel");

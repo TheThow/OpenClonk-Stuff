@@ -77,7 +77,10 @@ func HitObject(obj)
 {
 	if(obj->~CanBeHit() == false)
 		return;
-	AddEffect("PoisonDart", obj, 1, 100, nil, GetID());
+	
+	if (obj->GetID() == Clonk)
+		AddEffect("PoisonDart", obj, 1, 100, nil, GetID());
+		
 	WeaponDamage(obj, SpellDamage);
 	Sound("Hits::ProjectileHitLiving?", false, 50);
 	HitEffect();

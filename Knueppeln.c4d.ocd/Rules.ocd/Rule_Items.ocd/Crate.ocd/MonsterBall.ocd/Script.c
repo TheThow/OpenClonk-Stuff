@@ -22,6 +22,62 @@ func IsKnueppelItem() { return true; }
 func CanBeSucked() { return true; }
 func IsReflectable() { return true; }
 
+local SquidFx = new Effect {
+	Damage = func() {
+		return 0;
+	},
+	Timer = func() {
+		this.timer++;
+		Target->SetPosition(Target->GetX(), Target->GetY()-1);
+		
+		if(Target.swimming == false)
+			Target->StartSwim();
+	
+		if(this.timer >= 40)
+		{
+			var particles =
+			{
+				CollisionVertex = 500,
+				OnCollision = PC_Stop(),
+				ForceY = PV_Random(-2, 2),
+				ForceX = PV_Random(-2, 2),
+				DampingX = 900, DampingY = 900,
+				Alpha = PV_Linear(255, 0),
+				R = 50, G = 50, B = 100,
+				Size = PV_Linear(PV_Random(10, 20), PV_Random(40, 60)),
+				Phase = PV_Random(0, 15),
+				Attach = ATTACH_Front
+			};
+			
+			var dummy = Target->CreateObject(Dummy);
+			dummy.Plane = 940;
+			dummy.Visibility = VIS_All;
+			
+			for (var i = 0; i < 360; i+=2)
+			{
+				dummy->CreateParticle("SmokeThick", 0, 0, Cos(i, RandomX(10,30)), Sin(i, RandomX(10,30)), PV_Random(300, 360), particles, 2);
+				dummy->CreateParticle("SmokeThick", 0, 0, Cos(i, RandomX(40,60)), Sin(i, RandomX(40,60)), PV_Random(300, 360), particles, 2);
+				dummy->CreateParticle("SmokeThick", 0, 0, Cos(i, RandomX(70,100)), Sin(i, RandomX(70,100)), PV_Random(300, 360), particles, 2);
+			}
+			
+			dummy->CreateEffect(MonsterBall.RemoveFx, 1, 400);
+			
+			Target->RemoveObject();
+			return -1;
+		}
+	}
+};
+
+local RemoveFx = new Effect
+{
+	Timer = func()
+	{
+		Target->RemoveObject();
+		return -1;
+	}
+	
+};
+
 func InitEffect()
 {
 	SetLightRange(30, 70);
@@ -57,7 +113,7 @@ func Initialize()
 	graphics_index = Random(4);
 	if (graphics_index) SetGraphics(Format("%d", graphics_index+1));
 	
-	monsters = [Wipf, Bat, Piranha, Mooq, Puka, Squid];
+	monsters = [Bat, Piranha, Squid];
 	
 	thrown = false;
 	
@@ -95,7 +151,28 @@ func Hit()
 	
 	Sound("Items::monsterball", false, 100);
 	
-	CreateObject(monsters[Random(GetLength(monsters))], 0, - 5, GetOwner());
+	var monster = monsters[Random(GetLength(monsters))];
+	
+	if (monster == Piranha)
+	{
+		CreateObject(monster, 0, - 5, GetOwner());
+	}
+	
+	if (monster == Bat)
+	{
+		for (var i = 0; i < 7; i++)
+		{
+			CreateObject(monster, RandomX(-5,5), -5, GetOwner());
+		}
+	}
+	
+	if (monster == Squid)
+	{
+		var squid = CreateObject(monster, RandomX(-5,5), -15, GetOwner());
+		squid->SetCategory(C4D_StaticBack);
+		squid->CreateEffect(SquidFx, 1, 1);
+	}
+	
 	
 	var flashparticle =
 	{
