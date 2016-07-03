@@ -41,6 +41,8 @@ local DamageFx = new Effect
 		{
 			if (GetEffect("WormyHitCD", o))
 				continue;
+			
+			Sound("Hits::ProjectileHitLiving*", false, 50);
 		
 			var angle = Angle(Target->GetX(), Target->GetY(), o->GetX(), o->GetY());
 			AddEffect("WormyHitCD", o, 1, 15);
