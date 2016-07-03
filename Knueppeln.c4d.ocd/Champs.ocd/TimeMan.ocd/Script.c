@@ -14,7 +14,7 @@ local Special1Spell = TimeProjectile;
 local Special2Spell = TimeTravel;
 local Special3Spell = SlowField;
 
-local Special2Cooldown = 20;
+local Special2Cooldown = 10;
 local Special3Cooldown = 240;
 
 func Special1(object clonk, int x, int y, bool released, bool mouseclick, bool abletocast, bool cooldown)

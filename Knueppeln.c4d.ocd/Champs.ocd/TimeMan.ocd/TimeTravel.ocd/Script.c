@@ -8,7 +8,7 @@
 local ManaCost = 15;
 local SpellDamage = 30;
 local Speed = 100;
-local Size = 25;
+local Size = 30;
 local Dur = 400;
 
 local pos;
