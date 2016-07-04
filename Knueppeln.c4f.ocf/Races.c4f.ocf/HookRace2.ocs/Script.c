@@ -17,6 +17,7 @@ func Initialize()
 		Attach = ATTACH_Back | ATTACH_MoveRelative
 	};
 
+	AddEffect("Spaaaace", nil, 1, 2);
 
 	CreateEnvironment();
 
@@ -37,6 +38,22 @@ func Initialize()
 	Grass->Place(100*(GetPlayerCount()/2), nil);
 	Tree_Coniferous->Place(10);*/
 	//goal->SetStartpoint(1690, 145);
+}
+
+global func FxSpaaaaceTimer(object target, proplist effect, int time)
+{
+	for(var o in FindObjects(Find_NoContainer()))
+	{
+		if(!o)
+			continue;
+	
+		if(o->GetProcedure() == "FLOAT")
+			continue;
+		
+		if(o->GetMaterial() != Material("SpaceTunnel"))
+			o->SetYDir(o->GetYDir(100) - 31, 100);
+		
+	}
 }
 
 
@@ -107,10 +124,10 @@ func CreateEnvironment()
 	CreateObject(RaceSawBlade, 1430, 590, -1)->Stick();
 	
 	//Room5
-	CreateObject(Launcher, 1776, 175, -1)->Set(180, 110, MovingBrick, 15);
+	/*CreateObject(Launcher, 1776, 175, -1)->Set(180, 110, MovingBrick, 15);
 	CreateObject(Launcher, 1819, 175, -1)->Set(180, 110, MovingBrick, 15);
 	CreateObject(Launcher, 1862, 175, -1)->Set(180, 110, MovingBrick, 15);
-	CreateObject(Launcher, 1905, 175, -1)->Set(180, 110, MovingBrick, 15);
+	CreateObject(Launcher, 1905, 175, -1)->Set(180, 110, MovingBrick, 15);*/
 	
 	CreateObject(RaceSawBlade, 1840, 325, -1)->Circle(70, 4, 1);
 	CreateObject(RaceSawBlade, 1840, 325, -1)->Circle(70, 4, 1, 180);
@@ -123,7 +140,7 @@ func CreateEnvironment()
 	CreateObject(Launcher, 1980, 846, -1)->Set(180, 30, InstaProjectile);
 	
 	
-	CreateObject(RaceSawBlade, 1825, 945, -1)->Stick();
+	/*CreateObject(RaceSawBlade, 1825, 945, -1)->Stick();
 	CreateObject(RaceSawBlade, 1865, 945, -1)->Stick();
 	
 	CreateObject(RaceSawBlade, 1775, 1025, -1)->Stick();
@@ -132,7 +149,7 @@ func CreateEnvironment()
 	CreateObject(RaceSawBlade, 1870, 1025, -1)->Stick();
 	
 	CreateObject(RaceSawBlade, 1825, 1105, -1)->Stick();
-	CreateObject(RaceSawBlade, 1865, 1105, -1)->Stick();
+	CreateObject(RaceSawBlade, 1865, 1105, -1)->Stick();*/
 }
 
 func InitializePlayer(int plr, int iX, int iY, object pBase, int iTeam)
