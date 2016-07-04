@@ -123,11 +123,9 @@ func ChampUpdateDesc(data, int player, int ID, int subwindowID, object target)
 
 func SelectChamp(data, int player, int ID, int subwindowID, object target)
 {
-	ChampType = data[0];
-
 	if(FindObject(Find_Func("UseTeamExclusiveChampions")) && !FindObject(Find_ID(Rule_InstaGib)))
 	{
-		var banned = GetBannedTeamChampions(GetPlayerTeam(GetOwner()));
+		var banned = GetCurrentBannedTeamChampions(GetPlayerTeam(GetOwner()));
 		
 		for(var c in banned)
 		{
@@ -138,7 +136,7 @@ func SelectChamp(data, int player, int ID, int subwindowID, object target)
 			}
 		}
 		
-		RemoveTeamChamp(GetPlayerTeam(GetOwner()), ChampType);
+		//RemoveTeamChamp(GetPlayerTeam(GetOwner()), ChampType);
 	}
 	
 	for(var c in GetBannedChampions())
@@ -149,7 +147,8 @@ func SelectChamp(data, int player, int ID, int subwindowID, object target)
 			return false;
 		}
 	}
-
+	
+	ChampType = data[0];
 	ChampType->InitChamp(this);
 	
 	this->CancelMenu();
@@ -172,7 +171,7 @@ func UpdateSelectionMenu()
 
 	if(FindObject(Find_Func("UseTeamExclusiveChampions")))
 	{
-		var banned = GetBannedTeamChampions(GetPlayerTeam(GetOwner()));
+		var banned = GetCurrentBannedTeamChampions(GetPlayerTeam(GetOwner()));
 		for(var c in banned)
 		{
 			var champ_index = GetIndexOf(possible, c) + 101;

@@ -19,7 +19,7 @@ local HEALTHREGEN_MAX = 20;
 
 local choosemenu_id;
 
-local ChampType = Man;
+local ChampType;
 
 local special_active =  nil;
 
@@ -27,6 +27,8 @@ local RangeDummy;
 
 func Construction()
 {
+	ChampType = Man;
+
 	special_active =  [0, 0, 0, 0];
 	
 	var interval = 5;

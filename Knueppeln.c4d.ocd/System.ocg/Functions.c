@@ -135,6 +135,22 @@ global func GetBannedTeamChampions(int teamid)
 	return team_exclusiveChampions[teamid -1];
 }
 
+global func GetCurrentBannedTeamChampions(int teamid)
+{
+	var list = [];
+	
+	for (var o in FindObjects(Find_ID(Clonk), Find_OCF(OCF_Alive)))
+	{
+		if (GetPlayerTeam(o->GetOwner()) == teamid)
+		{
+			if (o.ChampType != Man)
+				PushBack(list, o.ChampType);
+		}
+	}
+	
+	return list;
+}
+
 
 global func DrawLightningSmall(fromX, fromY, toX, toY, props)
 {
