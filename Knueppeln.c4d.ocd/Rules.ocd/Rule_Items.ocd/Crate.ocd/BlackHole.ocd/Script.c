@@ -16,7 +16,7 @@ local oy;
 local trailparticles;
 local flyparticles;
 
-local probability = 20;
+local probability = 10;
 
 local MaxSize = 50;
 local size = 0;
