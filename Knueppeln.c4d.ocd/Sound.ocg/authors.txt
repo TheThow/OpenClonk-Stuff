@@ -20,5 +20,13 @@ adharca					- sawblade_destroyed (CC BY 3.0)
 
 unfa 					- wormy_dig (CC BY 3.0) 
 						http://freesound.org/people/unfa/sounds/258339/
+						
+nextmaking				- bat_jump
+						http://freesound.org/people/nextmaking/sounds/86022/
+						
+Taira Komori			-bat_throw
+						http://freesound.org/people/Taira%20Komori/sounds/215025/
 
 * changes were made
+
+All other sounds are CC0

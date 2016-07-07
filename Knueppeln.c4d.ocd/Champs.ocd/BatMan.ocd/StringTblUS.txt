@@ -1,0 +1,2 @@
+Name=Bat Man
+Description=Bat boy bat boy watcha gonna do? \n\nQ = Batarang \nE = Disrupter \nR = Bat Call

@@ -10,11 +10,11 @@
 local Description = "$Description$";
 local Name = "$Name$";
 
-local Special1Spell = ElectroProjectile;
-local Special2Spell = ElectroOrb;
-local Special3Spell = ThunderStrike;
+local Special1Spell = Batarang;
+local Special2Spell = Disrupter;
+local Special3Spell = Batarang;
 
-local Special3Cooldown = 30;
+local Special2Cooldown = 80;
 
 func Special1(object clonk, int x, int y, bool released, bool mouseclick, bool abletocast, bool cooldown)
 {
@@ -79,7 +79,7 @@ func JumpEffect(object clonk, dir)
 		to = 310;
 	}
 
-	Sound("electro_shot", false, 30);
+	Sound("BatMan::bat_jump", false, 20);
 
 	for(var i = from; i < to; i+=5)
 	{
@@ -91,16 +91,15 @@ func JumpEffect(object clonk, dir)
 		
 		var trailparticles =
 		{
-			Prototype = Particles_ElectroSpark2(),
-			Size = PV_Linear(10,0),
+			Size = PV_Linear(8,0),
 			Rotation = angle,
-			R = 150,
-			G = 215,
+			R = 255,
+			G = 255,
 			B = 255,
 			OnCollision = PC_Bounce(),
 		};
 	
-		CreateParticle("Lightning", x, y, Cos(i, r), Sin(i, r), 10, trailparticles);
+		CreateParticle("BatPrt", x, y, Cos(i, r), Sin(i, r), 10, trailparticles);
 	}
 }
 
@@ -116,15 +115,14 @@ func BlockEffect(object clonk, range)
 		
 		var trailparticles =
 		{
-			Prototype = Particles_ElectroSpark2(),
-			Size = PV_Linear(15,0),
-			Rotation = angle,
-			R = 150,
-			G = 215,
+			Size = PV_Linear(10,0),
+			Rotation = angle + 90,
+			R = 255,
+			G = 255,
 			B = 255,
 		};
 	
-		CreateParticle("Lightning", x, y, 0, 0, 10, trailparticles);
+		CreateParticle("BatPrt", x, y, 0, 0, 10, trailparticles);
 	}
 	
 }
@@ -134,27 +132,32 @@ func ShowRange()
 
 }
 
-func FxElectroHitTimer(object target, proplist effect, int time)
+func FxBatHitTimer(object target, proplist effect, int time)
 {
-	var lightning =
+	var bats =
 	{
-		Prototype = Particles_ElectroSpark2(),
 		Size = PV_Linear(PV_Random(2,5),0),
 		BlitMode = GFX_BLIT_Additive,
-		Rotation = PV_Random(0,360),
-		R = 175,
-		G = 215,
-		B = 255,
+		Rotation = PV_Step(10, PV_Random(0,360), 1),
+		R = 100,
+		G = 100,
+		B = 100,
 		Attach = ATTACH_Front | ATTACH_MoveRelative,
 	};
 	
-	target->CreateParticle("Lightning", RandomX(-5, 5), RandomX(-10, 10), 0, 0, 10, lightning, 2);
+	target->CreateParticle("BatPrt", RandomX(-5, 5), RandomX(-10, 10), 0, 0, 30, bats, 2);
 	
 	if(time > 40)
 		return -1;
 }
 
-global func AddElectroHitEffect()
+global func AddBatHitEffect()
 {
-	this->AddEffect("ElectroHit", this, 20, 1, nil, ElectroMan);
+	this->AddEffect("BatHit", this, 20, 5, nil, BatMan);
+}
+
+private func Definition(proplist def)
+{
+	def.PictureTransformation = Trans_Mul(Trans_Rotate(-65, 0, 1, 0), Trans_Rotate(-35, 0, 0, 1));
+	return _inherited(def, ...);
 }

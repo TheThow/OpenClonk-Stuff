@@ -1,7 +1,5 @@
 /*-- Ore --*/
 
-func IsKnueppelItem() { return true; }
-
 local Collectible = 1;
 local Name = "$Name$";
 local Description = "$Description$";
@@ -22,6 +20,9 @@ local MaxSize = 50;
 local size = 0;
 local MaxRange = 300;
 local Duration = 260;
+
+func IsReflectable() { return true; }
+func IsKnueppelItem() { return true; }
 
 func Initialize()
 {

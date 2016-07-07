@@ -9,7 +9,6 @@ local shooter;
 func Initialize()
 {
 	SetAction("Travel");
-	SetRDir(10);
 	SetClrModulation(RGBa(0,0,0,0));
 }
 
@@ -27,23 +26,6 @@ func Launch(object clonk, int x, int y)
 	SetVelocity(angle, Speed, 10);
 	AddEffect("HitCheck", this, 1,1, nil,nil, clonk);
 	AddEffect("TheEffect", this, 1, 1, this, Projectile);
-	
-	/*
-	if (Type == "Electro")
-	{
-		Sound("electric_shot", false, 100);
-		Sound("electro_travel", false, 50, nil, 1);
-		SetLightRange(30, 70);
-		SetLightColor(RGB(255, 255, 255));
-	}
-	
-	if (Type == "Fire")
-	{
-		Sound("Fire::Fireball", false, 100);
-		Sound("Fire::FuseLoop", false, 20, nil, 1);
-		SetLightRange(30, 70);
-		SetLightColor(RGB(255, 100, 0));
-	}*/
 }
 
 func FxTheEffectStart(object target, proplist effect, int temporary)
