@@ -12,7 +12,7 @@ local Name = "$Name$";
 
 local Special1Spell = Batarang;
 local Special2Spell = Disrupter;
-local Special3Spell = Batarang;
+local Special3Spell = BatCall;
 
 local Special2Cooldown = 80;
 
@@ -40,9 +40,9 @@ func Special3(object clonk, int x, int y, bool released, bool mouseclick, bool a
 {
 	var props =
 	{
-		R = 150,
-		G = 215,
-		B = 255,
+		R = 100,
+		G = 100,
+		B = 100,
 		Alpha = 40,
 		Size = Special3Spell.SpellRange*2,
 		BlitMode = GFX_BLIT_Additive,

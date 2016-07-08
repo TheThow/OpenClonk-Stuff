@@ -17,6 +17,8 @@ local pulseprt;
 
 local x,y;
 
+local dummy;
+
 func IsReflectable() { return true; }
 func CanBeSucked() { return true; }
 
@@ -41,7 +43,7 @@ func Initialize()
 
 	trailparticles =
 	{
-		Size = PV_Linear(PV_Random(4, 8),0),
+		Size = PV_Linear(PV_Random(3, 6),0),
 		BlitMode = GFX_BLIT_Additive,
 		Alpha = PV_Linear(255, 0),
 		R = pR,
@@ -69,15 +71,41 @@ func Launch(object clonk, int x, int y)
 	};
 	clonk->Charge(this, "ChargeStop", Charge_dur, params);
 	shooter = clonk;
+	dummy = CreateObject(Dummy, x, y, GetOwner());
+	dummy.Visibility = VIS_All;
+	
+	var chargeprt =
+	{
+		Size = 4,
+		BlitMode = GFX_BLIT_Additive,
+		R = pR,
+		G = pG,
+		B = pB,
+		Rotation = PV_Step(20, 0),
+		Attach=ATTACH_Front|ATTACH_MoveRelative,
+	};
+	
+	dummy->CreateParticle("BatPrt", 0, 0, 0, 0, 0, chargeprt, 2);
+}
+
+func ChargeEffect(proplist params)
+{
+	var a = params.new_angle;
+	var x = Sin(a, 10, 10);
+	var y = -Cos(a, 10, 10);
+	
+	dummy->SetPosition(GetX() + x, GetY() + y);
 }
 
 func ChargeInterrupted()
 {
+	dummy->RemoveObject();
 	RemoveObject();
 }
 
 func ChargeStop(proplist params)
 {
+	dummy->RemoveObject();
 	SetAction("Idle");
 	var angle = params.new_angle;
 	SetVelocity(angle, Speed, 10);

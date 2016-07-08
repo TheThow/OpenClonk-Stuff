@@ -1,0 +1,11 @@
+[DefCore]
+id=ManBat
+Version=7,0
+Category=C4D_Living
+Width=12
+Height=12
+Offset=-6,-6
+Mass=3
+StretchGrowth=1
+Oversize=1
+IncompleteActivity=1

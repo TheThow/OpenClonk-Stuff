@@ -535,6 +535,7 @@ func FxChargeTimer(object target, proplist effect, int time)
 	effect.p.new_angle = Angle(0,0,x1,y1,10);
 	effect.p.new_x = x1;
 	effect.p.new_y = y1;
+	effect.p.time = time;
 
 	effect.c->~ChargeEffect(effect.p);
 	
