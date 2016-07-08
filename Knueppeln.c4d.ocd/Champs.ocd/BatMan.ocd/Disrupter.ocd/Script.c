@@ -4,9 +4,10 @@ local pG = 150;
 local pB = 150;
 local Speed = 80;
 local SpellDamage = 12;
-local Size = 45;
+local Size = 40;
 local Charge_dur = 15;
 local ManaCost = 30;
+local Dur = 160;
 
 local counter = 0;
 local shooter;
@@ -15,6 +16,23 @@ local trailparticles;
 local pulseprt;
 
 local x,y;
+
+func IsReflectable() { return true; }
+func CanBeSucked() { return true; }
+
+local DisruptorHitFx = new Effect {
+
+	Timer = func() {
+	
+		this.timer++;
+		
+		Target->CreateParticle("Lightning", RandomX(-5, 5), RandomX(-10, 10), 0, 0, 10, this.lightning, 2);
+		
+		if(this.timer > this.dur)
+			return -1;
+	}
+
+};
 
 func Initialize()
 {
@@ -65,6 +83,7 @@ func ChargeStop(proplist params)
 	SetVelocity(angle, Speed, 10);
 	AddEffect("TheEffect", this, 1, 1, this, GetID());
 	AddEffect("HitCheck", this, 1,1, nil,nil, params.cl);
+	Sound("BatMan::disruptor_shot", false, 30);
 
 	SetLightRange(30, 70);
 	SetLightColor(RGB(255, 255, 255));
@@ -105,7 +124,7 @@ func TravelEffect(int time)
 func HitEffect()
 {
 	var props = {
-		Size = PV_Linear(20, Size*2),
+		Size = PV_Linear(20, Size*3),
 	    R = pR,
 	    G = pG,
 	    B = pB,
@@ -113,14 +132,75 @@ func HitEffect()
 		BlitMode = GFX_BLIT_Additive,
 	};
 	CreateParticle("Shockwave2", 0, 0, 0, 0, 5, props, 1);
+	
+	var props2 = {
+		Size = PV_Linear(Size*2, 0),
+	    R = pR,
+	    G = pG,
+	    B = pB,
+	    Alpha = PV_Linear(255, 0),
+		BlitMode = GFX_BLIT_Additive,
+		Rotation=PV_Step(10,0, 1),
+	};
+
+	var props3 = {
+		Prototype = props2,
+		Rotation=PV_Step(10,0, 1),
+	};
+	
+	CreateParticle("StarSpark", 0, 0, 0, 0, 10, props2, 2);
+	CreateParticle("StarSpark", 0, 0, 0, 0, 10, props3, 2);
+	
+	var particles =
+	{
+		ForceY = PV_Random(-2, 2),
+		ForceX = PV_Random(-2, 2),
+		DampingX = 900, DampingY = 900,
+		Alpha = PV_Linear(PV_Random(170, 140), 0),
+		R = 200, G = 250, B = 250,
+		Size = 40,
+		Phase = PV_Random(0, 15),
+		BlitMode = GFX_BLIT_Additive,
+	};
+	
+	CreateParticle("SmokeThick", PV_Cos(PV_Random(0, 360), PV_Random(0, Size-10)), PV_Sin(PV_Random(0, 360), PV_Random(0, Size-10)), 0, 0, 10, particles, 25);
+
+	/*for (var i = 0; i < 15; i++)
+	{
+		CreateParticle("SmokeThick", Cos(Random(360), Random(Size)), Sin(Random(360), Random(Size)), 0, 0, 20, particles, 1);
+	}*/
+
+	var lightning =
+	{
+		Prototype = Particles_ElectroSpark2(),
+		Size = PV_Linear(PV_Random(5,8),0),
+		BlitMode = GFX_BLIT_Additive,
+		Rotation = PV_Random(0,360),
+		R = 0,
+		G = 250,
+		B = 250,
+		Attach = ATTACH_Front | ATTACH_MoveRelative,
+	};
 
 	for(var o in FindObjects(Find_Distance(Size), Find_Func("CanBeHit", this)))
 	{
+		if(o->GetID() == Clonk)
+		{
+			o->DisableCasting(Dur);
+			var fx = o->CreateEffect(DisruptorHitFx, 1, 1);
+			fx.dur = Dur;
+			fx.lightning = lightning;
+		}
+			
 		WeaponDamage(o, SpellDamage);
 	}
+
+	SoundAt("BatMan::disruptor_hit1",0, 0, { volume = 100 });
+	SoundAt("BatMan::disruptor_hit2", 0, 0, { volume = 20 });
 	
 	RemoveObject();
 }
+
 
 func HitObject(obj)
 {

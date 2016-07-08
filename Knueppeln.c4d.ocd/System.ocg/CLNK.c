@@ -596,9 +596,15 @@ func CanCast()
 		GetAction() == "Float" || 
 		GetEffect("SpawnProtection", this) || 
 		!ChampType->CanCast(this) ||
+		GetEffect("CastingDisabled", this) ||
 		IsCarryingHeavy())
 		return false;
 	return true;
+}
+
+func DisableCasting(int time)
+{
+	AddEffect("CastingDisabled", this, 1, time, this);
 }
 
 func ShowSpellRange(object clonk, id spell, proplist props)

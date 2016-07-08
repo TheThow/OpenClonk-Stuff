@@ -26,6 +26,9 @@ nextmaking				- bat_jump
 						
 Taira Komori			-bat_throw
 						http://freesound.org/people/Taira%20Komori/sounds/215025/
+						
+Halleck					-disruptor_hit1
+						http://freesound.org/people/Halleck/sounds/19486/
 
 * changes were made
 

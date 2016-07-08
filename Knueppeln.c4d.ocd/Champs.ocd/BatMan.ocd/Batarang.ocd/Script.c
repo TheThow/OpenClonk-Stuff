@@ -7,7 +7,7 @@
 
 local ManaCost = 22;
 local SpellDamage = 20;
-local Speed = 65;
+local Speed = 60;
 local Dur = 30;
 
 local Name = "$Name$";
@@ -112,8 +112,8 @@ public func HitObject(obj)
 		
 	if (obj == shooter)
 	{
-		Sound("BatMan::bat_collect", false, 50);
-		obj->DoMagicEnergy(ManaCost/4);
+		obj->Sound("BatMan::bat_collect", false, 50);
+		obj->DoMagicEnergy(ManaCost/3);
 		RemoveObject();
 		return true;
 	}
