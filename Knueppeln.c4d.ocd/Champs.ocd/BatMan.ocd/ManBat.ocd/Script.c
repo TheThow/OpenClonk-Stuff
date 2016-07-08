@@ -20,12 +20,16 @@ local TravelFx = new Effect {
 		var x = Target.tx;
 		var y = Target.ty;
 		
+		if(!Random(3))
+			Sound("Animals::Bat::Flutter*");
+		
 		for (var o in Target->FindObjects(Find_Distance(15), Find_Not(Find_Owner(Target->GetOwner())), Find_Func("CanBeHit", Target)))
 		{
 			if (GetEffect("BatBiteCD", o))
 				continue;
 			
 			AddEffect("BatBiteCD", o, 1, 20);
+			o->AddBatHitEffect();
 			Target->BitePrey(o);
 		}
 		
