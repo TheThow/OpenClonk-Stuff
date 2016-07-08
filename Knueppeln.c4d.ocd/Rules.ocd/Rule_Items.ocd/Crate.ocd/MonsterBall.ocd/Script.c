@@ -111,7 +111,7 @@ func Initialize()
 	graphics_index = Random(4);
 	if (graphics_index) SetGraphics(Format("%d", graphics_index+1));
 	
-	monsters = [Bat, Piranha, Squid, WormyMcWormFace];
+	monsters = [Piranha, Squid, WormyMcWormFace];
 	
 	thrown = false;
 	
