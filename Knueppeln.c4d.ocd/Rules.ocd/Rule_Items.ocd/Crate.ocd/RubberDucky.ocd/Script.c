@@ -129,7 +129,7 @@ func Explosion()
 			
 		var angle = Angle(GetX(), GetY(), o->GetX(), o->GetY());
 
-		o->Fling(Sin(angle, 8), -Cos(angle, 8) - 2);
+		o->Fling(Sin(angle, 6), -Cos(angle, 6) - 2);
 		WeaponDamage(o, 25);
 	}
 	

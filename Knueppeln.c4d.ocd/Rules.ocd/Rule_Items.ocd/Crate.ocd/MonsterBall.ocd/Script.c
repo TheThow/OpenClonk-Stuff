@@ -173,7 +173,7 @@ func Hit()
 	
 	if (monster == WormyMcWormFace)
 	{
-		WormyMcWormFace->Appear(10, GetX(), GetY());
+		WormyMcWormFace->Appear(10, GetX(), GetY(), GetController());
 	}
 	
 	

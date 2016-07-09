@@ -71,7 +71,7 @@ local WormyAppearFx = new Effect
 		
 		if (this.timer > 40)
 		{
-			var head = CreateObject(WormyMcWormFace, this.x, this.y, -1)->Set(this.c);
+			var head = CreateObject(WormyMcWormFace, this.x, this.y, this.o)->Set(this.c);
 			head->SetCategory(C4D_Vehicle);
 			var a = RandomX(-20, -5);
 			if(!Random(2))
@@ -87,13 +87,14 @@ local WormyAppearFx = new Effect
 
 local next;
 
-func Appear(length, x, y)
+func Appear(length, x, y, owner)
 {
-	var dummy = CreateObject(Dummy, x,y, -1);
+	var dummy = CreateObject(Dummy, x,y, owner);
 	var fx = dummy->CreateEffect(WormyAppearFx, 1, 1);
 	fx.c = length;
 	fx.x = x;
 	fx.y = y;
+	fx.o = owner;
 	
 	fx.p1 =
 		{

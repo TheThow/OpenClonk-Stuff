@@ -1,7 +1,7 @@
 [DefCore]
 id=BatCall
 Version=5,2,0,1
-Category=C4D_Vehicle
+Category=C4D_StaticBack
 Width=20
 Height=30
 Offset=-10,-15

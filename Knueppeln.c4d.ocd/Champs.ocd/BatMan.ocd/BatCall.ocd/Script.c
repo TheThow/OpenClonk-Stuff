@@ -18,7 +18,6 @@ local angle_prec = 10;
 
 func Initialize()
 {
-	SetAction("Travel");
 	SetClrModulation(RGBa(0,0,0,0));
 }
 
