@@ -58,7 +58,7 @@ local TravelFx = new Effect {
 		//Target->CreateParticle("Flash", 0, 0, 0, 0, 10, Target.travelprt, 1);
 		Target->DrawParticleLine("Flash", this.x - Target->GetX(), this.y - Target->GetY(), 0, 0, 1, 0, 0, 10, Target.travelprt);
 		
-		if (this.timer == Target.Dur*2 + 5)
+		if (this.timer == Target.Dur*2 + 8)
 		{
 			Target->SetAction("Idle");
 		}

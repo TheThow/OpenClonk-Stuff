@@ -28,7 +28,7 @@ local TravelFx = new Effect {
 			if (GetEffect("BatBiteCD", o))
 				continue;
 			
-			AddEffect("BatBiteCD", o, 1, 20);
+			AddEffect("BatBiteCD", o, 1, 15);
 			o->AddBatHitEffect();
 			Target->BitePrey(o);
 		}

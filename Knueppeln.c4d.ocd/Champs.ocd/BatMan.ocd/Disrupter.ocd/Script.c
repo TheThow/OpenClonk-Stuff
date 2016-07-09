@@ -3,7 +3,7 @@ local pR = 100;
 local pG = 150;
 local pB = 150;
 local Speed = 80;
-local SpellDamage = 12;
+local SpellDamage = 10;
 local Size = 40;
 local Charge_dur = 15;
 local ManaCost = 30;
@@ -141,8 +141,8 @@ func InitEffect()
 
 func TravelEffect(int time)
 {
-	if(time%10)
-		CreateParticle("Shockwave2", 0, 0, 0, 0, 10, pulseprt, 1);
+	if(time%4==0)
+		CreateParticle("Shockwave2", 0, 0, 0, 0, 10, pulseprt, 3);
 		
 	DrawParticleLine("Flash", this.x - GetX(), this.y - GetY(), 0, 0, 1, 0, 0, 20, trailparticles);
 	this.x = GetX();
