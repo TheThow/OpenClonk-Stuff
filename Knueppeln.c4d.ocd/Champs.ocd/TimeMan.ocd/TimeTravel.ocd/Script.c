@@ -165,7 +165,7 @@ func FxTimeTravelTimer(object target, proplist effect, int time)
 
 func HitArea()
 {
-	Sound("time_travel_end", false, 50);
+	Sound("time_travel_end");
 
 	var flashparticle =
 	{

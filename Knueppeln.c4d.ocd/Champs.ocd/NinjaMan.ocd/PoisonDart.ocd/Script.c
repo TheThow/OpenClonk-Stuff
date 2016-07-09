@@ -82,7 +82,7 @@ func HitObject(obj)
 		AddEffect("PoisonDart", obj, 1, 100, nil, GetID());
 		
 	WeaponDamage(obj, SpellDamage);
-	Sound("Hits::ProjectileHitLiving?", false, 50);
+	Sound("Hits::ProjectileHitLiving?");
 	HitEffect();
 }
 

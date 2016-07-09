@@ -115,7 +115,7 @@ func ChargeStop(proplist params)
 	eff.dmg = SpellDamage;
 	eff.range = SpellRange;
 	
-	Sound("critical_swing", false, 50);
+	Sound("critical_swing");
 	
 	RemoveObject();
 }

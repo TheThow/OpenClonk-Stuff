@@ -51,7 +51,7 @@ func HitEffect()
 		BlitMode = GFX_BLIT_Additive,
 	};
 	CreateParticle("StarSpark", 0, 0, 0, 0, 7, sphereparticle, 4);
-	Sound("time_hit", false, 50);
+	Sound("time_hit");
 	
 }
 
