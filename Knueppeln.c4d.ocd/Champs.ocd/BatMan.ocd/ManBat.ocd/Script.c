@@ -148,7 +148,7 @@ private func Death()
 		B = 0
 	};
 	
-	CreateParticle("Flash", 0, 0, PV_Random(-60, 60), PV_Random(-60, 30), 140, props, 45);
+	CreateParticle("Flash", 0, 0, PV_Random(-20, 20), PV_Random(-30, 10), 140, props, 15);
 	
 	RemoveObject();
 }
