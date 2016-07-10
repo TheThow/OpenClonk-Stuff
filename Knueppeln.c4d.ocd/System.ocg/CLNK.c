@@ -25,6 +25,8 @@ local special_active =  nil;
 
 local RangeDummy;
 
+local bloodprops;
+
 func Construction()
 {
 	ChampType = Man;
@@ -43,6 +45,16 @@ func Construction()
 	RangeDummy = CreateObject(Dummy, 0, 0, GetOwner());
 	RangeDummy.Visibility = VIS_Owner;
 	RangeDummy->SetAction("HangOnto", this);
+	
+	bloodprops =  { 
+		Size = PV_Linear(PV_Random(2, 4), 0),
+		CollisionVertex = 500,
+		OnCollision = PC_Bounce(200),
+		ForceY = PV_Gravity(300),
+		R = 128,
+		G = 0,
+		B = 0,
+	};
 	
 	return _inherited();
 }
@@ -323,18 +335,8 @@ func Death(int killed_by)
 		CastObjects(Flesh, 8, 50);
 		
 	ChampType->CleanUp(this);
-	
-	var props = {
-		Size = PV_Linear(PV_Random(2, 4), 0),
-		CollisionVertex = 500,
-		OnCollision = PC_Bounce(200),
-		ForceY = PV_Gravity(300),
-		R = 128,
-		G = 0,
-		B = 0
-	};
-	
-	CreateParticle("Flash", 0, 0, PV_Random(-60, 60), PV_Random(-60, 30), 140, props, 45);
+
+	CreateParticle("Flash", 0, 0, PV_Random(-60, 60), PV_Random(-60, 30), 140, bloodprops, 45);
 	
 	//CastPXS("Blood", 50, 30);
 	Sound("kill", false, 100);
@@ -383,7 +385,12 @@ func FxAutoHealDamage(object target, proplist effect, int damage, int cause)
 {
 	if(damage < 0 || healthregen_base > GetEnergy())
 		healthregen_base = GetEnergy();
-		
+	
+	if (damage < 0)
+	{
+		CreateParticle("Flash", 0, 0, PV_Random(-40, 40), PV_Random(-40, 20), 140, bloodprops, damage / -1500);
+	}
+	
 	return damage;
 }
 
