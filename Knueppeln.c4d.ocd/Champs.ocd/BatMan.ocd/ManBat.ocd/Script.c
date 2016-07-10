@@ -10,7 +10,7 @@
 local tx;
 local ty;
 local range = 40;
-local maxspeed = 30;
+local maxspeed;
 
 local TravelFx = new Effect {
 
@@ -42,13 +42,13 @@ local TravelFx = new Effect {
 			this.cy = y + Sin(Random(360), Random(Target.range));
 		}
 		
-		var angle = Angle(Target->GetX(), Target->GetY(), this.cx, this.cy);
-		Target->AddVelocity(angle, 3);
+		var angle = Angle(Target->GetX(), Target->GetY(), this.cx, this.cy, 10);
+		Target->AddVelocity(angle, 6, 10);
 		
 		var s = Distance(0, 0, Target->GetXDir(), Target->GetYDir());
 		
 		if (s > Target.maxspeed)
-			Target->SetVelocity(Angle(0, 0, Target->GetXDir(), Target->GetYDir()), Target.maxspeed);
+			Target->SetVelocity(Angle(0, 0, Target->GetXDir(), Target->GetYDir(), 10), Target.maxspeed, 10);
 		
 		Target->UpdateFlightAppearance();
 		
@@ -72,6 +72,7 @@ func Set(x, y)
 
 private func Construction()
 {
+	maxspeed = 50;
 	Fly();
 	CreateEffect(TravelFx, 1, 1);
 }
@@ -125,7 +126,7 @@ private func Fly()
 private func BitePrey(object prey)
 {
 	// A small blow to the prey and heal the bat itself.
-	WeaponDamage(prey, 10);
+	WeaponDamage(prey, 11);
 	// Make a bite/attack sound.
 	Sound("Hits::ProjectileHitLiving*");
 	return;

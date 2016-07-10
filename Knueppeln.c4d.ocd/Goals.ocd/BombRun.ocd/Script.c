@@ -148,6 +148,7 @@ func FxGoalCheckTimer(object target, proplist effect, int time)
 func ResetPlayer(plr)
 {
 	GetCrew(plr).ChampType->CleanUp(GetCrew(plr));
+	GetCrew(plr).ChampType = Man;
 	GameCall("SpawnPlayer", plr, 10);
 	ScheduleCall(GetCrew(plr), "SelectChampion", 15, 0);
 	GetCrew(plr)->DoEnergy(100);

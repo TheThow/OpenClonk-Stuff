@@ -159,7 +159,7 @@ func HitEffect()
 	    Alpha = PV_Linear(180, 0),
 		BlitMode = GFX_BLIT_Additive,
 	};
-	CreateParticle("Shockwave2", 0, 0, 0, 0, 5, props, 1);
+	CreateParticle("Shockwave2", 0, 0, 0, 0, 10, props, 1);
 	
 	var props2 = {
 		Size = PV_Linear(Size*2, 0),

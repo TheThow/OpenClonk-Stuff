@@ -7,7 +7,7 @@
 
 local ManaCost = 22;
 local SpellDamage = 20;
-local Speed = 60;
+local Speed = 65;
 local Dur = 30;
 
 local Name = "$Name$";
@@ -73,7 +73,7 @@ func Initialize()
 {
 	SetAction("Travel");
 	travelprt = {
-		Size = PV_Linear(4, 0),
+		Size = PV_Linear(5, 0),
 		Alpha = PV_Linear(50, 0),
 		R = pR,
 		G = pG,

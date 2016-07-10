@@ -139,7 +139,7 @@ global func GetCurrentBannedTeamChampions(int teamid)
 {
 	var list = [];
 	
-	for (var o in FindObjects(Find_ID(Clonk), Find_OCF(OCF_Alive)))
+	for (var o in FindObjects(Find_ID(Clonk), Find_OCF(OCF_Alive), Find_AnyLayer()))
 	{
 		if (GetPlayerTeam(o->GetOwner()) == teamid)
 		{

@@ -12,7 +12,7 @@ local ManaCost = 45;
 local SpellRange = 225;
 
 local Dur = 400;
-local Charge_dur = 45;
+local Charge_dur = 37;
 
 local angle_prec = 10;
 
@@ -49,10 +49,10 @@ func Launch(object clonk, int x, int y)
 
 func ChargeEffect(proplist params)
 {
-	if (params.time < 5)
+	if (params.time < 4)
 		return;
 
-	if (params.time % 5 == 0)
+	if (params.time % 4 == 0)
 	{
 		var o = CreateObject(ManBat, params.clonk->GetX() - GetX(), params.clonk->GetY() - GetY(), GetOwner());
 		o->Set(params.clonk->GetX() + params.x, params.clonk->GetY() + params.y);
