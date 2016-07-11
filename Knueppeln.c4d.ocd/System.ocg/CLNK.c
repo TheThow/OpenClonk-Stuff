@@ -388,7 +388,7 @@ func FxAutoHealDamage(object target, proplist effect, int damage, int cause)
 	
 	if (damage < 0)
 	{
-		CreateParticle("Flash", 0, 0, PV_Random(-40, 40), PV_Random(-40, 20), 140, bloodprops, damage / -1500);
+		CreateParticle("Flash", 0, 0, PV_Random(-40, 40), PV_Random(-40, 20), 140, bloodprops, Min(40, damage / -1500));
 	}
 	
 	return damage;

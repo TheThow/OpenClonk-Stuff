@@ -129,7 +129,7 @@ func SelectChamp(data, int player, int ID, int subwindowID, object target)
 		
 		for(var c in banned)
 		{
-			if(c == ChampType)
+			if(c == data[0])
 			{
 				Sound("UI::Error", true, 50, player);
 				return false;
@@ -141,7 +141,7 @@ func SelectChamp(data, int player, int ID, int subwindowID, object target)
 	
 	for(var c in GetBannedChampions())
 	{
-		if(c == ChampType)
+		if(c == data[0])
 		{
 			Sound("UI::Error", true, 50, player);
 			return false;
