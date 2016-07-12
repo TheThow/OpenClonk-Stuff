@@ -8,7 +8,7 @@
 
 func Initialize()
 {
-	CreateObject(Goal_LastManStanding);
+	CreateObject(Goal_Domination);
 	CreateObject(Rule_KillLogs);
 	CheckScenarioParameters();
 	SetSkyParallax(0, 15, 15, nil, nil, 1, 1);
@@ -47,38 +47,57 @@ func InitClouds()
 
 func InitializePlayer(int plr, int iX, int iY, object pBase, int iTeam)
 {
-	//SpawnPlayer(plr);
+	SpawnPlayer(plr, 5);
    	SetPlayerZoomByViewRange(plr, 700, 0, PLRZOOM_Direct);
    	SetPlayerZoomByViewRange(plr, 700, 0, PLRZOOM_Direct);
+   	DoScoreboardShow(1, plr);
 	return;
 }
 
-func SpawnPlayer(int plr, prev_clonk)
+func SpawnPlayer(int plr, int time)
 {
 	var clonk = GetCrew(plr);
-	clonk->CreateContents(Sword);
+	if(!clonk->FindContents(Sword))
+		clonk->CreateContents(Sword);
+	
+	var con = clonk->Contained();
+	if(con)
+	{
+		clonk->Exit();
+		con->RemoveObject();
+	}
+		
 	clonk->SetMagicEnergy(50);
-	ScheduleCall(clonk, "SelectChampion", 15, 0);
 	//clonk->ChooseMenu();
+	
+	var clonk = GetCrew(plr);
+	var relaunch;
+	relaunch = CreateObjectAbove(RelaunchContainer, LandscapeWidth() / 2, LandscapeHeight() / 2, clonk->GetOwner());
+	
+	relaunch->StartRelaunch(clonk);
+	relaunch->SetRelaunchTime(time, true);
+	ScheduleCall(clonk, "SelectChampion", 15, 0);
 }
 
 // Gamecall from LastManStanding goal, on respawning.
 protected func OnPlayerRelaunch(int plr)
 {
-	var clonk = GetCrew(plr);
-	var relaunch = CreateObjectAbove(RelaunchContainer, LandscapeWidth() / 2, LandscapeHeight() / 2, clonk->GetOwner());
-	relaunch->StartRelaunch(clonk);
-	
-	SpawnPlayer(plr);
+	SpawnPlayer(plr, 5);
 	
 	return;
 }
 
 global func GetRandomSpawn()
 {
-	var spawns = [[660,300],[410,270],[180,315],[850,315],[820,405],[200,405],[410,395],[650,395]];
+	var spawns = [[152, 518],[188, 262],[157, 621],[156, 709],[243, 783],[362, 976],[450, 1109],[279, 398]];
 	var rand = Random(GetLength(spawns));
-	return spawns[rand];
+	
+	var ret = spawns[rand];
+	
+	if(!Random(2))
+		ret[0] = LandscapeWidth() - ret[0];
+	
+	return ret;
 }
 
 func OnClonkLeftRelaunch(object clonk)

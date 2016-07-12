@@ -1,0 +1,11 @@
+ManaRegName=Increased Mana Regeneration
+ManaRegDesc=Guess what
+
+InstaGibName=InstaGib
+InstaGibDesc=One hit kills.
+
+ItemsName=Items
+ItemsDesc=Enable items
+
+FFName=Friendly Fire
+FFDesc=Wanna hit your team mates or not?

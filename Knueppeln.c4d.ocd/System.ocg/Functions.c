@@ -97,7 +97,7 @@ global func GetLastChosenChampion(int plr)
 
 global func InitTeamExclusiveChamps(int teamcount)
 {
-	team_exclusiveChampions = CreateArray(2);
+	team_exclusiveChampions = CreateArray(teamcount);
 	
 	for(var i = 0; i < GetLength(team_exclusiveChampions); i++)
 	{

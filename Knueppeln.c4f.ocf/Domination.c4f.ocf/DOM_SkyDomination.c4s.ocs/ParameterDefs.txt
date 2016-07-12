@@ -1,0 +1,120 @@
+[ParameterDef]
+ID=ScoreToWin
+Default=350
+LeagueValue=350
+Name=Score
+Description=Score to win
+
+	[Options]
+		
+		[Option]
+		Name=200
+		Description=200
+		Value=200
+		
+		[Option]
+		Name=350
+		Description=350
+		Value=350
+		
+		[Option]
+		Name=500
+		Description=500
+		Value=500
+		
+		[Option]
+		Name=700
+		Description=700
+		Value=700
+
+
+[ParameterDef]
+ID=FriendlyFire
+Default=2
+LeagueValue=2
+Name=$FFName$
+Description=$FFDesc$
+
+	[Options]
+		
+		[Option]
+		Name=On
+		Description=On
+		Value=1
+		
+		[Option]
+		Name=Off
+		Description=Off
+		Value=2
+		
+[ParameterDef]
+ID=NodeCount
+Default=2
+LeagueValue=2
+Name=Nodes
+Description=Nodes
+
+	[Options]
+
+		[Option]
+		Name=1
+		Description=1
+		Value=1
+		
+		[Option]
+		Name=2
+		Description=2
+		Value=2
+		
+		[Option]
+		Name=3
+		Description=3
+		Value=3
+
+[ParameterDef]
+ID=IncreasedManaReg
+Default=1
+LeagueValue=1
+Name=$ManaRegName$
+Description=$ManaRegDesc$
+
+	[Options]
+		
+		[Option]
+		Name=Off
+		Description=Off
+		Value=1
+		
+		[Option]
+		Name=On
+		Description=On
+		Value=2
+		
+[ParameterDef]
+ID=Items
+Default=0
+LeagueValue=0
+Name=$ItemsName$
+Description=$ItemsDesc$
+
+	[Options]
+		
+		[Option]
+		Name=None
+		Description=None
+		Value=0
+		
+		[Option]
+		Name=Rare
+		Description=Rare
+		Value=200
+		
+		[Option]
+		Name=Common
+		Description=Common
+		Value=100
+		
+		[Option]
+		Name=Crazy
+		Description=Crazy
+		Value=50
