@@ -48,6 +48,7 @@ func Launch(object clonk, int x, int y)
 			arrow.Hit = this.OnArrowHit;
 			arrow->CreateEffect(ArrowRemoverEffect, 1, 5);
 			arrow.IsReflectable = this.ArrowIsReflectable;
+			arrow.is_minions_arrow = true;
 		}
 		bow->ControlUseStart(minion, GetX() - minion->GetX(), GetY() - minion->GetY());
 		bow->ControlUseStop(minion);

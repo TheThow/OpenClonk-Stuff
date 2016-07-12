@@ -671,6 +671,9 @@ func IsProjectileTarget(object from)
 			return false;
 	}
 	
+	if ((ChampType == GreatLeaderMan) && from.is_minions_arrow && (from->GetController() == GetController()))
+		return false;
+		
 	return true;
 }
 

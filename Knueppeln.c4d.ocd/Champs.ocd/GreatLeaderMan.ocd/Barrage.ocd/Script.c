@@ -1,5 +1,6 @@
+local Delay = 20;
 local ManaCost = 18;
-local Speed = 40;
+local Speed = 20;
 local MaxTime = 150; 
 
 func CallbackRemove()
