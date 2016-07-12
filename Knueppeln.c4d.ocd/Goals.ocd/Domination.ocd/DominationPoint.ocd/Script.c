@@ -20,7 +20,7 @@ local CheckFx = new Effect {
 	
 		var a = CreateArray(GetStartupTeamCount() + 1);
 		
-		for (var o in Target->FindObjects(Find_Distance(20), Find_ID(Clonk)))
+		for (var o in Target->FindObjects(Find_Distance(20), Find_ID(Clonk), Find_OCF(OCF_Alive)))
 		{
 			a[GetPlayerTeam(o->GetOwner())]++;
 		}

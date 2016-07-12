@@ -1,7 +1,7 @@
 [ParameterDef]
 ID=ScoreToWin
-Default=350
-LeagueValue=350
+Default=300
+LeagueValue=300
 Name=Score
 Description=Score to win
 
@@ -13,19 +13,19 @@ Description=Score to win
 		Value=200
 		
 		[Option]
-		Name=350
-		Description=350
-		Value=350
+		Name=300
+		Description=300
+		Value=300
 		
 		[Option]
-		Name=500
-		Description=500
-		Value=500
+		Name=400
+		Description=400
+		Value=400
 		
 		[Option]
-		Name=700
-		Description=700
-		Value=700
+		Name=600
+		Description=600
+		Value=600
 
 
 [ParameterDef]

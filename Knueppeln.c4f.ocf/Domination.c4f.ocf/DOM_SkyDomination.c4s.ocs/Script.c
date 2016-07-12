@@ -82,7 +82,16 @@ func SpawnPlayer(int plr, int time)
 // Gamecall from LastManStanding goal, on respawning.
 protected func OnPlayerRelaunch(int plr)
 {
-	SpawnPlayer(plr, 5);
+	var team = GetPlayerTeam(plr);
+	var time = 5;
+	
+	for (var o in FindObjects(Find_ID(DominationPoint)))
+	{
+		if (o.owner == team)
+			time = 7;
+	}
+	
+	SpawnPlayer(plr, time);
 	
 	return;
 }

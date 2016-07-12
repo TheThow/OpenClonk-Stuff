@@ -7,6 +7,22 @@
 
 local itemID;
 
+local RemoveFx = new Effect {
+
+	Timer = func()
+	{
+		if(!Target)
+			return -1;
+	
+		this.timer ++;
+		Target->SetClrModulation(RGBa(255, 255, 255, 255 - this.timer));
+		
+		if(this.timer == 255)
+			Target->RemoveObject();
+	}
+
+};
+
 func Initialize()
 {
 	itemID = GetRandomItem();
@@ -20,8 +36,14 @@ protected func Construction()
 	SetProperty("MeshTransformation",Trans_Rotate(RandomX(20,80),0,1,0));
 	
 	AddEffect("CheckDmg", this, 1, 2, this);
+	AddEffect("FadeOut", this, 1, 600, this);
 	
 	return _inherited(...);
+}
+
+func FxFadeOutTimer()
+{
+	CreateEffect(RemoveFx, 1, 1);
 }
 
 func FxCheckDmgTimer()
