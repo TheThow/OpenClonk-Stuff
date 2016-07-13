@@ -15,6 +15,7 @@ local Special2Spell = ExplosiveHook;
 local Special3Spell = SawBlade;
 
 local Special1Cooldown = 30;
+local Special3Cooldown = 400;
 
 func Special1(object clonk, int x, int y, bool released, bool mouseclick, bool abletocast, bool cooldown)
 {

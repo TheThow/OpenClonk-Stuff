@@ -2,13 +2,13 @@
 
 
 local ManaCost = 50;
-local SpellDamage = 35;
+local SpellDamage = 45;
 local Speed = 60;
-local Charge_dur = 30;
+local Charge_dur = 25;
 
 local Size = 20;
 
-local LifeTime = 200;
+local LifeTime = 300;
 local rotation = 0;
 local sharpflame;
 local lightning;

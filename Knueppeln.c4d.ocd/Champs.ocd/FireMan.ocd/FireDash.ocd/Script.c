@@ -13,8 +13,8 @@ local SpellRange = 180;
 
 local Size1 = 18;
 local Size2 = 40;
-local SpellDamage1 = 15;
-local SpellDamage2 = 35;
+local SpellDamage1 = 20;
+local SpellDamage2 = 50;
 
 local Speed = 30;
 local Dur = 70;

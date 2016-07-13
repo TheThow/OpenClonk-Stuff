@@ -14,6 +14,8 @@ local Special1Spell = IceProjectile;
 local Special2Spell = IceShard;
 local Special3Spell = IceShardUltimate;
 
+local Special3Cooldown = 400;
+
 func Special1(object clonk, int x, int y, bool released, bool mouseclick, bool abletocast, bool cooldown)
 {
 	if(!released && !mouseclick && abletocast && !cooldown)
@@ -30,7 +32,7 @@ func Special2(object clonk, int x, int y, bool released, bool mouseclick, bool a
 
 func Special3(object clonk, int x, int y, bool released, bool mouseclick, bool abletocast, bool cooldown)
 {
-	if (released || mouseclick || cooldown) return;
+	if (released || mouseclick) return;
 	
 	var existing = FindObject(Find_ID(IceShardUltimate), Find_Owner(clonk->GetOwner()), Find_Category(C4D_StaticBack), Find_Func("GetProperty", "is_selected"));
 	if (existing)
@@ -41,10 +43,10 @@ func Special3(object clonk, int x, int y, bool released, bool mouseclick, bool a
 		{
 			other[0].is_selected = true;
 		}
-		return;
+		return 1;
 	}
 	
-	if(abletocast)
+	if(abletocast && !cooldown)
 	{
 		if(clonk->LaunchSpell(IceShardUltimate, x, y, 0, 0))
 			return 1;

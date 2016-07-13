@@ -7,7 +7,7 @@ local Radius = 30;
 local Speed = 80;
 
 local BlastRadius = 30;
-local BlastDamage = 20;
+local BlastDamage = 30;
 
 local is_selected = false;
 local number = 0;

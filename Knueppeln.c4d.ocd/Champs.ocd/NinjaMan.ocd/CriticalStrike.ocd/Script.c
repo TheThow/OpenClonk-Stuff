@@ -11,7 +11,7 @@ local Description = "$Description$";
 local ManaCost = 40;
 local SpellRange = 40;
 
-local SpellDamage = 50;
+local SpellDamage = 80;
 
 local Charge_dur = 15;
 

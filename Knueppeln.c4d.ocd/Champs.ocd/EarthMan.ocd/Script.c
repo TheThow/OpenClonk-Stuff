@@ -14,6 +14,8 @@ local Special1Spell = EarthProjectile;
 local Special2Spell = EarthWall;
 local Special3Spell = DeathRock;
 
+local Special3Cooldown = 400;
+
 func Special1(object clonk, int x, int y, bool released, bool mouseclick, bool abletocast, bool cooldown)
 {
 	if(!released && !mouseclick && abletocast && !cooldown)

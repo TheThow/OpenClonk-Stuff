@@ -126,7 +126,7 @@ private func Fly()
 private func BitePrey(object prey)
 {
 	// A small blow to the prey and heal the bat itself.
-	WeaponDamage(prey, 11);
+	WeaponDamage(prey, 14);
 	// Make a bite/attack sound.
 	Sound("Hits::ProjectileHitLiving*");
 	return;

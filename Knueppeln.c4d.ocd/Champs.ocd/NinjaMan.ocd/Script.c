@@ -15,6 +15,7 @@ local Special2Spell = ShadowWalk;
 local Special3Spell = CriticalStrike;
 
 local Special2Cooldown = 160;
+local Special3Cooldown = 250;
 
 func Special1(object clonk, int x, int y, bool released, bool mouseclick, bool abletocast, bool cooldown)
 {
