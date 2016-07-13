@@ -16,6 +16,7 @@ local Special3Spell = BallDischarge;
 
 local Special1Cooldown = 12;
 local Special2Cooldown = 40;
+local Special3Cooldown = 60;
 
 local MaxRange = 300;
 
