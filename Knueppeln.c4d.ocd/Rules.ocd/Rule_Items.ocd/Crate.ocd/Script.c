@@ -36,7 +36,7 @@ protected func Construction()
 	SetProperty("MeshTransformation",Trans_Rotate(RandomX(20,80),0,1,0));
 	
 	AddEffect("CheckDmg", this, 1, 2, this);
-	AddEffect("FadeOut", this, 1, 600, this);
+	AddEffect("FadeOut", this, 1, 800, this);
 	
 	return _inherited(...);
 }
