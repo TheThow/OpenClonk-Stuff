@@ -22,6 +22,10 @@
 	[ControlDef]
 	Identifier=AimingCursor
 	
+	[ControlDef]
+	Identifier=SpecialMeleeAttack
+	Hold=1
+	
 [ControlSets]
 
 	[ControlSet]
@@ -35,4 +39,15 @@
 		Key=Mouse1Move
 		Control=AimingCursor
 		Priority=30
-				
+		
+		[Assignment]
+		Key=F
+		Control=SpecialMeleeAttack
+		Group=1
+		Priority=200
+
+		[Assignment]
+		Key=G
+		Control=PlayerMenu
+		Priority=100
+		GUIGroup=50

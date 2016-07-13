@@ -5,11 +5,14 @@ local MaxMagic = 100000;
 
 local TIMER = 10;
 local MOVEMENT_CD = 12;
+local MOVEMENT_X_SPEED = 32;
 local TUMBLE_DUR = 25;
 
 local BLOCK_CD = 35;
 local BLOCK_DUR = 5;
 local BLOCK_RANGE = 25;
+
+local SPECIAL_MELEE_CD = 120;
 
 local JUMP_MANA = 11;
 local MaxContentsCount = 2;
@@ -92,6 +95,20 @@ public func ObjectControl(int plr, int ctrl, int x, int y, int strength, bool re
 			}
 			return true;
 		}
+	}
+	
+	if (ctrl == CON_SpecialMeleeAttack)
+	{
+		var a = GetPlayerCursorPos(plr, true);
+		var x1 = a[0] - GetX();
+		var y1 = a[1] - GetY();
+	
+		var flag = ChampType->SpecialMeleeAttack(this, x1, y1, release, false, CanCast() && ChampType->CanCastSpecialMelee(this), GetEffect("SpecialMeleeCD", this));
+		
+		if(flag)
+			AddEffect("SpecialMeleeCD", this, 1, SPECIAL_MELEE_CD, this);
+		
+		return 1;
 	}
 	
 	
@@ -306,8 +323,9 @@ func ControlLeftDouble()
 	var penality = 0;
 	if(IsCarryingHeavy())
 		penality = 12;
-		
-  	SetXDir(-40 + penality);
+	
+	if(GetXDir() > -MOVEMENT_X_SPEED + penality)
+  		SetXDir(-MOVEMENT_X_SPEED + penality);
   	SetYDir(GetYDir() - 15);
   	return true;
 }
@@ -318,7 +336,9 @@ func ControlRightDouble()
 	if(IsCarryingHeavy())
 		penality = 12;
 
-  	SetXDir(40 - penality);
+	if(GetXDir() < MOVEMENT_X_SPEED - penality)
+  		SetXDir(MOVEMENT_X_SPEED - penality);
+  		
   	SetYDir(GetYDir() - 15);
   	return true;
 }
@@ -735,5 +755,16 @@ local ActMap = {
 		Delay = 1,
 		FacetBase = 1,
 		Speed=0
+	},
+	
+	Travel = {
+		Prototype = Action,
+		Name = "Travel",
+		Procedure = DFA_FLOAT,
+		NextAction = "Travel",
+		Length = 1,
+		Delay = 1,
+		FacetBase = 1,
+		Speed=1000
 	}
 };
