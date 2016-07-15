@@ -65,15 +65,20 @@ local SpecialMeleeFx = new Effect {
 	{
 		if(dmg < 0)
 			this.r = true;
+		
+		return dmg;
 	},
 	
 	Stop = func()
 	{
-		if(Target->GetAction("Travel"))
+		if(!this.r)
 		{
-			Target->SetAction("Jump");
-			var a = Angle(0, 0, Target->GetXDir(), Target->GetYDir());
-			Target->SetVelocity(a, 30);
+			if(Target->GetAction("Travel"))
+			{
+				Target->SetAction("Jump");
+				var a = Angle(0, 0, Target->GetXDir(), Target->GetYDir());
+				Target->SetVelocity(a, 30);
+			}
 		}
 	}
 
@@ -246,7 +251,7 @@ func SpecialMeleeAttack(object clonk, int x, int y, bool released, bool mousecli
 }
 func SpecialMeleeStrike(clonk, target)
 {
-	clonk->WeaponDamage(target, 25);
+	clonk->WeaponDamage(target, 20);
 	target->Fling(0, -2);
 	clonk->Sound("Objects::Weapons::WeaponHit?", false);
 }

@@ -2,7 +2,7 @@
 
 
 local ManaCost = 50;
-local SpellDamage = 45;
+local SpellDamage = 40;
 local Speed = 60;
 local Charge_dur = 25;
 
