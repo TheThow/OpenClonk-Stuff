@@ -181,9 +181,9 @@ public func InitScoreboard()
 	Scoreboard->Init(
 	[
 	 	{key = "team", title = "", sorted = true, priority = 200, default = ""},
-	 	{key = "score", title = "Score", priority = 100, default = ""},
-	 	{key = "kills", title = Sword, sorted = true, desc = true, priority = 75, default =""},
-		{key = "deaths", title = Clonk, sorted = true, desc = false, priority = 50, default = "", conditional = Scoreboard_Death.ScoreboardCondition}
+	 	{key = "score", title = "Score", priority = 100, default = 0},
+	 	{key = "kills", title = Sword, sorted = true, desc = true, priority = 75, default = 0},
+		{key = "deaths", title = Clonk, sorted = true, desc = false, priority = 50, default = 0, conditional = Scoreboard_Death.ScoreboardCondition}
 	]
 	);
 	
