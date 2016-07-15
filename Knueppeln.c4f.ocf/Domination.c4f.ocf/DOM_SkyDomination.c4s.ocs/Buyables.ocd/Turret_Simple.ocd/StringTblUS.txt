@@ -1,0 +1,2 @@
+Name=Turret_Simple
+Description=Simple turret.

@@ -1,0 +1,3 @@
+Requirements=Requires
+Tier=Tier
+Cost=Price

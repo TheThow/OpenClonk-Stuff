@@ -69,10 +69,13 @@ local CheckFx = new Effect {
 			Target.bar->SetValue(Target.capture);
 		}
 		
-		if (Target.owner && Target.owner != team)
+		if (Target.owner && Target.owner != team && Target.capture > 0)
 		{
 			Target.capture--;
 			Target.bar->SetValue(Target.capture);
+			
+			if (Target.capture <= 0)
+				Scenario->~OnCapturePointLiberated(this.Target, team, Target.owner);
 		}
 		
 		if (!Target.owner && Target.curr_capturer != team)
@@ -106,6 +109,8 @@ local CheckFx = new Effect {
 			Target.curr_capturer = nil;
 			Target.capture = Target.frames_to_capture;
 			Target->SetClrModulation(GetTeamColor(Target.owner) , 1);
+			
+			Scenario->~OnCapturePointCaptured(this.Target, team);
 		}
 		
 	}

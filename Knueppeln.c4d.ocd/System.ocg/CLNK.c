@@ -81,17 +81,18 @@ public func ObjectControl(int plr, int ctrl, int x, int y, int strength, bool re
 	if (ctrl == CON_InventoryShiftBackward || ctrl == CON_InventoryShiftForward)
 		return 1;
 	
-	if (ctrl == CON_Throw && !IsCarryingHeavy())
+	if (ctrl == CON_Throw && !IsCarryingHeavy() && !release)
 	{	
-		if(GetItem(1))
+		var item = GetItem(1);
+		if (item)
 		{
-			if(GetItem(1)->~IsKnueppelItem())
+			if(item->~IsKnueppelItem())
 			{
-				GetItem(1)->~ControlUse(this, x, y);
+				item->~ControlUse(this, x, y);
 			}
 			else
 			{
-				ObjectCommand("Throw", GetItem(1), x, y);
+				ObjectCommand("Throw", item, x, y);
 			}
 			return true;
 		}

@@ -1,0 +1,16 @@
+[ControlDefs]
+
+	[ControlDef]
+	Identifier=ToggleShop
+	
+
+[ControlSets]
+
+	[ControlSet]
+	Name=*
+		
+		[Assignment]
+		Key=P
+		Priority=-1
+		Control=ToggleShop
+

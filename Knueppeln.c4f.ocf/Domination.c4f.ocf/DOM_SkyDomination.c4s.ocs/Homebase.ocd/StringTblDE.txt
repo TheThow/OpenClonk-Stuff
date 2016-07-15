@@ -1,0 +1,3 @@
+Requirements=Benoetigt
+Tier=Stufe
+Cost=Preis
