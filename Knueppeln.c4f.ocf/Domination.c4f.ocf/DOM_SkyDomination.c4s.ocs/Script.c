@@ -43,7 +43,7 @@ public func DoPlayerCoins(int plr, int coins)
 	Scoreboard->SetPlayerData(plr, "coins_earned", player_coins_earned[plr]);
 	Scoreboard->SetData(team_id, "coins_earned", team_coins_earned[team_id]);
 	
-	Sound("UI::Cash", {player = plr});
+	Sound("UI::UnCash*", {player = plr});
 	DoWealth(plr, coins);
 }
 
