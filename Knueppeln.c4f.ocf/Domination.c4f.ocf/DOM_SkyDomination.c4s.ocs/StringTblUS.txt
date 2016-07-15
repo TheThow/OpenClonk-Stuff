@@ -9,3 +9,12 @@ ItemsDesc=Enable items
 
 FFName=Friendly Fire
 FFDesc=Wanna hit your team mates or not?
+
+HomebaseWeapons=Weapons
+HomebaseItems=Items
+HomebaseTechnology=Technology
+HomebaseUpgrades=Upgrades
+HomebaseArtifacts=Artifacts
+
+HomebaseLife=Extra HP
+HomebaseDescLife=Gives your Clonk permanent extra HP.

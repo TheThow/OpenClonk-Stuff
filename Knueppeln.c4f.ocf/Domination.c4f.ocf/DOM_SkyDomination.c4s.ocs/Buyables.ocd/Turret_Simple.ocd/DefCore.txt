@@ -1,0 +1,17 @@
+[DefCore]
+id=Turret_Simple
+Version=5,2,0,1
+Category=C4D_Object
+Width=20
+Height=20
+Offset=-10,-10
+Vertices=3
+VertexX=0,2,-2
+VertexY=1,-1,-1
+VertexFriction=20
+Value=1
+Mass=10
+Components=Turret_Simple=1
+Projectile=1
+Rotate=1
+
