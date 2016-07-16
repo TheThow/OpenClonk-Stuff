@@ -75,11 +75,12 @@ local SpecialMeleeFx = new Effect {
 		{
 			if(Target->GetAction("Travel"))
 			{
-				Target->SetAction("Jump");
 				var a = Angle(0, 0, Target->GetXDir(), Target->GetYDir());
 				Target->SetVelocity(a, 30);
 			}
 		}
+		if(Target->GetAction("Travel"))
+				Target->SetAction("Jump");
 	}
 
 };

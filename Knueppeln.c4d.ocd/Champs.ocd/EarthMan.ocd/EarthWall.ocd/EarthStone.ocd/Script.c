@@ -132,8 +132,14 @@ func FxParticlesDamage(object target, proplist effect, int damage, int cause)
 	return 0;
 }
 
-func CanBeHit()
+func CanBeHit(object from)
 {
+	if(from && from->GetOwner() != GetOwner() && GetPlayerTeam(GetOwner()) && FindObject(Find_ID(Rule_NoFriendlyFire)))
+	{
+		if(GetPlayerTeam(GetOwner()) == GetPlayerTeam(from->GetOwner()))
+			return false;
+	}
+	
 	return true;
 }
 

@@ -14,10 +14,13 @@ local CheckFx = new Effect {
 
 	Timer = func()
 	{
+		this.timer++;
+		
 		var r = 5;
-		this.timer += r;
-		Target->CreateParticle("Flash", Cos(this.timer, 20), Sin(this.timer, 20), 0, 0, 360/r, Target.prt_props, 1);
-	
+		this.timer2 += r;
+		Target->CreateParticle("Flash", Cos(this.timer2, 20), Sin(this.timer2, 20), 0, 0, 360/r, Target.prt_props, 1);
+		
+
 		var a = CreateArray(GetStartupTeamCount() + 1);
 		
 		for (var o in Target->FindObjects(Find_Distance(20), Find_ID(Clonk), Find_OCF(OCF_Alive)))
@@ -82,6 +85,16 @@ local CheckFx = new Effect {
 		{
 			Target.capture--;
 			Target.bar->SetValue(Target.capture);
+		}
+		
+		if (Target.owner == team)
+		{
+
+			if (Target.capture < Target.frames_to_capture && this.timer%5 == 0)
+			{
+				Target.capture++;
+				Target.bar->SetValue(Target.capture);
+			}
 		}
 		
 		if(Target.capture <= 0)

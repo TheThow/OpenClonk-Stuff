@@ -17,7 +17,7 @@ func Initialize()
 		Attach = ATTACH_Back | ATTACH_MoveRelative
 	};
 
-	AddEffect("Spaaaace", nil, 1, 2);
+	//AddEffect("Spaaaace", nil, 1, 2);
 
 	CreateEnvironment();
 
