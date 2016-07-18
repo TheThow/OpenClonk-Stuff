@@ -51,8 +51,8 @@ Default=7
 
 [ParameterDef]
 ID=ChampSelection
-Default=1
-LeagueValue=1
+Default=3
+LeagueValue=3
 Name=$ChampSelectionName$
 Description=$ChampSelectionDesc$
 

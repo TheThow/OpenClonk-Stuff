@@ -7,7 +7,7 @@ func SelectChampion()
 	{
 		var type = rotation->GetChamp(GetOwner());
 		SelectChamp([type], GetOwner());
-		PlayerMessage(GetOwner(), "%s", type.Name);
+		PlayerMessage(GetOwner(), "<i>Playing as:</i>|{{%i}}  %s", type, type.Name);
 		return;
 	}
 	
