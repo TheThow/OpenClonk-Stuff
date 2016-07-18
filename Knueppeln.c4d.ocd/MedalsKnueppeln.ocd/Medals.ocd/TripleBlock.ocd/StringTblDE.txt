@@ -1,2 +1,2 @@
-Name=Triple Block
-Description=Awarded when you block more than three projectile attacks with the same block.
+Name=Dreifach-Block
+Description=Wird verliehen, wenn 3 Projektile mit einem Block abgewehrt wurden.

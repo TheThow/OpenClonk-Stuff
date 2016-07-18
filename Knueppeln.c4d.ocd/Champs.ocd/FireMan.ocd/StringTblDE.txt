@@ -1,0 +1,2 @@
+Name=Fire Man
+Description=Eine heiße Sache! \n\nQ = Feuerschuss \nE = Feuertornado \nR = Feuerstürmer \n\nPassiv = Immun gegen Feuer

@@ -1,0 +1,38 @@
+MapType=Karte
+DescMapType=Definiert die Landschaftsform.
+MapTypeBigIsland=Große Insel
+DescMapTypeBigIsland=Eine zentrale Hauptinsel mit einigen Eisflecken in der Luft.
+MapTypeSpots=Kleine inseln
+DescMapTypeSpots=Viele kleine Eisflecken in der Luft.
+Weapons=Waffen
+DescWeapons=Setzt fest welche Angriffsmittel den Spielern zur Verfügung stehen.
+WeaponsClassic=Klassisch
+DescWeaponsClassic=Bögen, Speere, Keulen und einige Feuersteine
+WeaponsExplosive=Explosiv
+DescWeaponsExplosive=Nur Granatwerfer mit Endlosmunition
+Rounds=Rundenzahl
+DescRounds=Mehrere Runden spielen
+Stalemate=Unentschieden!
+WinningTeam=Gewinner: %s
+RemainingRounds=Noch %d Runden.
+LastRound=Letzte Runde!
+Tiebreak=Entscheidende Runde!
+BonusRound=Bonusrunde!
+
+ChampSelectionName=Championauswahl
+ChampSelectionDesc=Du kannst nur aus 2 verschiedenen Champs auswählen beim Respawn
+ChampSelection1=Normal
+ChampSelection2=Zufall
+ChampSelection3=Rotation
+
+RelaunchName=Relaunchanzahl
+RelaunchDesc=Wie oft ein Spieler respawnen kann
+
+ManaRegName=Erhöhte Manaregeneration
+ManaRegDesc=Rate mal...
+
+InstaGibName=InstaGib
+InstaGibDesc=Ein Schuss, sofort tot
+
+ItemsName=Items
+ItemsDesc=Items aktivieren

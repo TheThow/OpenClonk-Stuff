@@ -1,0 +1,2 @@
+Name=Electro Man
+Description=Akku leer? Nicht mit ihm! \n\nQ = Elektroschuss \nE = Elektro Orb \nR = Donnerschlag

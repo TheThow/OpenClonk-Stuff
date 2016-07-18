@@ -1,0 +1,2 @@
+Name=Time Man
+Description=Wie spät ist es? \n\nQ = Energieschuss \nE = Zeitreise \nR = Verlangsamungsfeld

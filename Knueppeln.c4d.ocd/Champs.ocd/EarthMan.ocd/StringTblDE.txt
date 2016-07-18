@@ -1,0 +1,2 @@
+Name=Earth Man
+Description=Sehr bodenständig. \n\nQ = Kleiner Stein \nE = Erdwall \nR = Großer Stein

@@ -1,0 +1,2 @@
+Name=Ice Man
+Description=Niemand ist so cool wie Ice Man. \n\nQ = Schneeball \nE = Blizzard \nR = Eisscherben \n\nErstellt von Zapper

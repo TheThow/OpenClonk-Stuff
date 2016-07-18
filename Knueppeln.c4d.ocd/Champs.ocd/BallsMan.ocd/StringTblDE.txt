@@ -1,0 +1,2 @@
+Name=Balls Man
+Description=Nur ein halber Mann... \n\nQ = Zum Angriff! \nE = Zurück! \nR = Energiestoß!

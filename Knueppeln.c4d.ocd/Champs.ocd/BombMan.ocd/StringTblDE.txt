@@ -1,0 +1,2 @@
+Name=Bomb Man
+Description=Wer wird denn gleich in die Luft gehen? \n\nQ = Haftbombe \nE = Bombenstreuung \n\nErstellt von Zapper
