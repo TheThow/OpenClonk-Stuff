@@ -1,0 +1,2 @@
+Name=Hook Man
+Description=Hakts bei dir? \n\nQ = Haken \nE = Explosivhaken \nR = Sägeblatt

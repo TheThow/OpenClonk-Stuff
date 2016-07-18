@@ -1,0 +1,14 @@
+ScoreName=Punkte zum Sieg
+ScoreDesc=Wie oft ein Team punkten muss zum Gewinn
+
+FFName=Friendly Fire
+FFDesc=Teamkollegen angreifen oder nicht?
+
+ManaRegName=Erhöhte Manaregeneration
+ManaRegDesc=Rate mal...
+
+InstaGibName=InstaGib
+InstaGibDesc=Ein Schuss, sofort tot
+
+ItemsName=Items
+ItemsDesc=Items aktivieren

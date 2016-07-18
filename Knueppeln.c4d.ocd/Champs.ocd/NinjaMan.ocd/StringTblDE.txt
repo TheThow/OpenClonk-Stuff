@@ -1,0 +1,2 @@
+Name=Ninja Man
+Description=Jetzt siehst du mich, jetzt nicht mehr! \n\nQ = Blendpfeil \nE = Schattenläufer \nR = Kritischer Schlag \n\nPassiv = Erhöhte Bewegungsgeschwindigkeit

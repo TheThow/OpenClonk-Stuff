@@ -1,0 +1,2 @@
+Name=Laser Man
+Description=Voll Laser! \n\nQ = Laserstern \nE = Laserschuss \nR = Blink \n\nErstellt von Zapper

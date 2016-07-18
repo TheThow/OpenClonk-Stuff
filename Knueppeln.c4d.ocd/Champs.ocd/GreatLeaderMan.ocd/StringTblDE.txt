@@ -1,0 +1,2 @@
+Name=Great Leader Man
+Description=Macht Knüppeln wieder toll. \n\nQ = Raketenreiter \nE = Zielen und Schießen \nR = Vasallenabwurf \n\nErstellt von Zapper

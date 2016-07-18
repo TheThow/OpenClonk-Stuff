@@ -1,0 +1,20 @@
+FFName=Friendly Fire
+FFDesc=Teamkollegen angreifen oder nicht?
+
+HomebaseWeapons=Waffen
+HomebaseItems=Items
+HomebaseTechnology=Technologie
+HomebaseUpgrades=Upgrades
+HomebaseArtifacts=Artefakte
+
+HomebaseLife=Extra HP
+HomebaseDescLife=Extraleben für den Clonk
+
+ManaRegName=Erhöhte Manaregeneration
+ManaRegDesc=Rate mal...
+
+InstaGibName=InstaGib
+InstaGibDesc=Ein Schuss, sofort tot
+
+ItemsName=Items
+ItemsDesc=Items aktivieren
