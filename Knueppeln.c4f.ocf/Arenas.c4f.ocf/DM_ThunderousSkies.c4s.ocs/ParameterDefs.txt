@@ -1,7 +1,6 @@
 [ParameterDef]
 ID=ChampSelection
 Default=1
-LeagueValue=1
 Name=$ChampSelectionName$
 Description=$ChampSelectionDesc$
 
@@ -25,7 +24,6 @@ Description=$ChampSelectionDesc$
 [ParameterDef]
 ID=Relaunchs
 Default=5
-LeagueValue=5
 Name=$RelaunchName$
 Description=$RelaunchDesc$
 
@@ -54,7 +52,6 @@ Description=$RelaunchDesc$
 [ParameterDef]
 ID=IncreasedManaReg
 Default=1
-LeagueValue=1
 Name=$ManaRegName$
 Description=$ManaRegDesc$
 
@@ -73,7 +70,6 @@ Description=$ManaRegDesc$
 [ParameterDef]
 ID=Items
 Default=100
-LeagueValue=100
 Name=$ItemsName$
 Description=$ItemsDesc$
 

@@ -1,7 +1,6 @@
 [ParameterDef]
 ID=ScoreToWin
 Default=3
-LeagueValue=5
 Name=$ScoreName$
 Description=$ScoreDesc$
 
@@ -25,7 +24,6 @@ Description=$ScoreDesc$
 [ParameterDef]
 ID=FriendlyFire
 Default=2
-LeagueValue=2
 Name=$FFName$
 Description=$FFDesc$
 
@@ -44,7 +42,6 @@ Description=$FFDesc$
 [ParameterDef]
 ID=Items
 Default=0
-LeagueValue=0
 Name=$ItemsName$
 Description=$ItemsDesc$
 

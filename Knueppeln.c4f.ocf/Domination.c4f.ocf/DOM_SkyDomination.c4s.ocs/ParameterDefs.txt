@@ -1,7 +1,6 @@
 [ParameterDef]
 ID=ScoreToWin
 Default=300
-LeagueValue=300
 Name=Score
 Description=Score to win
 
@@ -50,7 +49,6 @@ Description=$FFDesc$
 [ParameterDef]
 ID=NodeCount
 Default=2
-LeagueValue=2
 Name=Nodes
 Description=Nodes
 
@@ -74,7 +72,6 @@ Description=Nodes
 [ParameterDef]
 ID=IncreasedManaReg
 Default=1
-LeagueValue=1
 Name=$ManaRegName$
 Description=$ManaRegDesc$
 
@@ -93,7 +90,6 @@ Description=$ManaRegDesc$
 [ParameterDef]
 ID=Items
 Default=0
-LeagueValue=0
 Name=$ItemsName$
 Description=$ItemsDesc$
 
