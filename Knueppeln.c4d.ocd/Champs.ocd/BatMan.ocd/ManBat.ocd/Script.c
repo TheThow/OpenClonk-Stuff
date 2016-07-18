@@ -75,6 +75,19 @@ private func Construction()
 	maxspeed = 50;
 	Fly();
 	CreateEffect(TravelFx, 1, 1);
+	
+	var rgba = SplitRGBaValue(GetPlayerColor(GetOwner()));
+	
+	var props = {
+		R = rgba[0],
+		G = rgba[1],
+		B = rgba[2],
+		Size = 20,
+		Alpha = 40,
+		Attach = ATTACH_Back | ATTACH_MoveRelative
+	};
+	
+	CreateParticle("Shockwave", 0, 0, 0, 0, 0, props, 1);
 }
 
 public func IsManBat() { return true; }

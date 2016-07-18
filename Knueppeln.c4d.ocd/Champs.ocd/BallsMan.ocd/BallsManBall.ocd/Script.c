@@ -45,6 +45,7 @@ func Initialize()
 {
 	SetAction("Travel");
 	SetRDir(10);
+	SetObjectLayer(nil);
 	//AddEffect("MoveTo", this, 1, 1, this);
 	
 	ox=GetX();
@@ -127,6 +128,8 @@ func Initialize()
 		B = 255,
 		Attach=ATTACH_Back,
 	};
+	
+	
 }
 
 func SetMaster(object clonk)

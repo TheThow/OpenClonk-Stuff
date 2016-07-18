@@ -200,7 +200,7 @@ func FillHomebase(object homebase)
 {	
 	// Buy menu entries
 	homebase->AddCaption("Items");
-	for (var thing in [[Boompack, 5], [MonsterBall, 2], [RubberDucky, 5], [BlackHole, 10], [Superberry, 10]]) 
+	for (var thing in [[Boompack, 5], [MonsterBall, 2], [RubberDucky, 5], [Superberry, 10]]) 
 		homebase->AddHomebaseItem(new Homebase.ITEMTYPE_Consumable { item = thing[0], cost = thing[1], desc = thing[0].Description });
 
 	//homebase->AddCaption("$HomebaseTechnology$");

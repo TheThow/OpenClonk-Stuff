@@ -7,3 +7,4 @@ Height=12
 Offset=-6,-6
 Rotate=1
 NoStabilize=1
+ColorByOwner=1
