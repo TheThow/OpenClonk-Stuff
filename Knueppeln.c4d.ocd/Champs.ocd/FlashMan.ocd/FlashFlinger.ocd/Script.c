@@ -76,7 +76,7 @@ func DoTheLasers()
 
 func HitObject(obj)
 {
-	if(obj->~CanBeHit() == false)
+	if(obj->~CanBeHit(this) == false)
 		return;
 		
 	obj->Fling(0, -2, nil, true);
@@ -85,7 +85,7 @@ func HitObject(obj)
 
 func HitDamage(obj)
 {
-	if(obj->~CanBeHit() == false)
+	if(obj->~CanBeHit(this) == false)
 		return;
 	
 	obj->AddFlashHitEffect();

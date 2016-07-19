@@ -118,7 +118,7 @@ func FireDaLaser(int angle, int color)
 	}
 	
 	
-	for (var obj in FindObjects(Find_OnLine(from_x, from_y, to_x, to_y), Find_OCF(OCF_Alive), Find_Exclude(this.shooter), Find_Func("CanBeHit")))
+	for (var obj in FindObjects(Find_OnLine(from_x, from_y, to_x, to_y), Find_OCF(OCF_Alive), Find_Exclude(this.shooter), Find_Func("CanBeHit", this)))
 	{
 		this->HitDamage(obj);
 	}

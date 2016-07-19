@@ -38,10 +38,7 @@ func Launch(object clonk, int x, int y)
 	clonk->Charge(this, "ChargeStop", ChargeDuration, {});
 	
 	AddEffect("PreLazor", this, 1, 2, this, nil);
-	Sound("Flash::charge", nil, nil, nil, 1, nil, 20);
-	
-	
-	
+	Sound("Flash::charge", nil, nil, nil, nil, nil, 20);
 }
 
 func ChargeInterrupted()
@@ -150,7 +147,7 @@ func ImaFirenMaLazor(from_x, from_y, to_x, to_y, angle)
 	}
 	SoundAt("Flash::lightstrike", nil, nil, nil, nil, nil, 0);
 	
-	for (var obj in FindObjects(Find_OnLine(from_x, from_y, to_x, to_y), Find_OCF(OCF_Alive), Find_Exclude(this.shooter), Find_Func("CanBeHit")))
+	for (var obj in FindObjects(Find_OnLine(from_x, from_y, to_x, to_y), Find_OCF(OCF_Alive), Find_Exclude(this.shooter), Find_Func("CanBeHit", this)))
 	{
 		this->HitObject(obj);
 	}
