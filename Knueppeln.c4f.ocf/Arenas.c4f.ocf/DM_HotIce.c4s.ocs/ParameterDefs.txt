@@ -120,20 +120,24 @@ Description=$ItemsDesc$
 
 
 [ParameterDef]
-ID=InstaGib
+ID=GameMode
 Default=1
-LeagueValue=1
-Name=$InstaGibName$
-Description=$InstaGibDesc$
+Name=$GameModeName$
+Description=$GameModeDesc$
 
 	[Options]
 		
 		[Option]
-		Name=Off
-		Description=Off
+		Name=Classic
+		Description=Classic
 		Value=1
 		
 		[Option]
-		Name=On
-		Description=On
+		Name=$InstaGibName$
+		Description=$InstaGibDesc$
 		Value=2
+
+		[Option]
+		Name=$ComboName$
+		Description=$ComboDesc$
+		Value=3

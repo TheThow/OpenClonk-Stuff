@@ -21,6 +21,9 @@
 	
 	[ControlDef]
 	Identifier=AimingCursor
+
+	[ControlDef]
+	Identifier=ControlButton
 	
 	[ControlDef]
 	Identifier=SpecialMeleeAttack
@@ -51,3 +54,9 @@
 		Control=PlayerMenu
 		Priority=100
 		GUIGroup=50
+	
+		[Assignment]
+		Key=LeftControl
+		Control=ControlButton
+		Priority=500
+		Mouse=0

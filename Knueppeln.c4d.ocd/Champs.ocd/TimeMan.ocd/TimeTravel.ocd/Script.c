@@ -68,17 +68,10 @@ func FxTravelPosTimer(object target, proplist effect, int time)
 	if(tpos == nil)
 		return -1;
 	
-	if(time > effect.dur && !GetEffect("TimeTravel", target))
-	{
-		target.TimeTravelMark = nil;
-		return -1;
-	}
-	
 	effect.cnt +=10;
 	
 	effect.dummy->CreateParticle("Flash", Cos(effect.cnt, effect.size), Sin(effect.cnt, effect.size), 0, 0, 10, effect.props, 2);
 	effect.dummy->CreateParticle("Flash", Cos(effect.cnt + 180, effect.size), Sin(effect.cnt + 180, effect.size), 0, 0, 10, effect.props, 2);
-	CustomMessage(Format("%d", effect.dur/40 - time/40), effect.dummy, target->GetOwner());
 }
 
 func FxTravelPosStop(object target, proplist effect, int reason, bool temporary)

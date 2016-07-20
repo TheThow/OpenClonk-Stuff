@@ -5,7 +5,7 @@
 	@author 
 */
 
-local ManaCost = 35;
+local ManaCost = 30;
 
 local stones;
 local HP = 50;

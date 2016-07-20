@@ -3,6 +3,7 @@
 local SpellDamage = 22;
 local Speed = 60;
 local firetrailparticles;
+local ParticleSize = 10;
 
 func InitEffect()
 {
@@ -10,6 +11,14 @@ func InitEffect()
 	Sound("Fire::FuseLoop", false, 50, nil, 1);
 	SetLightRange(30, 70);
 	SetLightColor(RGB(255, 100, 0));
+	
+	if (shooter.ChampType == ComboMan)
+	{
+		Speed = 75;
+		ParticleSize = 13;
+		SpellDamage = 25;
+		SetVelocity(Angle(0,0,GetXDir(), GetYDir(), 10), Speed, 10);
+	}
 
 	var lightparticle =
 	{
@@ -28,7 +37,7 @@ func InitEffect()
 	firetrailparticles =
 	{
 		Prototype = Particles_FireTrail(),
-		Size = PV_Linear(10,0),
+		Size = PV_Linear(ParticleSize,0),
 		BlitMode = GFX_BLIT_Additive,
 	};
 }

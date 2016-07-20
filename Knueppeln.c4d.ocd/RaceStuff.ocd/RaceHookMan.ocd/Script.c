@@ -120,3 +120,9 @@ func BlockEffect(object clonk, range)
 	}
 	
 }
+
+func SpecialMeleeAttack(object clonk, int x, int y, bool released, bool mouseclick, bool abletocast, bool cooldown)
+{
+	return false;
+}
+

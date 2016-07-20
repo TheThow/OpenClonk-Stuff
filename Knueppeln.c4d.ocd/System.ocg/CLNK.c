@@ -98,6 +98,15 @@ public func ObjectControl(int plr, int ctrl, int x, int y, int strength, bool re
 		}
 	}
 	
+	if (ctrl == CON_ControlButton)
+	{
+		if(release)
+			return;
+			
+		ChampType->CtrlPress(this);
+		return true;
+	}
+	
 	if (ctrl == CON_SpecialMeleeAttack)
 	{
 		var a = GetPlayerCursorPos(plr, true);
@@ -538,6 +547,21 @@ func GetChampType()
 
 func Charge(object caller, string callback, int time, proplist params, bool nosound, bool nofloat)
 {
+	/*if (ChampType == ComboMan)
+	{
+			var eff = AddEffect("Charge", this, 20, 1, this);
+			eff.f = callback;
+			eff.c = caller;
+			eff.p = params;
+			eff.time = time;
+			eff.p.new_angle = eff.p.a;
+			eff.p.new_x = eff.p.x;
+			eff.p.new_y = eff.p.y;
+			eff.p.time = time;
+			RemoveEffect("Charge", this);
+			return;
+	}*/
+
 	if(!nofloat)
 		SetAction("Float");
 		

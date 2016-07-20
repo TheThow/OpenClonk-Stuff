@@ -74,6 +74,26 @@ func ShowHUD()
 
 func FxUpdateHUDTimer()
 {
+	if(ChampType == ComboMan)
+	{
+		if(this.SpellCombo == 1)
+			QSymbol->SetClrModulation(RGB(0,255,0));
+		else
+			QSymbol->SetClrModulation(RGB(255,255,255));
+			
+		if(this.SpellCombo == 2)
+			ESymbol->SetClrModulation(RGB(0,255,0));
+		else
+			ESymbol->SetClrModulation(RGB(255,255,255));
+			
+		if(this.SpellCombo == 3)
+			RSymbol->SetClrModulation(RGB(0,255,0));
+		else
+			RSymbol->SetClrModulation(RGB(255,255,255));
+		
+		return;
+	}
+
 	if(GetMagicEnergy() < ChampType.Special1Spell.ManaCost || !CanCast() || GetEffect("Special1CD", this) || !ChampType->CanCastSpecial1(this))
 		QSymbol->SetClrModulation(RGB(255,0,0));
 	else

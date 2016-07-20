@@ -69,7 +69,7 @@ func Launch(object clonk, int x, int y)
 		angle = Angle(0,0,x,y),
 		cl = clonk
 	};
-	clonk->Charge(this, "ChargeStop", Charge_dur, params);
+	
 	shooter = clonk;
 	dummy = CreateObject(Dummy, x, y, GetOwner());
 	dummy.Visibility = VIS_All;
@@ -85,7 +85,16 @@ func Launch(object clonk, int x, int y)
 		Attach=ATTACH_Front|ATTACH_MoveRelative,
 	};
 	
+	if (clonk.ChampType == ComboMan)
+	{
+		params.new_angle = params.angle*10;
+		ChargeStop(params);
+		return;
+	}
+	
 	dummy->CreateParticle("BatPrt", 0, 0, 0, 0, 0, chargeprt, 2);
+
+	clonk->Charge(this, "ChargeStop", Charge_dur, params);
 }
 
 func ChargeEffect(proplist params)
@@ -210,13 +219,18 @@ func HitEffect()
 		Attach = ATTACH_Front | ATTACH_MoveRelative,
 	};
 
+	var d = Dur;
+	if (shooter.ChampType == ComboMan)
+		d = Dur/2;
+
 	for(var o in FindObjects(Find_Distance(Size), Find_Func("CanBeHit", this)))
 	{
 		if(o->GetID() == Clonk)
 		{
-			o->DisableCasting(Dur);
+			o->DisableCasting(d);
 			var fx = o->CreateEffect(DisruptorHitFx, 1, 1);
-			fx.dur = Dur;
+			fx.dur = d;
+				
 			fx.lightning = lightning;
 		}
 			

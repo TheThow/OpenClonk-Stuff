@@ -13,5 +13,11 @@ ManaRegDesc=Rate mal...
 InstaGibName=InstaGib
 InstaGibDesc=Ein Schuss, sofort tot
 
+GameModeName=Spielmodus
+GameModeDesc=Alternative Spielmodi
+
+ComboName=Combo
+ComboDesc=Zaubern via Tastenkombinationen
+
 ItemsName=Items
 ItemsDesc=Items aktivieren

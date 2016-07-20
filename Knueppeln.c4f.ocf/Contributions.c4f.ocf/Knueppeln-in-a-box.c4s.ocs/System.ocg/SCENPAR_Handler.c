@@ -11,9 +11,12 @@ global func CheckScenarioParameters()
 	if(SCENPAR_IncreasedManaReg == 2)
 		CreateObject(Rule_FastMana, 0, 0, -1);
 		
-	if(SCENPAR_InstaGib == 2)
+	if(SCENPAR_GameMode == 2)
 		CreateObject(Rule_InstaGib, 0, 0, -1);
 
+	if(SCENPAR_GameMode == 3)
+		CreateObject(Rule_ComboMode, 0, 0, -1);
+	
 	if(SCENPAR_Items != 0)
 	{
 		var r = CreateObject(Rule_Items, 0, 0, -1);

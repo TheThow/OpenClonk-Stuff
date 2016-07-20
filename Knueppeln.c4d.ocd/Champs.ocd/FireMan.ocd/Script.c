@@ -31,8 +31,7 @@ func Special2(object clonk, int x, int y, bool released, bool mouseclick, bool a
 {
 	if(!released && !mouseclick && abletocast && !cooldown)
 	{
-		var y_off = -6;
-		if(clonk->LaunchSpell(Special2Spell, x, y, 0, y_off))
+		if(clonk->LaunchSpell(Special2Spell, x, y, 0, 0))
 			return 1;
 	}
 	

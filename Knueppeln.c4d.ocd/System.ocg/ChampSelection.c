@@ -2,18 +2,24 @@
 
 func SelectChampion()
 {
+	if(FindObject(Find_ID(Rule_InstaGib)))
+	{
+		SelectChamp([InstaGibMan], GetOwner());
+		return;
+	}
+	
+	if(FindObject(Find_ID(Rule_ComboMode)))
+	{
+		SelectChamp([ComboMan], GetOwner());
+		return;
+	}
+
 	var rotation = FindObject(Find_ID(Rule_ChampRotation));
 	if(rotation)
 	{
 		var type = rotation->GetChamp(GetOwner());
 		SelectChamp([type], GetOwner());
 		PlayerMessage(GetOwner(), "<i>Playing as:</i>|{{%i}}  %s", type, type.Name);
-		return;
-	}
-	
-	if(FindObject(Find_ID(Rule_InstaGib)))
-	{
-		SelectChamp([InstaGibMan], GetOwner());
 		return;
 	}
 	

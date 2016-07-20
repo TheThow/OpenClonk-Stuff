@@ -52,6 +52,12 @@ func Launch(object clonk, int x, int y)
 		y = y,
 		//marker = marker
 	};
+	
+	if (clonk.ChampType == ComboMan)
+	{
+		Charge_dur = Charge_dur*2/3;
+	}
+	
 	clonk->Charge(this, "ChargeStop", Charge_dur, params, false, true);
 }
 
@@ -134,7 +140,7 @@ func FxCheckHitTimer(object target, proplist effect, int time)
 
 	for(var o in FindObjects(Find_Distance(effect.range, target->GetX(), target->GetY()), Find_Func("CanBeHit", target)))
 	{
-		if(o->GetOwner() == target->GetOwner())
+		if(o->GetID() == Clonk && o->GetOwner() == target->GetOwner())
 			continue;
 		
 		var object_angle = Angle(target->GetX(), target->GetY(), o->GetX(), o->GetY());

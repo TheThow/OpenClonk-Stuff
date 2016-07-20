@@ -13,5 +13,11 @@ ManaRegDesc=Guess what
 InstaGibName=InstaGib
 InstaGibDesc=One hit kills.
 
+GameModeName=Game Mode
+GameModeDesc=Alternative game modes
+
+ComboName=Combo
+ComboDesc=Cast spells via key combinations.
+
 ItemsName=Items
 ItemsDesc=Enable items

@@ -83,7 +83,7 @@ private func Construction()
 		G = rgba[1],
 		B = rgba[2],
 		Size = 20,
-		Alpha = 40,
+		Alpha = 45,
 		Attach = ATTACH_Back | ATTACH_MoveRelative
 	};
 	

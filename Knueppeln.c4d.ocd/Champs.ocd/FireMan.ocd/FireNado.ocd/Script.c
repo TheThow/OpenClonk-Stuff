@@ -41,6 +41,15 @@ func Launch(object clonk, int x, int y)
 	var params = {
 		angle = Angle(0,0,x,y)
 	};
+	SetPosition(GetX(), GetY()-6);
+	
+	if (clonk.ChampType == ComboMan)
+	{
+		params.new_angle = params.angle*10;
+		ChargeStop(params);
+		return;
+	}
+	
 	clonk->Charge(this, "ChargeStop", Charge_Dur, params);
 }
 
