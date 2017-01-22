@@ -176,6 +176,16 @@ func Hit()
 		WormyMcWormFace->Appear(10, GetX(), GetY(), GetController());
 	}
 	
+	if (monster == Bananaphone)
+	{
+		CreateObject(monster, 0, - 5, -1);
+	}
+	
+	if (monster == Mineturtle)
+	{
+		CreateObject(monster, 0, - 1, -1);
+	}
+	
 	
 	var flashparticle =
 	{

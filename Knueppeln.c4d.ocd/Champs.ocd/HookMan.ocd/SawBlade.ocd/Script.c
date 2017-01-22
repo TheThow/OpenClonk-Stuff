@@ -12,6 +12,8 @@ local LifeTime = 400;
 local chargeprt;
 local snapped;
 
+public func IsDangerous4AI() { return true; }
+
 func Initialize()
 {
 	chargeprt =

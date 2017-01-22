@@ -1,14 +1,54 @@
 [Author]
 KKenny / Thow
 
+[Maps]
+KKenny	-	Knueppeln, Skycastle, Spaaaace, Knueppel Run, Sky Domination, Hookrace, Hookrace 2
+K-Pone	-	Knueppeln-in-a-box, Mischland, Disco, Vortex, Rmmzffl, AI-Knueppeln, Hookrace Reverse (original by KKenny)
+K-Pone and DasWipf	-	Ruinenschlucht
+
 [Contributions]
 Zapper	-	LaserMan
 Zapper	-	IceMan
 Zapper 	-	BombMan
 
-K-Pone	- 	Knueppeln in a box
+K-Pone	-	FlashMan
 
 Maikel	-	Medals
+
+[Spell Icons]
+eleazzaar	-	BombMan E
+				EarthMan Q, R
+				ElectroMan Q, E, R
+				FireMan Q, E, R
+				FlashMan R
+				IceMan Q, E, R
+				NinjaMan R,
+				Man F, Space
+				
+				http://opengameart.org/content/painterly-spell-icons-part-4
+				http://opengameart.org/content/painterly-spell-icons-part-3
+				http://opengameart.org/content/painterly-spell-icons-part-2
+				http://opengameart.org/content/painterly-spell-icons-part-1
+				CC-BY 3.0
+				
+Scribe		-	NinjaMan E
+				http://opengameart.org/content/spell-set
+				CC0 (Public Domain)
+				
+HorrorPen	-	NinjaMan Q
+				http://opengameart.org/content/random-rpg-icons-part-1
+				CC-BY 3.0
+				
+Sayned		-	BallsMan Q, E, R
+				Batman Q, E, R
+				EarthMan E
+				GreatLeaderMan Q, E, R
+				HookMan Q, E, R
+				FlashMan Q, E
+				LaserMan Q, E, R
+				TimeMan Q, E, R
+				BombMan Q, R
+
 
 [Special Thanks]
 Zapper	-	For being a helpful mothafucka

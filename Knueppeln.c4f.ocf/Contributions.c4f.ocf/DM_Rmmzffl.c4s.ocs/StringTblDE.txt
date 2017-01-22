@@ -1,0 +1,23 @@
+ChampSelectionName=Championauswahl
+ChampSelectionDesc=Du kannst nur aus 2 verschiedenen Champs auswählen beim Respawn
+ChampSelection1=Normal
+ChampSelection2=Zufall
+ChampSelection3=Rotation
+
+RelaunchName=Relaunchanzahl
+RelaunchDesc=Wie oft ein Spieler respawnen kann
+
+ManaRegName=Erhöhte Manaregeneration
+ManaRegDesc=Rate mal...
+
+InstaGibName=InstaGib
+InstaGibDesc=Ein Schuss, sofort tot
+
+GameModeName=Spielmodus
+GameModeDesc=Alternative Spielmodi
+
+ComboName=Combo
+ComboDesc=Zaubern via Tastenkombinationen
+
+ItemsName=Items
+ItemsDesc=Items aktivieren

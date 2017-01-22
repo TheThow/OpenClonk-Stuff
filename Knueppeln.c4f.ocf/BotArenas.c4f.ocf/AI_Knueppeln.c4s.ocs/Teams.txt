@@ -1,0 +1,5 @@
+[Teams]
+Custom=false
+AutoGenerateTeams=true
+MaxScriptPlayers=10
+ScriptPlayerNames=Siri|Cortana|Watson|GLaDOS|Nummer 5|Tay|Cleverbot|Agent Smith|Atlas|0xC0FFEE

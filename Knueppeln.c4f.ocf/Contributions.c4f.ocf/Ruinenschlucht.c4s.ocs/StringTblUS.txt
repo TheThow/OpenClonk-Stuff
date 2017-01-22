@@ -1,0 +1,23 @@
+ChampSelectionName=Champion Selection
+ChampSelectionDesc=You can only choose between two random champions each time you respawn
+ChampSelection1=Normal
+ChampSelection2=Random
+ChampSelection3=Rotation
+
+RelaunchName=Kill Count
+RelaunchDesc=How many times a player has to Kill (If != Sven2: This can also be Relaunch Count ;) ).
+
+ManaRegName=Increased Mana Regeneration
+ManaRegDesc=Guess what
+
+InstaGibName=InstaGib
+InstaGibDesc=One hit kills.
+
+ItemsName=Items
+ItemsDesc=Enable items
+
+DayNightName=Daytime
+DayNightDesc=Select time of the day
+DescDay=Day
+DescNight=Night
+DescDayNightRandom=Random

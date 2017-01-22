@@ -22,6 +22,10 @@ OverloadTextures
 87=FlatTunnel-concrete2
 88=Tunnel-concrete1_dark
 89=Tunnel-concrete2
+
+90=Tunnel-black
+91=FlatBrick-rainbow
+
 1=Vehicle-none
 2=HalfVehicle-none
 

@@ -27,6 +27,8 @@ local pR = 175;
 local pG = 215;
 local pB = 255;
 
+public func IsDangerous4AI() { return true; }
+
 func Initialize()
 {
 	SetAction("Travel");

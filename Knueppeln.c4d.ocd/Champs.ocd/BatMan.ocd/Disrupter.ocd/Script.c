@@ -21,6 +21,7 @@ local dummy;
 
 func IsReflectable() { return true; }
 func CanBeSucked() { return true; }
+public func IsDangerous4AI() { return true; }
 
 local DisruptorHitFx = new Effect {
 

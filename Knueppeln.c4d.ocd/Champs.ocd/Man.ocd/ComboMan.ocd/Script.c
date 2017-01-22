@@ -74,13 +74,25 @@ func CtrlPress(object clonk)
 	clonk.SpellCombo = 0;
 }
 
+func InitChamp(object clonk)
+{
+	clonk.SpellCombo = 0;
+}
+
 func DoSpellCombo(clonk, x, y, index)
 {
 	clonk.SpellCombo = index + clonk.SpellCombo*10;
 	var digits = CheckDigits(clonk.SpellCombo);
 	
+	if (digits == 1)
+	{
+		AddEffect("ResetCombo", clonk, 1, 10, nil, ComboMan);
+	}
+	
 	if (digits == 2)
 	{
+		RemoveEffect("ResetCombo", clonk);
+		
 		var spell = ComboMan->GetCombo(clonk.SpellCombo);
 		
 		if (spell == nil)
@@ -207,4 +219,10 @@ func BlockEffect(object clonk, range)
 		CreateParticle("StarSpark", x, y, 0, 0, 10, trailparticles);
 	}
 	
+}
+
+func FxResetComboTimer(target)
+{
+	target.SpellCombo = 0;
+	return -1;
 }

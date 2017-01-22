@@ -46,7 +46,6 @@
 		[Assignment]
 		Key=F
 		Control=SpecialMeleeAttack
-		Group=1
 		Priority=200
 
 		[Assignment]
@@ -59,4 +58,3 @@
 		Key=LeftControl
 		Control=ControlButton
 		Priority=500
-		Mouse=0

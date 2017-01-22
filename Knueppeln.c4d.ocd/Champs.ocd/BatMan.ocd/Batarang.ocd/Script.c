@@ -69,6 +69,8 @@ local TravelFx = new Effect {
 
 };
 
+public func IsDangerous4AI() { return true; }
+
 func Initialize()
 {
 	SetAction("Travel");

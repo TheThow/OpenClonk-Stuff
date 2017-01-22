@@ -25,6 +25,7 @@ func Launch(object clonk, int x, int y)
 	minion.CatchBlow = this.MinionCatchBlow;
 	minion.IsMinion = true;
 	RemoveEffect("UpdateHUD", minion);
+	minion->~RemoveHUD();
 	RemoveObject();
 }
 

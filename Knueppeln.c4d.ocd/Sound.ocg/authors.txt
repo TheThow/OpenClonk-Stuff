@@ -1,4 +1,4 @@
-K-Pone					- monsterball, Flash::(all)
+K-Pone					- monsterball, Flash::(all), fakehole_explode1-3, norejoin1
 
 NoiseNoir				- electro_explosion* (CC BY 3.0)
 						http://freesound.org/people/NoiseNoir/sounds/238302/

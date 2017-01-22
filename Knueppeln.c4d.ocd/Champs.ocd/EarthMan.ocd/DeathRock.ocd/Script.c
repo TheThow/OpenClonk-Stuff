@@ -14,6 +14,7 @@ local sharpflame;
 local lightning;
 
 func CanBeSucked() { return GetEffect("Life", this); }
+public func IsDangerous4AI() { return true; }
 
 private func Construction()
 {

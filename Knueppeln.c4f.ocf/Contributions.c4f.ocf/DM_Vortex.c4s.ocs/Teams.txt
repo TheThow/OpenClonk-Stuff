@@ -1,0 +1,4 @@
+[Teams]
+Custom=false
+AllowHostilityChange=true
+AutoGenerateTeams=true

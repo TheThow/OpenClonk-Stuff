@@ -23,7 +23,8 @@ func SelectChampion()
 		return;
 	}
 	
-	ChooseMenu();
+	if (GetPlayerType(GetOwner()) == C4PT_Script) {	AIChooseChamp(); }
+	else ChooseMenu();
 }
 
 func ChooseMenu()
@@ -127,8 +128,15 @@ func ChampUpdateDesc(data, int player, int ID, int subwindowID, object target)
 	GuiUpdate(update, choosemenu_id, 1, this);
 }
 
-func SelectChamp(data, int player, int ID, int subwindowID, object target)
+func AIChooseChamp()
 {
+	var rndstuff = Random(2);
+	if (rndstuff == 0) ScheduleCall(this, "SelectChamp", Random(150), 0, [FireMan]);
+	if (rndstuff == 1) ScheduleCall(this, "SelectChamp", Random(150), 0, [ElectroMan]);
+}
+
+func SelectChamp(data, int player, int ID, int subwindowID, object target)
+{	
 	if(FindObject(Find_Func("UseTeamExclusiveChampions")) && !FindObject(Find_ID(Rule_InstaGib)))
 	{
 		var banned = GetCurrentBannedTeamChampions(GetPlayerTeam(GetOwner()));
@@ -169,6 +177,7 @@ func SelectChamp(data, int player, int ID, int subwindowID, object target)
 	}
 	
 	UpdateAllSelectionMenus();
+	UpdateSymbolsForChamp();
 }
 
 func UpdateSelectionMenu()

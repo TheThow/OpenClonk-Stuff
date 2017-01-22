@@ -1,0 +1,120 @@
+[ParameterDef]
+ID=ChampSelection
+Default=1
+Name=$ChampSelectionName$
+Description=$ChampSelectionDesc$
+
+	[Options]
+		
+		[Option]
+		Name=$ChampSelection1$
+		Description=$ChampSelection1$
+		Value=1
+		
+		[Option]
+		Name=$ChampSelection2$
+		Description=$ChampSelection2$
+		Value=2
+		
+		[Option]
+		Name=$ChampSelection3$
+		Description=$ChampSelection3$
+		Value=3
+
+[ParameterDef]
+ID=Relaunchs
+Default=5
+Name=$RelaunchName$
+Description=$RelaunchDesc$
+
+	[Options]
+		
+		[Option]
+		Name=3
+		Description=3
+		Value=3
+		
+		[Option]
+		Name=5
+		Description=5
+		Value=5
+		
+		[Option]
+		Name=7
+		Description=7
+		Value=7
+		
+		[Option]
+		Name=10
+		Description=10
+		Value=10
+		
+[ParameterDef]
+ID=IncreasedManaReg
+Default=1
+Name=$ManaRegName$
+Description=$ManaRegDesc$
+
+	[Options]
+		
+		[Option]
+		Name=Off
+		Description=Off
+		Value=1
+		
+		[Option]
+		Name=On
+		Description=On
+		Value=2
+		
+[ParameterDef]
+ID=Items
+Default=0
+Name=$ItemsName$
+Description=$ItemsDesc$
+
+	[Options]
+		
+		[Option]
+		Name=None
+		Description=None
+		Value=0
+		
+		[Option]
+		Name=Rare
+		Description=Rare
+		Value=200
+		
+		[Option]
+		Name=Common
+		Description=Common
+		Value=100
+		
+		[Option]
+		Name=Crazy
+		Description=Crazy
+		Value=50
+
+
+[ParameterDef]
+ID=GameMode
+Default=1
+Name=$GameModeName$
+Description=$GameModeDesc$
+
+	[Options]
+		
+		[Option]
+		Name=Classic
+		Description=Classic
+		Value=1
+		
+		[Option]
+		Name=$InstaGibName$
+		Description=$InstaGibDesc$
+		Value=2
+
+		[Option]
+		Name=$ComboName$
+		Description=$ComboDesc$
+		Value=3

@@ -67,7 +67,7 @@ func IsAiming() { return true; }
 
 public func ObjectControl(int plr, int ctrl, int x, int y, int strength, bool repeat, bool release)
 {	
-	if (ctrl == CON_Interact && release == false && !Contained())
+	if (ctrl == CON_Interact && !Contained())
 	{
 		if(!GetEffect("BlockingCD", this))
 		{
@@ -184,7 +184,7 @@ public func ObjectControl(int plr, int ctrl, int x, int y, int strength, bool re
 			return true;
 	}
 
-	if (ctrl == CON_Jump && IsJumping() && release == false) 
+	if (ctrl == CON_Jump && IsJumping()) 
 	{
 		if (GetEffect("IntControlJumpDouble", this))
   		{
@@ -211,7 +211,7 @@ public func ObjectControl(int plr, int ctrl, int x, int y, int strength, bool re
 	 	}
 	}
 	
-	if (ctrl == CON_Left && IsJumping() && release == false)
+	if (ctrl == CON_Left && IsJumping() && !release)
 	{
 	
 	  	if (GetEffect("IntControlLeftDouble", this))
@@ -225,8 +225,8 @@ public func ObjectControl(int plr, int ctrl, int x, int y, int strength, bool re
 		    		JumpEffect("Left");
 		    		DoMagicEnergy(-JUMP_MANA);
 		    		
-		    		if(GetDir() == DIR_Right)
-						FlipDir();
+		    		/*if(GetDir() == DIR_Right)
+						FlipDir();*/
 				}
     		}
     		else
@@ -244,7 +244,7 @@ public func ObjectControl(int plr, int ctrl, int x, int y, int strength, bool re
   		
 	}
 	
-	if (ctrl == CON_Right && IsJumping() && release == false)
+	if (ctrl == CON_Right && IsJumping() && !release)
 	{
 	  	if (GetEffect("IntControlRightDouble", this))
   		{
@@ -258,8 +258,8 @@ public func ObjectControl(int plr, int ctrl, int x, int y, int strength, bool re
 	    			JumpEffect("Right");
 	    			DoMagicEnergy(-JUMP_MANA);
 	    			
-	    			if(GetDir() == DIR_Left)
-						FlipDir();
+	    			/*if(GetDir() == DIR_Left)
+						FlipDir();*/
 				}
     		}
       		else
@@ -275,7 +275,7 @@ public func ObjectControl(int plr, int ctrl, int x, int y, int strength, bool re
   		}
 	}
 	
-	if (ctrl == CON_Down && IsJumping() && release == false)
+	if (ctrl == CON_Down && IsJumping())
 	{
 	  	if (GetEffect("IntControlDownDouble", this))
   		{
@@ -580,9 +580,22 @@ func FxChargeTimer(object target, proplist effect, int time)
 	if(!effect.c)
 		return -1;
 
+	// Scriptplayers have no cursor. The KnueppelnAI has got a helperfunction for that. It returns coordinates of the AI-Clonk's Target.
 	var a = GetPlayerCursorPos(GetOwner(), true);
-	var x1 = a[0] - GetX();
-	var y1 = a[1] - GetY();
+	var x1;
+	var y1;
+	if (!a)
+	{
+		a = KnueppelnAI->GetAICursor( KnueppelnAI->GetAI(target) );
+		x1 = a[0];
+		y1 = a[1];
+	}
+	else
+	{
+		x1 = a[0] - GetX();
+		y1 = a[1] - GetY();
+	}
+	
 	
 	effect.p.new_angle = Angle(0,0,x1,y1,10);
 	effect.p.new_x = x1;
@@ -624,8 +637,19 @@ func FxChargeStop(object target, proplist effect, int reason, bool temporary)
 	SetAction("Jump");
 			
 	var a = GetPlayerCursorPos(GetOwner(), true);
-	var x1 = a[0] - GetX();
-	var y1 = a[1] - GetY();
+	var x1;
+	var y1;
+	if (!a)
+	{
+		a = KnueppelnAI->GetAICursor( KnueppelnAI->GetAI(target) );
+		x1 = a[0];
+		y1 = a[1];
+	}
+	else
+	{
+		x1 = a[0] - GetX();
+		y1 = a[1] - GetY();
+	}
 	
 	effect.p.new_angle = Angle(0,0,x1,y1, 10);
 	effect.p.new_x = x1;

@@ -6,6 +6,8 @@ local SpellDamage = 15;
 
 local shooter;
 
+public func IsDangerous4AI() { return true; }
+
 func Initialize()
 {
 	SetAction("Travel");
