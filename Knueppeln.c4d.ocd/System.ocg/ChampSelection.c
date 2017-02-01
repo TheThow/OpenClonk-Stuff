@@ -53,7 +53,7 @@ func ChooseMenu()
 		list = 
 		{
 			Right = "50%-0.5em",
-			Style = GUI_VerticalLayout,
+			Style = GUI_GridLayout,
 			BackgroundColor = RGBa(0, 0, 0, 150)
 		},
 		right = {
@@ -62,11 +62,27 @@ func ChooseMenu()
 			ID = 1,
 			icon = 
 			{
-				Left = "50%-4em",
-				Right = "50%+4em",
+				Left = "0%",
+				Right = "100%",
 				Bottom = "5em",
 				Top = "1em",
-				Symbol = Clonk
+				/* Symbol = Clonk, */
+				
+				champicon =
+				{
+					Symbol = Sword,
+					Left = "1em",
+					Right = "5em",
+				},
+				
+				champname =
+				{
+					Left = "7em",
+					Right = "100%",
+					Text = "",
+					Style = GUI_TextVCenter,
+				}
+				
 			},
 			textwindow =
 			{
@@ -91,7 +107,8 @@ func ChooseMenu()
 		{
 			ID = 100 + index,
 			Priority = index,
-			Bottom = "+2em",
+			Bottom = "+2.5em",
+			Right = "+2.5em",
 			BackgroundColor = {Std = 0, Hover = 0x50ffff00, Nope = 0x50ff0000},
 			OnMouseIn = [ 
 				GuiAction_Call(this, "ChampUpdateDesc", [champ]), 
@@ -101,13 +118,13 @@ func ChooseMenu()
 			OnClick = GuiAction_Call(this, "SelectChamp", [champ]),
 			icon = {
 				Symbol = champ,
-				Right = "+2em"
+				Right = "+2.5em"
 			},
-			text = {
+			/* text = {
 				Left = "+2.5em", 
 				Style = GUI_TextVCenter, 
 				Text = champ.Name
-			},
+			}, */
 		};
 		GuiAddSubwindow(subm, menu.list);
 	}
@@ -122,7 +139,18 @@ func ChampUpdateDesc(data, int player, int ID, int subwindowID, object target)
 {
 	var update = 
 	{
-		icon = {Symbol = data[0]},
+		icon = 
+		{
+			champicon =
+			{
+				Symbol = data[0],
+			},
+			
+			champname = 
+			{
+				Text = data[0].Name,
+			},
+		},
 		textwindow = {Text = data[0].Description}
 	};
 	GuiUpdate(update, choosemenu_id, 1, this);

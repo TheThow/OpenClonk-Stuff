@@ -77,7 +77,7 @@ local WormyAppearFx = new Effect
 			if(!Random(2))
 				a += 25;
 			head->SetVelocity(a, 100);
-			head->Sound("wormy_sound", false, 90);
+			head->Sound("wormy_sound*", false, 90);
 			Target->RemoveObject();
 			return -1;
 		}

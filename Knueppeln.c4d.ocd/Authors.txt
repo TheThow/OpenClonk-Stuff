@@ -13,6 +13,8 @@ Zapper 	-	BombMan
 
 K-Pone	-	FlashMan
 
+K-Pone	-	Major improvements
+
 Maikel	-	Medals
 
 [Spell Icons]
@@ -35,9 +37,6 @@ Scribe		-	NinjaMan E
 				http://opengameart.org/content/spell-set
 				CC0 (Public Domain)
 				
-HorrorPen	-	NinjaMan Q
-				http://opengameart.org/content/random-rpg-icons-part-1
-				CC-BY 3.0
 				
 Sayned		-	BallsMan Q, E, R
 				Batman Q, E, R
@@ -48,6 +47,7 @@ Sayned		-	BallsMan Q, E, R
 				LaserMan Q, E, R
 				TimeMan Q, E, R
 				BombMan Q, R
+				NinjaMan Q
 
 
 [Special Thanks]

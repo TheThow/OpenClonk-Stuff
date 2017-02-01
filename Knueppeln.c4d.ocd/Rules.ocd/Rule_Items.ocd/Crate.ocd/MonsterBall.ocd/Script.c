@@ -76,6 +76,20 @@ local RemoveFx = new Effect
 	
 };
 
+local WormySpamFx = new Effect
+{
+	Timer = func()
+	{
+		if (Time == 10) WormyMcWormFace->Appear(10, Target->GetX(), Target->GetY(), Target->GetController());
+		if (Time == 20) WormyMcWormFace->Appear(10, Target->GetX(), Target->GetY(), Target->GetController());
+		if (Time == 30) WormyMcWormFace->Appear(10, Target->GetX(), Target->GetY(), Target->GetController());
+		if (Time == 40) WormyMcWormFace->Appear(10, Target->GetX(), Target->GetY(), Target->GetController());
+		if (Time == 50) WormyMcWormFace->Appear(10, Target->GetX(), Target->GetY(), Target->GetController());
+		if (Time == 55) return -1;
+		
+	}
+};
+
 func InitEffect()
 {
 	SetLightRange(30, 70);
@@ -111,7 +125,7 @@ func Initialize()
 	graphics_index = Random(4);
 	if (graphics_index) SetGraphics(Format("%d", graphics_index+1));
 	
-	monsters = [Piranha, Squid, WormyMcWormFace];
+	monsters = [Piranha, Squid, WormyMcWormFace, Howler];
 	
 	thrown = false;
 	
@@ -156,6 +170,11 @@ func Hit()
 		CreateObject(monster, 0, - 5, -1);
 	}
 	
+	if (monster == Howler)
+	{
+		CreateObject(monster, 0, - 5, -1);
+	}
+	
 	if (monster == Bat)
 	{
 		for (var i = 0; i < 7; i++)
@@ -174,18 +193,10 @@ func Hit()
 	if (monster == WormyMcWormFace)
 	{
 		WormyMcWormFace->Appear(10, GetX(), GetY(), GetController());
+		if (Random(10) < 3) WormyMcWormFace->Appear(10, GetX(), GetY(), GetController());
+		if (Random(10) < 2) WormyMcWormFace->Appear(10, GetX(), GetY(), GetController());
+		if (Random(100) < 2) this->CreateObject(Dummy)->CreateEffect(WormySpamFx, 1, 1);
 	}
-	
-	if (monster == Bananaphone)
-	{
-		CreateObject(monster, 0, - 5, -1);
-	}
-	
-	if (monster == Mineturtle)
-	{
-		CreateObject(monster, 0, - 1, -1);
-	}
-	
 	
 	var flashparticle =
 	{
