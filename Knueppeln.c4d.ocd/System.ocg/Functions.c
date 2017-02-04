@@ -31,11 +31,11 @@ global func GetChampionsWithoutBanned()
 		return GetChampions();
 	
 	var champs = [];
-	for (champ in GetChampions())
+	for (var champ in GetChampions())
 	{
 		var flag = false;
 	
-		for (champ2 in banned_Champions)
+		for (var champ2 in banned_Champions)
 		{
 			if (champ == champ2)
 			{

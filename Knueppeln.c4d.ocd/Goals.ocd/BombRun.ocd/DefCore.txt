@@ -8,7 +8,6 @@ Offset=-4,-4
 VertexFriction=20
 Value=1
 Mass=10
-Components=Goal_BombRun=1
 Projectile=1
 Rotate=1
 

@@ -101,10 +101,10 @@ func Launch(object clonk, int x, int y)
 func ChargeEffect(proplist params)
 {
 	var a = params.new_angle;
-	var x = Sin(a, 10, 10);
-	var y = -Cos(a, 10, 10);
+	var dx = Sin(a, 10, 10);
+	var dy = -Cos(a, 10, 10);
 	
-	dummy->SetPosition(GetX() + x, GetY() + y);
+	dummy->SetPosition(GetX() + dx, GetY() + dy);
 }
 
 func ChargeInterrupted()

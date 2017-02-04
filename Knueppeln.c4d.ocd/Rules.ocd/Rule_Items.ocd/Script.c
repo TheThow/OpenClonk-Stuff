@@ -22,7 +22,7 @@ global func GetRandomItem()
 	var items = [Superberry, Boompack, MonsterBall, BlackHole, RubberDucky, FakeHole];
 	var l = [];
 	
-	for (item in items)
+	for (var item in items)
 	{
 		for(var i = 0; i < item.probability; i++)
 			PushBack(l, item);

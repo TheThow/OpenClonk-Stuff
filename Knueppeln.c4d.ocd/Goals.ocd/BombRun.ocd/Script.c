@@ -117,7 +117,7 @@ func FxGoalCheckTimer(object target, proplist effect, int time)
 		Scoreboard->SetData(effect.enemy, "score", team_score[effect.enemy - 1]);
 		
 		DoScoreboardShow(1);
-		Schedule(nil, Format("DoScoreboardShow(-1)"), 35 * MIME_ShowBoardTime);
+		Schedule(nil, Format("DoScoreboardShow(-1)"), 36 * 10);
 		
 		
 		if (team_score[effect.enemy - 1] == GameCall("ScoreToWin"))
@@ -251,7 +251,7 @@ protected func RelaunchPlayer(int plr, int killer)
 	GameCall("OnPlayerRelaunch", plr, true);
 	// Show scoreboard for a while.
 	DoScoreboardShow(1, plr + 1);
-	Schedule(this,Format("DoScoreboardShow(-1, %d)", plr + 1), 35 * MIME_ShowBoardTime);
+	Schedule(this,Format("DoScoreboardShow(-1, %d)", plr + 1), 36 * 10);
 	return; // _inherited(plr, killer, ...);
 }
 

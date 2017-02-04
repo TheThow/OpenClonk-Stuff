@@ -16,7 +16,7 @@ local JumpPadFx = new Effect {
 	{
 		var r = Target->GetR() - 90;
 		
-		for (obj in Target->FindObjects(Find_OnLine(Cos(r-75, 18), Sin(r-75, 22), Cos(r+75, 18), Sin(r+75,22)), Find_ID(Clonk)))
+		for (var obj in Target->FindObjects(Find_OnLine(Cos(r-75, 18), Sin(r-75, 22), Cos(r+75, 18), Sin(r+75,22)), Find_ID(Clonk)))
 		{
 			if(GetEffect("JumpPadCD", obj))
 				continue;

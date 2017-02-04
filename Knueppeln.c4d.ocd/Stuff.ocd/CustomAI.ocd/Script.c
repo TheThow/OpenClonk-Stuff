@@ -27,7 +27,7 @@ func Execute(proplist fx, int time)
 		
 		if (Scenario->GetMaterial(end[0], end[1] -4) == Material("DuroLava"))
 		{
-			if ( fx.Target->CanCast() && (!(GetEffect("SpecialMeleeCD", fx.Target || fx.Target.ChampType->CanCastSpecialMelee(fx.Target))) ))
+			if (fx.Target->CanCast() && (!GetEffect("SpecialMeleeCD", fx.Target) || fx.Target.ChampType->CanCastSpecialMelee(fx.Target)))
 			{
 				ExecuteSpecialMeleeAttack(fx, RandomX(-10,10), -50);
 			}
@@ -202,7 +202,7 @@ func ExecuteDoubleJump(fx)
 			var ok = fx.Target->ControlUpDouble();
 			if(ok)
 			{
-				fx.Target->JumpEffect("Up");
+				fx.Target->JumpEffect(fx.Target, "Up");
 				fx.Target->DoMagicEnergy(-fx.Target.JUMP_MANA);
 			}
 		}
