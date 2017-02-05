@@ -44,7 +44,7 @@ public func SpawnRandomAIClonk()
 	
 	if (rndstuff == 0)
 	{
-		clnk.ChampType = FireMan;
+		clnk.ChampType = BatMan;
 		clnk.ChampType->InitChamp(clnk);
 	}
 	
@@ -66,7 +66,7 @@ func Initialize()
 	//InitClouds();
 	ActivateMedalRule();
 	
-	//CreateEffect(clonkspawnerfx, 1, 1);
+	CreateEffect(clonkspawnerfx, 1, 1);
 	antirejoin = CreateEffect(antirejoinfx, 100, 100);
 	
 	g_aiskins = [];

@@ -495,23 +495,34 @@ func LaunchSpecial1(x, y, released, mouse, abletocast)
 {
 	//!released && !mouse && abletocast && !GetEffect("Special1CD", this) &&
 	var ret = ChampType->Special1(this, x, y, released, mouse, abletocast, GetEffect("Special1CD", this));
-	if(ret)
+	if (ret)
+	{
 		AddEffect("Special1CD", this, 1, ChampType.Special1Cooldown);
-	
+		return true;
+	}
+	return false;
 }
 
 func LaunchSpecial2(int x, int y, released, mouse, abletocast)
 {
 	var ret = ChampType->Special2(this, x, y, released, mouse, abletocast, GetEffect("Special2CD", this));
-	if(ret)
+	if (ret)
+	{
 		AddEffect("Special2CD", this, 1, ChampType.Special2Cooldown);
+		return true;
+	}
+	return false;
 }
 
 func LaunchSpecial3(int x, int y, released, mouse, abletocast)
 {
 	var ret = ChampType->Special3(this, x, y, released, mouse, abletocast, GetEffect("Special3CD", this));
-	if(ret)
+	if (ret)
+	{
 		AddEffect("Special3CD", this, 1, ChampType.Special3Cooldown);
+		return true;
+	}
+	return false;
 }
 
 func LaunchSpell(id ID, int x, int y, int x_off, int y_off, proplist params)
@@ -530,7 +541,7 @@ func LaunchSpell(id ID, int x, int y, int x_off, int y_off, proplist params)
 	else
 	{
 		Sound("UI::Error", 0, 50, GetOwner());
-		return 0;
+		return false;
 	}
 	
 	if (spell == nil)
@@ -586,7 +597,7 @@ func FxChargeTimer(object target, proplist effect, int time)
 	var y1;
 	if (!a)
 	{
-		a = KnueppelnAI->GetAICursor( KnueppelnAI->GetAI(target) );
+		a = KnueppelnAI->GetAICursor(KnueppelnAI->GetAI(target));
 		x1 = a[0];
 		y1 = a[1];
 	}

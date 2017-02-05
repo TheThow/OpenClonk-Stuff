@@ -98,17 +98,17 @@ cooldown 		spell is on cooldown
 */
 func Special1(object clonk, int x, int y, bool released, bool mouseclick, bool abletocast, bool cooldown)
 {
-	return 0;
+	return false;
 }
 
 func Special2(object clonk, int x, int y, bool released, bool mouseclick, bool abletocast, bool cooldown)
 {
-	return 0;
+	return false;
 }
 
 func Special3(object clonk, int x, int y, bool released, bool mouseclick, bool abletocast, bool cooldown)
 {
-	return 0;
+	return false;
 }
 
 /*
@@ -254,7 +254,8 @@ func SpecialMeleeAttack(object clonk, int x, int y, bool released, bool mousecli
 func SpecialMeleeStrike(clonk, target)
 {
 	clonk->WeaponDamage(target, 20);
-	target->Fling(0, -2);
+	if (target)
+		target->Fling(0, -2);
 	clonk->Sound("Objects::Weapons::WeaponHit?", false);
 }
 

@@ -20,16 +20,6 @@ local Special1Spell = FlashPrisma;
 local Special2Spell = FlashFlinger;
 local Special3Spell = SuperSpectralLazor;
 
-/*
-Parameters: 
-clonk 			Calling clonk, 
-x		 		mouse x, 
-y 				mouse y, 
-released		key/mouse event released, 
-mouseclick 		mouseclick when the special key is held down, 
-abletocast 		clonk is able to cast at the moment, 
-cooldown 		spell is on cooldown
-*/
 func Special1(object clonk, int x, int y, bool released, bool mouseclick, bool abletocast, bool cooldown)
 {
 	if(!released && !mouseclick && abletocast && !cooldown)
@@ -39,6 +29,9 @@ func Special1(object clonk, int x, int y, bool released, bool mouseclick, bool a
 	}
 	return 0;
 }
+
+public func IsSpecial1Shot() { return true; }
+public func IsSpecial1ShotSpeed() { return Special1Spell.Speed; }
 
 func Special2(object clonk, int x, int y, bool released, bool mouseclick, bool abletocast, bool cooldown)
 {
@@ -215,11 +208,6 @@ func CastSpellWithSpellRange(object clonk, int x, int y, bool released, bool mou
 	}
 	
 	return 0;
-}
-
-func CastSpellWithSpellRangeCondition(object clonk, int x, int y, bool released, bool mouseclick, bool abletocast, bool cooldown, proplist props, id spell)
-{
-	return true;
 }
 
 func FxFlashHitTimer(object target, proplist effect, int time)

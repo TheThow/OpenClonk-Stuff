@@ -22,20 +22,27 @@ func Special1(object clonk, int x, int y, bool released, bool mouseclick, bool a
 	if(!released && !mouseclick && abletocast && !cooldown)
 	{
 		if(clonk->LaunchSpell(Special1Spell, x, y, 0, 0))
-			return 1;
+			return true;
 	}
-	return 0;
+	return false;
 }
+
+public func IsSpecial1Shot() { return true; }
+public func IsSpecial1ShotStraight() { return true; }
+public func IsSpecial1ShotSpeed() { return Special1Spell.Speed; }
 
 func Special2(object clonk, int x, int y, bool released, bool mouseclick, bool abletocast, bool cooldown)
 {
 	if(!released && !mouseclick && abletocast && !cooldown)
 	{
 		if(clonk->LaunchSpell(Special2Spell, x, y, 0, 0))
-			return 1;
+			return true;
 	}
-	return 0;
+	return false;
 }
+
+public func IsSpecial2Shot() { return true; }
+public func IsSpecial2ShotSpeed() { return Special2Spell.Speed; }
 
 func Special3(object clonk, int x, int y, bool released, bool mouseclick, bool abletocast, bool cooldown)
 {

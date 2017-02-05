@@ -13,3 +13,6 @@ local Visibility = VIS_None;
 func Initialize()
 {
 }
+
+// UI not saved.
+public func SaveScenarioObject() { return false; }
