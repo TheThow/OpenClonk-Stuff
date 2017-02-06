@@ -1,2 +1,10 @@
 Name=Time Man
-Description=Wie spät ist es? \n\nQ = Energieschuss \nE = Zeitreise \nR = Verlangsamungsfeld
+Description=Wie spät ist es?
+Spell1Name=Energieschuss
+Spell1Description=Verschießt ein Projektil, das bei wiederholtem Treffer erhöhten Schaden austeilt.
+Spell2Name=Zeitreise
+Spell2Description=Setzt eine Markierung. Bei wiederholtem Einsatz der Fähigkeit springt der Clonk dorthin zurück. Gegner an diesem Punkt erleiden Schaden, sobald der Clonk am Ziel ankommt.
+Spell3Name=Verlangsamungsfeld
+Spell3Description=Erzeugt ein Energiefeld, das darin befindliche Objekte verlangsamt.
+PassiveName=
+PassiveDescription=

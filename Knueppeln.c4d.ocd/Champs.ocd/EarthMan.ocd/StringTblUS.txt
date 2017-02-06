@@ -6,3 +6,5 @@ Spell2Name=Earth Wall
 Spell2Description=Creates a solid wall that absorbs up to 50 damage when clicking within the range indicator.
 Spell3Name=Big Rock
 Spell3Description=Launches a giant rock that bounces around the battlefield, damaging everything on its way.
+PassiveName=
+PassiveDescription=

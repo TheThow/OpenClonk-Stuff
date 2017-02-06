@@ -1,2 +1,10 @@
 Name=Fire Man
-Description=Someone need a lighter? \n\nQ = Fire Shot \nE = Fire Tornado \nR = Fire Dash \n\nPassive = Immune to fire
+Description=Someone need a lighter?
+Spell1Name=Fire Shot
+Spell1Description=Shoots a fire projectile that spreads some flames around.
+Spell2Name=Fire Tornado
+Spell2Description=Shoots a Fire Tornado that throws Clonks upwards and deflects projectiles upwards.
+Spell3Name=Fire Dash
+Spell3Description=Charges and dashes to the mouse position. Impacts with an explosion. Can be used to move through walls.
+PassiveName=Fireproof
+PassiveDescription=Is immune to flames.

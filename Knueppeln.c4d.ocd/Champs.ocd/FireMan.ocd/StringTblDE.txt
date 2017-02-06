@@ -1,2 +1,10 @@
 Name=Fire Man
-Description=Eine heiße Sache! \n\nQ = Feuerschuss \nE = Feuertornado \nR = Feuerstürmer \n\nPassiv = Immun gegen Feuer
+Description=Eine heiße Sache!
+Spell1Name=Feuerschuss
+Spell1Description=Verschießt ein Feuerprojektil, dass beim Aufprall Flammen verstreut.
+Spell2Name=Feuertornado
+Spell2Description=Verschießt einen Feuertornado, der Clonks nach oben schleudert und Projektile nach oben umlenkt.
+Spell3Name=Feuerstürmer
+Spell3Description=Lädt Energie auf, um anschließend auf den Zielpunkt loszustürmen. Der Clonk schlägt am Zielpunkt mit einer Explosion ein. Kann auch durch Wände benutzt werden.
+PassiveName=Feuerschutz
+PassiveDescription=Ist immun gegen Flammen.

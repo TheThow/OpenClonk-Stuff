@@ -1,2 +1,10 @@
 Name=Ice Man
-Description=Noone ain't as cool as IceMan. \n\nQ = Snow Ball \nE = Blizzard \nR = Ice Shards \n\nContributed by Zapper
+Description=Noone ain't as cool as IceMan.
+Spell1Name=Snow Ball
+Spell1Description=Launches a snowball. Slow, but flings heavily on impact.
+Spell2Name=Blizzard
+Spell2Description=Launches a blizzard towards the mouse position.
+Spell3Name=Ice Shards
+Spell3Description=Creates 6 Ice Shards that fly around the Clonk. They can be shot one by one.
+PassiveName=
+PassiveDescription=

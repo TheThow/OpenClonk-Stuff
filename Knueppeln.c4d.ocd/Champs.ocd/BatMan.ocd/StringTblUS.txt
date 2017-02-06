@@ -1,8 +1,10 @@
 Name=Bat Man
 Description=Bat boy bat boy watcha gonna do?
 Spell1Name=Batarang
-Spell1Description=<Insert Spell1Description>
+Spell1Description=Throws a boomerang that returns after short time. It can be caught and mana will reimburse a small amount of mana.
 Spell2Name=Disrupter
-Spell2Description=<Insert Spell2Description>
+Spell2Description=Shoots a projectile that damages everything around on impact and disables abilities (except blocking and air-jumps).
 Spell3Name=Bat Call
 Spell3Description=Launches a swarm of bats.
+PassiveName=
+PassiveDescription=

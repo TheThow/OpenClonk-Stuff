@@ -1,2 +1,10 @@
 Name=Electro Man
-Description=Akku leer? Nicht mit ihm! \n\nQ = Elektroschuss \nE = Elektro Orb \nR = Donnerschlag
+Description=Akku leer? Nicht mit ihm!
+Spell1Name=Elektroschuss
+Spell1Description=Verschießt ein elektrisches Projektil.
+Spell2Name=Elektro Orb
+Spell2Description=Verschießt einen Orb, der nach kurzer Zeit wieder zu seinem Meister zurückfliegt. Kann mehrere Zeile treffen und mehrmals Schaden austeilen.
+Spell3Name=Donnerschlag
+Spell3Description=Lässt einen Blitz am Mauszeiger einschlagen. Richtet hohen Schaden an.
+PassiveName=
+PassiveDescription=

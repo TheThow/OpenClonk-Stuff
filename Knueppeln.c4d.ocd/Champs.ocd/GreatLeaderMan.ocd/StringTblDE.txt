@@ -1,2 +1,10 @@
 Name=Great Leader Man
-Description=Macht Knüppeln wieder toll. \n\nQ = Raketenreiter \nE = Zielen und Schießen \nR = Vasallenabwurf \n\nErstellt von Zapper
+Description=Macht Knüppeln wieder toll.
+Spell1Name=Raketenreiter
+Spell1Description=Verschießt einen Minion auf einer Rakete. Die Rakete visiert automatisch einen nahen Gegner an.
+Spell2Name=Zielen und Schießen
+Spell2Description=Alle Minions schießen in Richtung des Mauscursors.
+Spell3Name=Vasallenabwurf
+Spell3Description=Erzeugt Minions.
+PassiveName=
+PassiveDescription=

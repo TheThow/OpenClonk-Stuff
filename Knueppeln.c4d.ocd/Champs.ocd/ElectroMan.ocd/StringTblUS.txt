@@ -1,2 +1,10 @@
 Name=Electro Man
-Description=You can use him to charge your smartphone. \n\nQ = Electro Shot \nE = Electro Orb \nR = Thunder Strike
+Description=You can use him to charge your smartphone.
+Spell1Name=Electro Shot
+Spell1Description=Shoots an electric projectile.
+Spell2Name=Electro Orb
+Spell2Description=Shoots an orb that returns to its owner after some time. Can damage multiple targets and hit multiple times.
+Spell3Name=Thunder Strike
+Spell3Description=Launches a lightning at the mouse position. Deals high damage.
+PassiveName=
+PassiveDescription=

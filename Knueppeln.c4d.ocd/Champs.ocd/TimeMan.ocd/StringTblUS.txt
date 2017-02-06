@@ -1,2 +1,10 @@
 Name=Time Man
-Description=What time is it? \n\nQ = Energy Shot \nE = Time Travel \nR = Slowing Field
+Description=What time is it?
+Spell1Name=Energy Shot
+Spell1Description=Launches a projectile that deals more damage when hitting again quickly.
+Spell2Name=Time Travel
+Spell2Description=Sets a mark. When using the ability again, the Clonk will travel teleport back to this point and will damage enemies at the mark.
+Spell3Name=Slowing Field
+Spell3Description=Creates an energy field that slows down everything inside.
+PassiveName=
+PassiveDescription=

@@ -1,2 +1,10 @@
 Name=Laser Man
-Description=Voll Laser! \n\nQ = Laserstern \nE = Laserschuss \nR = Blink \n\nErstellt von Zapper
+Description=Voll Laser!
+Spell1Name=Laserstern
+Spell1Description=Erzeugt einen Laserstern, der nach kurzer Zeit in viele Richtungen Laserstrahlen feuert.
+Spell2Name=Laser
+Spell2Description=Lädt auf und feuert einen Laserstrahl in Richtung des Mauszeigers. Kann bis zur maximalen Länge an Wänden reflektieren.
+Spell3Name=Blink
+Spell3Description=Teleportiert in Richtung des Mauszeigers und feuert dabei einen schwachen Laserstrahl in dieselbe Richtung.
+PassiveName=
+PassiveDescription=

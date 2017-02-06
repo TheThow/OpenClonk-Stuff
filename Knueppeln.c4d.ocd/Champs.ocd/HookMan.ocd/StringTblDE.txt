@@ -1,2 +1,10 @@
 Name=Hook Man
-Description=Hakts bei dir? \n\nQ = Haken \nE = Explosivhaken \nR = Sägeblatt
+Description=Hakts bei dir?
+Spell1Name=Haken
+Spell1Description=Verschießt einen Haken. Trifft der Haken eine Wand oder ein Ziel (Clonks, Kisten, Boompacks, ...) zieht sich der Clonk zum Ziel. Kann erneut ausgelöst werden zum sofortigen Heranziehen in der Luft.
+Spell2Name=Explosivhaken
+Spell2Description=Verschießt einen explosiven Haken. Prallt an Wänden ab.
+Spell3Name=Sägeblatt
+Spell3Description=Verschleudert ein Sägeblatt, dass an der Landschaft anheftet und daran lang wandert.
+PassiveName=
+PassiveDescription=

@@ -1,2 +1,10 @@
 Name=Flash Man
-Description=Regenboooogen!!! \n\nQ = Prisma \nE = Lazerer \nR = Superspektrallazor! \n\nErstellt von K-Pone
+Description=Regenboooogen!!!
+Spell1Name=Prisma
+Spell1Description=Verschießt ein Projektil, das nach kurzer Zeit drei Laserstrahlen abfeuert.
+Spell2Name=Flinger
+Spell2Description=Verschießt ein Projektil, das mehrere Laserstrahlen abfeuert, wenn es mit einer Wand kollidiert.
+Spell3Name=Superspektrallazor
+Spell3Description=Verschießt einen starken Laserstrahl, der auch durch Wände trifft.
+PassiveName=
+PassiveDescription=

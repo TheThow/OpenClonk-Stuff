@@ -1,2 +1,10 @@
 Name=Flash Man
-Description=Rainboooow!!!. \n\nQ = Prisma \nE = Flinger \nR = Super Spectral Lazor! \n\nContributed by K-Pone
+Description=Rainboooow!!!
+Spell1Name=Prisma
+Spell1Description=Shoots a projectile that fires 3 lasers after short time.
+Spell2Name=Flinger
+Spell2Description=Shoots a projectile that fires multiple lasers when colliding with walls.
+Spell3Name=Super Spectral Lazor
+Spell3Description=Shoots a strong laser that hits through walls.
+PassiveName=
+PassiveDescription=

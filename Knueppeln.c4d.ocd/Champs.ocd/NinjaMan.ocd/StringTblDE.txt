@@ -1,2 +1,10 @@
 Name=Ninja Man
-Description=Jetzt siehst du mich, jetzt nicht mehr! \n\nQ = Blendpfeil \nE = Schattenläufer \nR = Kritischer Schlag \n\nPassiv = Erhöhte Bewegungsgeschwindigkeit
+Description=Jetzt siehst du mich, jetzt nicht mehr!
+Spell1Name=Blendpfeil
+Spell1Description=Verschießt einen Pfeil, der das Ziel bei einem Treffer kurzzeitig blendet.
+Spell2Name=Schattenläufer
+Spell2Description=Macht den Clonk kurzzeitig unsichtbar für Gegner. Angriffe beenden die Wirkung vorzeitig.
+Spell3Name=Kritischer Schlag
+Spell3Description=Sammelt kräfte um anschließend einen kritischen Nahkampfangriff auszuführen. Schleudert getroffene Ziele sehr weit weg und richtet hohen Schaden an.
+PassiveName=Wie der Wind
+PassiveDescription=Bewegungsgeschwindigkeit ist um 20% erhöht

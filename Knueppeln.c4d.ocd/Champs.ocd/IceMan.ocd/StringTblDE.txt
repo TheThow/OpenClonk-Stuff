@@ -1,2 +1,10 @@
 Name=Ice Man
-Description=Niemand ist so cool wie Ice Man. \n\nQ = Schneeball \nE = Blizzard \nR = Eisscherben \n\nErstellt von Zapper
+Description=Niemand ist so cool wie Ice Man.
+Spell1Name=Schneeball
+Spell1Description=Verschießt einen Schneeball. Fliegt langsam, schleudert aber immens.
+Spell2Name=Blizzard
+Spell2Description=Feuert einen Hagelsturm in Richtung des Mauszeigers.
+Spell3Name=Eisscherben
+Spell3Description=Erzeugt 6 Eisscherben, die den Clonk umkreisen. Diese können anschließend abgefeuert werden.
+PassiveName=
+PassiveDescription=

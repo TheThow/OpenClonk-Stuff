@@ -1,2 +1,10 @@
 Name=Ninja Man
-Description=Now you see me, now you don't! \n\nQ = Poison Dart \nE = Shadow Walk \nR = Critical Strike \n\nPassive = Increased movement speed
+Description=Now you see me, now you don't!
+Spell1Name=Blinding Dart
+Spell1Description=Launches an arrow that blinds enemies on hit.
+Spell2Name=Shadow Walk
+Spell2Description=Makes the Clonk invisible to enemies.
+Spell3Name=Critical Strike
+Spell3Description=Charges and executes a critical melee attack that deals high damages and flings enemies far away
+PassiveName=Like the wind
+PassiveDescription=Movement speed is increased by 20%

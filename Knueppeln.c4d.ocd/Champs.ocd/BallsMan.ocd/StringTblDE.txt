@@ -1,8 +1,10 @@
 Name=Balls Man
 Description=Nur ein halber Mann...
 Spell1Name=Zum Angriff!
-Spell1Description=Your ball moves to your mouse position damaging enemies on the target location.
+Spell1Description=Dein Ball fliegt in zum Mauscursor und beschädigt Gegner am Zielort.
 Spell2Name=Zurück!
-Spell2Description=Your ball moves back to you with increased speed damaging everything on its path. Upon reaching you it grants you a shield that absorbs 15 damage.
+Spell2Description=Dein Ball fliegt zu dir zurück und fügt dabei allen getroffenen Gegnern Schaden zu. Ist der Ball wieder bei dir, erhältst du einen Schild, der 15 Schadenspunkte abfängt.
 Spell3Name=Energiestoß!
-Spell3Description=Your ball damages everything near it after a small delay.
+Spell3Description=Dein Ball entlädt einen starken Energiestoß, der Gegner Schaden zufügt und wegschleudert.
+PassiveName=
+PassiveDescription=

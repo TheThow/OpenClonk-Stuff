@@ -1,2 +1,10 @@
 Name=Hook Man
-Description=Wanna hook up? \n\nQ = Hook \nE = Explosive Hook \nR = Sawblade
+Description=Wanna hook up?
+Spell1Name=Hook
+Spell1Description=Launches a hook. Pulls towards the hook when it hits a target (Clonks, Crates, Boompacks, ...). Can be used again to pull towards the hook without hitting a target.
+Spell2Name=Explosive Hook
+Spell2Description=Launches an explosive Hook. Deflects on walls.
+Spell3Name=Sawblade
+Spell3Description=Launches a sawblade that snaps to walls and moves along its borders.
+PassiveName=
+PassiveDescription=
