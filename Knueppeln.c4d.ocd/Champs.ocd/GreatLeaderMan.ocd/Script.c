@@ -1,14 +1,11 @@
 /**
-	IceMan
+	GreatLeaderMan
 	
 
 	@author 
 */
 
 #include Man
-
-local Name = "$Name$";
-local Description = "$Description$";
 
 local Special3Spell = GreatLeaderMan_Minion;
 local Special2Spell = AimAndFire;

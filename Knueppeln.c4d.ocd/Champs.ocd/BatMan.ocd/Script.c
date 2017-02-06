@@ -7,9 +7,6 @@
 
 #include Man
 
-local Description = "$Description$";
-local Name = "$Name$";
-
 local Special1Spell = Batarang;
 local Special2Spell = Disrupter;
 local Special3Spell = BatCall;
@@ -169,3 +166,14 @@ private func Definition(proplist def)
 	def.PictureTransformation = Trans_Mul(Trans_Rotate(-65, 0, 1, 0), Trans_Rotate(-35, 0, 0, 1));
 	return _inherited(def, ...);
 }
+
+/*-- Properties --*/
+
+local Name = "$Name$";
+local Description = "$Description$";
+local Spell1Name = "$Spell1Name$";
+local Spell1Description = "$Spell1Description$";
+local Spell2Name = "$Spell2Name$";
+local Spell2Description = "$Spell2Description$";
+local Spell3Name = "$Spell3Name$";
+local Spell3Description = "$Spell3Description$";

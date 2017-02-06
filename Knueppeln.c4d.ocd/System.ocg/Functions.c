@@ -288,17 +288,3 @@ global func Unstuck()
 	}
 	
 }
-
-global func ShuffleArray(array arr)
-  {
-    for (var i = GetLength(arr) - 1; i > 0; i--)
-    {
-      var index = Random(i + 1);
-      // Simple swap
-      var a = arr[index];
-      arr[index] = arr[i];
-      arr[i] = a;
-    }
-    
-    return arr;
-  }

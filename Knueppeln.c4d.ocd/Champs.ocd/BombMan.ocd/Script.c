@@ -7,9 +7,6 @@
 
 #include Man
 
-local Name = "$Name$";
-local Description = "$Description$";
-
 local Special1Spell = StickyBomb;
 local Special3Spell = StickyBombMagnet;
 
@@ -123,3 +120,14 @@ func CleanUp(object clonk)
 	for (var bomb in FindObjects(Find_ID(StickyBomb), Find_Owner(clonk->GetOwner())))
 		bomb->Remove();
 }
+
+/*-- Properties --*/
+
+local Name = "$Name$";
+local Description = "$Description$";
+local Spell1Name = "$Spell1Name$";
+local Spell1Description = "$Spell1Description$";
+local Spell2Name = "$Spell2Name$";
+local Spell2Description = "$Spell2Description$";
+local Spell3Name = "$Spell3Name$";
+local Spell3Description = "$Spell3Description$";

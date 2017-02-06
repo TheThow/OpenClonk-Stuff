@@ -1,2 +1,8 @@
 Name=Earth Man
-Description=Sehr bodenständig. \n\nQ = Kleiner Stein \nE = Erdwall \nR = Großer Stein
+Description=Sehr bodenständig.
+Spell1Name=Small Rock
+Spell1Description=Launches a ballistic projectile that will bounce off the ground once and explode on contact with enemies.
+Spell2Name=Earth Wall
+Spell2Description=Creates a solid wall that absorbs up to 50 damage when clicking within the range indicator.
+Spell3Name=Big Rock
+Spell3Description=Launches a giant rock that bounces around the battlefield, damaging everything on its way.

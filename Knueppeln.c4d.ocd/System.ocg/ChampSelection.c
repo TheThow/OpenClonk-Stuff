@@ -4,26 +4,27 @@ func SelectChampion()
 {
 	if(FindObject(Find_ID(Rule_InstaGib)))
 	{
-		SelectChamp([InstaGibMan], GetOwner());
+		SelectChamp(InstaGibMan, GetOwner());
 		return;
 	}
 	
 	if(FindObject(Find_ID(Rule_ComboMode)))
 	{
-		SelectChamp([ComboMan], GetOwner());
+		SelectChamp(ComboMan, GetOwner());
 		return;
 	}
 
 	var rotation = FindObject(Find_ID(Rule_ChampRotation));
-	if(rotation)
+	if (rotation)
 	{
 		var type = rotation->GetChamp(GetOwner());
-		SelectChamp([type], GetOwner());
+		SelectChamp(type, GetOwner());
 		PlayerMessage(GetOwner(), "<i>Playing as:</i>|{{%i}}  %s", type, type.Name);
 		return;
 	}
 	
-	if (GetPlayerType(GetOwner()) == C4PT_Script) {	AIChooseChamp(); }
+	if (GetPlayerType(GetOwner()) == C4PT_Script)
+		AIChooseChamp();
 	else ChooseMenu();
 }
 
@@ -31,13 +32,13 @@ func ChooseMenu()
 {
 	var champs = GetChampions();
 	
-	if(FindObject(Find_ID(Rule_RandomChamp)))
+	if (FindObject(Find_ID(Rule_RandomChamp)))
 	{
 		champs = GetChampionsWithoutBanned();
 		var i = Random(GetLength(champs));
 		var u = Random(GetLength(champs));
 		
-		while(u == i)
+		while (u == i)
 		{
 			u = Random(GetLength(champs));
 		}
@@ -52,49 +53,87 @@ func ChooseMenu()
 		Margin = ["2em", "2em"],
 		list = 
 		{
-			Right = "50%-0.5em",
+			Right = "50%-0.4em",
 			Style = GUI_GridLayout,
 			BackgroundColor = RGBa(0, 0, 0, 150)
 		},
 		right = {
 			Target = this,
-			Left = "50%+0.5em",
+			Left = "50%+0.4em",
 			ID = 1,
-			icon = 
+			champ = 
 			{
-				Left = "0%",
-				Right = "100%",
+				Top = "0em",
 				Bottom = "5em",
-				Top = "1em",
-				/* Symbol = Clonk, */
-				
-				champicon =
+				Margin = "0.1em",
+				icon =
 				{
-					Symbol = Sword,
-					Left = "1em",
+					Symbol = nil,
 					Right = "5em",
 				},
-				
-				champname =
+				text =
 				{
-					Left = "7em",
-					Right = "100%",
-					Text = "",
-					Style = GUI_TextVCenter,
-				}
-				
+					Left = "5em",
+					Margin = ["0.1em", nil, nil, nil],
+					Text = "Select your Champion!",
+				}				
 			},
-			textwindow =
+			champspell1 = 
 			{
-				Top = "6em",
-				Left = "10%",
-				Right = "80%",
-				Text = "Select your Champion!"
+				Top = "5em",
+				Bottom = "8em",
+				Margin = "0.1em",
+				icon = 
+				{
+					Right = "3em",
+					Symbol = nil,
+				},
+				text = 
+				{
+					Left = "3em",
+					Margin = ["0.1em", nil, nil, nil],
+					Text = nil				
+				}
+			},
+			champspell2 = 
+			{
+				Top = "8em",
+				Bottom = "11em",
+				Margin = "0.1em",
+				icon = 
+				{
+					Right = "3em",
+					Symbol = nil,
+				},
+				text = 
+				{
+					Left = "3em",
+					Margin = ["0.1em", nil, nil, nil],
+					Text = nil				
+				}
+			},
+			champspell3 = 
+			{
+				Top = "11em",
+				Bottom = "14em",
+				Margin = "0.1em",
+				icon = 
+				{
+					Right = "3em",
+					Symbol = nil,
+				},
+				text = 
+				{
+					Left = "3em",
+					Margin = ["0.1em", nil, nil, nil],
+					Text = nil				
+				}
 			}
 		},
-		separator = {
-			Left = "50%-0.5em",
-			Right = "50%+0.5em",
+		separator = 
+		{
+			Left = "50%-0.4em",
+			Right = "50%+0.4em",
 			BackgroundColor = RGBa(240, 240, 240, 150)
 		}
 	};
@@ -107,24 +146,25 @@ func ChooseMenu()
 		{
 			ID = 100 + index,
 			Priority = index,
-			Bottom = "+2.5em",
-			Right = "+2.5em",
+			Bottom = "4em",
+			Right = "4em",
 			BackgroundColor = {Std = 0, Hover = 0x50ffff00, Nope = 0x50ff0000},
-			OnMouseIn = [ 
-				GuiAction_Call(this, "ChampUpdateDesc", [champ]), 
+			OnMouseIn = 
+			[ 
+				GuiAction_Call(this, "ChampUpdateDesc", champ), 
 				GuiAction_SetTag("Hover")
 			],
 			OnMouseOut = GuiAction_SetTag("Std"),
-			OnClick = GuiAction_Call(this, "SelectChamp", [champ]),
-			icon = {
-				Symbol = champ,
-				Right = "+2.5em"
+			OnClick = GuiAction_Call(this, "SelectChamp", champ),
+			icon = 
+			{
+				Symbol = champ
 			},
-			/* text = {
-				Left = "+2.5em", 
-				Style = GUI_TextVCenter, 
+			/*text = {
+				Top = "3em", 
+				Style = GUI_TextHCenter | GUI_TextVCenter, 
 				Text = champ.Name
-			}, */
+			}*/
 		};
 		GuiAddSubwindow(subm, menu.list);
 	}
@@ -135,62 +175,92 @@ func ChooseMenu()
 	UpdateSelectionMenu();
 }
 
-func ChampUpdateDesc(data, int player, int ID, int subwindowID, object target)
+func ChampUpdateDesc(id champ, int player, int ID, int subwindowID, object target)
 {
 	var update = 
 	{
-		icon = 
+		champ = 
 		{
-			champicon =
+			icon = 
 			{
-				Symbol = data[0],
-			},
-			
-			champname = 
+				Symbol = champ
+			},			
+			text = 
 			{
-				Text = data[0].Name,
+				Text = Format("<c aa0000>%s:</c> %s", champ.Name, champ.Description)
 			},
 		},
-		textwindow = {Text = data[0].Description}
+		champspell1 =
+		{
+			icon =
+			{
+				Symbol = HUDSymbol,
+				GraphicsName = Format("%iQ", champ),
+			},
+			text = 
+			{
+				Text = Format("<c aa0000>%s:</c> %s", champ.Spell1Name, champ.Spell1Description)
+			}
+		},
+		champspell2 =
+		{
+			icon =
+			{
+				Symbol = HUDSymbol,
+				GraphicsName = Format("%iE", champ),
+			},
+			text = 
+			{
+				Text = Format("<c aa0000>%s:</c> %s", champ.Spell2Name, champ.Spell2Description)
+			}
+		},
+		champspell3 =
+		{
+			icon =
+			{
+				Symbol = HUDSymbol,
+				GraphicsName = Format("%iR", champ),
+			},
+			text = 
+			{
+				Text = Format("<c aa0000>%s:</c> %s", champ.Spell3Name, champ.Spell3Description)
+			}
+		}
 	};
 	GuiUpdate(update, choosemenu_id, 1, this);
 }
 
 func AIChooseChamp()
 {
-	var rndstuff = Random(2);
-	if (rndstuff == 0) ScheduleCall(this, "SelectChamp", Random(150), 0, [FireMan]);
-	if (rndstuff == 1) ScheduleCall(this, "SelectChamp", Random(150), 0, [ElectroMan]);
+	ScheduleCall(this, "SelectChamp", Random(150), 0, RandomElement([FireMan, ElectroMan]));
 }
 
-func SelectChamp(data, int player, int ID, int subwindowID, object target)
+func SelectChamp(id champ, int player, int ID, int subwindowID, object target)
 {	
-	if(FindObject(Find_Func("UseTeamExclusiveChampions")) && !FindObject(Find_ID(Rule_InstaGib)))
+	if (FindObject(Find_Func("UseTeamExclusiveChampions")) && !FindObject(Find_ID(Rule_InstaGib)))
 	{
 		var banned = GetCurrentBannedTeamChampions(GetPlayerTeam(GetOwner()));
 		
-		for(var c in banned)
+		for (var c in banned)
 		{
-			if(c == data[0])
+			if (c == champ)
 			{
 				Sound("UI::Error", true, 50, player);
 				return false;
 			}
 		}
-		
-		//RemoveTeamChamp(GetPlayerTeam(GetOwner()), ChampType);
 	}
 	
-	for(var c in GetBannedChampions())
+	for (var c in GetBannedChampions())
 	{
-		if(c == data[0])
+		if (c == champ)
 		{
 			Sound("UI::Error", true, 50, player);
 			return false;
 		}
 	}
 	
-	ChampType = data[0];
+	ChampType = champ;
 	ChampType->InitChamp(this);
 	
 	this->CancelMenu();
@@ -212,21 +282,19 @@ func UpdateSelectionMenu()
 {
 	var possible = GetChampions();
 
-	if(FindObject(Find_Func("UseTeamExclusiveChampions")))
+	if (FindObject(Find_Func("UseTeamExclusiveChampions")))
 	{
 		var banned = GetCurrentBannedTeamChampions(GetPlayerTeam(GetOwner()));
 		for(var c in banned)
 		{
 			var champ_index = GetIndexOf(possible, c) + 101;
 			GuiUpdate({BackgroundColor = 0x50ff0000}, choosemenu_id, champ_index, nil);
-			//GuiUpdateTag("Nope", choosemenu_id, c);
 		}
 	}
 	
-	for(var c in GetBannedChampions())
+	for (var c in GetBannedChampions())
 	{
 		var champ_index = GetIndexOf(possible, c) + 101;
 		GuiUpdate({BackgroundColor = 0x50ff0000}, choosemenu_id, champ_index, nil);
-		//GuiUpdateTag("Nope", choosemenu_id, c);
 	}
 }

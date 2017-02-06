@@ -7,9 +7,6 @@
 
 #include Man
 
-local Description = "$Description$";
-local Name = "$Name$";
-
 local Special1Spell = TimeProjectile;
 local Special2Spell = TimeTravel;
 local Special3Spell = SlowField;

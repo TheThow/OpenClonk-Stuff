@@ -7,9 +7,6 @@
 
 #include Man
 
-local Description = "$Description$";
-local Name = "$Name$";
-
 local Special1Spell = Hook;
 local Special2Spell = ExplosiveHook;
 local Special3Spell = SawBlade;
@@ -46,6 +43,10 @@ func Special2(object clonk, int x, int y, bool released, bool mouseclick, bool a
 	return 0;
 }
 
+public func IsSpecial2Shot() { return true; }
+public func IsSpecial2ShotStraight() { return true; }
+public func IsSpecial2ShotSpeed() { return Special2Spell.Speed; }
+
 func Special3(object clonk, int x, int y, bool released, bool mouseclick, bool abletocast, bool cooldown)
 {
 	if(!released && !mouseclick && abletocast && !cooldown)
@@ -55,6 +56,9 @@ func Special3(object clonk, int x, int y, bool released, bool mouseclick, bool a
 	}
 	return 0;
 }
+
+public func IsSpecial3Shot() { return true; }
+public func IsSpecial3ShotSpeed() { return Special3Spell.Speed; }
 
 func JumpEffect(object clonk, dir)
 {

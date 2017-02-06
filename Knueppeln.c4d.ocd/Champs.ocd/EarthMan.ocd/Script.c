@@ -7,9 +7,6 @@
 
 #include Man
 
-local Description = "$Description$";
-local Name = "$Name$";
-
 local Special1Spell = EarthProjectile;
 local Special2Spell = EarthWall;
 local Special3Spell = DeathRock;
@@ -168,3 +165,14 @@ global func AddEarthHitEffect()
 {
 	this->AddEffect("EarthHit", this, 20, 1, nil, EarthMan);
 }
+
+/*-- Properties --*/
+
+local Name = "$Name$";
+local Description = "$Description$";
+local Spell1Name = "$Spell1Name$";
+local Spell1Description = "$Spell1Description$";
+local Spell2Name = "$Spell2Name$";
+local Spell2Description = "$Spell2Description$";
+local Spell3Name = "$Spell3Name$";
+local Spell3Description = "$Spell3Description$";

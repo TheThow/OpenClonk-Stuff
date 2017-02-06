@@ -1,0 +1,8 @@
+Name=<Insert Name>
+Description=<Insert description>
+Spell1Name=<Insert Spell1Name>
+Spell1Description=<Insert Spell1Description>
+Spell2Name=<Insert Spell2Name>
+Spell2Description=<Insert Spell2Description>
+Spell3Name=<Insert Spell3Name>
+Spell3Description=<Insert Spell3Description>

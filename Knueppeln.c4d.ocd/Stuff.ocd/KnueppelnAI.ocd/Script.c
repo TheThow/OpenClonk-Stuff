@@ -258,7 +258,54 @@ public func ExecuteRSpell(effect fx)
 {
 	if (!fx.target)
 		return false;
+		
+	// Get champ type and target info.
 	var type = fx.Target.ChampType;
+	var x = fx.Target->GetX(), y = fx.Target->GetY();
+	var tx = fx.target->GetX(), ty = fx.target->GetY() - 4;
+	var d = Distance(x, y, tx, ty);
+
+	// Perform shooting spells.
+	if (type->~IsSpecial3Shot())
+	{
+		// Determine shot speed.
+		var shot_speed = type->~IsSpecial3ShotSpeed();
+		var dx, dy;
+
+		// Correct for projected movement of target.
+		var dt = d * 10 / shot_speed;
+		tx += this->GetTargetXDir(fx.target, dt);
+		ty += this->GetTargetYDir(fx.target, dt);
+		if (!fx.target->GetContact(-1))
+			if (!fx.target->GetCategory() & C4D_StaticBack)
+				ty += GetGravity() * dt * dt / 200;	
+		
+		// Perform straight shot.
+		if (type->~IsSpecial3ShotStraight())
+		{
+			if (!PathFree(x, y, tx, ty))
+				return false;
+			dx = tx - x;
+			dy = ty - y;
+		
+		}
+		// Perform ballistic shot.
+		else
+		{
+			// Ballistic angle takes into account projectile speed and projected movement of target.
+			var angle = this->GetBallisticAngle(x, y, tx, ty, shot_speed, 180);
+			if (angle == nil)
+				return false;
+			dx = Sin(angle, 1000, 10);
+			dy = -Cos(angle, 1000, 10);
+		}
+		if (fx.Target->LaunchSpecial3(dx, dy, false, false, fx.Target->CanCast() && type->CanCastSpecial3(fx.Target)))
+		{
+			this->LogKN(fx, "Execute special 3 spell (E).");
+			return true;
+		}
+		return false;
+	}
 
 	if (type == ElectroMan || type == FireMan || type == BatMan)
 	{

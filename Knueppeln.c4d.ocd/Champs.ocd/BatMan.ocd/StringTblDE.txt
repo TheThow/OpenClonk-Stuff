@@ -1,2 +1,8 @@
 Name=Bat Man
-Description=Bat boy bat boy watcha gonna do? \n\nQ = Batarang \nE Unterbrecher \nR = Fledersturm rufen
+Description=Bat boy bat boy watcha gonna do?
+Spell1Name=Batarang
+Spell1Description=<Insert Spell1Description>
+Spell2Name=Unterbrecher
+Spell2Description=<Insert Spell2Description>
+Spell3Name=Fledersturm rufen
+Spell3Description=Launches a swarm of bats.

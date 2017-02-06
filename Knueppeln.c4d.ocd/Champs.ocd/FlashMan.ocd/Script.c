@@ -9,9 +9,6 @@
 
 #include Man
 
-local Description = "$Description$";
-local Name = "$Name$";
-
 local Special1Cooldown = 8;
 local Special2Cooldown = 8;
 local Special3Cooldown = 400;

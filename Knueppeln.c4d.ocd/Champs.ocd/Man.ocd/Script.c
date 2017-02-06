@@ -1,9 +1,12 @@
 /**
 	Man
-	
+	Basic script for a champ.
 
-	@author 
+	@author KKenny
 */
+
+
+/*-- Spells --*/
 
 local Special1Cooldown = 10;
 local Special2Cooldown = 10;
@@ -12,79 +15,6 @@ local Special3Cooldown = 10;
 local Special1Spell = Projectile;
 local Special2Spell = Projectile;
 local Special3Spell = Projectile;
-
-local SpecialMeleeFx = new Effect {
-
-	Construction = func()
-	{
-		this.x = Target->GetX();
-		this.y = Target->GetY();
-	},
-
-	Timer = func()
-	{
-		if(this.r)
-			return -1;
-	
-		this.timer++;
-		//Target->CreateParticle("Flash", 0, 0, 0, 0, 15, this.p, 1);
-		Target->DrawParticleLine("Flash", 0, 0, this.x - Target->GetX(), this.y - Target->GetY(), 1, 0, 0, 15, this.p);
-		
-		for (var obj in Target->FindObjects(Find_Distance(15), Find_Exclude(Target), Find_Func("CanBeHit", Target)))
-		{
-			if(GetEffect(Format("SpecialMeleeHitCD%d", Target->GetOwner()), obj))
-				continue;
-			
-			var fx = GetEffect("SpecialMeleeFx", obj);
-			if(fx)
-			{
-				fx.r = true;
-				RemoveEffect("SpecialMeeleFx", obj);
-				var a = Angle(Target->GetX(), Target->GetY(), obj->GetX(), obj->GetY());
-				Target->Sound("Hits::Materials::Metal::LightMetalHit?");
-				
-				Target->Fling(Sin(a - 180, 5), -Cos(a - 180, 5));
-				obj->Fling(Sin(a, 5), -Cos(a, 5));
-				AddEffect(Format("SpecialMeleeHitCD%d", obj->GetOwner()), Target, 1, 1);
-				this.r = true;
-				return -1;
-			}
-			
-			Target.ChampType->SpecialMeleeStrike(Target, obj);
-			AddEffect(Format("SpecialMeleeHitCD%d", Target->GetOwner()), obj, 1, 11);
-		}
-		
-		this.x = Target->GetX();
-		this.y = Target->GetY();
-		
-		if(this.timer > 10)
-			return -1;
-	},
-	
-	Damage = func(dmg)
-	{
-		if(dmg < 0)
-			this.r = true;
-		
-		return dmg;
-	},
-	
-	Stop = func()
-	{
-		if(!this.r)
-		{
-			if(Target->GetAction("Travel"))
-			{
-				var a = Angle(0, 0, Target->GetXDir(), Target->GetYDir());
-				Target->SetVelocity(a, 30);
-			}
-		}
-		if(Target->GetAction("Travel"))
-				Target->SetAction("Jump");
-	}
-
-};
-
 
 /*
 Parameters: 
@@ -211,6 +141,9 @@ func CastSpellWithSpellRangeCondition(object clonk, int x, int y, bool released,
 	return true;
 }
 
+
+/*-- Special Melee Attack --*/
+
 func SpecialMeleeAttack(object clonk, int x, int y, bool released, bool mouseclick, bool abletocast, bool cooldown)
 {
 	if (!abletocast || cooldown || released || mouseclick)
@@ -251,6 +184,78 @@ func SpecialMeleeAttack(object clonk, int x, int y, bool released, bool mousecli
 	return true;
 }
 
+local SpecialMeleeFx = new Effect {
+
+	Construction = func()
+	{
+		this.x = Target->GetX();
+		this.y = Target->GetY();
+	},
+
+	Timer = func()
+	{
+		if(this.r)
+			return -1;
+	
+		this.timer++;
+		//Target->CreateParticle("Flash", 0, 0, 0, 0, 15, this.p, 1);
+		Target->DrawParticleLine("Flash", 0, 0, this.x - Target->GetX(), this.y - Target->GetY(), 1, 0, 0, 15, this.p);
+		
+		for (var obj in Target->FindObjects(Find_Distance(15), Find_Exclude(Target), Find_Func("CanBeHit", Target)))
+		{
+			if(GetEffect(Format("SpecialMeleeHitCD%d", Target->GetOwner()), obj))
+				continue;
+			
+			var fx = GetEffect("SpecialMeleeFx", obj);
+			if(fx)
+			{
+				fx.r = true;
+				RemoveEffect("SpecialMeeleFx", obj);
+				var a = Angle(Target->GetX(), Target->GetY(), obj->GetX(), obj->GetY());
+				Target->Sound("Hits::Materials::Metal::LightMetalHit?");
+				
+				Target->Fling(Sin(a - 180, 5), -Cos(a - 180, 5));
+				obj->Fling(Sin(a, 5), -Cos(a, 5));
+				AddEffect(Format("SpecialMeleeHitCD%d", obj->GetOwner()), Target, 1, 1);
+				this.r = true;
+				return -1;
+			}
+			
+			Target.ChampType->SpecialMeleeStrike(Target, obj);
+			AddEffect(Format("SpecialMeleeHitCD%d", Target->GetOwner()), obj, 1, 11);
+		}
+		
+		this.x = Target->GetX();
+		this.y = Target->GetY();
+		
+		if(this.timer > 10)
+			return -1;
+	},
+	
+	Damage = func(dmg)
+	{
+		if(dmg < 0)
+			this.r = true;
+		
+		return dmg;
+	},
+	
+	Stop = func()
+	{
+		if(!this.r)
+		{
+			if(Target->GetAction("Travel"))
+			{
+				var a = Angle(0, 0, Target->GetXDir(), Target->GetYDir());
+				Target->SetVelocity(a, 30);
+			}
+		}
+		if(Target->GetAction("Travel"))
+				Target->SetAction("Jump");
+	}
+
+};
+
 func SpecialMeleeStrike(clonk, target)
 {
 	clonk->WeaponDamage(target, 20);
@@ -263,3 +268,14 @@ func CtrlPress(clonk)
 {
 	return true;
 }
+
+/*-- Properties --*/
+
+local Name = "$Name$";
+local Description = "$Description$";
+local Spell1Name = "$Spell1Name$";
+local Spell1Description = "$Spell1Description$";
+local Spell2Name = "$Spell2Name$";
+local Spell2Description = "$Spell2Description$";
+local Spell3Name = "$Spell3Name$";
+local Spell3Description = "$Spell3Description$";

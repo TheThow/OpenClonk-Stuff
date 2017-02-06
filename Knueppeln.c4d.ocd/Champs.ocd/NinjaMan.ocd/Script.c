@@ -1,14 +1,11 @@
 /**
-	FireMan
+	NinjaMan
 	
 
 	@author 
 */
 
 #include Man
-
-local Description = "$Description$";
-local Name = "$Name$";
 
 local Special1Spell = PoisonDart;
 local Special2Spell = ShadowWalk;

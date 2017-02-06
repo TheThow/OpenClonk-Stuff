@@ -1,2 +1,8 @@
 Name=Bomb Man
-Description=Wer wird denn gleich in die Luft gehen? \n\nQ = Haftbombe \nE = Bombenstreuung \n\nErstellt von Zapper
+Description=Wer wird denn gleich in die Luft gehen?
+Spell1Name=Sticky Bomb
+Spell1Description=Throws a sticky bomb that sticks to material or clonks.
+Spell2Name=Blow Up
+Spell2Description=Blows up all existing sticky bombs.
+Spell3Name=Bomb Magnet
+Spell3Description=Click on a position to let all nearby bombs jump towards it.

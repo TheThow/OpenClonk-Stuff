@@ -7,9 +7,6 @@
 
 #include Man
 
-local Name = "$Name$";
-local Description = "$Description$";
-
 local Special1Spell = IceProjectile;
 local Special2Spell = IceShard;
 local Special3Spell = IceShardUltimate;

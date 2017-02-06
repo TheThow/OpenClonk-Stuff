@@ -7,9 +7,6 @@
 
 #include Man
 
-local Description = "$Description$";
-local Name = "$Name$";
-
 local Special1Spell = BallAttackOrder;
 local Special2Spell = BallHomeCall;
 local Special3Spell = BallDischarge;
@@ -258,3 +255,14 @@ global func AddBallHitEffect()
 {
 	this->AddEffect("BallHit", this, 20, 1, nil, BallsMan);
 }
+
+/*-- Properties --*/
+
+local Name = "$Name$";
+local Description = "$Description$";
+local Spell1Name = "$Spell1Name$";
+local Spell1Description = "$Spell1Description$";
+local Spell2Name = "$Spell2Name$";
+local Spell2Description = "$Spell2Description$";
+local Spell3Name = "$Spell3Name$";
+local Spell3Description = "$Spell3Description$";
