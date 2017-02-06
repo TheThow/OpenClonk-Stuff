@@ -6,5 +6,3 @@ Spell2Name=Home Call
 Spell2Description=Your ball moves back to you with increased speed damaging everything on its path. Upon reaching you it grants you a shield that absorbs 15 damage.
 Spell3Name=Discharge
 Spell3Description=Your ball damages and flings everything near it after a small delay.
-PassiveName=
-PassiveDescription=

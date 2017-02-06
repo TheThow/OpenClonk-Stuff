@@ -6,3 +6,5 @@ Spell2Name=<Insert Spell2Name>
 Spell2Description=<Insert Spell2Description>
 Spell3Name=<Insert Spell3Name>
 Spell3Description=<Insert Spell3Description>
+PassiveName=Nichts
+PassiveDescription=Dieser Champ besitzt keine passive Fähigkeit

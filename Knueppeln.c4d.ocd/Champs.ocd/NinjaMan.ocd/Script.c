@@ -157,3 +157,16 @@ func CleanUp(object clonk)
 	//clonk->PushActionSpeed("Walk", 200);
 	clonk.ActMap.Walk.Speed = clonk.Prototype.ActMap.Walk.Speed;
 }
+
+/*-- Properties --*/
+
+local Name = "$Name$";
+local Description = "$Description$";
+local Spell1Name = "$Spell1Name$";
+local Spell1Description = "$Spell1Description$";
+local Spell2Name = "$Spell2Name$";
+local Spell2Description = "$Spell2Description$";
+local Spell3Name = "$Spell3Name$";
+local Spell3Description = "$Spell3Description$";
+local PassiveName = "$PassiveName$";
+local PassiveDescription = "$PassiveDescription$";

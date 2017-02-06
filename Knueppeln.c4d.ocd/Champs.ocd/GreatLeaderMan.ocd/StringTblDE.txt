@@ -1,10 +1,8 @@
 Name=Great Leader Man
-Description=Macht Kn¸ppeln wieder toll.
+Description=Macht Kn√ºppeln wieder toll.
 Spell1Name=Raketenreiter
-Spell1Description=Verschieﬂt einen Minion auf einer Rakete. Die Rakete visiert automatisch einen nahen Gegner an.
-Spell2Name=Zielen und Schieﬂen
-Spell2Description=Alle Minions schieﬂen in Richtung des Mauscursors.
+Spell1Description=Verschie√üt einen Minion auf einer Rakete. Die Rakete visiert automatisch einen nahen Gegner an.
+Spell2Name=Zielen und Schie√üen
+Spell2Description=Alle Minions schie√üen in Richtung des Mauscursors.
 Spell3Name=Vasallenabwurf
 Spell3Description=Erzeugt Minions.
-PassiveName=
-PassiveDescription=

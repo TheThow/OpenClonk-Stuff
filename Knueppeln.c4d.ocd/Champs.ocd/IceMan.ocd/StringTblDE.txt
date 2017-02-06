@@ -6,5 +6,3 @@ Spell2Name=Blizzard
 Spell2Description=Feuert einen Hagelsturm in Richtung des Mauszeigers.
 Spell3Name=Eisscherben
 Spell3Description=Erzeugt 6 Eisscherben, die den Clonk umkreisen. Diese können anschließend abgefeuert werden.
-PassiveName=
-PassiveDescription=

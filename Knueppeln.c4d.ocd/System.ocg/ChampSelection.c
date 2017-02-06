@@ -76,59 +76,79 @@ func ChooseMenu()
 					Left = "5em",
 					Margin = ["0.1em", nil, nil, nil],
 					Text = "Select your Champion!",
+					Style = GUI_TextVCenter
 				}				
 			},
+			
 			champspell1 = 
 			{
 				Top = "5em",
-				Bottom = "8em",
-				Margin = "0.1em",
+				Bottom = "9em",
+				//Margin = "0.1em",
 				icon = 
 				{
-					Right = "3em",
+					Right = "4em",
 					Symbol = nil,
 				},
 				text = 
 				{
-					Left = "3em",
+					Left = "4em",
 					Margin = ["0.1em", nil, nil, nil],
 					Text = nil				
 				}
 			},
 			champspell2 = 
 			{
-				Top = "8em",
-				Bottom = "11em",
-				Margin = "0.1em",
+				Top = "9em",
+				Bottom = "13em",
+				//Margin = "0.1em",
 				icon = 
 				{
-					Right = "3em",
+					Right = "4em",
 					Symbol = nil,
 				},
 				text = 
 				{
-					Left = "3em",
+					Left = "4em",
 					Margin = ["0.1em", nil, nil, nil],
 					Text = nil				
 				}
 			},
 			champspell3 = 
 			{
-				Top = "11em",
-				Bottom = "14em",
-				Margin = "0.1em",
+				Top = "13em",
+				Bottom = "17em",
+				//Margin = "0.1em",
 				icon = 
 				{
-					Right = "3em",
+					Right = "4em",
 					Symbol = nil,
 				},
 				text = 
 				{
-					Left = "3em",
+					Left = "4em",
+					Margin = ["0.1em", nil, nil, nil],
+					Text = nil				
+				}
+			},
+			passive = 
+			{
+				Top = "17em",
+				Bottom = "21em",
+				//Margin = "0.1em",
+				icon = 
+				{
+					Right = "4em",
+					Symbol = nil,
+				},
+				text = 
+				{
+					Left = "4em",
 					Margin = ["0.1em", nil, nil, nil],
 					Text = nil				
 				}
 			}
+			
 		},
 		separator = 
 		{
@@ -224,6 +244,18 @@ func ChampUpdateDesc(id champ, int player, int ID, int subwindowID, object targe
 			text = 
 			{
 				Text = Format("<c aa0000>%s:</c> %s", champ.Spell3Name, champ.Spell3Description)
+			}
+		},
+		passive =
+		{
+			icon =
+			{
+				Symbol = HUDSymbol,
+				GraphicsName = Format("%iPassive", champ),
+			},
+			text = 
+			{
+				Text = Format("<c aa0000>%s:</c> %s", champ.PassiveName, champ.PassiveDescription)
 			}
 		}
 	};

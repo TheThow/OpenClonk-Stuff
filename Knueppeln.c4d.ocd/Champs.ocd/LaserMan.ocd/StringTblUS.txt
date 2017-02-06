@@ -6,5 +6,3 @@ Spell2Name=Laser Shot
 Spell2Description=Charges and shoots a laser that deflects at walls up to its maximum length.
 Spell3Name=Blink
 Spell3Description=Teleports you in the direction of the mouse position and fires a very weak laser in the same direction.
-PassiveName=
-PassiveDescription=

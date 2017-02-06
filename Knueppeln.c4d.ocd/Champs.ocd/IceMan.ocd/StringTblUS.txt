@@ -6,5 +6,3 @@ Spell2Name=Blizzard
 Spell2Description=Launches a blizzard towards the mouse position.
 Spell3Name=Ice Shards
 Spell3Description=Creates 6 Ice Shards that fly around the Clonk. They can be shot one by one.
-PassiveName=
-PassiveDescription=

@@ -6,5 +6,3 @@ Spell2Name=Explosive Hook
 Spell2Description=Launches an explosive Hook. Deflects on walls.
 Spell3Name=Sawblade
 Spell3Description=Launches a sawblade that snaps to walls and moves along its borders.
-PassiveName=
-PassiveDescription=

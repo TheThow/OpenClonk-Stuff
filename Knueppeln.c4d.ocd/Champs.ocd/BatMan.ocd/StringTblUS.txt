@@ -6,5 +6,3 @@ Spell2Name=Disrupter
 Spell2Description=Shoots a projectile that damages everything around on impact and disables abilities (except blocking and air-jumps).
 Spell3Name=Bat Call
 Spell3Description=Launches a swarm of bats.
-PassiveName=
-PassiveDescription=

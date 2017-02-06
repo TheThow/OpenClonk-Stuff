@@ -232,3 +232,16 @@ global func AddFlashHitEffect()
 {
 	this->AddEffect("FlashHit", this, 20, 1, nil, FlashMan);
 }
+
+/*-- Properties --*/
+
+local Name = "$Name$";
+local Description = "$Description$";
+local Spell1Name = "$Spell1Name$";
+local Spell1Description = "$Spell1Description$";
+local Spell2Name = "$Spell2Name$";
+local Spell2Description = "$Spell2Description$";
+local Spell3Name = "$Spell3Name$";
+local Spell3Description = "$Spell3Description$";
+//local PassiveName = "$PassiveName$";
+//local PassiveDescription = "$PassiveDescription$";

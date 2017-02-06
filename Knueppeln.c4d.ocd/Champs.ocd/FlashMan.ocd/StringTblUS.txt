@@ -6,5 +6,3 @@ Spell2Name=Flinger
 Spell2Description=Shoots a projectile that fires multiple lasers when colliding with walls.
 Spell3Name=Super Spectral Lazor
 Spell3Description=Shoots a strong laser that hits through walls.
-PassiveName=
-PassiveDescription=

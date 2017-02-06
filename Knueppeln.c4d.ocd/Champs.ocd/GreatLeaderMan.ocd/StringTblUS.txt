@@ -1,10 +1,8 @@
 Name=Great Leader Man
-Description=Makes Knüppeln great again.
+Description=Makes KnÃ¼ppeln great again.
 Spell1Name=Rocket Peon
 Spell1Description=Launches a peon on a rocket. The rocket is automatically targeting enemies.
 Spell2Name=Aim and Fire
 Spell2Description=Minions will shoot towards the mouse cursor.
 Spell3Name=Spawn Peon
 Spell3Description=Spawns peons.
-PassiveName=
-PassiveDescription=

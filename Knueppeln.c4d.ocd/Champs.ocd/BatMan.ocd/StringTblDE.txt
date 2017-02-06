@@ -6,5 +6,3 @@ Spell2Name=Unterbrecher
 Spell2Description=Feuert ein großes Projektil ab, dass beim Auftreffen Schaden verursacht und alle in der nähe stehenden Champs hindert, ihre Fähigkeiten (ausser Blocken und Luftsprünge) einzusetzen.
 Spell3Name=Fledersturm rufen
 Spell3Description=Entfacht einen Fledermaussturm, der Gegnern Schaden zufügt.
-PassiveName=
-PassiveDescription=

@@ -21,10 +21,10 @@ Maikel	-	Medals
 eleazzaar	-	BombMan E
 				EarthMan Q, R
 				ElectroMan Q, E, R
-				FireMan Q, E, R
+				FireMan Q, E, R, Passive
 				FlashMan R
 				IceMan Q, E, R
-				NinjaMan R,
+				NinjaMan R, Passive
 				Man F, Space
 				
 				http://opengameart.org/content/painterly-spell-icons-part-4
@@ -48,6 +48,8 @@ Sayned		-	BallsMan Q, E, R
 				TimeMan Q, E, R
 				BombMan Q, R
 				NinjaMan Q
+				
+K-Pone		-	No Passive
 
 
 [Special Thanks]
