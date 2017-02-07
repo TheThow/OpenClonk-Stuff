@@ -26,6 +26,7 @@ func Launch(object clonk, int x, int y)
 	var angle = Angle(0,0,x,y, 10);
 	shooter = clonk;
 	SetVelocity(angle, Speed, 10);
+	SetController(clonk->GetController());
 	AddEffect("HitCheck", this, 1,1, nil,nil, clonk);
 	AddEffect("TheEffect", this, 1, 1, this, Projectile);
 }

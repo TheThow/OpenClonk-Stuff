@@ -86,7 +86,7 @@ func FirenMaLazor()
 	dummy->Sound("Flash::spectralhit");
 	dummy->RemoveObject();
 	
-	for (var obj in FindObjects(Find_OnLine(from_x, from_y, tox, toy), Find_OCF(OCF_Alive), Find_Exclude(this.shooter), Find_Func("CanBeHit")))
+	for (var obj in FindObjects(Find_OnLine(from_x, from_y, tox, toy), Find_Exclude(this.shooter), Find_Func("CanBeHit")))
 	{
 		this->HitObject(obj);
 	}

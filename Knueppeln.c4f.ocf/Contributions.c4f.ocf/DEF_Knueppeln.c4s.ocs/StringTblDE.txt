@@ -1,0 +1,7 @@
+TeamAttackers=Angreifer
+TeamDefenders=Verteidiger
+MsgWave=Angriff!
+
+AchievementBasic=Gut verteidigt!
+AchievementTough=Hartnäckige Verteidigung!
+AchievementRockSolid=Felsenfeste Verteidigung!
