@@ -29,8 +29,6 @@ func Initialize()
 		OnCollision = PC_Bounce(),
 	};
 	snapped = false;
-	
-	
 }
 
 func HitByHook(hook)
@@ -122,7 +120,7 @@ func FxCheckEnemiesTimer(object target, proplist effect, int time)
 {
 	for(var o in FindObjects(Find_Distance(Size), Find_Not(Find_ID(Hook)), Find_Or(Find_Func("IsReflectable"), Find_Func("CanBeHit", this))))
 	{
-		if(GetEffect("SawBladeCD", o) || (o->GetOwner() == GetOwner() && time < 15))
+		if (!o || GetEffect("SawBladeCD", o) || (o->GetOwner() == GetOwner() && time < 15))
 		{
 			continue;
 		}

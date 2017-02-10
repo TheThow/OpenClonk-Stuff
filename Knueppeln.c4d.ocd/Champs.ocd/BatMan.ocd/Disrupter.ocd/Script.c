@@ -247,7 +247,7 @@ func HitEffect()
 
 func HitObject(obj)
 {
-	if(obj->~CanBeHit() == false)
+	if(obj->~CanBeHit(this) == false)
 		return;
 		
 	Hit();

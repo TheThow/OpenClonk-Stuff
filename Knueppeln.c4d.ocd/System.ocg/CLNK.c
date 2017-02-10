@@ -722,50 +722,26 @@ func CancelShowSpellRange()
 
 func CanBeHit(object from)
 {
-	if(GetEffect("Unhitable", this))
+	if (GetEffect("Unhitable", this))
 		return false;
 		
-	if(Contained())
+	if (Contained())
 		return false;
 	
-	if(!GetAlive())
+	if (!GetAlive())
 		return false;
-	
-	if(from && from->GetOwner() != GetOwner() && GetPlayerTeam(GetOwner()) && FindObject(Find_ID(Rule_NoFriendlyFire)))
-	{
-		if(GetPlayerTeam(GetOwner()) == GetPlayerTeam(from->GetOwner()))
-			return false;
-	}
-	
 	return true;
 }
 
 func IsProjectileTarget(object from)
 {
-	if(!GetAlive())
+	if (!GetAlive())
 		return false;
 
-	if(from && from->GetOwner() != GetOwner() && GetPlayerTeam(GetOwner()) && FindObject(Find_ID(Rule_NoFriendlyFire)))
-	{
-		if(GetPlayerTeam(GetOwner()) == GetPlayerTeam(from->GetOwner()))
-			return false;
-	}
-	
 	if ((ChampType == GreatLeaderMan) && from.is_minions_arrow && (from->GetController() == GetController()))
 		return false;
 		
 	return true;
-}
-
-func OnShockwaveHit(level, x, y, cause_plr)
-{
-	if(cause_plr != -1 && cause_plr != GetOwner() && GetPlayerTeam(GetOwner()) && FindObject(Find_ID(Rule_NoFriendlyFire)))
-	{
-		if(GetPlayerTeam(GetOwner()) == GetPlayerTeam(cause_plr))
-			return true;
-	}
-	
-	return false;
 }
 
 func MakeHitable(bool hitable)
