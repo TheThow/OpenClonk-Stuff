@@ -27,6 +27,7 @@ func Special1(object clonk, int x, int y, bool released, bool mouseclick, bool a
 public func IsSpecial1Shot() { return true; }
 public func IsSpecial1ShotStraight() { return true; }
 public func IsSpecial1ShotSpeed() { return Special1Spell.Speed; }
+public func IsSpecial1ShotRange() { return Special1Spell.Range; }
 
 func Special2(object clonk, int x, int y, bool released, bool mouseclick, bool abletocast, bool cooldown)
 {

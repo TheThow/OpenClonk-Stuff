@@ -11,7 +11,7 @@
 
 // AI Settings.
 local MaxAggroDistance = 800; // Lose sight to target if it is this far away (unless we're ranged - then always guard the range rect).
-local KnueppelnLoggingOn = false; // Whether or not debug logging is turned on.
+local KnueppelnLoggingOn = true; // Whether or not debug logging is turned on.
 
 
 public func Execute(effect fx, int time)
@@ -161,7 +161,8 @@ public func ExecuteQSpell(effect fx)
 		// Perform straight shot.
 		if (type->~IsSpecial1ShotStraight())
 		{
-			if (!PathFree(x, y, tx, ty))
+			var range = type->~IsSpecial1ShotRange();
+			if (!PathFree(x, y, tx, ty) || (range && d > range))
 				return false;
 			dx = tx - x;
 			dy = ty - y;
@@ -222,7 +223,8 @@ public func ExecuteESpell(effect fx)
 		// Perform straight shot.
 		if (type->~IsSpecial2ShotStraight())
 		{
-			if (!PathFree(x, y, tx, ty))
+			var range = type->~IsSpecial2ShotRange();
+			if (!PathFree(x, y, tx, ty) || (range && d > range))
 				return false;
 			dx = tx - x;
 			dy = ty - y;
@@ -283,7 +285,8 @@ public func ExecuteRSpell(effect fx)
 		// Perform straight shot.
 		if (type->~IsSpecial3ShotStraight())
 		{
-			if (!PathFree(x, y, tx, ty))
+			var range = type->~IsSpecial3ShotRange();
+			if (!PathFree(x, y, tx, ty) || (range && d > range))
 				return false;
 			dx = tx - x;
 			dy = ty - y;

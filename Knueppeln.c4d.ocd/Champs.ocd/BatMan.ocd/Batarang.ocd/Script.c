@@ -9,6 +9,7 @@ local ManaCost = 22;
 local SpellDamage = 20;
 local Speed = 65;
 local Dur = 30;
+local Range = 220;
 
 local Name = "$Name$";
 local Description = "$Description$";
