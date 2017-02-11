@@ -12,6 +12,7 @@ Zapper	-	IceMan
 Zapper 	-	BombMan
 
 K-Pone	-	FlashMan
+K-Pone	-	ArchMan
 
 K-Pone	-	Major improvements
 

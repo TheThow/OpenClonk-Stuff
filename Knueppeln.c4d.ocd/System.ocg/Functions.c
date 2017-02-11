@@ -5,7 +5,7 @@ static banned_Champions;
 global func GetChampions()
 {
 	/* var Champ_Def = [ElectroMan, FireMan, LaserMan, TimeMan, IceMan, EarthMan, NinjaMan, BallsMan, BombMan, HookMan, GreatLeaderMan, FlashMan, BatMan]; */
-	var Champ_Def = [BallsMan, BatMan, BombMan, EarthMan, ElectroMan, FireMan, FlashMan, GreatLeaderMan, HookMan, IceMan, LaserMan, NinjaMan, TimeMan];
+	var Champ_Def = [ArchMan, BallsMan, BatMan, BombMan, EarthMan, ElectroMan, FireMan, FlashMan, GreatLeaderMan, HookMan, IceMan, LaserMan, NinjaMan, TimeMan];
 	return Champ_Def;
 }
 

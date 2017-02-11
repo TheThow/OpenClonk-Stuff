@@ -1,0 +1,10 @@
+Name=Arch Man
+Description=Präzise wie ein Mähdrescher
+Spell1Name=Pfeil
+Spell1Description=Verschießt einen Pfeil
+Spell2Name=Multi-Pfeil
+Spell2Description=Verschießt einen Fächer aus Pfeilen
+Spell3Name=Bulldozer-Rakete
+Spell3Description=Eine Rakete, die alles Solide durchdringt und bei Gegnerkontakt explodiert
+PassiveName=Nichts
+PassiveDescription=Dieser Champ besitzt keine passive Fähigkeit

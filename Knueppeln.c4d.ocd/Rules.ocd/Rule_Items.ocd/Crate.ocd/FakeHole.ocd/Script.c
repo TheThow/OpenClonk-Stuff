@@ -145,6 +145,7 @@ func Hit()
 	
 	SetClrModulation(RGBa(255, 255, 255, 0));
 	if (Random(10) < 2) ScheduleCall(this, "StartBlackHole", 50, 0);
+	else ScheduleCall(this, "RemoveObject", 50, 0);
 	
 	return true;
 }

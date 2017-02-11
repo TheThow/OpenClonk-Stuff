@@ -1,0 +1,10 @@
+Name=Arch Man
+Description=Precise like a harvester.
+Spell1Name=Arrow
+Spell1Description=Launches an arrow
+Spell2Name=Multi-Arrow
+Spell2Description=Launches a cone of arrows
+Spell3Name=Bulldozer-Rocket
+Spell3Description=Launches a rocket that flies through walls and explodes on enemy contact
+PassiveName=Nothing
+PassiveDescription=This champ has no passive ability

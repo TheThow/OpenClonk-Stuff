@@ -1,0 +1,10 @@
+[DefCore]
+id=BulldozerRocket
+Version=6,0
+Category=C4D_Object
+Width=12
+Height=12
+Offset=-6,-6
+Mass=14
+StretchGrowth=1
+Rotate=1
