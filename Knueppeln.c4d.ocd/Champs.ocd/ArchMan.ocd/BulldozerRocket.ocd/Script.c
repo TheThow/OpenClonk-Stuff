@@ -13,7 +13,7 @@ local ChargeDuration = 15;
 func Initialize()
 {
 	SetAction("Travel");
-	//SetClrModulation(RGBa(0,0,0,0));
+	SetClrModulation(RGBa(255,255,255,120));
 }
 
 func InitEffect()
@@ -71,14 +71,10 @@ func TravelEffect(int time)
 {
 	var trailparticles =
 	{
-		Prototype = Particles_ElectroSpark2(),
-		Size = PV_Linear(PV_Random(5,15),0),
-		BlitMode = GFX_BLIT_Additive,
-		Rotation = Angle(0,0,GetXDir(), GetYDir()),
-		R = 250,
-		G = 100,
-		B = 30,
-		Alpha = 50,
+		R = PV_Linear(50,0),
+		G = PV_Linear(50,0),
+		B = PV_Linear(255,100),
+		Alpha = PV_Linear(255, 100),
 	};
 	
 	var angle = Angle(0,0, GetXDir(), GetYDir()) + 180;
