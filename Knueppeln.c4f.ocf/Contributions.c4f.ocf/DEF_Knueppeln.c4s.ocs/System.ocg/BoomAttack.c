@@ -1,4 +1,4 @@
-// Explode on blow.
+// Explode on blow for Knueppeln.
 
 #appendto DefenseBoomAttack
 

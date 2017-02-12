@@ -66,6 +66,7 @@ public func OnClonkDeath(object clonk)
 		return;
 	var new_clonk = CreateObjectAbove(Clonk, 0, 0, plr);
 	new_clonk->MakeCrewMember(plr);
+	new_clonk.MaxMagic = clonk.MaxMagic;
 	SetCursor(plr, new_clonk);
 	var relaunch = CreateObjectAbove(RelaunchContainer, LandscapeWidth() / 2, LandscapeHeight() / 2, new_clonk->GetOwner());
 	relaunch->SetRelaunchTime(3);

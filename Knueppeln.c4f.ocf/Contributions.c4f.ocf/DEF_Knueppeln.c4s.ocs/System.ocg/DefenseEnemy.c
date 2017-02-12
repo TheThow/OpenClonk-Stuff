@@ -1,4 +1,4 @@
-
+// Alternative champ enemies for Knueppeln.
 
 #appendto DefenseEnemy
 
