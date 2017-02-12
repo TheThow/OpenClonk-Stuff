@@ -24,7 +24,11 @@ func Special1(object clonk, int x, int y, bool released, bool mouseclick, bool a
 func Special2(object clonk, int x, int y, bool released, bool mouseclick, bool abletocast,  bool cooldown)
 {
 	if (released || mouseclick || cooldown) return;
-	
+	return BlowUpBombs(clonk);
+}
+
+public func BlowUpBombs(object clonk)
+{
 	var existing = FindObjects(Find_ID(StickyBomb), Find_Owner(clonk->GetOwner()));
 	if (existing)
 	{
@@ -33,6 +37,7 @@ func Special2(object clonk, int x, int y, bool released, bool mouseclick, bool a
 			bomb->BlowUp();
 		return;
 	}
+	return;
 }
 
 func Special3(object clonk, int x, int y, bool released, bool mouseclick, bool abletocast, bool cooldown)
@@ -119,6 +124,40 @@ func CleanUp(object clonk)
 {
 	for (var bomb in FindObjects(Find_ID(StickyBomb), Find_Owner(clonk->GetOwner())))
 		bomb->Remove();
+}
+
+/*-- AI --*/
+
+public func ExecuteAISpecial1Spell(effect fx)
+{
+	if (!fx.Target || !fx.target)
+		return false;
+	var x = fx.Target->GetX(), y = fx.Target->GetY();
+	var tx = fx.target->GetX(), ty = fx.target->GetY() - 4;
+	if (Distance(x, y, tx, ty) > 50)
+		return false;
+	fx.Target->LaunchSpell(Special1Spell, tx - x, ty - y, 0, 0);
+	return true;
+}
+
+public func ExecuteAISpecial2Spell(effect fx)
+{
+	if (!fx.Target)
+		return false;
+	// Don't blow up if ally is too close.	
+	for (var bomb in FindObjects(Find_ID(StickyBomb), Find_Owner(fx.Target->GetOwner())))
+		if (bomb->FindObject(Find_OCF(OCF_Alive), Find_Allied(fx.Target->GetOwner()), Find_Distance(StickyBomb.BlastRadius)))
+			return false;
+	// Blow up if enemy is close.
+	for (var bomb in FindObjects(Find_ID(StickyBomb), Find_Owner(fx.Target->GetOwner())))
+	{
+		if (bomb->FindObject(Find_OCF(OCF_Alive), Find_Hostile(fx.Target->GetOwner()), Find_Distance(StickyBomb.BlastRadius)))
+		{
+			BlowUpBombs(fx.Target);
+			return true;	
+		}
+	}
+	return false;
 }
 
 /*-- Properties --*/

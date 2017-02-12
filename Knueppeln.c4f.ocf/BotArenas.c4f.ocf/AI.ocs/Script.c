@@ -89,7 +89,7 @@ global func CreateEnemy(id champ_type, int x, int y, int plr)
 
 /*-- AI Tests --*/
 
-global func Test1_OnStart(int plr)
+global func Test8_OnStart(int plr)
 {
 	CreateEnemy(FireMan, 120, 258, script_enemy1);
 	CreateEnemy(EarthMan, 392, 258, script_enemy2);
@@ -148,6 +148,27 @@ global func Test6_OnStart(int plr)
 	CreateEnemy(BatMan, 392, 258, script_enemy2);
 	// Log what the test is about.
 	Log("AI battle: hook man (p1) vs. bat man (p2).");
+	return true;
+}
+
+global func Test7_OnStart(int plr)
+{
+	CreateObject(Rule_NoFriendlyFire);
+	DrawMaterialQuad("Brick", 248, 272, 248, 172, 264, 172, 264, 272);
+	CreateEnemy(ArchMan, 120, 258, script_enemy1);
+	CreateEnemy(FlashMan, 392, 258, script_enemy2);
+	// Log what the test is about.
+	Log("AI battle: arch man (p1) vs. flash man (p2).");
+	return true;
+}
+
+global func Test1_OnStart(int plr)
+{
+	CreateObject(Rule_NoFriendlyFire);
+	CreateEnemy(BallsMan, 120, 258, script_enemy1);
+	CreateEnemy(BombMan, 392, 258, script_enemy2);
+	// Log what the test is about.
+	Log("AI battle: balls man (p1) vs. bomb man (p2).");
 	return true;
 }
 

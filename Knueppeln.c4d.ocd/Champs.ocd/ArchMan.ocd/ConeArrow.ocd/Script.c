@@ -4,6 +4,7 @@ local pB = 250;
 local Speed = 100;
 //local SpellDamage = 8;
 local ManaCost = 35;
+local Range = 200;
 
 func Launch(object clonk, int x, int y)
 {

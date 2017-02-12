@@ -8,6 +8,7 @@ local SpellDamage = 1;
 local Size = 10;
 local ManaCost = 22;
 local LifeTime = 22;
+local Range = 210;
 
 local trailparticles;
 local hit;

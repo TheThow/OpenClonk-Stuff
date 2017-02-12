@@ -40,6 +40,9 @@ func Special2(object clonk, int x, int y, bool released, bool mouseclick, bool a
 	return 0;
 }
 
+public func IsSpecial2Shot() { return true; }
+public func IsSpecial2ShotSpeed() { return Special2Spell.Speed; }
+
 func Special3(object clonk, int x, int y, bool released, bool mouseclick, bool abletocast, bool cooldown)
 {
 	if(!released && !mouseclick && abletocast && !cooldown)
@@ -50,9 +53,12 @@ func Special3(object clonk, int x, int y, bool released, bool mouseclick, bool a
 	return 0;
 }
 
-/*
-dir 	"Up", "Left", "Right", "Down"
-*/
+public func IsSpecial3Shot() { return true; }
+public func IsSpecial3ShotStraight() { return true; }
+public func IsSpecial3ShotSpeed() { return Special3Spell.Speed; }
+public func IsSpecial3ShotRange() { return Special3Spell.Range; }
+public func IsSpecial3ShotThroughWalls() { return true; }
+
 func JumpEffect(object clonk, string dir)
 {
 	var from;

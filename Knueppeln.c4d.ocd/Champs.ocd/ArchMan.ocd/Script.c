@@ -16,16 +16,6 @@ local Special1Spell = SimpleArrow;
 local Special2Spell = ConeArrow;
 local Special3Spell = BulldozerRocket;
 
-/*
-Parameters: 
-clonk 			Calling clonk, 
-x		 		mouse x, 
-y 				mouse y, 
-released		key/mouse event released, 
-mouseclick 		mouseclick when the special key is pressed, 
-abletocast 		clonk is able to cast at the moment, 
-cooldown 		spell is on cooldown
-*/
 func Special1(object clonk, int x, int y, bool released, bool mouseclick, bool abletocast, bool cooldown)
 {
 	if(!released && !mouseclick && abletocast && !cooldown)
@@ -35,6 +25,9 @@ func Special1(object clonk, int x, int y, bool released, bool mouseclick, bool a
 	}
 	return 0;
 }
+
+public func IsSpecial1Shot() { return true; }
+public func IsSpecial1ShotSpeed() { return Special1Spell.Speed; }
 
 func Special2(object clonk, int x, int y, bool released, bool mouseclick, bool abletocast, bool cooldown)
 {
@@ -46,6 +39,10 @@ func Special2(object clonk, int x, int y, bool released, bool mouseclick, bool a
 	return 0;
 }
 
+public func IsSpecial2Shot() { return true; }
+public func IsSpecial2ShotSpeed() { return Special2Spell.Speed; }
+public func IsSpecial2ShotRange() { return Special2Spell.Range; }
+
 func Special3(object clonk, int x, int y, bool released, bool mouseclick, bool abletocast, bool cooldown)
 {
 	if(!released && !mouseclick && abletocast && !cooldown)
@@ -56,9 +53,12 @@ func Special3(object clonk, int x, int y, bool released, bool mouseclick, bool a
 	return 0;
 }
 
-/*
-dir 	"Up", "Left", "Right", "Down"
-*/
+public func IsSpecial3Shot() { return true; }
+public func IsSpecial3ShotStraight() { return true; }
+public func IsSpecial3ShotSpeed() { return Special3Spell.Speed; }
+public func IsSpecial3ShotThroughWalls() { return true; }
+
+
 func JumpEffect(object clonk, string dir)
 {
 	var range = 15;

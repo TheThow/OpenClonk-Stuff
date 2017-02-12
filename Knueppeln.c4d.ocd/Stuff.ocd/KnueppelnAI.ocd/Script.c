@@ -206,7 +206,8 @@ public func ExecuteQSpell(effect fx)
 		if (type->~IsSpecial1ShotStraight())
 		{
 			var range = type->~IsSpecial1ShotRange();
-			if (!PathFree(x, y, tx, ty) || (range && d > range))
+			var through_walls = type->~IsSpecial1ShotThroughWalls();
+			if ((!PathFree(x, y, tx, ty) && !through_walls) || (range && d > range))
 				return false;
 			dx = tx - x;
 			dy = ty - y;
@@ -228,6 +229,13 @@ public func ExecuteQSpell(effect fx)
 			return true;
 		}
 		return false;
+	}
+	
+	// Try to execute spell in champ.
+	if (type->~ExecuteAISpecial1Spell(fx))
+	{
+		this->LogKN(fx, "Execute special 1 spell (Q).");
+		return true;
 	}
 	
 	// Spell type not yet implemented.
@@ -268,7 +276,8 @@ public func ExecuteESpell(effect fx)
 		if (type->~IsSpecial2ShotStraight())
 		{
 			var range = type->~IsSpecial2ShotRange();
-			if (!PathFree(x, y, tx, ty) || (range && d > range))
+			var through_walls = type->~IsSpecial2ShotThroughWalls();
+			if ((!PathFree(x, y, tx, ty) && !through_walls) || (range && d > range))
 				return false;
 			dx = tx - x;
 			dy = ty - y;
@@ -291,6 +300,13 @@ public func ExecuteESpell(effect fx)
 		}
 		return false;
 	}
+	
+	// Try to execute spell in champ.
+	if (type->~ExecuteAISpecial2Spell(fx))
+	{
+		this->LogKN(fx, "Execute special 2 spell (E).");
+		return true;
+	}	
 
 	// Spell type not yet implemented.
 	this->LogKN(fx, Format("E spell for %i not yet implemented.", type));
@@ -330,7 +346,8 @@ public func ExecuteRSpell(effect fx)
 		if (type->~IsSpecial3ShotStraight())
 		{
 			var range = type->~IsSpecial3ShotRange();
-			if (!PathFree(x, y, tx, ty) || (range && d > range))
+			var through_walls = type->~IsSpecial3ShotThroughWalls();
+			if ((!PathFree(x, y, tx, ty) && !through_walls) || (range && d > range))
 				return false;
 			dx = tx - x;
 			dy = ty - y;
@@ -348,11 +365,18 @@ public func ExecuteRSpell(effect fx)
 		}
 		if (fx.Target->LaunchSpecial3(dx, dy, false, false, fx.Target->CanCast() && type->CanCastSpecial3(fx.Target)))
 		{
-			this->LogKN(fx, "Execute special 3 spell (E).");
+			this->LogKN(fx, "Execute special 3 spell (R).");
 			return true;
 		}
 		return false;
 	}
+	
+	// Try to execute spell in champ.
+	if (type->~ExecuteAISpecial3Spell(fx))
+	{
+		this->LogKN(fx, "Execute special 3 spell (R).");
+		return true;
+	}	
 
 	if (type == ElectroMan || type == FireMan || type == BatMan)
 	{
