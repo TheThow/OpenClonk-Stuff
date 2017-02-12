@@ -191,12 +191,7 @@ public func ObjectControl(int plr, int ctrl, int x, int y, int strength, bool re
   			if(GetMagicEnergy() >= JUMP_MANA)
   			{
   				RemoveEffect("IntControlJumpDouble", this);
-	 			var ok = ControlUpDouble();
-	 			if(ok)
-	 			{
-		 			JumpEffect("Up");
-		 			DoMagicEnergy(-JUMP_MANA);
-		 		}
+	 			ControlUpDouble();
 	 		}
 			else
 			{
@@ -219,15 +214,7 @@ public func ObjectControl(int plr, int ctrl, int x, int y, int strength, bool re
   		 	if(GetMagicEnergy() >= JUMP_MANA)
   			{
 	    		RemoveEffect("IntControlLeftDouble", this);
-	    		var ok = ControlLeftDouble();
-	    		if(ok)
-		    	{
-		    		JumpEffect("Left");
-		    		DoMagicEnergy(-JUMP_MANA);
-		    		
-		    		/*if(GetDir() == DIR_Right)
-						FlipDir();*/
-				}
+	    		ControlLeftDouble();
     		}
     		else
 			{
@@ -251,17 +238,8 @@ public func ObjectControl(int plr, int ctrl, int x, int y, int strength, bool re
   			if(GetMagicEnergy() >= JUMP_MANA)
   			{
     			RemoveEffect("IntControlRightDouble", this);
-    			var ok = ControlRightDouble();
-    			
-    			if (ok)
-    			{
-	    			JumpEffect("Right");
-	    			DoMagicEnergy(-JUMP_MANA);
-	    			
-	    			/*if(GetDir() == DIR_Left)
-						FlipDir();*/
-				}
-    		}
+    			ControlRightDouble();
+     		}
       		else
 			{
 				Sound("UI::Error", 0, 50, GetOwner());
@@ -282,13 +260,7 @@ public func ObjectControl(int plr, int ctrl, int x, int y, int strength, bool re
   			if(GetMagicEnergy() >= JUMP_MANA)
   			{
     			RemoveEffect("IntControlDownDouble", this);
-    			
-    			var ok = ControlDownDouble();
-    			if (ok)
-    			{
-    				JumpEffect("Down");
-    				DoMagicEnergy(-JUMP_MANA);
-    			}
+    			ControlDownDouble();
     		}
       		else
 			{
@@ -319,12 +291,16 @@ func JumpEffect(dir)
 func ControlUpDouble()
 {
 	SetYDir(-this.JumpSpeed * GetCon(), 100 * 100);
+	JumpEffect("Up");
+	DoMagicEnergy(-JUMP_MANA);	
 	return true;
 }
 
 func ControlDownDouble()
 {
 	SetYDir(this.JumpSpeed * GetCon(), 100 * 100);
+	JumpEffect("Down");
+	DoMagicEnergy(-JUMP_MANA);	
 	return true;
 }
 
@@ -337,6 +313,8 @@ func ControlLeftDouble()
 	if(GetXDir() > -MOVEMENT_X_SPEED + penality)
   		SetXDir(-MOVEMENT_X_SPEED + penality);
   	SetYDir(GetYDir() - 15);
+  	JumpEffect("Left");
+	DoMagicEnergy(-JUMP_MANA);	
   	return true;
 }
 
@@ -347,9 +325,10 @@ func ControlRightDouble()
 		penality = 12;
 
 	if(GetXDir() < MOVEMENT_X_SPEED - penality)
-  		SetXDir(MOVEMENT_X_SPEED - penality);
-  		
+  		SetXDir(MOVEMENT_X_SPEED - penality);	
   	SetYDir(GetYDir() - 15);
+  	JumpEffect("Right");
+	DoMagicEnergy(-JUMP_MANA);	
   	return true;
 }
 

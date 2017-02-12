@@ -226,7 +226,7 @@ func DestroyEffect()
 
 func IsReflectable(clonk) 
 { 	
-	if(GetOwner() == clonk->GetOwner())
+	if (GetOwner() == clonk->GetOwner())
 		return false;
 	return true; 
 }

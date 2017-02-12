@@ -8,3 +8,5 @@ public func Death()
 	Explode(20);
 	return;
 }
+
+public func CanBeHit(object by) { return true; }

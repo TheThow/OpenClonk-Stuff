@@ -14,6 +14,7 @@ protected func Initialize()
 	CreateObject(Goal_Defense);
 	
 	// Rules.
+	ActivateMedalRule();
 	CreateObject(Rule_NoFriendlyFire);
 	return;
 }
@@ -76,6 +77,8 @@ public func OnClonkDeath(object clonk)
 public func SpawnPlayer(int plr)
 {
 	var clonk = GetCrew(plr);
+	if (!clonk)
+		return;
 	clonk->SetPosition(507, 408);	
 	clonk->CreateContents(Sword);
 	clonk->SetMagicEnergy(50);
@@ -100,10 +103,12 @@ public func GetAttackWave(int nr)
 		return new DefenseEnemy.BreakWave { Duration = 10 };
 	
 	// Attack positions.
-	var pos_left= {X = 10, Y = 408, Exact = true};
-	var pos_right = {X = LandscapeWidth() - 10, Y = 408, Exact = true};
-	var pos_above = {X = LandscapeWidth() / 2, Y = 10}; 
-	
+	var pos_left_down = {X = 10, Y = 408, Exact = true};
+	var pos_right_down = {X = LandscapeWidth() - 10, Y = 408, Exact = true};
+	var pos_left_up = {X = 10, Y = 232, Exact = true};
+	var pos_right_up = {X = LandscapeWidth() - 10, Y = 232, Exact = true};	
+	var pos_above_left = {X = LandscapeWidth() / 2 - 400, Y = 10}; 
+	var pos_above_right = {X = LandscapeWidth() / 2 + 400, Y = 10};
 	// Automatically build waves that become stronger.
 	var wave = new DefenseEnemy.DefaultWave
 	{
@@ -115,30 +120,27 @@ public func GetAttackWave(int nr)
 		Enemies = []
 	};
 	
-	// Add enemy ground troups: swordsman, archer, spearman, grenadier, bomber.
-	PushBack(wave.Enemies, new DefenseEnemy.Swordsman {
-		Amount = BoundBy(nr / 2 + 1, 1, 20),
-		Energy = BoundBy(20 + 5 * nr, 30, 100),
-		Position = RandomElement([pos_left, pos_right])
-	});
-	PushBack(wave.Enemies, new DefenseEnemy.Grenadier {
-		Amount = BoundBy(nr / 2 + 1, 1, 20),
-		Energy = BoundBy(10 + nr, 20, 50),
-		Position = RandomElement([pos_left, pos_right])
-	});		
 	// Add enemy: boom attack.
 	PushBack(wave.Enemies, new DefenseEnemy.BoomAttack {
-		Amount = BoundBy(nr / 2 + 1, 1, 20),
+		Amount = nr / 2,
 		Speed = BoundBy(80 + nr * 5, 100, 250),
-		Position = pos_above
-	});	
+		Position = RandomElement([pos_above_left, pos_above_right])
+	});
+	
+	// Add enemy: champs.
+	PushBack(wave.Enemies, new DefenseEnemy.Champ {
+		Amount = nr / 2,
+		Energy = 10 + nr * 10,
+		Magic = 100 + 10 * nr,
+		Position = RandomElement([pos_left_down, pos_right_down, pos_left_up, pos_right_up])
+	});
 	return wave;
 }
 
 // The attackers should go for all things alive.
 public func GiveRandomAttackTarget(object attacker)
 {
-	var target = FindObject(Find_OCF(OCF_Alive), Find_Hostile(attacker->GetController()), Sort_Distance());
+	var target = attacker->FindObject(Find_OCF(OCF_Alive), Find_Hostile(attacker->GetController()), Sort_Distance());
 	if (target)
 		return target;
 	return;

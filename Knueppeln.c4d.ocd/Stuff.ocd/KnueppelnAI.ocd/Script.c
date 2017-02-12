@@ -11,7 +11,7 @@
 
 // AI Settings.
 local MaxAggroDistance = 800; // Lose sight to target if it is this far away (unless we're ranged - then always guard the range rect).
-local KnueppelnLoggingOn = true; // Whether or not debug logging is turned on.
+local KnueppelnLoggingOn = false; // Whether or not debug logging is turned on.
 
 
 public func Execute(effect fx, int time)
@@ -19,9 +19,13 @@ public func Execute(effect fx, int time)
 	// Don't do anything when still in respawn container.
 	if (fx.Target->Contained())
 		return;
+		
+	// Find a target to attack (also change targets from time to time).
+	if (!fx.target || fx.Target->ObjectDistance(fx.target) > RandomX(150, 800))
+		fx.target = this->FindTarget(fx);
 
-	// Show magic energy.
-	fx.Target->Message("@<c 0000aa>%d</c>", fx.Target->GetMagicEnergy());		
+	// Show energy/magic energy.
+	fx.Target->Message("@<c aa0000>%d</c>/<c 0000aa>%d</c>", fx.Target->GetEnergy(), fx.Target->GetMagicEnergy());		
 	
 	// Try to evade danger like lava.
 	if (this->ExecuteEvadeDanger(fx))
@@ -54,6 +58,10 @@ public func Execute(effect fx, int time)
 	if (Random(3))
 		if (this->ExecuteQSpell(fx))
 			return;
+	
+	// Execute special champ movement to reach the target.
+	if (this->ExecuteChampMovement(fx))
+		return;		
 		
 	// Do normal AI behavior.
 	return inherited(fx, time, ...);
@@ -80,28 +88,64 @@ public func ExecuteEvadeDanger(effect fx)
 
 public func ExecuteDoubleJump(effect fx, string direction)
 {
-	if (GetEffect("IntControlJumpDouble", fx.Target))
-	{
-		if (fx.Target->GetMagicEnergy() >= fx.Target.JUMP_MANA)
-		{
-			RemoveEffect("IntControlJumpDouble", fx.Target);
-			var ok = fx.Target->ControlUpDouble();
-			if (ok)
-			{
-				fx.Target->JumpEffect(fx.Target, "Up");
-				fx.Target->DoMagicEnergy(-fx.Target.JUMP_MANA);
-				this->LogKN(fx, Format("Executed double jump %s", "Up"));
-				return true;
-			}
-		}
+	if (!fx.Target->IsJumping())
 		return false;
+	if (fx.Target->GetMagicEnergy() < fx.Target.JUMP_MANA)
+		return false;
+	
+	if (direction == "Up")
+	{
+		fx.Target->ControlUpDouble();
+	}
+	if (direction == "Dow ")
+	{
+		fx.Target->ControlDownDouble();
+	}
+	if (direction == "Left")
+	{
+		fx.Target->ControlLeftDouble();
+	}
+	if (direction == "Right")
+	{
+		fx.Target->ControlRightDouble();
+	}
+	this->LogKN(fx, Format("Executed double jump %s", direction));
+	return true;
+}
+
+public func ExecuteChampMovement(effect fx)
+{
+	if (!fx.target)
+		return false;
+	
+	// Try to get to the same level as the target or even above.
+	if (fx.target->GetY() < fx.Target->GetY() - 30)
+	{
+		if (this->ExecuteJump(fx))
+			return true;
 	}
 	
-	if (!GetEffect("JumpMCD", fx.Target))
+	if (fx.Target->IsJumping() && !GetEffect("MovementMCD", fx.Target))
 	{
-		AddEffect("IntControlJumpDouble", fx.Target, 1, fx.Target.TIMER);
-		AddEffect("JumpMCD", fx.Target, 1, fx.Target.MOVEMENT_CD);
-		return true;
+		var angle = Angle(fx.Target->GetX(), fx.Target->GetY(), fx.target->GetX(), fx.target->GetY());
+		if (Inside(angle, -45, 45))
+			if (this->ExecuteDoubleJump(fx, "Up"))
+			{
+				AddEffect("MovementMCD", fx.Target, 1, fx.Target.MOVEMENT_CD);
+				return true;
+			}
+		if (Inside(angle, 45, 135))
+			if (this->ExecuteDoubleJump(fx, "Right"))
+			{
+				AddEffect("MovementMCD", fx.Target, 1, fx.Target.MOVEMENT_CD);
+				return true;
+			}
+		if (Inside(angle, -135, -45))
+			if (this->ExecuteDoubleJump(fx, "Left"))
+			{
+				AddEffect("MovementMCD", fx.Target, 1, fx.Target.MOVEMENT_CD);
+				return true;
+			}
 	}
 	return false;
 }
@@ -333,7 +377,7 @@ public func ExecuteRSpell(effect fx)
 
 public func ExecuteBlock(effect fx)
 {
-	var danger = fx.Target->FindObject(Find_Distance(fx.Target->GetBlockingRange() + 5), Find_Func("IsReflectable"), Find_Not(Find_Owner(fx.Target->GetOwner())));
+	var danger = fx.Target->FindObject(Find_Distance(fx.Target->GetBlockingRange() + 5), Find_Func("IsReflectable", fx.Target), Find_Not(Find_Owner(fx.Target->GetOwner())));
 	if (!danger)
 		return false;
 	// Still waiting for cool down?	
@@ -355,6 +399,14 @@ public func ExecuteIdle(effect fx)
 	return true;
 }
 
+// Checks whether the AI has a weapon for the target.
+public func HasWeaponForTarget(effect fx, object target)
+{
+	if (target && target->~CanBeHit())
+		return true;
+	return _inherited(fx, target, ...);
+}
+
 
 /*-- Aiming Cursor --*/
 
@@ -370,11 +422,9 @@ public func GetAICursor(fx)
 
 /*-- Debug Logging --*/
 
-
 public func LogKN(effect fx, string message)
 {
 	if (fx.control.KnueppelnLoggingOn)
 		Log("[%d]%v(%i): %s", FrameCounter(), fx.Target, fx.Target.ChampType, message);
 	return;
 }
-

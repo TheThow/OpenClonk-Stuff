@@ -1,3 +1,9 @@
 Knüppeln Defense
 
 Defend the gold statues and inventor's lab.
+
+Goal: Survive as many attack waves as possible.
+
+Hints:
+- This round is cooperative, so work together and divide tasks.
+- You get magic energy for killing enemies.
