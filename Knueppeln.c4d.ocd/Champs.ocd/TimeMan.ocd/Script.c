@@ -1,11 +1,12 @@
 /**
-	FireMan
-	
-
+	Time Man
 	@author 
 */
 
 #include Man
+
+
+/*-- Spells --*/
 
 local Special1Spell = TimeProjectile;
 local Special2Spell = TimeTravel;
@@ -154,10 +155,9 @@ func FxTimeHitTimer(object target, proplist effect, int time)
 		return -1;
 }
 
-global func AddTimeHitEffect()
-{
-	this->AddEffect("TimeHit", this, 20, 1, nil, TimeMan);
-}
+
+/*-- AI --*/
+
 
 /*-- Properties --*/
 

@@ -247,7 +247,7 @@ func CheckForEnemies()
 		{
 			plr_hit[GetPlayerByIndex(o->GetOwner())] = 1;
 			o->Fling(0,-1);
-			o->AddElectroHitEffect();
+			AddEffect("ElectroHit", o, 20, 1, nil, ElectroMan);
 			
 			Sound("electro_shot", false, 50);
 			

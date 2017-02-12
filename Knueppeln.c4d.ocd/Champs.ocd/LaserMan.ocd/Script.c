@@ -1,47 +1,48 @@
 /**
-	LightMan
-	
-
+	Laser Man
 	@author 
 */
 
 #include Man
 
+
+/*-- Spells --*/
+
 local Special1Spell = LaserStar;
 local Special2Spell = LaserRay;
 local Special3Spell = LaserBlink;
 
-func Special1(object clonk, int x, int y, bool released, bool mouseclick, bool abletocast, bool cooldown)
+public func Special1(object clonk, int x, int y, bool released, bool mouseclick, bool abletocast, bool cooldown)
 {
 	if(!released && !mouseclick && abletocast)
 	{
-		if(clonk->LaunchSpell(LaserStar, x, y, 0, 0))
-			return 1;
+		if(clonk->LaunchSpell(Special1Spell, x, y, 0, 0))
+			return true;
 	}
-	return 0;
+	return false;
 }
 
-func Special2(object clonk, int x, int y, bool released, bool mouseclick, bool abletocast, bool cooldown)
+public func Special2(object clonk, int x, int y, bool released, bool mouseclick, bool abletocast, bool cooldown)
 {
 	if(!released && !mouseclick && abletocast)
 	{
-		if(clonk->LaunchSpell(LaserRay, x, y, 0, 0))
-			return 1;
+		if(clonk->LaunchSpell(Special2Spell, x, y, 0, 0))
+			return true;
 	}
-	return 0;
+	return false;
 }
 
-func Special3(object clonk, int x, int y, bool released, bool mouseclick, bool abletocast, bool cooldown)
+public func Special3(object clonk, int x, int y, bool released, bool mouseclick, bool abletocast, bool cooldown)
 {
 	if(!released && !mouseclick && abletocast)
 	{
-		if(clonk->LaunchSpell(LaserBlink, x, y, 0, 0))
-			return 1;
+		if(clonk->LaunchSpell(Special3Spell, x, y, 0, 0))
+			return true;
 	}
-	return 0;
+	return false;
 }
 
-func JumpEffect(object clonk, dir)
+public func JumpEffect(object clonk, dir)
 {
 	var from;
 	var to;
@@ -88,7 +89,7 @@ func JumpEffect(object clonk, dir)
 	}
 }
 
-func BlockEffect(object clonk, range)
+public func BlockEffect(object clonk, range)
 {
 	var ray = 
 	{
@@ -115,7 +116,7 @@ func BlockEffect(object clonk, range)
 	}
 }
 
-func FxLaserHitTimer(object target, proplist effect, int time)
+public func FxLaserHitTimer(object target, proplist effect, int time)
 {
 	var lightning =
 	{
@@ -135,10 +136,48 @@ func FxLaserHitTimer(object target, proplist effect, int time)
 		return -1;
 }
 
-global func AddLaserHitEffect()
+
+/*-- AI --*/
+
+public func ExecuteAISpecial1Spell(effect fx)
 {
-	this->AddEffect("LaserHit", this, 20, 1, nil, LaserMan);
+	if (!fx.Target || !fx.target)
+		return false;
+	var x = fx.Target->GetX(), y = fx.Target->GetY();
+	var tx = fx.target->GetX(), ty = fx.target->GetY() - 4;
+	if (Distance(x, y, tx, ty) > 30)
+		return false;
+	if (fx.Target->LaunchSpell(Special1Spell, tx - x, ty - y, 0, 0))
+		return true;
+	return false;
 }
+
+public func ExecuteAISpecial2Spell(effect fx)
+{
+	if (!fx.Target || !fx.target)
+		return false;
+	var x = fx.Target->GetX(), y = fx.Target->GetY();
+	var tx = fx.target->GetX(), ty = fx.target->GetY() - 4;
+	if (Distance(x, y, tx, ty) > Special2Spell.MaxLength)
+		return false;
+	if (fx.Target->LaunchSpell(Special2Spell, tx - x, ty - y, 0, 0))
+		return true;
+	return false;
+}
+
+public func ExecuteAISpecial3Spell(effect fx)
+{
+	if (!fx.Target || !fx.target)
+		return false;
+	var x = fx.Target->GetX(), y = fx.Target->GetY();
+	var tx = fx.target->GetX(), ty = fx.target->GetY() - 4;
+	if (Distance(x, y, tx, ty) > Special3Spell.Length)
+		return false;
+	if (fx.Target->LaunchSpell(Special3Spell, tx - x, ty - y, 0, 0))
+		return true;
+	return false;
+}
+
 
 /*-- Properties --*/
 

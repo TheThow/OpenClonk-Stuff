@@ -1,11 +1,12 @@
 /**
-	NinjaMan
-	
-
+	Ninja Man
 	@author 
 */
 
 #include Man
+
+
+/*- Spells --*/
 
 local Special1Spell = PoisonDart;
 local Special2Spell = ShadowWalk;
@@ -28,9 +29,6 @@ func Special1(object clonk, int x, int y, bool released, bool mouseclick, bool a
 	}
 	return 0;
 }
-
-public func IsSpecial1Shot() { return true; }
-public func IsSpecial1ShotSpeed() { return Special1Spell.Speed; }
 
 func Special2(object clonk, int x, int y, bool released, bool mouseclick, bool abletocast, bool cooldown)
 {
@@ -157,6 +155,23 @@ func CleanUp(object clonk)
 	//clonk->PushActionSpeed("Walk", 200);
 	clonk.ActMap.Walk.Speed = clonk.Prototype.ActMap.Walk.Speed;
 }
+
+
+/*-- AI --*/
+
+public func IsSpecial1Shot() { return true; }
+public func IsSpecial1ShotSpeed() { return Special1Spell.Speed; }
+
+public func ExecuteAISpecial2Spell(effect fx)
+{
+	if (!fx.Target)
+		return false;
+	if (fx.Target->GetEnergy() < 20)
+		if (fx.Target->LaunchSpell(Special2Spell, 0, 0, 0, 0))
+			return true;
+	return false;
+}
+
 
 /*-- Properties --*/
 

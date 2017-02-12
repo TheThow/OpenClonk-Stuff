@@ -1,11 +1,12 @@
 /**
-	FireMan
-	
-
+	Fire Man
 	@author 
 */
 
 #include Man
+
+
+/*-- Spells --*/
 
 local Special1Spell = FireProjectile;
 local Special2Spell = FireNado;
@@ -24,10 +25,6 @@ func Special1(object clonk, int x, int y, bool released, bool mouseclick, bool a
 	return 0;
 }
 
-public func IsSpecial1Shot() { return true; }
-public func IsSpecial1ShotStraight() { return true; }
-public func IsSpecial1ShotSpeed() { return Special1Spell.Speed; }
-
 func Special2(object clonk, int x, int y, bool released, bool mouseclick, bool abletocast, bool cooldown)
 {
 	if(!released && !mouseclick && abletocast && !cooldown)
@@ -38,10 +35,6 @@ func Special2(object clonk, int x, int y, bool released, bool mouseclick, bool a
 	
 	return 0;
 }
-
-public func IsSpecial2Shot() { return true; }
-public func IsSpecial2ShotStraight() { return true; }
-public func IsSpecial2ShotSpeed() { return Special2Spell.Speed; }
 
 func Special3(object clonk, int x, int y, bool released, bool mouseclick, bool abletocast, bool cooldown)
 {
@@ -188,6 +181,18 @@ func CastSpellWithSpellRangeCondition(object clonk, int x, int y, bool released,
 		
 		return solidcheck;
 }
+
+
+/*-- AI --*/
+
+public func IsSpecial1Shot() { return true; }
+public func IsSpecial1ShotStraight() { return true; }
+public func IsSpecial1ShotSpeed() { return Special1Spell.Speed; }
+
+public func IsSpecial2Shot() { return true; }
+public func IsSpecial2ShotStraight() { return true; }
+public func IsSpecial2ShotSpeed() { return Special2Spell.Speed; }
+
 
 /*-- Properties --*/
 

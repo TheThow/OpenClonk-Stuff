@@ -1,11 +1,12 @@
 /**
-	FireMan
-	
-
+	Balls Man
 	@author 
 */
 
 #include Man
+
+
+/*-- Spells --*/
 
 local Special1Spell = BallAttackOrder;
 local Special2Spell = BallHomeCall;
@@ -40,9 +41,6 @@ func Special1(object clonk, int x, int y, bool released, bool mouseclick, bool a
 	return 0;
 }
 
-public func IsSpecial1Shot() { return true; }
-public func IsSpecial1ShotStraight() { return true; }
-public func IsSpecial1ShotSpeed() { return BallsManBall.Speed; }
 
 func Special2(object clonk, int x, int y, bool released, bool mouseclick, bool abletocast, bool cooldown)
 {
@@ -255,10 +253,13 @@ func FxBallHitTimer(object target, proplist effect, int time)
 		return -1;
 }
 
-global func AddBallHitEffect()
-{
-	this->AddEffect("BallHit", this, 20, 1, nil, BallsMan);
-}
+
+/*-- AI --*/
+
+public func IsSpecial1Shot() { return true; }
+public func IsSpecial1ShotStraight() { return true; }
+public func IsSpecial1ShotSpeed() { return BallsManBall.Speed; }
+
 
 /*-- Properties --*/
 

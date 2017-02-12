@@ -187,7 +187,7 @@ func HitArea()
 	for(var o in FindObjects(Find_Distance(Size), Find_Func("CanBeHit", this), Find_Not(Find_Func("IsBlocking"))))
 	{
 		var angle = Angle(GetX(), GetY(), o->GetX(), o->GetY());
-		o->AddTimeHitEffect();
+		AddEffect("TimeHit", o, 20, 1, nil, TimeMan);
 		o->Fling(Sin(angle, 5), -Cos(angle, 5) - 2);
 		WeaponDamage(o, SpellDamage);
 		

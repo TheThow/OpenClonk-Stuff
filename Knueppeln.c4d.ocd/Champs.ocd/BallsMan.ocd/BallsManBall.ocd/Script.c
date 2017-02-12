@@ -247,7 +247,7 @@ func FxDischargeStop(object target, proplist effect, int reason, bool temporary)
 	for(var o in FindObjects(Find_Distance(DischargeSize), Find_Func("CanBeHit", this)))
 	{
 		var angle = Angle(GetX(), GetY(), o->GetX(), o->GetY());
-		o->AddBallHitEffect();
+		AddEffect("BallHit", o, 20, 1, nil, BallsMan);
 		o->Fling(Sin(angle, 8), -Cos(angle, 8));
 		WeaponDamage(o, DischargeDamage);
 	}
@@ -455,7 +455,7 @@ func CheckForEnemies(Size)
 		if(o->GetOwner() == GetOwner() || GetEffect("BallHitCD", o))
 			continue;
 		
-		o->AddBallHitEffect();
+		AddEffect("BallHit", o, 20, 1, nil, BallsMan);
 		o->Fling(0, -2);
 		AddEffect("BallHitCD", o, 1, 15);
 		

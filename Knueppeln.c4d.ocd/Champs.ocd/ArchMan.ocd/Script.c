@@ -1,10 +1,10 @@
 /**
 	Arch Man
-
 	@author K-Pone
 */
 
 #include Man
+
 
 /*-- Spells --*/
 
@@ -26,9 +26,6 @@ func Special1(object clonk, int x, int y, bool released, bool mouseclick, bool a
 	return 0;
 }
 
-public func IsSpecial1Shot() { return true; }
-public func IsSpecial1ShotSpeed() { return Special1Spell.Speed; }
-
 func Special2(object clonk, int x, int y, bool released, bool mouseclick, bool abletocast, bool cooldown)
 {
 	if(!released && !mouseclick && abletocast && !cooldown)
@@ -39,10 +36,6 @@ func Special2(object clonk, int x, int y, bool released, bool mouseclick, bool a
 	return 0;
 }
 
-public func IsSpecial2Shot() { return true; }
-public func IsSpecial2ShotSpeed() { return Special2Spell.Speed; }
-public func IsSpecial2ShotRange() { return Special2Spell.Range; }
-
 func Special3(object clonk, int x, int y, bool released, bool mouseclick, bool abletocast, bool cooldown)
 {
 	if(!released && !mouseclick && abletocast && !cooldown)
@@ -52,12 +45,6 @@ func Special3(object clonk, int x, int y, bool released, bool mouseclick, bool a
 	}
 	return 0;
 }
-
-public func IsSpecial3Shot() { return true; }
-public func IsSpecial3ShotStraight() { return true; }
-public func IsSpecial3ShotSpeed() { return Special3Spell.Speed; }
-public func IsSpecial3ShotThroughWalls() { return true; }
-
 
 func JumpEffect(object clonk, string dir)
 {
@@ -122,6 +109,22 @@ func BlockEffect(object clonk, int range)
 		clonk->CreateParticle("WoodChip", Sin(i, range), -Cos(i, range), Sin(i, 3), -Cos(i, 3), 20, particlefx);
 	}
 }
+
+
+/*-- AI --*/
+
+public func IsSpecial1Shot() { return true; }
+public func IsSpecial1ShotSpeed() { return Special1Spell.Speed; }
+
+public func IsSpecial2Shot() { return true; }
+public func IsSpecial2ShotSpeed() { return Special2Spell.Speed; }
+public func IsSpecial2ShotRange() { return Special2Spell.Range; }
+
+public func IsSpecial3Shot() { return true; }
+public func IsSpecial3ShotStraight() { return true; }
+public func IsSpecial3ShotSpeed() { return Special3Spell.Speed; }
+public func IsSpecial3ShotThroughWalls() { return true; }
+
 
 /*-- Properties --*/
 

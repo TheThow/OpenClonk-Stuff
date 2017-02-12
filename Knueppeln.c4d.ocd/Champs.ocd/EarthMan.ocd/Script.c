@@ -1,11 +1,12 @@
 /**
-	FireMan
-	
-
-	@author 
+	Earth Man
+	@author
 */
 
 #include Man
+
+
+/*-- Spells --*/
 
 local Special1Spell = EarthProjectile;
 local Special2Spell = EarthWall;
@@ -22,9 +23,6 @@ func Special1(object clonk, int x, int y, bool released, bool mouseclick, bool a
 	}
 	return 0;
 }
-
-public func IsSpecial1Shot() { return true; }
-public func IsSpecial1ShotSpeed() { return Special1Spell.Speed; }
 
 func Special2(object clonk, int x, int y, bool released, bool mouseclick, bool abletocast, bool cooldown)
 {
@@ -161,10 +159,12 @@ func FxEarthHitTimer(object target, proplist effect, int time)
 		return -1;
 }
 
-global func AddEarthHitEffect()
-{
-	this->AddEffect("EarthHit", this, 20, 1, nil, EarthMan);
-}
+
+/*-- AI --*/
+
+public func IsSpecial1Shot() { return true; }
+public func IsSpecial1ShotSpeed() { return Special1Spell.Speed; }
+
 
 /*-- Properties --*/
 

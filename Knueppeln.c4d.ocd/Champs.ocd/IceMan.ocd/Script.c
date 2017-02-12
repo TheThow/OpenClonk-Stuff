@@ -1,11 +1,12 @@
 /**
-	IceMan
-	
-
-	@author 
+	Ice Man
+	@author
 */
 
 #include Man
+
+
+/*-- Spells --*/
 
 local Special1Spell = IceProjectile;
 local Special2Spell = IceShard;
@@ -18,10 +19,6 @@ func Special1(object clonk, int x, int y, bool released, bool mouseclick, bool a
 	if(!released && !mouseclick && abletocast && !cooldown)
 		clonk->LaunchSpell(IceProjectile, x, y, 0, 0);
 }
-
-public func IsSpecial1Shot() { return true; }
-public func IsSpecial1ShotStraight() { return true; }
-public func IsSpecial1ShotSpeed() { return Special1Spell.Speed; }
 
 func Special2(object clonk, int x, int y, bool released, bool mouseclick, bool abletocast,  bool cooldown)
 {
@@ -134,6 +131,14 @@ func CleanUp(object clonk)
 	for (var shard in shards)
 		shard->RemoveObject();
 }
+
+
+/*-- AI --*/
+
+public func IsSpecial1Shot() { return true; }
+public func IsSpecial1ShotStraight() { return true; }
+public func IsSpecial1ShotSpeed() { return Special1Spell.Speed; }
+
 
 /*-- Properties --*/
 

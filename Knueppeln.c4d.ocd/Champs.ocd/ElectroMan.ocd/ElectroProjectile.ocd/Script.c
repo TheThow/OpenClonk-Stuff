@@ -96,7 +96,7 @@ func Hit()
 	
 	for(var o in FindObjects(Find_Distance(Size), Find_Func("CanBeHit", this)))
 	{
-		o->AddElectroHitEffect();
+		AddEffect("ElectroHit", o, 20, 1, nil, ElectroMan);
 		var angle = Angle(GetX(), GetY(), o->GetX(), o->GetY());
 		o->SetVelocity(angle, 10);
 		WeaponDamage(o, SpellDamage);

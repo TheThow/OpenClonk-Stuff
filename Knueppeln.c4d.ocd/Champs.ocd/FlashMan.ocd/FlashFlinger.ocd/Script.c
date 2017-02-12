@@ -88,7 +88,7 @@ func HitDamage(obj)
 	if(obj->~CanBeHit(this) == false)
 		return;
 	
-	obj->AddFlashHitEffect();
+	AddEffect("FlashHit", obj, 20, 1, nil, FlashMan);
 	WeaponDamage(obj, 1);
 }
 

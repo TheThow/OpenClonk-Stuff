@@ -102,7 +102,7 @@ public func HitObject(obj)
 {
 	if(obj->~CanBeHit(this) == false)
 		return;
-	obj->AddLaserHitEffect();
+	AddEffect("LaserHit", obj, 20, 1, nil, LaserMan);
 	obj->Fling(0, -4, nil, true);
 	WeaponDamage(obj, SpellDamage);
 }

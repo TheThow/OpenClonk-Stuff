@@ -1,13 +1,12 @@
 /**
-
-	FlashMan
-	
-	
+	Flash Man
 	@author K-Pone
-
 */
 
 #include Man
+
+
+/*-- Spells --*/
 
 local Special1Cooldown = 8;
 local Special2Cooldown = 8;
@@ -27,9 +26,6 @@ func Special1(object clonk, int x, int y, bool released, bool mouseclick, bool a
 	return 0;
 }
 
-public func IsSpecial1Shot() { return true; }
-public func IsSpecial1ShotSpeed() { return Special1Spell.Speed; }
-
 func Special2(object clonk, int x, int y, bool released, bool mouseclick, bool abletocast, bool cooldown)
 {
 	if(!released && !mouseclick && abletocast && !cooldown)
@@ -40,8 +36,6 @@ func Special2(object clonk, int x, int y, bool released, bool mouseclick, bool a
 	return 0;
 }
 
-public func IsSpecial2Shot() { return true; }
-public func IsSpecial2ShotSpeed() { return Special2Spell.Speed; }
 
 func Special3(object clonk, int x, int y, bool released, bool mouseclick, bool abletocast, bool cooldown)
 {
@@ -52,12 +46,6 @@ func Special3(object clonk, int x, int y, bool released, bool mouseclick, bool a
 	}
 	return 0;
 }
-
-public func IsSpecial3Shot() { return true; }
-public func IsSpecial3ShotStraight() { return true; }
-public func IsSpecial3ShotSpeed() { return Special3Spell.Speed; }
-public func IsSpecial3ShotRange() { return Special3Spell.Range; }
-public func IsSpecial3ShotThroughWalls() { return true; }
 
 func JumpEffect(object clonk, string dir)
 {
@@ -110,9 +98,6 @@ func JumpEffect(object clonk, string dir)
 	}
 }
 
-/*
-range	range of the block effect
-*/
 func BlockEffect(object clonk, int range)
 {
 	for(var i = 0; i < 360; i+=10)
@@ -234,10 +219,21 @@ func FxFlashHitTimer(object target, proplist effect, int time)
 		return -1;
 }
 
-global func AddFlashHitEffect()
-{
-	this->AddEffect("FlashHit", this, 20, 1, nil, FlashMan);
-}
+
+/*-- AI --*/
+
+public func IsSpecial1Shot() { return true; }
+public func IsSpecial1ShotSpeed() { return Special1Spell.Speed; }
+
+public func IsSpecial2Shot() { return true; }
+public func IsSpecial2ShotSpeed() { return Special2Spell.Speed; }
+
+public func IsSpecial3Shot() { return true; }
+public func IsSpecial3ShotStraight() { return true; }
+public func IsSpecial3ShotSpeed() { return Special3Spell.Speed; }
+public func IsSpecial3ShotRange() { return Special3Spell.Range; }
+public func IsSpecial3ShotThroughWalls() { return true; }
+
 
 /*-- Properties --*/
 

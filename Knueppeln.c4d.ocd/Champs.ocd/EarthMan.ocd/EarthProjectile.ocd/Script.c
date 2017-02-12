@@ -69,7 +69,7 @@ func HitEffect()
 	
 	for(var o in FindObjects(Find_Distance(SpellDamage), Find_Func("CanBeHit", this)))
 	{
-		o->AddEarthHitEffect();
+		AddEffect("EarthHit", o, 20, 1, nil, EarthMan);
 	}
 	
 	Explode(SpellDamage);

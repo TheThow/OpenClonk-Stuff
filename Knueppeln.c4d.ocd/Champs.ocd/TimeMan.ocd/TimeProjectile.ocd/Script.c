@@ -61,7 +61,7 @@ func Hit()
 	
 	for(var o in FindObjects(Find_Distance(Size), Find_Func("CanBeHit", this)))
 	{
-		o->AddTimeHitEffect();
+		AddEffect("TimeHit", o, 20, 1, nil, TimeMan);
 		var flag = false;
 		
 		if(GetEffect("TimeMark", o))
@@ -140,7 +140,7 @@ func MarkHit()
 	
 	for(var o in FindObjects(Find_Distance(Size*2), Find_Func("CanBeHit", this)))
 	{
-		o->AddTimeHitEffect();
+		AddEffect("TimeHit", o, 20, 1, nil, TimeMan);
 		var angle = Angle(GetX(), GetY(), o->GetX(), o->GetY());
 		o->Fling(Sin(angle, 4), -Cos(angle, 4) + 1);
 		WeaponDamage(o, MarkDamage);

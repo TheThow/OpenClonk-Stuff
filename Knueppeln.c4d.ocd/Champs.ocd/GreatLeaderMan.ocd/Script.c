@@ -1,41 +1,30 @@
 /**
 	GreatLeaderMan
-	
-
 	@author 
 */
 
 #include Man
 
-local Special3Spell = GreatLeaderMan_Minion;
-local Special2Spell = AimAndFire;
+
+/*-- Spells --*/
+
 local Special1Spell = Barrage;
+local Special2Spell = AimAndFire;
+local Special3Spell = GreatLeaderMan_Minion;
 
 local Special3Cooldown = 1;
 
-func Special1(object clonk, int x, int y, bool released, bool mouseclick, bool abletocast, bool cooldown)
+public func Special1(object clonk, int x, int y, bool released, bool mouseclick, bool abletocast, bool cooldown)
 {
-	if(!released && !mouseclick && abletocast && !cooldown)
+	if (!released && !mouseclick && abletocast && !cooldown)
 	{
-		if(clonk->LaunchSpell(Special1Spell, x, y, 0, 0))
-			return 1;
+		if (clonk->LaunchSpell(Special1Spell, x, y, 0, 0))
+			return true;
 	}
-	
-	return 0;
+	return false;
 }
 
-func Special3(object clonk, int x, int y, bool released, bool mouseclick, bool abletocast, bool cooldown)
-{
-	if(!released && !mouseclick && abletocast && !cooldown)
-	{
-		if(clonk->LaunchSpell(Special3Spell, x, y, 0, 0))
-			return 1;
-	}
-	
-	return 0;
-}
-
-func Special2(object clonk, int x, int y, bool released, bool mouseclick, bool abletocast,  bool cooldown)
+public func Special2(object clonk, int x, int y, bool released, bool mouseclick, bool abletocast,  bool cooldown)
 {
 	var props =
 	{
@@ -50,7 +39,17 @@ func Special2(object clonk, int x, int y, bool released, bool mouseclick, bool a
 	return CastSpellWithSpellRange(clonk, x, y, released, mouseclick, abletocast, cooldown, props, Special2Spell);
 }
 
-func JumpEffect(object clonk, dir)
+public func Special3(object clonk, int x, int y, bool released, bool mouseclick, bool abletocast, bool cooldown)
+{
+	if (!released && !mouseclick && abletocast && !cooldown)
+	{
+		if (clonk->LaunchSpell(Special3Spell, x, y, 0, 0))
+			return true;
+	}
+	return false;
+}
+
+public func JumpEffect(object clonk, dir)
 {
 	var from, to;
 
@@ -96,7 +95,7 @@ func JumpEffect(object clonk, dir)
 	}
 }
 
-func BlockEffect(object clonk, int radius)
+public func BlockEffect(object clonk, int radius)
 {
 	var trailparticles =
 	{
@@ -115,11 +114,56 @@ func BlockEffect(object clonk, int radius)
 		PV_Random(-5, 5), PV_Random(-5, 5), PV_Random(20, 30), trailparticles, 100);
 }
 
-func CleanUp(object clonk)
+public func CleanUp(object clonk)
 {
 	for (var obj in FindObjects(Find_ID(Clonk), Find_Owner(clonk->GetOwner()), Find_Property("IsMinion")))
 		obj->Kill();
 }
+
+
+/*-- AI --*/
+
+public func ExecuteAISpecial1Spell(effect fx)
+{
+	if (!fx.Target || !fx.target)
+		return false;
+	var x = fx.Target->GetX(), y = fx.Target->GetY();
+	var tx = fx.target->GetX(), ty = fx.target->GetY() - 4;
+	if (Distance(x, y, tx, ty) > 250)
+		return false;
+	if (fx.Target->LaunchSpell(Special1Spell, tx - x, ty - y, 0, 0))
+		return true;
+	return false;
+}
+
+public func ExecuteAISpecial2Spell(effect fx)
+{
+	if (!fx.Target || !fx.target)
+		return false;
+	if (!FindObject(Find_ID(Clonk), Find_Owner(fx.Target->GetOwner()), Find_Property("IsMinion")))
+		return false;
+	var x = fx.Target->GetX(), y = fx.Target->GetY();
+	var tx = fx.target->GetX(), ty = fx.target->GetY() - 4;
+	if (Distance(x, y, tx, ty) > 200)
+		return false;
+	if (fx.Target->LaunchSpell(Special2Spell, tx - x, ty - y, 0, 0))
+		return true;
+	return false;
+}
+
+public func ExecuteAISpecial3Spell(effect fx)
+{
+	if (!fx.Target || !fx.target)
+		return false;
+	var x = fx.Target->GetX(), y = fx.Target->GetY();
+	var tx = fx.target->GetX(), ty = fx.target->GetY() - 4;
+	if (Distance(x, y, tx, ty) > 300)
+		return false;
+	if (fx.Target->LaunchSpell(Special3Spell, tx - x, ty - y, 0, 0))
+		return true;
+	return false;
+}
+
 
 /*-- Properties --*/
 

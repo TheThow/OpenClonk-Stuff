@@ -1,11 +1,12 @@
 /**
-	FireMan
-	
-
+	Electro Man
 	@author 
 */
 
 #include Man
+
+
+/*-- Spells --*/
 
 local Special1Spell = ElectroProjectile;
 local Special2Spell = ElectroOrb;
@@ -22,10 +23,6 @@ func Special1(object clonk, int x, int y, bool released, bool mouseclick, bool a
 	}
 	return 0;
 }
-
-public func IsSpecial1Shot() { return true; }
-public func IsSpecial1ShotStraight() { return true; }
-public func IsSpecial1ShotSpeed() { return Special1Spell.Speed; }
 
 func Special2(object clonk, int x, int y, bool released, bool mouseclick, bool abletocast, bool cooldown)
 {
@@ -155,10 +152,13 @@ func FxElectroHitTimer(object target, proplist effect, int time)
 		return -1;
 }
 
-global func AddElectroHitEffect()
-{
-	this->AddEffect("ElectroHit", this, 20, 1, nil, ElectroMan);
-}
+
+/*-- AI --*/
+
+public func IsSpecial1Shot() { return true; }
+public func IsSpecial1ShotStraight() { return true; }
+public func IsSpecial1ShotSpeed() { return Special1Spell.Speed; }
+
 
 /*-- Properties --*/
 

@@ -28,8 +28,6 @@ func FxShadowWalkTimer(object target, proplist effect, int time)
 {
 	if(time >= effect.dur)
 		return -1;
-	
-	
 }
 
 func FxShadowWalkStop(object target, proplist effect, int reason, bool temporary)

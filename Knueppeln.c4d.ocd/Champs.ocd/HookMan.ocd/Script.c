@@ -1,11 +1,12 @@
 /**
-	FireMan
-	
-
+	Hook Man
 	@author 
 */
 
 #include Man
+
+
+/*-- Spells --*/
 
 local Special1Spell = Hook;
 local Special2Spell = ExplosiveHook;
@@ -16,27 +17,22 @@ local Special3Cooldown = 400;
 
 func Special1(object clonk, int x, int y, bool released, bool mouseclick, bool abletocast, bool cooldown)
 {
-	if(clonk.currHook && !released && abletocast)
+	if (clonk.currHook && !released && abletocast)
 	{
 		clonk.currHook->Trigger();
-		return 1;
+		return true;
 	}
 
-	if(!released && !mouseclick && abletocast && !cooldown)
+	if (!released && !mouseclick && abletocast && !cooldown)
 	{
 		clonk.currHook = clonk->LaunchSpell(Special1Spell, x, y, 0, 0);
 		if(clonk.currHook)
 		{
-			return 1;
+			return true;
 		}
 	}
-	return 0;
+	return false;
 }
-
-public func IsSpecial1Shot() { return true; }
-public func IsSpecial1ShotStraight() { return true; }
-public func IsSpecial1ShotSpeed() { return Special1Spell.Speed; }
-public func IsSpecial1ShotRange() { return Special1Spell.Range; }
 
 func Special2(object clonk, int x, int y, bool released, bool mouseclick, bool abletocast, bool cooldown)
 {
@@ -48,11 +44,6 @@ func Special2(object clonk, int x, int y, bool released, bool mouseclick, bool a
 	return 0;
 }
 
-public func IsSpecial2Shot() { return true; }
-public func IsSpecial2ShotStraight() { return true; }
-public func IsSpecial2ShotSpeed() { return Special2Spell.Speed; }
-public func IsSpecial2ShotRange() { return Special2Spell.Range; }
-
 func Special3(object clonk, int x, int y, bool released, bool mouseclick, bool abletocast, bool cooldown)
 {
 	if(!released && !mouseclick && abletocast && !cooldown)
@@ -63,8 +54,6 @@ func Special3(object clonk, int x, int y, bool released, bool mouseclick, bool a
 	return 0;
 }
 
-public func IsSpecial3Shot() { return true; }
-public func IsSpecial3ShotSpeed() { return Special3Spell.Speed; }
 
 func JumpEffect(object clonk, dir)
 {
@@ -140,6 +129,23 @@ func BlockEffect(object clonk, range)
 	}
 	
 }
+
+
+/*-- AI --*/
+
+public func IsSpecial1Shot() { return true; }
+public func IsSpecial1ShotStraight() { return true; }
+public func IsSpecial1ShotSpeed() { return Special1Spell.Speed; }
+public func IsSpecial1ShotRange() { return Special1Spell.Range; }
+
+public func IsSpecial2Shot() { return true; }
+public func IsSpecial2ShotStraight() { return true; }
+public func IsSpecial2ShotSpeed() { return Special2Spell.Speed; }
+public func IsSpecial2ShotRange() { return Special2Spell.Range; }
+
+public func IsSpecial3Shot() { return true; }
+public func IsSpecial3ShotSpeed() { return Special3Spell.Speed; }
+
 
 /*-- Properties --*/
 

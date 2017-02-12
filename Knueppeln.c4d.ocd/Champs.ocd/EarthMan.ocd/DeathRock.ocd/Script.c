@@ -120,7 +120,7 @@ func FxCheckEnemiesTimer(object target, proplist effect, int time)
 		}
 		
 		o->Fling(Sin(angle, 5), -Cos(angle, 5));
-		o->AddEarthHitEffect();
+		AddEffect("EarthHit", o, 20, 1, nil, EarthMan);
 		WeaponDamage(o, SpellDamage);
 	}
 }

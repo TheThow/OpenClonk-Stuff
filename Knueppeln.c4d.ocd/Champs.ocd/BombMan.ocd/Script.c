@@ -1,16 +1,17 @@
 /**
-	IceMan
-	
-
+	Bomb Man
 	@author 
 */
 
 #include Man
 
+
+/*-- Spells --*/
+
 local Special1Spell = StickyBomb;
 local Special3Spell = StickyBombMagnet;
 
-func Special1(object clonk, int x, int y, bool released, bool mouseclick, bool abletocast, bool cooldown)
+public func Special1(object clonk, int x, int y, bool released, bool mouseclick, bool abletocast, bool cooldown)
 {
 	if(!released && !mouseclick && abletocast && !cooldown)
 	{
@@ -21,7 +22,7 @@ func Special1(object clonk, int x, int y, bool released, bool mouseclick, bool a
 	return 0;
 }
 
-func Special2(object clonk, int x, int y, bool released, bool mouseclick, bool abletocast,  bool cooldown)
+public func Special2(object clonk, int x, int y, bool released, bool mouseclick, bool abletocast,  bool cooldown)
 {
 	if (released || mouseclick || cooldown) return;
 	return BlowUpBombs(clonk);
@@ -40,7 +41,7 @@ public func BlowUpBombs(object clonk)
 	return;
 }
 
-func Special3(object clonk, int x, int y, bool released, bool mouseclick, bool abletocast, bool cooldown)
+public func Special3(object clonk, int x, int y, bool released, bool mouseclick, bool abletocast, bool cooldown)
 {
 	var props =
 	{
@@ -55,7 +56,7 @@ func Special3(object clonk, int x, int y, bool released, bool mouseclick, bool a
 	return CastSpellWithSpellRange(clonk, x, y, released, mouseclick, abletocast, cooldown, props, Special3Spell);
 }
 
-func JumpEffect(object clonk, dir)
+public func JumpEffect(object clonk, dir)
 {
 	var from, to;
 
@@ -101,7 +102,7 @@ func JumpEffect(object clonk, dir)
 	}
 }
 
-func BlockEffect(object clonk, int radius)
+public func BlockEffect(object clonk, int radius)
 {
 	var trailparticles =
 	{
@@ -120,11 +121,12 @@ func BlockEffect(object clonk, int radius)
 		PV_Random(-5, 5), PV_Random(-5, 5), PV_Random(20, 30), trailparticles, 100);
 }
 
-func CleanUp(object clonk)
+public func CleanUp(object clonk)
 {
 	for (var bomb in FindObjects(Find_ID(StickyBomb), Find_Owner(clonk->GetOwner())))
 		bomb->Remove();
 }
+
 
 /*-- AI --*/
 
@@ -136,8 +138,9 @@ public func ExecuteAISpecial1Spell(effect fx)
 	var tx = fx.target->GetX(), ty = fx.target->GetY() - 4;
 	if (Distance(x, y, tx, ty) > 50)
 		return false;
-	fx.Target->LaunchSpell(Special1Spell, tx - x, ty - y, 0, 0);
-	return true;
+	if (fx.Target->LaunchSpell(Special1Spell, tx - x, ty - y, 0, 0))
+		return true;
+	return false;
 }
 
 public func ExecuteAISpecial2Spell(effect fx)
@@ -159,6 +162,7 @@ public func ExecuteAISpecial2Spell(effect fx)
 	}
 	return false;
 }
+
 
 /*-- Properties --*/
 

@@ -1,11 +1,12 @@
 /**
-	FireMan
-	
-
+	Bat Man
 	@author 
 */
 
 #include Man
+
+
+/*-- Spells --*/
 
 local Special1Spell = Batarang;
 local Special2Spell = Disrupter;
@@ -24,10 +25,6 @@ func Special1(object clonk, int x, int y, bool released, bool mouseclick, bool a
 	return false;
 }
 
-public func IsSpecial1Shot() { return true; }
-public func IsSpecial1ShotStraight() { return true; }
-public func IsSpecial1ShotSpeed() { return Special1Spell.Speed; }
-public func IsSpecial1ShotRange() { return Special1Spell.Range; }
 
 func Special2(object clonk, int x, int y, bool released, bool mouseclick, bool abletocast, bool cooldown)
 {
@@ -38,9 +35,6 @@ func Special2(object clonk, int x, int y, bool released, bool mouseclick, bool a
 	}
 	return false;
 }
-
-public func IsSpecial2Shot() { return true; }
-public func IsSpecial2ShotSpeed() { return Special2Spell.Speed; }
 
 func Special3(object clonk, int x, int y, bool released, bool mouseclick, bool abletocast, bool cooldown)
 {
@@ -167,6 +161,18 @@ private func Definition(proplist def)
 	def.PictureTransformation = Trans_Mul(Trans_Rotate(-65, 0, 1, 0), Trans_Rotate(-35, 0, 0, 1));
 	return _inherited(def, ...);
 }
+
+
+/*-- AI --*/
+
+public func IsSpecial1Shot() { return true; }
+public func IsSpecial1ShotStraight() { return true; }
+public func IsSpecial1ShotSpeed() { return Special1Spell.Speed; }
+public func IsSpecial1ShotRange() { return Special1Spell.Range; }
+
+public func IsSpecial2Shot() { return true; }
+public func IsSpecial2ShotSpeed() { return Special2Spell.Speed; }
+
 
 /*-- Properties --*/
 

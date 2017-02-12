@@ -16,88 +16,83 @@ local Special1Spell = Projectile;
 local Special2Spell = Projectile;
 local Special3Spell = Projectile;
 
-/*
-Parameters: 
-clonk 			Calling clonk, 
-x		 		mouse x, 
-y 				mouse y, 
-released		key/mouse event released, 
-mouseclick 		mouseclick when the special key is pressed, 
-abletocast 		clonk is able to cast at the moment, 
-cooldown 		spell is on cooldown
-*/
-func Special1(object clonk, int x, int y, bool released, bool mouseclick, bool abletocast, bool cooldown)
+ 
+// clonk 			Calling clonk, 
+// x		 		mouse x, 
+// y 				mouse y, 
+// released			key/mouse event released, 
+// mouseclick 		mouseclick when the special key is pressed, 
+// abletocast 		clonk is able to cast at the moment, 
+// cooldown 		spell is on cooldown
+public func Special1(object clonk, int x, int y, bool released, bool mouseclick, bool abletocast, bool cooldown)
 {
 	return false;
 }
 
-func Special2(object clonk, int x, int y, bool released, bool mouseclick, bool abletocast, bool cooldown)
+public func Special2(object clonk, int x, int y, bool released, bool mouseclick, bool abletocast, bool cooldown)
 {
 	return false;
 }
 
-func Special3(object clonk, int x, int y, bool released, bool mouseclick, bool abletocast, bool cooldown)
+public func Special3(object clonk, int x, int y, bool released, bool mouseclick, bool abletocast, bool cooldown)
 {
 	return false;
 }
 
-/*
-dir 	"Up", "Left", "Right", "Down"
-*/
-func JumpEffect(object clonk, string dir)
+
+// dir 	"Up", "Left", "Right", "Down"
+public func JumpEffect(object clonk, string dir)
 {
 
 }
 
-/*
-range	range of the block effect
-*/
-func BlockEffect(object clonk, int range)
+// range	range of the block effect
+public func BlockEffect(object clonk, int range)
 {
 
 }
 
-func LeftClick(object clonk, int x, int y, bool released, bool abletocast)
+public func LeftClick(object clonk, int x, int y, bool released, bool abletocast)
 {
 
 }
 
-func InitChamp(object clonk)
+public func InitChamp(object clonk)
 {
 
 }
 
-func CanCast(object clonk)
+public func CanCast(object clonk)
 {
 	return true;
 }
 
-func CanCastSpecial1(object clonk)
+public func CanCastSpecial1(object clonk)
 {
 	return true;
 }
 
-func CanCastSpecial2(object clonk)
+public func CanCastSpecial2(object clonk)
 {
 	return true;
 }
 
-func CanCastSpecial3(object clonk)
+public func CanCastSpecial3(object clonk)
 {
 	return true;
 }
 
-func CanCastSpecialMelee(object clonk)
+public func CanCastSpecialMelee(object clonk)
 {
 	return true;
 }
 
-func CleanUp(object clonk)
+public func CleanUp(object clonk)
 {
 
 }
 
-func CastSpellWithSpellRange(object clonk, int x, int y, bool released, bool mouseclick, bool abletocast, bool cooldown, proplist props, id spell)
+public func CastSpellWithSpellRange(object clonk, int x, int y, bool released, bool mouseclick, bool abletocast, bool cooldown, proplist props, id spell)
 {
 	if(!released && !mouseclick)
 	{
@@ -114,29 +109,28 @@ func CastSpellWithSpellRange(object clonk, int x, int y, bool released, bool mou
 		if(!CastSpellWithSpellRangeCondition(clonk, x, y, released, mouseclick, abletocast, cooldown, props, spell))
 		{
 			Sound("UI::Error", false, 50, clonk->GetOwner());
-			return 0;
+			return false;
 		}
 	
 		if (Sqrt(x**2 + y**2) > spell.SpellRange)
 		{
-			var a = Angle(0,0, x, y, 10);
+			var a = Angle(0, 0, x, y, 10);
 			var newx = Sin(a, spell.SpellRange, 10);
 			var newy = -Cos(a, spell.SpellRange, 10);
 			
 			if(clonk->LaunchSpell(spell, newx, newy, newx, newy))
-				return 1;
+				return true;
 			
-			return 0;
+			return false;
 		}
 		
 		if(clonk->LaunchSpell(spell, x, y, x, y))
-			return 1;
-	}
-	
-	return 0;
+			return true;
+	}	
+	return false;
 }
 
-func CastSpellWithSpellRangeCondition(object clonk, int x, int y, bool released, bool mouseclick, bool abletocast, bool cooldown, proplist props, id spell)
+public func CastSpellWithSpellRangeCondition(object clonk, int x, int y, bool released, bool mouseclick, bool abletocast, bool cooldown, proplist props, id spell)
 {
 	return true;
 }
@@ -144,7 +138,7 @@ func CastSpellWithSpellRangeCondition(object clonk, int x, int y, bool released,
 
 /*-- Special Melee Attack --*/
 
-func SpecialMeleeAttack(object clonk, int x, int y, bool released, bool mouseclick, bool abletocast, bool cooldown)
+public func SpecialMeleeAttack(object clonk, int x, int y, bool released, bool mouseclick, bool abletocast, bool cooldown)
 {
 	if (!abletocast || cooldown || released || mouseclick)
 		return false;
@@ -256,7 +250,7 @@ local SpecialMeleeFx = new Effect {
 
 };
 
-func SpecialMeleeStrike(clonk, target)
+public func SpecialMeleeStrike(clonk, target)
 {
 	clonk->WeaponDamage(target, 20);
 	if (target)
@@ -264,10 +258,14 @@ func SpecialMeleeStrike(clonk, target)
 	clonk->Sound("Objects::Weapons::WeaponHit?", false);
 }
 
-func CtrlPress(clonk)
+public func CtrlPress(clonk)
 {
 	return true;
 }
+
+
+/*-- AI --*/
+
 
 /*-- Properties --*/
 

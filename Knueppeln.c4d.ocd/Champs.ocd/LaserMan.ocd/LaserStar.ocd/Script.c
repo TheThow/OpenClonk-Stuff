@@ -65,7 +65,7 @@ public func HitObject(obj)
 	if(obj->~CanBeHit(this) == false)
 		return;
 		
-	obj->AddLaserHitEffect();
+	AddEffect("LaserHit", obj, 20, 1, nil, LaserMan);
 	obj->SetSpeed(7 * obj->GetXDir(1) / 10, 7 * obj->GetYDir(1) / 10, 1); 
 	WeaponDamage(obj, SpellDamage);
 }
