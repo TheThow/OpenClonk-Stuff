@@ -303,7 +303,7 @@ func FxUpdateHUDTimer(object target)
 	var cdq = GetEffect("Special1CD", this);
 	var cdqtext;
 	if (cdq)
-		cdqtext = GetHumanTime(ChampType.Special1Cooldown - cdq.Time); //Format("%d", ChampType.Special1Cooldown - cdq.Time);
+		cdqtext = GetHumanTime(ChampType.Special1Cooldown - cdq.Time);
 	else
 		cdqtext = "";
 	
@@ -414,8 +414,8 @@ func FxUpdateHUDTimer(object target)
 
 func GetHumanTime(int Ftime)
 {
-	var retval = Ftime * 10 / 35;
-	return Format("%d,%d", retval / 10, retval % 10);
+	var retval = Ftime * 10 / 36;
+	return Format("%d.%ds", retval / 10, retval % 10);
 }
 
 func FxUpdateHUDStop(object target, proplist effect, int reason, bool temporary)

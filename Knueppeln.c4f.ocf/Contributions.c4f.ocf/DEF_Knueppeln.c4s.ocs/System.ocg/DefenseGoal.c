@@ -52,3 +52,6 @@ public func DoMaxMagicForAll(int amount)
 		DoMaxMagic(plr, amount);
 	return;
 }
+
+// Only one of each type of champ for the defenders.
+public func UseTeamExclusiveChampions() { return true; }

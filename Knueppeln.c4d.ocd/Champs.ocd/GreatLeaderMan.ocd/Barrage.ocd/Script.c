@@ -25,6 +25,7 @@ func Launch(object clonk, int x, int y)
 	rider->SetObjectBlitMode(GFX_BLIT_Mod2);
 	rider->SetClrModulation(clonk->GetColor());
 	RemoveEffect("UpdateHUD", rider);
+	rider->~RemoveHUD();
 	boompack->OnMount(rider);
 	boompack->Sound("Clonk::Skin::Adventurer::Shock*", {pitch = 75});
 	RemoveObject();

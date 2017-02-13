@@ -30,12 +30,12 @@ public func Special1(object clonk, int x, int y, bool released, bool mouseclick,
 
 public func Special2(object clonk, int x, int y, bool released, bool mouseclick, bool abletocast, bool cooldown)
 {
-	if(!released && !mouseclick && abletocast && !cooldown)
+	if (!released && !mouseclick && abletocast && !cooldown)
 	{
-		if(clonk->LaunchSpell(Special2Spell, x, y, 0, 0))
-			return 1;
+		if (clonk->LaunchSpell(Special2Spell, x, y, 0, 0))
+			return true;
 	}
-	return 0;
+	return false;
 }
 
 public func Special3(object clonk, int x, int y, bool released, bool mouseclick, bool abletocast, bool cooldown)
@@ -45,11 +45,10 @@ public func Special3(object clonk, int x, int y, bool released, bool mouseclick,
 		if (clonk->LaunchSpell(Special3Spell, x, y, 0, 0))
 		{
 			MakeVisible(clonk);			
-			return 1;
+			return true;
 		}
 	}
-	
-	return 0;
+	return false;
 }
 
 public func LeftClick(object clonk, int x, int y, bool released, bool abletocast)
@@ -67,10 +66,6 @@ public func MakeVisible(object clonk)
 public func JumpEffect(object clonk, dir)
 {
 	var lifetime = 10;
-	var dummy = CreateObject(Dummy, clonk->GetX(), clonk->GetY(), clonk->GetOwner());
-	dummy.Visibility = VIS_Owner;
-	AddEffect("Remove", dummy, 1, lifetime, nil, NinjaMan);
-
 	var from;
 	var to;
 
@@ -114,13 +109,18 @@ public func JumpEffect(object clonk, dir)
 		};
 		
 		if (GetEffect("*Invisible*", clonk))
+		{	
+			var dummy = CreateObject(Dummy, clonk->GetX(), clonk->GetY(), clonk->GetOwner());
+			dummy.Visibility = VIS_Owner;
+			AddEffect("Remove", dummy, 1, lifetime, nil, NinjaMan);
 			dummy->CreateParticle("Flash", x - clonk->GetX(), y - clonk->GetY(), Cos(i, r), Sin(i, r), lifetime, trailparticles);
+		}
 		else
 			CreateParticle("Flash", x, y, Cos(i, r), Sin(i, r), lifetime, trailparticles);
 	}
 }
 
-public func BlockEffect(object clonk, range)
+public func BlockEffect(object clonk, int range)
 {
 
 	for(var i = 0; i < 360; i+=3)
@@ -142,7 +142,7 @@ public func BlockEffect(object clonk, range)
 	
 }
 
-public func FxRemoveStop(target)
+public func FxRemoveStop(object target)
 {
 	target->RemoveObject();
 }
@@ -166,11 +166,16 @@ public func IsSpecial1ShotSpeed() { return Special1Spell.Speed; }
 
 public func ExecuteAISpecial2Spell(effect fx)
 {
-	if (!fx.Target)
+	if (!fx.Target || !fx.target)
 		return false;
-	if (fx.Target->GetEnergy() < 20)
-		if (fx.Target->LaunchSpell(Special2Spell, 0, 0, 0, 0))
-			return true;
+	if (GetEffect("*Invisible*", fx.Target))
+		return false;
+	var x = fx.Target->GetX(), y = fx.Target->GetY();
+	var tx = fx.target->GetX(), ty = fx.target->GetY();
+	if (Distance(x, y, tx, ty) > 150)
+		return false;
+	if (fx.Target->LaunchSpecial2(0, 0, false, true, fx.Target->CanCast() && this->CanCastSpecial2(fx.Target)))
+		return true;
 	return false;
 }
 

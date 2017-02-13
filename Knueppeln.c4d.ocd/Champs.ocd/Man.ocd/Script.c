@@ -142,6 +142,9 @@ public func SpecialMeleeAttack(object clonk, int x, int y, bool released, bool m
 {
 	if (!abletocast || cooldown || released || mouseclick)
 		return false;
+	var sword = clonk->FindContents(Sword);	
+	if (!sword)
+		return false;
 	
 	var a = Angle(0, 0, x, y);
 
@@ -162,8 +165,6 @@ public func SpecialMeleeAttack(object clonk, int x, int y, bool released, bool m
 	
 	var fx = clonk->CreateEffect(SpecialMeleeFx, 1, 1);
 	fx.p = props;
-	
-	var sword = clonk->FindContents(Sword);
 	
 	var length = Sword_Standard_StrikingLength;
 	var arm = "R";

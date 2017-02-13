@@ -13,7 +13,7 @@ local clonkspawnerfx = new Effect
 {
 	Start = func()
 	{
-		this.spawndelay = 200;
+		this.spawndelay = 100;
 		this.lastspawn = 0;
 	},
 	
@@ -22,7 +22,8 @@ local clonkspawnerfx = new Effect
 		if (Time >= (this.lastspawn + this.spawndelay))
 		{
 			this.lastspawn = Time;
-			GameCall("SpawnRandomAIClonk");
+			if (!FindObject(Find_OCF(OCF_CrewMember), Find_Owner(NO_OWNER)))
+				GameCall("SpawnRandomAIClonk");
 		}
 	},
 };
@@ -52,7 +53,7 @@ public func SpawnRandomAIClonk()
 	clnk->SetSkin(Random(4));
 	clnk->SetColor(RGB(Random(256),Random(256),Random(256)));
 	
-	var aifx = KnueppelnAI->AddAI(clnk, aispawns);
+	KnueppelnAI->AddAI(clnk, aispawns);
 	KnueppelnAI->SetGuardRange(clnk, 0,0,LandscapeWidth(),LandscapeHeight());
 }
 
