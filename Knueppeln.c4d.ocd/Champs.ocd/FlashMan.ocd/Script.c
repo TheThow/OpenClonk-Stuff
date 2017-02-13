@@ -200,6 +200,8 @@ func CastSpellWithSpellRange(object clonk, int x, int y, bool released, bool mou
 
 func FxFlashHitTimer(object target, proplist effect, int time)
 {
+	if (!target)
+		return FX_Execute_Kill;
 	var lightning =
 	{
 		Prototype = Particles_ElectroSpark2(),
@@ -215,8 +217,9 @@ func FxFlashHitTimer(object target, proplist effect, int time)
 	
 	target->CreateParticle("Flash", RandomX(-5, 5), RandomX(-10, 10), 0, 0, 10, lightning, 3);
 	
-	if(time > 25)
-		return -1;
+	if (time > 25)
+		return FX_Execute_Kill;
+	return FX_OK;
 }
 
 

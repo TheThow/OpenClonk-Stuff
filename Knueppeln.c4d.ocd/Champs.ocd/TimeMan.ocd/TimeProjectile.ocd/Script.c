@@ -72,9 +72,6 @@ func Hit()
 		
 		if(!o)
 			continue;
-			
-		//var angle = Angle(GetX(), GetY(), o->GetX(), o->GetY());
-		//o->SetVelocity(angle, 10);
 		
 		if(!flag)
 		{

@@ -15,27 +15,27 @@ local Special3Spell = SlowField;
 local Special2Cooldown = 5;
 local Special3Cooldown = 240;
 
-func Special1(object clonk, int x, int y, bool released, bool mouseclick, bool abletocast, bool cooldown)
+public func Special1(object clonk, int x, int y, bool released, bool mouseclick, bool abletocast, bool cooldown)
 {
-	if(!released && !mouseclick && abletocast && !cooldown)
+	if (!released && !mouseclick && abletocast && !cooldown)
 	{
-		if(clonk->LaunchSpell(Special1Spell, x, y, 0, 0))
-			return 1;
+		if (clonk->LaunchSpell(Special1Spell, x, y, 0, 0))
+			return true;
 	}
-	return 0;
+	return false;
 }
 
-func Special2(object clonk, int x, int y, bool released, bool mouseclick, bool abletocast, bool cooldown)
+public func Special2(object clonk, int x, int y, bool released, bool mouseclick, bool abletocast, bool cooldown)
 {
-	if(!released && !mouseclick && abletocast && !cooldown)
+	if (!released && !mouseclick && abletocast && !cooldown)
 	{
-		if(clonk->LaunchSpell(Special2Spell, x, y, 0, 0))
-			return 1;
+		if (clonk->LaunchSpell(Special2Spell, x, y, 0, 0))
+			return true;
 	}
-	return 0;
+	return false;
 }
 
-func Special3(object clonk, int x, int y, bool released, bool mouseclick, bool abletocast, bool cooldown)
+public func Special3(object clonk, int x, int y, bool released, bool mouseclick, bool abletocast, bool cooldown)
 {
 	var props =
 	{
@@ -47,12 +47,11 @@ func Special3(object clonk, int x, int y, bool released, bool mouseclick, bool a
 		BlitMode = GFX_BLIT_Additive,
 		Rotation = PV_Step(10, 0, 1),
 		Attach = ATTACH_Back | ATTACH_MoveRelative
-		
 	};
 	return CastSpellWithSpellRange(clonk, x, y, released, mouseclick, abletocast, cooldown, props, Special3Spell);
 }
 
-func JumpEffect(object clonk, dir)
+public func JumpEffect(object clonk, dir)
 {
 	var from;
 	var to;
@@ -103,7 +102,7 @@ func JumpEffect(object clonk, dir)
 	}
 }
 
-func BlockEffect(object clonk, range)
+public func BlockEffect(object clonk, range)
 {
 	for(var i = 0; i < 360; i+=10)
 	{
@@ -128,15 +127,18 @@ func BlockEffect(object clonk, range)
 	
 }
 
-func CleanUp(object clonk)
+public func CleanUp(object clonk)
 {
 	if(clonk.TimeTravelMark)
 		clonk.TimeTravelMark = nil;
 }
 
 
-func FxTimeHitTimer(object target, proplist effect, int time)
+public func FxTimeHitTimer(object target, proplist effect, int time)
 {
+	if (!target)
+		return FX_Execute_Kill;
+
 	var lightning =
 	{
 		Prototype = Particles_ElectroSpark2(),
@@ -151,12 +153,33 @@ func FxTimeHitTimer(object target, proplist effect, int time)
 	
 	target->CreateParticle("Lightning", RandomX(-5, 5), RandomX(-10, 10), 0, 0, 10, lightning, 2);
 	
-	if(time > 40)
-		return -1;
+	if (time > 40)
+		return FX_Execute_Kill;
+	return FX_OK;
 }
 
 
 /*-- AI --*/
+
+public func IsSpecial1Shot() { return true; }
+public func IsSpecial1ShotStraight() { return true; }
+public func IsSpecial1ShotSpeed() { return Special1Spell.Speed; }
+
+public func ExecuteAISpecial3Spell(effect fx)
+{
+	if (!fx.Target || !fx.target)
+		return false;
+	var x = fx.Target->GetX(), y = fx.Target->GetY();
+	var tx = fx.target->GetX(), ty = fx.target->GetY();
+	var dt = 5;
+	tx += fx.control->GetTargetXDir(fx.target, dt);
+	ty += fx.control->GetTargetYDir(fx.target, dt);
+	if (Distance(x, y, tx, ty) > Special3Spell.SpellRange)
+		return false;
+	if (fx.Target->LaunchSpecial3(tx - x, ty - y, false, true, fx.Target->CanCast() && this->CanCastSpecial3(fx.Target)))
+		return true;
+	return false;
+}
 
 
 /*-- Properties --*/

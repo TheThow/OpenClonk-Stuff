@@ -94,19 +94,19 @@ public func CleanUp(object clonk)
 
 public func CastSpellWithSpellRange(object clonk, int x, int y, bool released, bool mouseclick, bool abletocast, bool cooldown, proplist props, id spell)
 {
-	if(!released && !mouseclick)
+	if (!released && !mouseclick)
 	{
 		clonk->ShowSpellRange(clonk, spell, props);
 	}
 	
-	if(released && !mouseclick)
+	if (released && !mouseclick)
 	{
 		clonk->CancelShowSpellRange();
 	}
 
-	if(!released && mouseclick && abletocast && !cooldown)
+	if (!released && mouseclick && abletocast && !cooldown)
 	{
-		if(!CastSpellWithSpellRangeCondition(clonk, x, y, released, mouseclick, abletocast, cooldown, props, spell))
+		if (!CastSpellWithSpellRangeCondition(clonk, x, y, released, mouseclick, abletocast, cooldown, props, spell))
 		{
 			Sound("UI::Error", false, 50, clonk->GetOwner());
 			return false;
@@ -118,13 +118,13 @@ public func CastSpellWithSpellRange(object clonk, int x, int y, bool released, b
 			var newx = Sin(a, spell.SpellRange, 10);
 			var newy = -Cos(a, spell.SpellRange, 10);
 			
-			if(clonk->LaunchSpell(spell, newx, newy, newx, newy))
+			if (clonk->LaunchSpell(spell, newx, newy, newx, newy))
 				return true;
 			
 			return false;
 		}
 		
-		if(clonk->LaunchSpell(spell, x, y, x, y))
+		if (clonk->LaunchSpell(spell, x, y, x, y))
 			return true;
 	}	
 	return false;
@@ -174,12 +174,11 @@ public func SpecialMeleeAttack(object clonk, int x, int y, bool released, bool m
 	sword->PlayAnimation(animation_sword, 10, Anim_Linear(0, 0, clonk->GetAnimationLength(animation_sword), length, ANIM_Remove), Anim_Const(1000));
 	
 	clonk->Sound("Objects::Weapons::WeaponSwing?");
-	
 	return true;
 }
 
-local SpecialMeleeFx = new Effect {
-
+local SpecialMeleeFx = new Effect
+{
 	Construction = func()
 	{
 		this.x = Target->GetX();
@@ -236,7 +235,7 @@ local SpecialMeleeFx = new Effect {
 	
 	Stop = func()
 	{
-		if(!this.r)
+		if (!this.r)
 		{
 			if(Target->GetAction("Travel"))
 			{
@@ -244,10 +243,9 @@ local SpecialMeleeFx = new Effect {
 				Target->SetVelocity(a, 30);
 			}
 		}
-		if(Target->GetAction("Travel"))
+		if (Target->GetAction("Travel"))
 				Target->SetAction("Jump");
 	}
-
 };
 
 public func SpecialMeleeStrike(clonk, target)

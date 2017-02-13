@@ -134,6 +134,9 @@ func ShowRange()
 
 func FxElectroHitTimer(object target, proplist effect, int time)
 {
+	if (!target)
+		return FX_Execute_Kill;
+	
 	var lightning =
 	{
 		Prototype = Particles_ElectroSpark2(),
@@ -148,8 +151,9 @@ func FxElectroHitTimer(object target, proplist effect, int time)
 	
 	target->CreateParticle("Lightning", RandomX(-5, 5), RandomX(-10, 10), 0, 0, 10, lightning, 2);
 	
-	if(time > 40)
-		return -1;
+	if (time > 40)
+		return FX_Execute_Kill;
+	return FX_OK;
 }
 
 
@@ -158,6 +162,22 @@ func FxElectroHitTimer(object target, proplist effect, int time)
 public func IsSpecial1Shot() { return true; }
 public func IsSpecial1ShotStraight() { return true; }
 public func IsSpecial1ShotSpeed() { return Special1Spell.Speed; }
+
+public func ExecuteAISpecial3Spell(effect fx)
+{
+	if (!fx.Target || !fx.target)
+		return false;
+	var x = fx.Target->GetX(), y = fx.Target->GetY();
+	var tx = fx.target->GetX(), ty = fx.target->GetY();
+	var dt = Special3Spell.Delay / 2;
+	tx += fx.control->GetTargetXDir(fx.target, dt);
+	ty += fx.control->GetTargetYDir(fx.target, dt);
+	if (Distance(x, y, tx, ty) > Special3Spell.SpellRange)
+		return false;
+	if (fx.Target->LaunchSpecial3(tx - x, ty - y, false, true, fx.Target->CanCast() && this->CanCastSpecial3(fx.Target)))
+		return true;
+	return false;
+}
 
 
 /*-- Properties --*/

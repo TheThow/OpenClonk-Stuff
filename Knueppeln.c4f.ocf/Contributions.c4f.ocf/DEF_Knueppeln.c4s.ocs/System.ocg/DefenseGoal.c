@@ -23,7 +23,8 @@ local shared_magic_remainder = 0;
 public func DoMaxMagic(int plr, int amount)
 {
 	var crew = GetCrew(plr);
-	crew.MaxMagic += 100 * amount;
+	if (crew)
+		crew.MaxMagic += 100 * amount;
 	return;
 }
 

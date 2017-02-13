@@ -175,8 +175,8 @@ global func Test8_OnStart(int plr)
 global func Test1_OnStart(int plr)
 {
 	CreateObject(Rule_NoFriendlyFire);
-	CreateEnemy(LaserMan, 120, 258, script_enemy1);
-	CreateEnemy(GreatLeaderMan, 392, 258, script_enemy2);
+	CreateEnemy(ElectroMan, 120, 258, script_enemy1);
+	CreateEnemy(TimeMan, 392, 258, script_enemy2);
 	// Log what the test is about.
 	Log("AI battle: laser man (p1) vs. great leader man (p2).");
 	return true;
@@ -278,14 +278,14 @@ global func ClearCurrentTest()
 
 global func IsTestCompleted()
 {
-	if (ObjectCount(Find_OCF(OCF_Alive), Find_Owner(script_enemy1)) == 0 || ObjectCount(Find_OCF(OCF_Alive), Find_Owner(script_enemy2)) == 0)
+	if (ObjectCount(Find_OCF(OCF_CrewMember), Find_Owner(script_enemy1)) == 0 || ObjectCount(Find_OCF(OCF_CrewMember), Find_Owner(script_enemy2)) == 0)
 		return true;
 	return false;
 }
 
 global func GetTestWinner()
 {
-	if (ObjectCount(Find_OCF(OCF_Alive), Find_Owner(script_enemy1)) > ObjectCount(Find_OCF(OCF_Alive), Find_Owner(script_enemy2)))
+	if (ObjectCount(Find_OCF(OCF_CrewMember), Find_Owner(script_enemy1)) > ObjectCount(Find_OCF(OCF_CrewMember), Find_Owner(script_enemy2)))
 		return 1;
 	return 2;
 }

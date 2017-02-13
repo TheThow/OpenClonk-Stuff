@@ -125,6 +125,8 @@ func Hit()
 	
 	for(var o in FindObjects(Find_Distance(Size), Find_Func("CanBeHit", this)))
 	{
+		if (!o)
+			continue;
 		var angle = Angle(GetX(), GetY(), o->GetX(), o->GetY());
 		o->SetVelocity(angle, 10);
 		WeaponDamage(o, SpellDamage);

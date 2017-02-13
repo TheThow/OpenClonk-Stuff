@@ -378,19 +378,6 @@ public func ExecuteRSpell(effect fx)
 		return true;
 	}	
 
-	if (type == ElectroMan || type == FireMan || type == BatMan)
-	{
-		if (Distance(fx.Target->GetX(), fx.Target->GetY(), fx.target->GetX(), fx.target->GetY()) > type.Special3Spell.SpellRange)
-			return false;
-		var dx = fx.target->GetX() - fx.Target->GetX();
-		var dy = fx.target->GetY() - fx.Target->GetY();
-		if (fx.Target->LaunchSpecial3(dx, dy, false, true, fx.Target->CanCast() && type->CanCastSpecial3(fx.Target)))
-		{
-			this->LogKN(fx, "Execute special 3 spell (R).");
-			return true;
-		}
-		return false;
-	}
 	// Spell type not yet implemented.
 	this->LogKN(fx, Format("R spell for %i not yet implemented.", type));
 	return false;

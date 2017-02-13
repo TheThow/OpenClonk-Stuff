@@ -247,10 +247,14 @@ func FxBallHitStart(target, effect)
 
 func FxBallHitTimer(object target, proplist effect, int time)
 {
+	if (!target)
+		return FX_Execute_Kill;
+		
 	target->CreateParticle("Flash", RandomX(-5, 5), RandomX(-10, 10), 0, 0, 10, effect.props, 2);
 	
-	if(time > 40)
-		return -1;
+	if (time > 40)
+		return FX_Execute_Kill;
+	return FX_OK;
 }
 
 

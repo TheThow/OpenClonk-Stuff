@@ -151,8 +151,8 @@ func FxFireHitStart(target, fx)
 
 func FxFireHitTimer(object target, proplist effect, int time)
 {
-	if(time > 40 || !target)
-		return -1;
+	if (!target || time > 40)
+		return FX_Execute_Kill;
 	
 	var x = target->GetX();
 	var y = target->GetY();
@@ -192,6 +192,23 @@ public func IsSpecial1ShotSpeed() { return Special1Spell.Speed; }
 public func IsSpecial2Shot() { return true; }
 public func IsSpecial2ShotStraight() { return true; }
 public func IsSpecial2ShotSpeed() { return Special2Spell.Speed; }
+
+public func ExecuteAISpecial3Spell(effect fx)
+{
+	if (!fx.Target || !fx.target)
+		return false;
+	var x = fx.Target->GetX(), y = fx.Target->GetY();
+	var tx = fx.target->GetX(), ty = fx.target->GetY();
+	var d = Distance(x, y, tx, ty);
+	var dt = d * 10 / Special3Spell.Speed;
+	tx += fx.control->GetTargetXDir(fx.target, dt);
+	ty += fx.control->GetTargetYDir(fx.target, dt);
+	if (Distance(x, y, tx, ty) > Special3Spell.SpellRange)
+		return false;
+	if (fx.Target->LaunchSpecial3(tx - x, ty - y, false, true, fx.Target->CanCast() && this->CanCastSpecial3(fx.Target)))
+		return true;
+	return false;
+}
 
 
 /*-- Properties --*/
