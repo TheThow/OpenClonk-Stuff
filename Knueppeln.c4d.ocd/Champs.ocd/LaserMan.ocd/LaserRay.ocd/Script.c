@@ -13,9 +13,6 @@ local Durr = 35;
 
 local Size = 15;
 
-local Name = "$Name$";
-local Description = "$Description$";
-
 local ChargeDuration = 20;
 
 local MaxLength = 200;

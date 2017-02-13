@@ -14,21 +14,21 @@ local Special3Spell = IceShardUltimate;
 
 local Special3Cooldown = 400;
 
-func Special1(object clonk, int x, int y, bool released, bool mouseclick, bool abletocast, bool cooldown)
+public func Special1(object clonk, int x, int y, bool released, bool mouseclick, bool abletocast, bool cooldown)
 {
 	if(!released && !mouseclick && abletocast && !cooldown)
 		clonk->LaunchSpell(IceProjectile, x, y, 0, 0);
 }
 
-func Special2(object clonk, int x, int y, bool released, bool mouseclick, bool abletocast,  bool cooldown)
+public func Special2(object clonk, int x, int y, bool released, bool mouseclick, bool abletocast,  bool cooldown)
 {
 	if(!released && !mouseclick && abletocast && !cooldown)
 		clonk->LaunchSpell(Blizzard, x, y, 0, 0);
 	
-	return 0;
+	return false;
 }
 
-func Special3(object clonk, int x, int y, bool released, bool mouseclick, bool abletocast, bool cooldown)
+public func Special3(object clonk, int x, int y, bool released, bool mouseclick, bool abletocast, bool cooldown)
 {
 	if (released || mouseclick) return;
 	
@@ -41,19 +41,19 @@ func Special3(object clonk, int x, int y, bool released, bool mouseclick, bool a
 		{
 			other[0].is_selected = true;
 		}
-		return 1;
+		return true;
 	}
 	
-	if(abletocast && !cooldown)
+	if (abletocast && !cooldown)
 	{
-		if(clonk->LaunchSpell(IceShardUltimate, x, y, 0, 0))
-			return 1;
+		if (clonk->LaunchSpell(IceShardUltimate, x, y, 0, 0))
+			return true;
 	}
 	
-	return 0;
+	return false;
 }
 
-func JumpEffect(object clonk, dir)
+public func JumpEffect(object clonk, dir)
 {
 	var from, to;
 
@@ -103,7 +103,7 @@ func JumpEffect(object clonk, dir)
 	}
 }
 
-func BlockEffect(object clonk, int radius)
+public func BlockEffect(object clonk, int radius)
 {
 	var border = 
 	{
@@ -125,7 +125,7 @@ func BlockEffect(object clonk, int radius)
 	}
 }
 
-func CleanUp(object clonk)
+public func CleanUp(object clonk)
 {
 	var shards = FindObjects(Find_ID(IceShard), Find_Owner(clonk->GetOwner()), Find_Category(C4D_StaticBack));
 	for (var shard in shards)
@@ -138,6 +138,9 @@ func CleanUp(object clonk)
 public func IsSpecial1Shot() { return true; }
 public func IsSpecial1ShotStraight() { return true; }
 public func IsSpecial1ShotSpeed() { return Special1Spell.Speed; }
+
+public func IsSpecial2Shot() { return true; }
+public func IsSpecial2ShotSpeed() { return Special2Spell.Speed; }
 
 
 /*-- Properties --*/

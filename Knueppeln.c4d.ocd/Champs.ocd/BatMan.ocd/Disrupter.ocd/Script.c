@@ -203,11 +203,6 @@ func HitEffect()
 	
 	CreateParticle("SmokeThick", PV_Cos(PV_Random(0, 360), PV_Random(0, Size-10)), PV_Sin(PV_Random(0, 360), PV_Random(0, Size-10)), 0, 0, 10, particles, 25);
 
-	/*for (var i = 0; i < 15; i++)
-	{
-		CreateParticle("SmokeThick", Cos(Random(360), Random(Size)), Sin(Random(360), Random(Size)), 0, 0, 20, particles, 1);
-	}*/
-
 	var lightning =
 	{
 		Prototype = Particles_ElectroSpark2(),
@@ -224,9 +219,11 @@ func HitEffect()
 	if (shooter.ChampType == ComboMan)
 		d = Dur/2;
 
-	for(var o in FindObjects(Find_Distance(Size), Find_Func("CanBeHit", this)))
+	for (var o in FindObjects(Find_Distance(Size), Find_Func("CanBeHit", this)))
 	{
-		if(o->GetID() == Clonk)
+		if (!o)
+			continue;
+		if (o->GetID() == Clonk)
 		{
 			o->DisableCasting(d);
 			var fx = o->CreateEffect(DisruptorHitFx, 1, 1);

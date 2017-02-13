@@ -11,9 +11,6 @@ local Speed = 65;
 local Dur = 30;
 local Range = 220;
 
-local Name = "$Name$";
-local Description = "$Description$";
-
 local pR = 100;
 local pG = 100;
 local pB = 100;

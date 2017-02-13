@@ -14,9 +14,6 @@ local l_effect_range = 100;
 
 local Size = 15;
 
-local Name = "$Name$";
-local Description = "$Description$";
-
 local LifeTime = 200;
 
 local plr_hit;

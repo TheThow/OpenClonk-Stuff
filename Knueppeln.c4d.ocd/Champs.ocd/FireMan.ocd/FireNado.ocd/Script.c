@@ -5,9 +5,6 @@
 	@author 
 */
 
-local Name = "$Name$";
-local Description = "$Description$";
-
 local ManaCost = 30;
 
 local size_x = 25;
@@ -106,7 +103,7 @@ func FxFireNadoTimer(object target, proplist effect, int time)
 		if(o->GetOwner() != GetOwner())
 		{
 			o->Fling(0, -5);
-			o->AddFireHitEffect();
+			AddEffect("FireHit", o, 20, 1, nil, FireMan);
 			WeaponDamage(o, SpellDamage);
 		}
 

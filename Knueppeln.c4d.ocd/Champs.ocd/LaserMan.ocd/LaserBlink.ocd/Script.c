@@ -13,9 +13,6 @@ local Durr = 35;
 
 local Size = 15;
 
-local Name = "$Name$";
-local Description = "$Description$";
-
 local ChargeTime = 38;
 local Length = 200;
 local TargetAngle = 0;

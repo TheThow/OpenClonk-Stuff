@@ -1,3 +1,7 @@
+/**
+	Projectile
+	@author
+*/
 
 local Speed = 60;
 
@@ -6,64 +10,57 @@ local SpellDamage = 15;
 
 local shooter;
 
-public func IsDangerous4AI() { return true; }
 
-func Initialize()
+public func Initialize()
 {
 	SetAction("Travel");
-	SetClrModulation(RGBa(0,0,0,0));
+	SetClrModulation(RGBa(0, 0, 0, 0));
 }
 
-func CanBeSucked() { return true; }
+public func IsDangerous4AI() { return true; }
+public func CanBeSucked() { return true; }
+public func IsReflectable() { return true; }
 
-func IsReflectable()
-{
-	return true;
-}
-
-func Launch(object clonk, int x, int y)
+public func Launch(object clonk, int x, int y)
 {
 	var angle = Angle(0,0,x,y, 10);
 	shooter = clonk;
 	SetVelocity(angle, Speed, 10);
 	SetController(clonk->GetController());
-	AddEffect("HitCheck", this, 1,1, nil,nil, clonk);
+	AddEffect("HitCheck", this, 1, 1, nil, nil, clonk);
 	AddEffect("TheEffect", this, 1, 1, this, Projectile);
 }
 
-func FxTheEffectStart(object target, proplist effect, int temporary)
+public func FxTheEffectStart(object target, proplist effect, int temporary)
 {
-	if(temporary)
+	if (temporary)
 		return;
-		
 	this->~InitEffect();
 }
 
-func FxTheEffectTimer(object target, proplist effect, int time)
+public func FxTheEffectTimer(object target, proplist effect, int time)
 {
 	this->~TravelEffect(time);
 }
 
 public func HitObject(obj)
 {
-	if(obj->~CanBeHit(this) == false)
+	if (!obj->~CanBeHit(this))
 		return;
-		
 	Hit();
 }
 
 public func Hit()
 {
-	Explode(SpellDamage);
+	Explode(this.SpellDamage);
 }
 
-func ChargeInterrupted()
+public func ChargeInterrupted()
 {
 	RemoveObject();
 }
 
 local ActMap = {
-
 	Travel = {
 		Prototype = Action,
 		Name = "Travel",
@@ -75,4 +72,3 @@ local ActMap = {
 		Speed=1000
 	},
 };
-

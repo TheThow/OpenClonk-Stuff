@@ -15,22 +15,20 @@ local Special3Spell = CriticalStrike;
 local Special2Cooldown = 160;
 local Special3Cooldown = 250;
 
-func Special1(object clonk, int x, int y, bool released, bool mouseclick, bool abletocast, bool cooldown)
+public func Special1(object clonk, int x, int y, bool released, bool mouseclick, bool abletocast, bool cooldown)
 {
 	if(!released && !mouseclick && abletocast && !cooldown)
 	{
 		if(clonk->LaunchSpell(Special1Spell, x, y, 0, 0))
 		{
-			if(GetEffect("ShadowWalk", clonk))
-				RemoveEffect("ShadowWalk", clonk);
-			
-			return 1;
+			MakeVisible(clonk);
+			return true;
 		}
 	}
-	return 0;
+	return false;
 }
 
-func Special2(object clonk, int x, int y, bool released, bool mouseclick, bool abletocast, bool cooldown)
+public func Special2(object clonk, int x, int y, bool released, bool mouseclick, bool abletocast, bool cooldown)
 {
 	if(!released && !mouseclick && abletocast && !cooldown)
 	{
@@ -40,15 +38,13 @@ func Special2(object clonk, int x, int y, bool released, bool mouseclick, bool a
 	return 0;
 }
 
-func Special3(object clonk, int x, int y, bool released, bool mouseclick, bool abletocast, bool cooldown)
+public func Special3(object clonk, int x, int y, bool released, bool mouseclick, bool abletocast, bool cooldown)
 {
-	if(!released && !mouseclick && abletocast && !cooldown)
+	if (!released && !mouseclick && abletocast && !cooldown)
 	{
-		if(clonk->LaunchSpell(Special3Spell, x, y, 0, 0))
+		if (clonk->LaunchSpell(Special3Spell, x, y, 0, 0))
 		{
-			if(GetEffect("ShadowWalk", clonk))
-				RemoveEffect("ShadowWalk", clonk);
-			
+			MakeVisible(clonk);			
 			return 1;
 		}
 	}
@@ -56,13 +52,19 @@ func Special3(object clonk, int x, int y, bool released, bool mouseclick, bool a
 	return 0;
 }
 
-func LeftClick(object clonk, int x, int y, bool released, bool abletocast)
+public func LeftClick(object clonk, int x, int y, bool released, bool abletocast)
 {
-	if(GetEffect("ShadowWalk", clonk))
-		RemoveEffect("ShadowWalk", clonk);
+	MakeVisible(clonk);
 }
 
-func JumpEffect(object clonk, dir)
+public func MakeVisible(object clonk)
+{
+	if (GetEffect("*Invisible*", clonk))
+		RemoveEffect("*Invisible*", clonk);
+	return;
+}
+
+public func JumpEffect(object clonk, dir)
 {
 	var lifetime = 10;
 	var dummy = CreateObject(Dummy, clonk->GetX(), clonk->GetY(), clonk->GetOwner());
@@ -111,14 +113,14 @@ func JumpEffect(object clonk, dir)
 			Attach = ATTACH_Back,
 		};
 		
-		if(GetEffect("ShadowWalk", clonk))
+		if (GetEffect("*Invisible*", clonk))
 			dummy->CreateParticle("Flash", x - clonk->GetX(), y - clonk->GetY(), Cos(i, r), Sin(i, r), lifetime, trailparticles);
 		else
 			CreateParticle("Flash", x, y, Cos(i, r), Sin(i, r), lifetime, trailparticles);
 	}
 }
 
-func BlockEffect(object clonk, range)
+public func BlockEffect(object clonk, range)
 {
 
 	for(var i = 0; i < 360; i+=3)
@@ -140,17 +142,17 @@ func BlockEffect(object clonk, range)
 	
 }
 
-func FxRemoveStop(target)
+public func FxRemoveStop(target)
 {
 	target->RemoveObject();
 }
 
-func InitChamp(object clonk)
+public func InitChamp(object clonk)
 {
 	clonk->PushActionSpeed("Walk", 250);
 }
 
-func CleanUp(object clonk)
+public func CleanUp(object clonk)
 {
 	//clonk->PushActionSpeed("Walk", 200);
 	clonk.ActMap.Walk.Speed = clonk.Prototype.ActMap.Walk.Speed;

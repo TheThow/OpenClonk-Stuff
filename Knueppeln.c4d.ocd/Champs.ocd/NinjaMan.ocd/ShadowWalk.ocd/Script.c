@@ -1,43 +1,41 @@
 /**
-	ShadowWalk
-	
-
+	Shadow Walk
 	@author 
 */
 
-local Name = "$Name$";
-local Description = "$Description$";
-
 local ManaCost = 30;
+local Duration = 100;
 
-local Dur = 100;
-
-func Launch(object clonk, int x, int y)
+public func Launch(object clonk, int x, int y)
 {
-	CreateParticle("Smoke", PV_Random(-5,5), PV_Random(-10,10), PV_Random(-5,5), 0, 30, Particles_Smoke(), 20);
-	clonk.Visibility = VIS_Owner;
-	clonk->SetClrModulation(RGBa(255,255,255,50));
-	clonk->Sound("vanish", false, 50);
-	
-	var fx = AddEffect("ShadowWalk", clonk, 20, 1, nil, GetID());
-	fx.dur = Dur;
-	RemoveObject();
+	clonk->CreateEffect(FxInvisible, 100, 10, this.Duration);
+	return RemoveObject();
 }
 
-func FxShadowWalkTimer(object target, proplist effect, int time)
+local FxInvisible = new Effect
 {
-	if(time >= effect.dur)
-		return -1;
-}
-
-func FxShadowWalkStop(object target, proplist effect, int reason, bool temporary)
-{
-	if(temporary || !target)
-		return;
-	
-	target.Visibility = VIS_All;
-	target->SetClrModulation(RGBa(255, 255, 255, 255));
-	target->Sound("reappear", false, 50);
-	//target->CreateParticle("Smoke", PV_Random(-5,5), PV_Random(-10,10), PV_Random(-5,5), 0, 30, Particles_Smoke(), 20);
-}
-
+	Construction = func(int duration)
+	{
+		this.duration = duration;
+		this.Target->CreateParticle("Smoke", PV_Random(-5, 5), PV_Random(-10, 10), PV_Random(-5, 5), 0, 30, Particles_Smoke(), 20);
+		this.Target.Visibility = VIS_Owner;
+		this.Target->SetClrModulation(RGBa(255, 255, 255, 50));
+		this.Target->Sound("vanish", false, 50);
+		return FX_OK;
+	},
+	Timer = func(int time)
+	{
+		if (time >= this.duration)
+			return FX_Execute_Kill;
+		return FX_OK;
+	},
+	Destruction = func()
+	{
+		if (!this.Target)
+			return FX_OK;
+		this.Target.Visibility = VIS_All;
+		this.Target->SetClrModulation(RGBa(255, 255, 255, 255));
+		this.Target->Sound("reappear", false, 50);
+		return FX_OK;
+	}
+};

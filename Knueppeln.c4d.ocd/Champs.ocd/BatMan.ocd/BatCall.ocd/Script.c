@@ -5,9 +5,6 @@
 	@author 
 */
 
-local Name = "$Name$";
-local Description = "$Description$";
-
 local ManaCost = 45;
 local SpellRange = 225;
 

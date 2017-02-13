@@ -176,7 +176,7 @@ global func Test1_OnStart(int plr)
 {
 	CreateObject(Rule_NoFriendlyFire);
 	CreateEnemy(ElectroMan, 120, 258, script_enemy1);
-	CreateEnemy(TimeMan, 392, 258, script_enemy2);
+	CreateEnemy(IceMan, 392, 258, script_enemy2);
 	// Log what the test is about.
 	Log("AI battle: laser man (p1) vs. great leader man (p2).");
 	return true;

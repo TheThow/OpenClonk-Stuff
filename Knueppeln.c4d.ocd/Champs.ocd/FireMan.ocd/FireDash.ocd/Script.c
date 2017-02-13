@@ -5,9 +5,6 @@
 	@author 
 */
 
-local Name = "$Name$";
-local Description = "$Description$";
-
 local ManaCost = 45;
 local SpellRange = 180;
 
@@ -29,11 +26,7 @@ func Initialize()
 }
 
 func Launch(object clonk, int x, int y)
-{
-	//var marker = CreateObject(Icon_Cancel, clonk->GetX() + x - GetX(), clonk->GetY() + y - GetY() + 16, GetOwner());
-	//marker.Visibility = VIS_Owner;
-	//marker->SetClrModulation(RGBa(255,255,255,100));
-	
+{	
 	var params = {
 		angle = Angle(0,0,x,y, angle_prec),
 		clonk = clonk,
@@ -114,7 +107,7 @@ func FxFireDashTimer(object target, proplist effect, int time)
 		{
 			o->Fling(0, -5);
 			AddEffect("DashCD", o, 20, 10);
-			o->AddFireHitEffect();
+			AddEffect("FireHit", o, 20, 1, nil, FireMan);
 			target->WeaponDamage(o, effect.SpellDamage1);
 		}
 		
@@ -187,8 +180,8 @@ func FxFireDashStop(object target, proplist effect, int reason, bool temporary)
 			continue;
 			
 		var angle = Angle(target->GetX(), target->GetY(), o->GetX(), o->GetY());
-		
-		o->AddFireHitEffect();
+			
+		AddEffect("FireHit", o, 20, 1, nil, FireMan);
 		o->Fling(Sin(angle, 8), -Cos(angle, 8) - 2);
 		target->WeaponDamage(o, effect.SpellDamage2);
 	}

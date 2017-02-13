@@ -14,17 +14,17 @@ local Special3Spell = DeathRock;
 
 local Special3Cooldown = 400;
 
-func Special1(object clonk, int x, int y, bool released, bool mouseclick, bool abletocast, bool cooldown)
+public func Special1(object clonk, int x, int y, bool released, bool mouseclick, bool abletocast, bool cooldown)
 {
-	if(!released && !mouseclick && abletocast && !cooldown)
+	if (!released && !mouseclick && abletocast && !cooldown)
 	{
-		if(clonk->LaunchSpell(Special1Spell, x, y, 0, 0))
-			return 1;
+		if (clonk->LaunchSpell(Special1Spell, x, y, 0, 0))
+			return true;
 	}
-	return 0;
+	return false;
 }
 
-func Special2(object clonk, int x, int y, bool released, bool mouseclick, bool abletocast, bool cooldown)
+public func Special2(object clonk, int x, int y, bool released, bool mouseclick, bool abletocast, bool cooldown)
 {
 	var props =
 	{
@@ -36,23 +36,21 @@ func Special2(object clonk, int x, int y, bool released, bool mouseclick, bool a
 		BlitMode = GFX_BLIT_Additive,
 		Rotation = PV_Step(10, 0, 1),
 		Attach = ATTACH_Back | ATTACH_MoveRelative
-		
 	};
-	
 	return CastSpellWithSpellRange(clonk, x, y, released, mouseclick, abletocast, cooldown, props, Special2Spell);
 }
 
-func Special3(object clonk, int x, int y, bool released, bool mouseclick, bool abletocast, bool cooldown)
+public func Special3(object clonk, int x, int y, bool released, bool mouseclick, bool abletocast, bool cooldown)
 {
-	if(!released && !mouseclick && abletocast && !cooldown)
+	if (!released && !mouseclick && abletocast && !cooldown)
 	{
-		if(clonk->LaunchSpell(Special3Spell, x, y, 0, 0))
-			return 1;
+		if (clonk->LaunchSpell(Special3Spell, x, y, 0, 0))
+			return true;
 	}
-	return 0;
+	return false;
 }
 
-func JumpEffect(object clonk, dir)
+public func JumpEffect(object clonk, dir)
 {
 	var from, to;
 
@@ -108,7 +106,7 @@ func JumpEffect(object clonk, dir)
 	}
 }
 
-func BlockEffect(object clonk, range)
+public func BlockEffect(object clonk, range)
 {
 	for(var i = 0; i < 360; i+=5)
 	{
@@ -139,7 +137,7 @@ func BlockEffect(object clonk, range)
 	}
 }
 
-func FxEarthHitTimer(object target, proplist effect, int time)
+public func FxEarthHitTimer(object target, proplist effect, int time)
 {
 	if (!target)
 		return FX_Execute_Kill;
