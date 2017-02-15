@@ -155,6 +155,8 @@ func DoTheLaser(from_x, from_y, to_x, to_y, angle, max_length, no_bounce, stop_a
 	
 	for (var obj in FindObjects(Find_OnLine(from_x, from_y, to_x, to_y), Find_Exclude(this.shooter), Find_Func("CanBeHit", this)))
 	{
+		if (!obj)
+			continue;
 		CreateParticle("StarSpark", AbsX(obj->GetX()), AbsY(obj->GetY()), 0, 0, 10, this.particle_stars, 2);
 		this->HitObject(obj);
 	}

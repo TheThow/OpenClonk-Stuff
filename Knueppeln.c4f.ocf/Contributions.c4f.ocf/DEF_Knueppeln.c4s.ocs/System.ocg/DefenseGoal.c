@@ -24,7 +24,7 @@ public func DoMaxMagic(int plr, int amount)
 {
 	var crew = GetCrew(plr);
 	if (crew)
-		crew.MaxMagic += 100 * amount;
+		crew.MaxMagic += 150 * amount;
 	return;
 }
 

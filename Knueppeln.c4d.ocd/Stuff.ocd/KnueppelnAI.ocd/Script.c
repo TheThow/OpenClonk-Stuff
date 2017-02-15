@@ -25,7 +25,8 @@ public func Execute(effect fx, int time)
 		fx.target = this->FindTarget(fx);
 
 	// Show energy/magic energy.
-	fx.Target->Message("@<c aa0000>%d</c>/<c 0000aa>%d</c>", fx.Target->GetEnergy(), fx.Target->GetMagicEnergy());		
+	if (fx.control.KnueppelnLoggingOn)
+		fx.Target->Message("@<c aa0000>%d</c>/<c 0000aa>%d</c>", fx.Target->GetEnergy(), fx.Target->GetMagicEnergy());		
 	
 	// Try to evade danger like lava.
 	if (this->ExecuteEvadeDanger(fx))

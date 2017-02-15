@@ -16,7 +16,8 @@ protected func Initialize()
 	// Rules.
 	ActivateMedalRule();
 	CreateObject(Rule_NoFriendlyFire);
-	CreateObject(Rule_Items);
+	CreateObject(Rule_Items)->Set(200);
+	CreateObject(Rule_FastMana);
 	CreateObject(Env_MedalRewards);
 	return;
 }
@@ -137,7 +138,7 @@ public func GetAttackWave(int nr)
 	// Add enemy: champs.
 	PushBack(wave.Enemies, new DefenseEnemy.Champ {
 		Amount = nr / 2,
-		Energy = 10 + nr * 5,
+		Energy = 10 + nr * 3,
 		Magic = 100 + 10 * nr,
 		Position = RandomElement([pos_left_down, pos_right_down, pos_left_up, pos_right_up])
 	});
