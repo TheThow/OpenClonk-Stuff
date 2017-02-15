@@ -22,7 +22,7 @@ local clonkspawnerfx = new Effect
 		if (Time >= (this.lastspawn + this.spawndelay))
 		{
 			this.lastspawn = Time;
-			if (!FindObject(Find_OCF(OCF_CrewMember), Find_Owner(NO_OWNER)))
+			if (!FindObject(Find_OCF(OCF_CrewMember), Find_Owner(NO_OWNER)) && GetPlayerCount(C4PT_Script) <= 0)
 				GameCall("SpawnRandomAIClonk");
 		}
 	},

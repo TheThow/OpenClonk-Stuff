@@ -1,17 +1,17 @@
 13/02/2017
 ===========================
-ArchMan: 	 	27
-BallsMan: 	 	24
-BatMan: 	 	29
-BombMan: 	 	16
-EarthMan: 	 	17
-ElectroMan: 	21
-FireMan: 	 	15
-FlashMan: 	 	23
-GreatLeaderMan:  6
-HookMan: 	 	21
-IceMan: 	 	15
-LaserMan: 	 	17
-NinjaMan: 	 	24
-TimeMan: 		18
+ArchMan:        34
+BallsMan:       35
+BatMan:         34
+BombMan:        31
+EarthMan:       23
+ElectroMan:     31
+FireMan:        17
+FlashMan:       27
+GreatLeaderMan: 12
+HookMan:        23
+IceMan:         16
+LaserMan:       33
+NinjaMan:       28
+TimeMan:        20
 ===========================

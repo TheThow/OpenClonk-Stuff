@@ -80,7 +80,7 @@ public func SpawnPlayer(int plr)
 	var clonk = GetCrew(plr);
 	if (!clonk)
 		return;
-	clonk->SetPosition(507, 408);	
+	clonk->SetPosition(512, 222);	
 	clonk->CreateContents(Sword);
 	clonk->SetMagicEnergy(50);
 	ScheduleCall(clonk, "SelectChampion", 1, 0);

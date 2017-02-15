@@ -26,6 +26,7 @@ func Launch(object clonk, int x, int y)
 	minion.IsMinion = true;
 	RemoveEffect("UpdateHUD", minion);
 	minion->~RemoveHUD();
+	GameCallEx("OnCreationRuleNoFF", this);
 	RemoveObject();
 }
 

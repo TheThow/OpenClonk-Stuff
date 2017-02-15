@@ -11,9 +11,9 @@ static script_enemy1;
 static script_enemy2;
 
 // Which champs to test and how many battles between each pair.
-static const rank_champs = [IceMan, NinjaMan];
-//static const rank_champs = [ArchMan, BallsMan, BatMan, BombMan, EarthMan, ElectroMan, FireMan, FlashMan, GreatLeaderMan, HookMan, IceMan, LaserMan, NinjaMan, TimeMan];
-static const nr_pair_battles = 50;
+//static const rank_champs = [IceMan, NinjaMan];
+static const rank_champs = [ArchMan, BallsMan, BatMan, BombMan, EarthMan, ElectroMan, FireMan, FlashMan, GreatLeaderMan, HookMan, IceMan, LaserMan, NinjaMan, TimeMan];
+static const nr_pair_battles = 4;
 
 
 protected func Initialize()
