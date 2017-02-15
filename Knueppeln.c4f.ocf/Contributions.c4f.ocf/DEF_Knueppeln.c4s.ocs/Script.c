@@ -16,6 +16,8 @@ protected func Initialize()
 	// Rules.
 	ActivateMedalRule();
 	CreateObject(Rule_NoFriendlyFire);
+	CreateObject(Rule_Items);
+	CreateObject(Env_MedalRewards);
 	return;
 }
 
@@ -79,7 +81,11 @@ public func SpawnPlayer(int plr)
 {
 	var clonk = GetCrew(plr);
 	if (!clonk)
+	{
+		Log("WARNING: player %d has no clonk.", plr);
+		LogCallStack();
 		return;
+	}
 	clonk->SetPosition(512, 222);	
 	clonk->CreateContents(Sword);
 	clonk->SetMagicEnergy(50);
@@ -90,7 +96,7 @@ public func SpawnPlayer(int plr)
 public func OnClonkLeftRelaunch(object clonk)
 {
 	clonk->Exit();
-	clonk->SetPosition(507, 408);
+	clonk->SetPosition(512, 222);
 	return;
 }
 
