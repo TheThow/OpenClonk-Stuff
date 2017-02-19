@@ -1,0 +1,2 @@
+Name=Defense Tower
+Description=Fires at enemies.

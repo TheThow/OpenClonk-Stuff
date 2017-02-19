@@ -1,0 +1,13 @@
+[DefCore]
+id=DefenseTower
+Version=8,0
+Category=C4D_Structure
+Width=22
+Height=32
+Offset=-11,-16
+Vertices=4
+VertexX=-10,-10,10,10
+VertexY=-10,16,-10,16
+VertexFriction=50,100,50,100
+Construction=1
+Mass=200
