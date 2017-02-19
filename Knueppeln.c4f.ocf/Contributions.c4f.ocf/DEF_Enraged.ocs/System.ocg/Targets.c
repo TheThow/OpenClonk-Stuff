@@ -1,6 +1,6 @@
 // Destroy targets when they die.
 
-#appendto Idol
+#appendto DefenseTower
 #appendto InventorsLab
 
 public func Death()

@@ -1,14 +1,12 @@
 [Head]
 Icon=19
-Title=Knueppeln.c4s
+Title=Enraged
 Version=8
 NoInitialize=true
 
 [Definitions]
 Definition2=Knueppeln.c4d.ocd
 Definition3=Medals.ocd
-
-[Game]
 
 [Player1]
 

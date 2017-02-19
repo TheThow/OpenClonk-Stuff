@@ -1,0 +1,9 @@
+Enraged Mages
+
+Your construction of an inventor's lab enraged a group of mages as it threathens their supremacy. Try to defend it against their attacks.
+
+Goal: Survive as many attack waves as possible.
+
+Hints:
+- This round is cooperative, so work together and divide tasks.
+- You get magic energy for killing enemies.

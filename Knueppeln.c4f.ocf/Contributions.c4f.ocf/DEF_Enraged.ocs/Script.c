@@ -1,8 +1,8 @@
 /**
-	Knüppeln Defense
+	Enraged
 	Defense round for Knueppeln.
 
-	@author K-Pone, Maikel
+	@author Maikel
 */
 
 static init_defenders;
@@ -38,13 +38,13 @@ protected func InitializePlayer(int plr)
 	SpawnPlayer(plr);
 	
 	// Set zoom ranges.
-	SetPlayerZoomByViewRange(plr, 800, nil, PLRZOOM_LimitMax);
-	SetPlayerZoomByViewRange(plr, 450, nil, PLRZOOM_Direct);
+	SetPlayerZoomByViewRange(plr, 1200, nil, PLRZOOM_LimitMax);
+	SetPlayerZoomByViewRange(plr, 500, nil, PLRZOOM_Direct);
 	
 	// Give base and set wealth.
 	if (!init_defenders)
 	{
-		for (var obj in FindObjects(Find_Or(Find_ID(InventorsLab), Find_ID(Idol))))
+		for (var obj in FindObjects(Find_Or(Find_ID(InventorsLab), Find_ID(DefenseTower))))
 		{
 			obj->SetOwner(plr);
 			obj->SetCategory(C4D_Living);
@@ -62,7 +62,7 @@ protected func InitializePlayer(int plr)
 
 public func OnClonkDeath(object clonk)
 {
-	if (!FindObject(Find_Or(Find_ID(InventorsLab), Find_ID(Idol))))
+	if (!FindObject(Find_Or(Find_ID(InventorsLab), Find_ID(DefenseTower))))
 		return;	
 	var plr = clonk->GetOwner();
 	if (GetPlayerType(plr) == C4PT_Script)
@@ -71,9 +71,6 @@ public func OnClonkDeath(object clonk)
 	new_clonk->MakeCrewMember(plr);
 	new_clonk.MaxMagic = clonk.MaxMagic;
 	SetCursor(plr, new_clonk);
-	var relaunch = CreateObjectAbove(RelaunchContainer, LandscapeWidth() / 2, LandscapeHeight() / 2, new_clonk->GetOwner());
-	relaunch->SetRelaunchTime(3);
-	relaunch->StartRelaunch(new_clonk);
 	SpawnPlayer(plr);
 	return;
 }
@@ -87,9 +84,12 @@ public func SpawnPlayer(int plr)
 		LogCallStack();
 		return;
 	}
-	clonk->SetPosition(512, 222);	
+	clonk->SetPosition(70, 406);	
 	clonk->CreateContents(Sword);
 	clonk->SetMagicEnergy(50);
+	var relaunch = CreateObjectAbove(RelaunchContainer, 70, 406, clonk->GetOwner());
+	relaunch->SetRelaunchTime(10);
+	relaunch->StartRelaunch(clonk);	
 	ScheduleCall(clonk, "SelectChampion", 1, 0);
 	return;
 }
@@ -97,7 +97,7 @@ public func SpawnPlayer(int plr)
 public func OnClonkLeftRelaunch(object clonk)
 {
 	clonk->Exit();
-	clonk->SetPosition(512, 222);
+	clonk->SetPosition(70, 406);
 	return;
 }
 
@@ -107,16 +107,16 @@ public func OnClonkLeftRelaunch(object clonk)
 public func GetAttackWave(int nr)
 {
 	// The round starts with a short phase to prepare.
-	if (nr % 2 == 1) 
-		return new DefenseEnemy.BreakWave { Duration = 10 };
+	if (nr == 1) 
+		return new DefenseEnemy.BreakWave { Duration = 15 };
 	
 	// Attack positions.
-	var pos_left_down = {X = 10, Y = 408, Exact = true};
-	var pos_right_down = {X = LandscapeWidth() - 10, Y = 408, Exact = true};
-	var pos_left_up = {X = 10, Y = 232, Exact = true};
-	var pos_right_up = {X = LandscapeWidth() - 10, Y = 232, Exact = true};	
-	var pos_above_left = {X = LandscapeWidth() / 2 - 400, Y = 10}; 
-	var pos_above_right = {X = LandscapeWidth() / 2 + 400, Y = 10};
+	var pos_rockets = {X = LandscapeWidth() - 10, Y = 10};
+	var pos_below = {X = LandscapeWidth() - 10, Y = 504, Exact = true};
+	var pos_middle = {X = LandscapeWidth() - 10, Y = 416, Exact = true};
+	var pos_above = {X = LandscapeWidth() - 10, Y = 200, Exact = true};
+	
+
 	// Automatically build waves that become stronger.
 	var wave = new DefenseEnemy.DefaultWave
 	{
@@ -130,17 +130,29 @@ public func GetAttackWave(int nr)
 	
 	// Add enemy: boom attack.
 	PushBack(wave.Enemies, new DefenseEnemy.BoomAttack {
-		Amount = nr / 2,
-		Speed = BoundBy(80 + nr * 5, 100, 250),
-		Position = RandomElement([pos_above_left, pos_above_right])
+		Amount = nr - 1,
+		Speed = 80 + (nr - 2) * 20,
+		Position = pos_rockets
 	});
 	
 	// Add enemy: champs.
 	PushBack(wave.Enemies, new DefenseEnemy.Champ {
-		Amount = nr / 2,
-		Energy = 10 + nr * 3,
+		Amount = (nr + 1) / 3,
+		Energy = 10 + nr * 5,
 		Magic = 100 + 10 * nr,
-		Position = RandomElement([pos_left_down, pos_right_down, pos_left_up, pos_right_up])
+		Position = pos_middle
+	});
+	PushBack(wave.Enemies, new DefenseEnemy.Champ {
+		Amount = (nr + 0) / 3,
+		Energy = 10 + nr * 5,
+		Magic = 100 + 10 * nr,
+		Position = pos_middle
+	});
+	PushBack(wave.Enemies, new DefenseEnemy.Champ {
+		Amount = (nr - 1) / 3,
+		Energy = 10 + nr * 5,
+		Magic = 100 + 10 * nr,
+		Position = pos_above
 	});
 	return wave;
 }
