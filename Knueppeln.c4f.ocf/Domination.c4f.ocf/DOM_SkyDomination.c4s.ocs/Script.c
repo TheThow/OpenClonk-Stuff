@@ -33,10 +33,10 @@ func Initialize()
 		);
 	GUI_Controller_Wealth->ShowWealth();
 	
-	CreateObject(JumpPad, 860, 870, -1).strength = 115;
+	CreateObject(JumpPad, 860, 870, -1).Strength = 115;
 	CreateObject(JumpPad, 930, 1040, -1);
 
-	CreateObject(JumpPad, LandscapeWidth() - 860, 870, -1).strength = 115;
+	CreateObject(JumpPad, LandscapeWidth() - 860, 870, -1).Strength = 115;
 	CreateObject(JumpPad, LandscapeWidth() - 930, 1040, -1);
 }
 
