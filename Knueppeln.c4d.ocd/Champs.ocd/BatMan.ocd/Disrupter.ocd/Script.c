@@ -216,7 +216,7 @@ func HitEffect()
 	};
 
 	var d = Dur;
-	if (shooter.ChampType == ComboMan)
+	if (shooter && shooter.ChampType == ComboMan)
 		d = Dur/2;
 
 	for (var o in FindObjects(Find_Distance(Size), Find_Func("CanBeHit", this)))

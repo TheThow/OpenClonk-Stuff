@@ -3,13 +3,17 @@
 	@author
 */
 
-local Speed = 60;
 
+/*-- Projectile Properties --*/
+
+local Speed = 60;
 local ManaCost = 22;
 local SpellDamage = 15;
 
-local shooter;
 
+/*-- Code --*/
+
+local shooter;
 
 public func Initialize()
 {
@@ -20,10 +24,11 @@ public func Initialize()
 public func IsDangerous4AI() { return true; }
 public func CanBeSucked() { return true; }
 public func IsReflectable() { return true; }
+public func IsProjectileSpell() { return true; }
 
 public func Launch(object clonk, int x, int y)
 {
-	var angle = Angle(0,0,x,y, 10);
+	var angle = Angle(0, 0, x, y, 10);
 	shooter = clonk;
 	SetVelocity(angle, Speed, 10);
 	SetController(clonk->GetController());
@@ -60,6 +65,9 @@ public func ChargeInterrupted()
 	RemoveObject();
 }
 
+
+/*-- Properties --*/
+
 local ActMap = {
 	Travel = {
 		Prototype = Action,
@@ -69,6 +77,6 @@ local ActMap = {
 		Length = 1,
 		Delay = 1,
 		FacetBase = 1,
-		Speed=1000
+		Speed = 1000
 	},
 };

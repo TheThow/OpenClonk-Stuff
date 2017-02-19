@@ -155,11 +155,6 @@ func FxBatHitTimer(object target, proplist effect, int time)
 	return FX_OK;
 }
 
-global func AddBatHitEffect()
-{
-	this->AddEffect("BatHit", this, 20, 5, nil, BatMan);
-}
-
 private func Definition(proplist def)
 {
 	def.PictureTransformation = Trans_Mul(Trans_Rotate(-65, 0, 1, 0), Trans_Rotate(-35, 0, 0, 1));

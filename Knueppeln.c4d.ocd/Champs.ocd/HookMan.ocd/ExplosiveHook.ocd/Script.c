@@ -4,6 +4,7 @@ local pR = 200;
 local pG = 100;
 local pB = 0;
 local Speed = 70;
+local IsStraight = true;
 local SpellDamage = 25;
 local Size = 10;
 local ManaCost = 25;

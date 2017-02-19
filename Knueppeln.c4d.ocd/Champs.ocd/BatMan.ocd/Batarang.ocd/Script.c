@@ -113,12 +113,12 @@ public func HitObject(obj)
 	if (obj == shooter)
 	{
 		obj->Sound("BatMan::bat_collect", false, 50);
-		obj->DoMagicEnergy(ManaCost/3);
+		obj->~DoMagicEnergy(ManaCost/3);
 		RemoveObject();
 		return true;
 	}
 	
-	obj->AddBatHitEffect();
+	AddEffect("BatHit", obj, 20, 5, nil, BatMan);
 	obj->Sound("Hits::ProjectileHitLiving*", false, 50);
 	obj->Fling();
 	WeaponDamage(obj, SpellDamage);

@@ -29,7 +29,7 @@ local TravelFx = new Effect {
 				continue;
 			
 			AddEffect("BatBiteCD", o, 1, 15);
-			o->AddBatHitEffect();
+			AddEffect("BatHit", o, 20, 5, nil, BatMan);
 			Target->BitePrey(o);
 		}
 		

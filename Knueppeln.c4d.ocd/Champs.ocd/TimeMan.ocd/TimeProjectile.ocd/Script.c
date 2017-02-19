@@ -4,6 +4,7 @@ local pR = 255;
 local pG = 150;
 local pB = 50;
 local Speed = 75;
+local IsStraight = true;
 local SpellDamage = 10;
 local MarkDamage = 20;
 local Size = 15;
@@ -135,8 +136,10 @@ func MarkHit()
 		this->CreateTimeTrail(20, RandomX(-140, 140), 0, 0, nil);
 	}
 	
-	for(var o in FindObjects(Find_Distance(Size*2), Find_Func("CanBeHit", this)))
+	for (var o in FindObjects(Find_Distance(Size*2), Find_Func("CanBeHit", this)))
 	{
+		if (!o)
+			continue;
 		AddEffect("TimeHit", o, 20, 1, nil, TimeMan);
 		var angle = Angle(GetX(), GetY(), o->GetX(), o->GetY());
 		o->Fling(Sin(angle, 4), -Cos(angle, 4) + 1);

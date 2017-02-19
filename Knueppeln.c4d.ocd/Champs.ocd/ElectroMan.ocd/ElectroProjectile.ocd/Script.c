@@ -94,8 +94,10 @@ func Hit()
 {
 	HitEffect();
 	
-	for(var o in FindObjects(Find_Distance(Size), Find_Func("CanBeHit", this)))
+	for (var o in FindObjects(Find_Distance(Size), Find_Func("CanBeHit", this)))
 	{
+		if (!o)
+			continue;
 		AddEffect("ElectroHit", o, 20, 1, nil, ElectroMan);
 		var angle = Angle(GetX(), GetY(), o->GetX(), o->GetY());
 		o->SetVelocity(angle, 10);

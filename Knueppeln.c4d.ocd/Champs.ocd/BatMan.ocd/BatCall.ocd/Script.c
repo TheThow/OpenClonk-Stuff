@@ -53,6 +53,7 @@ func ChargeEffect(proplist params)
 	{
 		var o = CreateObject(ManBat, params.clonk->GetX() - GetX(), params.clonk->GetY() - GetY(), GetOwner());
 		o->Set(params.clonk->GetX() + params.x, params.clonk->GetY() + params.y);
+		GameCallEx("OnCreationRuleNoFF", o);
 		o->Sound("Animals::Bat::Noise*");
 	}
 }
