@@ -295,6 +295,9 @@ func SelectChamp(id champ, int player, int ID, int subwindowID, object target)
 	ChampType = champ;
 	ChampType->InitChamp(this);
 	
+	// Notify goals, scenario, etc. a champ has been selected.
+	GameCallEx("OnChampSelection", champ, player);
+	
 	this->CancelMenu();
 	
 	SetLastChosenChampion(player, ChampType);

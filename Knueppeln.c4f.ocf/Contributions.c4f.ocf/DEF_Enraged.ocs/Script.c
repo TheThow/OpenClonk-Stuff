@@ -19,6 +19,9 @@ protected func Initialize()
 	CreateObject(Rule_Items)->Set(200);
 	CreateObject(Rule_FastMana);
 	CreateObject(Env_MedalRewards);
+	
+	// Statistics.
+	InitStatistics();
 	return;
 }
 

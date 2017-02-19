@@ -8,6 +8,7 @@
 local ManaCost = 22;
 local SpellDamage = 20;
 local Speed = 65;
+local IsStraight = true;
 local Dur = 30;
 local Range = 220;
 
