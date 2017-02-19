@@ -208,7 +208,7 @@ public func ExecuteQSpell(effect fx)
 		{
 			var range = type->~IsSpecial1ShotRange();
 			var through_walls = type->~IsSpecial1ShotThroughWalls();
-			if ((!PathFree(x, y, tx, ty) && !through_walls) || (range && d > range))
+			if ((!PathFree(x, y, tx, ty) && !through_walls) || (range && Distance(x, y, tx, ty) > range))
 				return false;
 			dx = tx - x;
 			dy = ty - y;

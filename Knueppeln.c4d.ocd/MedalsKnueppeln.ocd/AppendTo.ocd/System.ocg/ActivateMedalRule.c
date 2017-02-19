@@ -6,6 +6,8 @@ global func ActivateMedalRule()
 	if (medal_rule_def)
 	{
 		var medal_rule = CreateObject(medal_rule_def);
+		if (!medal_rule)
+			return false;
 		// Do logging of medals in normal log.
 		medal_rule->SetLogging(true);
 		// No clunker rewards.

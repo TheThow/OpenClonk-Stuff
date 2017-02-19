@@ -5,7 +5,8 @@ global func Control2Player(int plr, int ctrl, int x, int y, int strength, bool r
 	// cursor pos info - store in player values
 	if (ctrl == CON_AimingCursor)
 	{
-		if (!g_player_cursor_pos_ingame) g_player_cursor_pos_ingame = CreateArray(plr+1);
+		if (!g_player_cursor_pos_ingame)
+			g_player_cursor_pos_ingame = [];
 		g_player_cursor_pos_ingame[plr] = [x, y];
 		return true;
 	}
@@ -16,7 +17,7 @@ global func Control2Player(int plr, int ctrl, int x, int y, int strength, bool r
 /* return info of last sent CON_CursorPos packet for that player as [x, y] */
 global func GetPlayerCursorPos(int plr, bool ingame)
 {
-	if (!ingame) return inherited(plr, ingame, ...);
+	if (!ingame) return inherited(plr, ...);
 	if (!g_player_cursor_pos_ingame) return nil;
 	return g_player_cursor_pos_ingame[plr];
 }
