@@ -61,7 +61,8 @@ protected func Initialize()
 	};
 	
 	CheckScenarioParameters();
-	
+	// Gather statistics.
+	InitStatistics(STATS_Type_All);
 	return;
 }
 

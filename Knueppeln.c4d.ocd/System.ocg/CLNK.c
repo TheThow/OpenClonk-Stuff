@@ -34,7 +34,7 @@ func Construction()
 {
 	ChampType = Man;
 
-	special_active =  [0, 0, 0, 0];
+	special_active =  [false, false, false, false];
 	
 	var interval = 5;
 	if(FindObject(Find_ID(Rule_FastMana)))
@@ -69,17 +69,16 @@ public func ObjectControl(int plr, int ctrl, int x, int y, int strength, bool re
 {	
 	if (ctrl == CON_Interact && !Contained())
 	{
-		if(!GetEffect("BlockingCD", this))
+		if (!GetEffect("BlockingCD", this))
 		{
 			AddEffect("Blocking", this, 1, 1, this, GetID());
 			AddEffect("BlockingCD", this, 1, BLOCK_CD);
 		}
-		
 		return true;
 	}
 	
 	if (ctrl == CON_InventoryShiftBackward || ctrl == CON_InventoryShiftForward)
-		return 1;
+		return true;
 	
 	if (ctrl == CON_Throw && !IsCarryingHeavy() && !release)
 	{	
@@ -102,7 +101,6 @@ public func ObjectControl(int plr, int ctrl, int x, int y, int strength, bool re
 	{
 		if(release)
 			return;
-			
 		ChampType->CtrlPress(this);
 		return true;
 	}
@@ -112,76 +110,59 @@ public func ObjectControl(int plr, int ctrl, int x, int y, int strength, bool re
 		var a = GetPlayerCursorPos(plr, true);
 		var x1 = a[0] - GetX();
 		var y1 = a[1] - GetY();
-	
-		var flag = ChampType->SpecialMeleeAttack(this, x1, y1, release, false, CanCast() && ChampType->CanCastSpecialMelee(this), GetEffect("SpecialMeleeCD", this));
-		
-		if(flag)
+		if (ChampType->SpecialMeleeAttack(this, x1, y1, release, false, CanCast() && ChampType->CanCastSpecialMelee(this), GetEffect("SpecialMeleeCD", this)))
+		{
 			AddEffect("SpecialMeleeCD", this, 1, SPECIAL_MELEE_CD, this);
-		
-		return 1;
+			// Callback for statistics collection.
+			GameCallEx("OnChampUseSpecialSword", this);
+		}
+		return true;
 	}
 	
 	
 	if (ctrl == CON_QuickSwitch)
 	{
 		special_active[1] = !release;
-		
 		var a = GetPlayerCursorPos(plr, true);
 		var x1 = a[0] - GetX();
 		var y1 = a[1] - GetY();
-		
 		LaunchSpecial1(x1, y1, release, false, CanCast() && ChampType->CanCastSpecial1(this));
-		
 		return true;
 	}
 	
 	if (ctrl == CON_Contents)
 	{
 		special_active[2] = !release;
-	
 		var a = GetPlayerCursorPos(plr, true);
 		var x1 = a[0] - GetX();
 		var y1 = a[1] - GetY();
-		
 		LaunchSpecial2(x1, y1, release, false, CanCast() && ChampType->CanCastSpecial2(this));
-		
 		return true;
 	}
-	
 	
 	if (ctrl == CON_NextCrew)
 	{
 		special_active[3] = !release;
-	
 		var a = GetPlayerCursorPos(plr, true);
 		var x1 = a[0] - GetX();
 		var y1 = a[1] - GetY();
-		
 		LaunchSpecial3(x1, y1, release, false, CanCast() && ChampType->CanCastSpecial3(this));
-		
 		return true;
 	}
 	
 	if (ctrl == CON_Use)
 	{
-		if(IsCharging())
+		if (IsCharging())
 			return true;
-			
 		ChampType->LeftClick(this, x, y, release, CanCast());
-	
-		var flag = false;
-		
-		for(var i = 0; i < GetLength(special_active); i++)
+		for (var i = 0; i < GetLength(special_active); i++)
 		{
-			if(special_active[i] == true)
+			if (special_active[i])
 			{
 				Call(Format("LaunchSpecial%d", i), x, y, release, true, CanCast() && ChampType->Call(Format("CanCastSpecial%d", i), this));
-				flag = true;
+				return true;
 			}
-		}
-		
-		if (flag)
-			return true;
+		}			
 	}
 
 	if (ctrl == CON_Jump && IsJumping()) 
@@ -275,9 +256,9 @@ public func ObjectControl(int plr, int ctrl, int x, int y, int strength, bool re
   		}
 	}
 	
-	if(ctrl == CON_Drop)
+	if (ctrl == CON_Drop)
 	{
-		return 1;
+		return true;
 	}
 	 
 	return _inherited(plr, ctrl, x, y, strength, repeat, release);
@@ -292,7 +273,9 @@ func ControlUpDouble()
 {
 	SetYDir(-this.JumpSpeed * GetCon(), 100 * 100);
 	JumpEffect("Up");
-	DoMagicEnergy(-JUMP_MANA);	
+	DoMagicEnergy(-JUMP_MANA);
+	// Callback for statistics collection.
+	GameCallEx("OnChampDoubleJump", this, "Up");
 	return true;
 }
 
@@ -300,7 +283,9 @@ func ControlDownDouble()
 {
 	SetYDir(this.JumpSpeed * GetCon(), 100 * 100);
 	JumpEffect("Down");
-	DoMagicEnergy(-JUMP_MANA);	
+	DoMagicEnergy(-JUMP_MANA);
+	// Callback for statistics collection.
+	GameCallEx("OnChampDoubleJump", this, "Down");
 	return true;
 }
 
@@ -314,7 +299,9 @@ func ControlLeftDouble()
   		SetXDir(-MOVEMENT_X_SPEED + penality);
   	SetYDir(GetYDir() - 15);
   	JumpEffect("Left");
-	DoMagicEnergy(-JUMP_MANA);	
+	DoMagicEnergy(-JUMP_MANA);
+	// Callback for statistics collection.
+	GameCallEx("OnChampDoubleJump", this, "Left");
   	return true;
 }
 
@@ -328,7 +315,9 @@ func ControlRightDouble()
   		SetXDir(MOVEMENT_X_SPEED - penality);	
   	SetYDir(GetYDir() - 15);
   	JumpEffect("Right");
-	DoMagicEnergy(-JUMP_MANA);	
+	DoMagicEnergy(-JUMP_MANA);
+	// Callback for statistics collection.
+	GameCallEx("OnChampDoubleJump", this, "Right");
   	return true;
 }
 
@@ -428,6 +417,8 @@ func FxBlockingStart(object target, proplist effect)
 	ChampType->BlockEffect(this, BLOCK_RANGE);
 	
 	FxBlockingTimer(target, effect, 0);
+	// Callback for statistics collection.
+	GameCallEx("OnChampBlock", target);
 	return FX_OK;
 }
 
@@ -477,6 +468,8 @@ func LaunchSpecial1(x, y, released, mouse, abletocast)
 	if (ret)
 	{
 		AddEffect("Special1CD", this, 1, ChampType.Special1Cooldown);
+		// Callback for statistics collection.
+		GameCallEx("OnChampSpellQ", this);
 		return true;
 	}
 	return false;
@@ -488,6 +481,8 @@ func LaunchSpecial2(int x, int y, released, mouse, abletocast)
 	if (ret)
 	{
 		AddEffect("Special2CD", this, 1, ChampType.Special2Cooldown);
+		// Callback for statistics collection.
+		GameCallEx("OnChampSpellE", this);	
 		return true;
 	}
 	return false;
@@ -499,6 +494,8 @@ func LaunchSpecial3(int x, int y, released, mouse, abletocast)
 	if (ret)
 	{
 		AddEffect("Special3CD", this, 1, ChampType.Special3Cooldown);
+		// Callback for statistics collection.
+		GameCallEx("OnChampSpellR", this);	
 		return true;
 	}
 	return false;

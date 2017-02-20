@@ -20,8 +20,8 @@ protected func Initialize()
 	CreateObject(Rule_FastMana);
 	CreateObject(Env_MedalRewards);
 	
-	// Statistics.
-	InitStatistics();
+	// Gather statistics.
+	InitStatistics(STATS_Type_All);
 	return;
 }
 

@@ -23,6 +23,9 @@ func Initialize()
 		{key = "death", title = "", sorted = false, default = "", priority = 0},
 	]);
 	
+	// Gather statistics.
+	InitStatistics(STATS_Type_All);
+	
 }
 
 global func BlastFree(x, y, level, cause_plr, bla) 

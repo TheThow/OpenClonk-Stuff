@@ -17,6 +17,8 @@ func Initialize()
 	
 	// Active the medal rule if loaded.
 	ActivateMedalRule();
+	// Gather statistics.
+	InitStatistics(STATS_Type_All);
 }
 
 func CreateEnvironment()

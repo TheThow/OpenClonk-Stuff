@@ -14,6 +14,8 @@ func Initialize()
 	CheckScenarioParameters();
 	InitClouds();
 	ActivateMedalRule();
+	// Gather statistics.
+	InitStatistics(STATS_Type_All);
 }
 
 func InitClouds()

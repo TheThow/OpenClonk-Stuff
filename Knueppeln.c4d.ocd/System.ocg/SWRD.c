@@ -21,3 +21,10 @@ func WeaponDamage(object target, int damage, int damage_type, bool exact_damage)
 	target->Fling(Sin(angle, 55), -Abs(Cos(angle, 55)), 10);
 	return _inherited(target, damage, damage_type, exact_damage);
 }
+
+public func ControlUse(object clonk, int x, int y)
+{
+	// Callback for statistics collection.
+	GameCallEx("OnChampUseSword", clonk);
+	return _inherited(clonk, x, y, ...);
+}
