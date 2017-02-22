@@ -49,6 +49,9 @@ Sayned		-	BallsMan Q, E, R
 				TimeMan Q, E, R
 				BombMan Q, R
 				NinjaMan Q
+				ArchMan Q, E, R
+				
+				Champ/Class Icons
 				
 K-Pone		-	No Passive
 
