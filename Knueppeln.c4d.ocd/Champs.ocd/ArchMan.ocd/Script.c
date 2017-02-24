@@ -16,37 +16,37 @@ local Special1Spell = SimpleArrow;
 local Special2Spell = ConeArrow;
 local Special3Spell = BulldozerRocket;
 
-func Special1(object clonk, int x, int y, bool released, bool mouseclick, bool abletocast, bool cooldown)
+public func Special1(object clonk, int x, int y, bool released, bool mouseclick, bool abletocast, bool cooldown)
 {
-	if(!released && !mouseclick && abletocast && !cooldown)
+	if (!released && !mouseclick && abletocast && !cooldown)
 	{
-		if(clonk->LaunchSpell(Special1Spell, x, y, 0, 0))
-			return 1;
+		if (clonk->LaunchSpell(Special1Spell, x, y, 0, 0))
+			return true;
 	}
-	return 0;
+	return false;
 }
 
-func Special2(object clonk, int x, int y, bool released, bool mouseclick, bool abletocast, bool cooldown)
+public func Special2(object clonk, int x, int y, bool released, bool mouseclick, bool abletocast, bool cooldown)
 {
-	if(!released && !mouseclick && abletocast && !cooldown)
+	if (!released && !mouseclick && abletocast && !cooldown)
 	{
-		if(clonk->LaunchSpell(Special2Spell, x, y, 0, 0))
-			return 1;
+		if (clonk->LaunchSpell(Special2Spell, x, y, 0, 0))
+			return true;
 	}
-	return 0;
+	return false;
 }
 
-func Special3(object clonk, int x, int y, bool released, bool mouseclick, bool abletocast, bool cooldown)
+public func Special3(object clonk, int x, int y, bool released, bool mouseclick, bool abletocast, bool cooldown)
 {
-	if(!released && !mouseclick && abletocast && !cooldown)
+	if (!released && !mouseclick && abletocast && !cooldown)
 	{
-		if(clonk->LaunchSpell(Special3Spell, x, y, 0, 0))
-			return 1;
+		if (clonk->LaunchSpell(Special3Spell, x, y, 0, 0))
+			return true;
 	}
-	return 0;
+	return false;
 }
 
-func JumpEffect(object clonk, string dir)
+public func JumpEffect(object clonk, string dir)
 {
 	var range = 15;
 	var particlefx = 
@@ -92,10 +92,7 @@ func JumpEffect(object clonk, string dir)
 	}
 }
 
-/*
-range	range of the block effect
-*/
-func BlockEffect(object clonk, int range)
+public func BlockEffect(object clonk, int range)
 {
 	var particlefx = 
 	{

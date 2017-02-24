@@ -6,3 +6,5 @@ Spell2Name=Time Travel
 Spell2Description=Sets a mark. When using the ability again, the Clonk will travel teleport back to this point and will damage enemies at the mark.
 Spell3Name=Slowing Field
 Spell3Description=Creates an energy field that slows down everything inside.
+PassiveName=Nothing
+PassiveDescription=This Champ doesn't have a passive ability.

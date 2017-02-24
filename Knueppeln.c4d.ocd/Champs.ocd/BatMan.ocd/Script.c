@@ -15,7 +15,7 @@ local Special3Spell = BatCall;
 local Special2Cooldown = 25;
 local Special3Cooldown = 400;
 
-func Special1(object clonk, int x, int y, bool released, bool mouseclick, bool abletocast, bool cooldown)
+public func Special1(object clonk, int x, int y, bool released, bool mouseclick, bool abletocast, bool cooldown)
 {
 	if(!released && !mouseclick && abletocast && !cooldown)
 	{
@@ -26,7 +26,7 @@ func Special1(object clonk, int x, int y, bool released, bool mouseclick, bool a
 }
 
 
-func Special2(object clonk, int x, int y, bool released, bool mouseclick, bool abletocast, bool cooldown)
+public func Special2(object clonk, int x, int y, bool released, bool mouseclick, bool abletocast, bool cooldown)
 {
 	if(!released && !mouseclick && abletocast && !cooldown)
 	{
@@ -36,7 +36,7 @@ func Special2(object clonk, int x, int y, bool released, bool mouseclick, bool a
 	return false;
 }
 
-func Special3(object clonk, int x, int y, bool released, bool mouseclick, bool abletocast, bool cooldown)
+public func Special3(object clonk, int x, int y, bool released, bool mouseclick, bool abletocast, bool cooldown)
 {
 	var props =
 	{
@@ -53,7 +53,7 @@ func Special3(object clonk, int x, int y, bool released, bool mouseclick, bool a
 	return CastSpellWithSpellRange(clonk, x, y, released, mouseclick, abletocast, cooldown, props, Special3Spell);
 }
 
-func JumpEffect(object clonk, dir)
+public func JumpEffect(object clonk, dir)
 {
 	var from;
 	var to;
@@ -103,7 +103,7 @@ func JumpEffect(object clonk, dir)
 	}
 }
 
-func BlockEffect(object clonk, range)
+public func BlockEffect(object clonk, range)
 {
 	for(var i = 0; i < 360; i+=10)
 	{
@@ -127,12 +127,12 @@ func BlockEffect(object clonk, range)
 	
 }
 
-func ShowRange()
+public func ShowRange()
 {
 
 }
 
-func FxBatHitTimer(object target, proplist effect, int time)
+public func FxBatHitTimer(object target, proplist effect, int time)
 {
 	if (!target)
 		return FX_Execute_Kill;
@@ -199,5 +199,5 @@ local Spell2Name = "$Spell2Name$";
 local Spell2Description = "$Spell2Description$";
 local Spell3Name = "$Spell3Name$";
 local Spell3Description = "$Spell3Description$";
-//local PassiveName = "$PassiveName$";
-//local PassiveDescription = "$PassiveDescription$";
+local PassiveName = "$PassiveName$";
+local PassiveDescription = "$PassiveDescription$";

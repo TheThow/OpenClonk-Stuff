@@ -16,15 +16,15 @@ public func Special1(object clonk, int x, int y, bool released, bool mouseclick,
 	if(!released && !mouseclick && abletocast && !cooldown)
 	{
 		if(clonk->LaunchSpell(Special1Spell, x, y, 0, 0))
-			return 1;
+			return true;
 	}
 	
-	return 0;
+	return false;
 }
 
 public func Special2(object clonk, int x, int y, bool released, bool mouseclick, bool abletocast,  bool cooldown)
 {
-	if (released || mouseclick || cooldown) return;
+	if (released || mouseclick || cooldown) return false;
 	return BlowUpBombs(clonk);
 }
 
@@ -36,9 +36,9 @@ public func BlowUpBombs(object clonk)
 		SoundAt("UI::Click");
 		for (var bomb in existing)
 			bomb->BlowUp();
-		return;
+		return true;
 	}
-	return;
+	return false;
 }
 
 public func Special3(object clonk, int x, int y, bool released, bool mouseclick, bool abletocast, bool cooldown)
@@ -174,5 +174,5 @@ local Spell2Name = "$Spell2Name$";
 local Spell2Description = "$Spell2Description$";
 local Spell3Name = "$Spell3Name$";
 local Spell3Description = "$Spell3Description$";
-//local PassiveName = "$PassiveName$";
-//local PassiveDescription = "$PassiveDescription$";
+local PassiveName = "$PassiveName$";
+local PassiveDescription = "$PassiveDescription$";

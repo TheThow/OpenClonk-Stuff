@@ -6,3 +6,5 @@ Spell2Name=Electro Orb
 Spell2Description=Shoots an orb that returns to its owner after some time. Can damage multiple targets and hit multiple times.
 Spell3Name=Thunder Strike
 Spell3Description=Launches a lightning at the mouse position. Deals high damage.
+PassiveName=Nothing
+PassiveDescription=This Champ doesn't have a passive ability.

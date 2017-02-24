@@ -6,3 +6,5 @@ Spell2Name=Blow Up
 Spell2Description=Blows up all existing sticky bombs.
 Spell3Name=Bomb Magnet
 Spell3Description=Click on a position to let all nearby bombs jump towards it.
+PassiveName=Nothing
+PassiveDescription=This Champ doesn't have a passive ability.

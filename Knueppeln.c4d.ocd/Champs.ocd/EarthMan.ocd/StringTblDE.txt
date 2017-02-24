@@ -6,3 +6,5 @@ Spell2Name=Erdwall
 Spell2Description=Erzeugt eine kleine Erdwand am Mauszeiger, die 50 Schaden abfängt.
 Spell3Name=Großer Stein
 Spell3Description=Verschießt einen großen Stein, der alles niederwalzt, dass sich ihm in den Weg stellt. Kann nicht geblockt werden.
+PassiveName=Nichts
+PassiveDescription=Dieser Champ besitzt keine passive Fähigkeit.

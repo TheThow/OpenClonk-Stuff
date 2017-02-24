@@ -6,3 +6,5 @@ Spell2Name=Explosivhaken
 Spell2Description=Verschießt einen explosiven Haken. Prallt an Wänden ab.
 Spell3Name=Sägeblatt
 Spell3Description=Verschleudert ein Sägeblatt, dass an der Landschaft anheftet und daran lang wandert.
+PassiveName=Nichts
+PassiveDescription=Dieser Champ besitzt keine passive Fähigkeit.

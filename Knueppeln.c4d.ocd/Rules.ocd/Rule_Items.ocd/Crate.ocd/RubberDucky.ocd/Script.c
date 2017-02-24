@@ -145,10 +145,10 @@ func Bounce(int xdir, int ydir)
 	var angle_diff = GetTurnDirection(angle - 180, surface_angle);
 	var new_angle = surface_angle + angle_diff;
 	
-	var speed = Distance(0, 0, xdir, ydir);
-	speed = speed*3/4;
-	SetXDir(Sin(new_angle, speed), 100);
-	SetYDir(-Cos(new_angle, speed), 100);
+	var new_speed = Distance(0, 0, xdir, ydir);
+	new_speed = new_speed*3/4;
+	SetXDir(Sin(new_angle, new_speed), 100);
+	SetYDir(-Cos(new_angle, new_speed), 100);
 }
 
 func FxIdleStop()

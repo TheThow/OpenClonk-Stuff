@@ -6,3 +6,5 @@ Spell2Name=Zeitreise
 Spell2Description=Setzt eine Markierung. Bei wiederholtem Einsatz der Fähigkeit springt der Clonk dorthin zurück. Gegner an diesem Punkt erleiden Schaden, sobald der Clonk am Ziel ankommt.
 Spell3Name=Verlangsamungsfeld
 Spell3Description=Erzeugt ein Energiefeld, das darin befindliche Objekte verlangsamt.
+PassiveName=Nichts
+PassiveDescription=Dieser Champ besitzt keine passive Fähigkeit.

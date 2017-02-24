@@ -16,38 +16,38 @@ local Special1Spell = FlashPrisma;
 local Special2Spell = FlashFlinger;
 local Special3Spell = SuperSpectralLazor;
 
-func Special1(object clonk, int x, int y, bool released, bool mouseclick, bool abletocast, bool cooldown)
+public func Special1(object clonk, int x, int y, bool released, bool mouseclick, bool abletocast, bool cooldown)
 {
 	if(!released && !mouseclick && abletocast && !cooldown)
 	{
 		if(clonk->LaunchSpell(Special1Spell, x, y, 0, 0))
-			return 1;
+			return true;
 	}
-	return 0;
+	return false;
 }
 
-func Special2(object clonk, int x, int y, bool released, bool mouseclick, bool abletocast, bool cooldown)
+public func Special2(object clonk, int x, int y, bool released, bool mouseclick, bool abletocast, bool cooldown)
 {
 	if(!released && !mouseclick && abletocast && !cooldown)
 	{
 		if(clonk->LaunchSpell(Special2Spell, x, y, 0, 0))
-			return 1;
+			return true;
 	}
-	return 0;
+	return false;
 }
 
 
-func Special3(object clonk, int x, int y, bool released, bool mouseclick, bool abletocast, bool cooldown)
+public func Special3(object clonk, int x, int y, bool released, bool mouseclick, bool abletocast, bool cooldown)
 {
 	if(!released && !mouseclick && abletocast && !cooldown)
 	{
 		if(clonk->LaunchSpell(Special3Spell, x, y, 0, 0))
-			return 1;
+			return true;
 	}
-	return 0;
+	return false;
 }
 
-func JumpEffect(object clonk, string dir)
+public func JumpEffect(object clonk, string dir)
 {
 	var from;
 	var to;
@@ -98,9 +98,9 @@ func JumpEffect(object clonk, string dir)
 	}
 }
 
-func BlockEffect(object clonk, int range)
+public func BlockEffect(object clonk, int range)
 {
-	for(var i = 0; i < 360; i+=10)
+	for (var i = 0; i < 360; i+=10)
 	{
 		var r = range;
 		var x = clonk->GetX() + Cos(i, r);
@@ -117,49 +117,11 @@ func BlockEffect(object clonk, int range)
 			G = RandomX(0,200),
 			B = RandomX(0,200),
 		};
-		
-		//CreateParticle("Lightning", x, y, 0, 0, 30, trailparticles);
-		//CreateParticle("Lightning", x, y, Cos(i+180, 25), Sin(i+180, 25), 30, trailparticles);
 		CreateParticle("Lightning", x, y, Cos(i, 3), Sin(i, 3), 30, trailparticles);
 	}
 }
 
-func LeftClick(object clonk, int x, int y, bool released, bool abletocast)
-{
-
-}
-
-func InitChamp(object clonk)
-{
-
-}
-
-func CanCast(object clonk)
-{
-	return true;
-}
-
-func CanCastSpecial1(object clonk)
-{
-	return true;
-}
-
-func CanCastSpecial2(object clonk)
-{
-	return true;
-}
-
-func CanCastSpecial3(object clonk)
-{
-	return true;
-}
-
-func CleanUp(object clonk)
-{
-
-}
-
-func CastSpellWithSpellRange(object clonk, int x, int y, bool released, bool mouseclick, bool abletocast, bool cooldown, proplist props, id spell)
+public func CastSpellWithSpellRange(object clonk, int x, int y, bool released, bool mouseclick, bool abletocast, bool cooldown, proplist props, id spell)
 {
 	if(!released && !mouseclick)
 	{
@@ -198,7 +160,7 @@ func CastSpellWithSpellRange(object clonk, int x, int y, bool released, bool mou
 	return 0;
 }
 
-func FxFlashHitTimer(object target, proplist effect, int time)
+public func FxFlashHitTimer(object target, proplist effect, int time)
 {
 	if (!target)
 		return FX_Execute_Kill;
@@ -248,5 +210,5 @@ local Spell2Name = "$Spell2Name$";
 local Spell2Description = "$Spell2Description$";
 local Spell3Name = "$Spell3Name$";
 local Spell3Description = "$Spell3Description$";
-//local PassiveName = "$PassiveName$";
-//local PassiveDescription = "$PassiveDescription$";
+local PassiveName = "$PassiveName$";
+local PassiveDescription = "$PassiveDescription$";

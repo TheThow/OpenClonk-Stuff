@@ -6,3 +6,5 @@ Spell2Name=Explosion
 Spell2Description=Sprengt alle Haftbomben.
 Spell3Name=Bombenmagnet
 Spell3Description=Schleudert alle Haftbomben in der Nähe des Mauszeigers in dessen Richtung.
+PassiveName=Nichts
+PassiveDescription=Dieser Champ besitzt keine passive Fähigkeit.

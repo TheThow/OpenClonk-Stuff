@@ -6,3 +6,5 @@ Spell2Name=Laser
 Spell2Description=Lädt auf und feuert einen Laserstrahl in Richtung des Mauszeigers. Kann bis zur maximalen Länge an Wänden reflektieren.
 Spell3Name=Blink
 Spell3Description=Teleportiert in Richtung des Mauszeigers und feuert dabei einen schwachen Laserstrahl in dieselbe Richtung.
+PassiveName=Nichts
+PassiveDescription=Dieser Champ besitzt keine passive Fähigkeit.

@@ -6,3 +6,5 @@ Spell2Name=Zielen und Schießen
 Spell2Description=Alle Minions schießen in Richtung des Mauscursors.
 Spell3Name=Vasallenabwurf
 Spell3Description=Erzeugt Minions.
+PassiveName=Nichts
+PassiveDescription=Dieser Champ besitzt keine passive Fähigkeit.

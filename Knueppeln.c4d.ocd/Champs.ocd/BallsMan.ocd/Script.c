@@ -18,17 +18,17 @@ local Special3Cooldown = 60;
 
 local MaxRange = 300;
 
-func Special1(object clonk, int x, int y, bool released, bool mouseclick, bool abletocast, bool cooldown)
+public func Special1(object clonk, int x, int y, bool released, bool mouseclick, bool abletocast, bool cooldown)
 {
-	if(!released && !mouseclick && abletocast && !cooldown)
+	if (!released && !mouseclick && abletocast && !cooldown)
 	{
 		var balldist = Distance(clonk->GetX() + x, clonk->GetY() + y, clonk.Ball->GetX(), clonk.Ball->GetY());
 		var clonkdist = Distance(0, 0, x, y);
 		
-		if(balldist < 35 || clonkdist > MaxRange)
+		if (balldist < 35 || clonkdist > MaxRange)
 		{
 			Sound("UI::Error", 0, 50, clonk->GetOwner());
-			return 0;
+			return false;
 		}
 	
 		var param = {
@@ -36,13 +36,13 @@ func Special1(object clonk, int x, int y, bool released, bool mouseclick, bool a
 		};
 		
 		if(clonk->LaunchSpell(Special1Spell, x, y, 0, 0, param))
-			return 1;
+			return true;
 	}
-	return 0;
+	return false;
 }
 
 
-func Special2(object clonk, int x, int y, bool released, bool mouseclick, bool abletocast, bool cooldown)
+public func Special2(object clonk, int x, int y, bool released, bool mouseclick, bool abletocast, bool cooldown)
 {
 	if(!released && !mouseclick && abletocast && !cooldown)
 	{
@@ -51,12 +51,12 @@ func Special2(object clonk, int x, int y, bool released, bool mouseclick, bool a
 		};
 		
 		if(clonk->LaunchSpell(Special2Spell, x, y, 0, 0, param))
-			return 1;
+			return true;
 	}
-	return 0;
+	return false;
 }
 
-func Special3(object clonk, int x, int y, bool released, bool mouseclick, bool abletocast, bool cooldown)
+public func Special3(object clonk, int x, int y, bool released, bool mouseclick, bool abletocast, bool cooldown)
 {
 	if(!released && !mouseclick && abletocast && !cooldown)
 	{
@@ -65,12 +65,12 @@ func Special3(object clonk, int x, int y, bool released, bool mouseclick, bool a
 		};
 		
 		if(clonk->LaunchSpell(Special3Spell, x, y, 0, 0, param))
-			return 1;
+			return true;
 	}
-	return 0;
+	return false;
 }
 
-func JumpEffect(object clonk, dir)
+public func JumpEffect(object clonk, dir)
 {
 	var from;
 	var to;
@@ -119,7 +119,7 @@ func JumpEffect(object clonk, dir)
 	}
 }
 
-func BlockEffect(object clonk, range)
+public func BlockEffect(object clonk, range)
 {
 	for(var i = 0; i < 360; i+=10)
 	{
@@ -142,7 +142,7 @@ func BlockEffect(object clonk, range)
 	
 }
 
-func CanCast(object clonk)
+public func CanCast(object clonk)
 {
 	if(clonk.Ball)
 	{
@@ -153,7 +153,7 @@ func CanCast(object clonk)
 	return _inherited(clonk);
 }
 
-func CanCastSpecial2(object clonk)
+public func CanCastSpecial2(object clonk)
 {
 	if(clonk.Ball)
 	{
@@ -164,7 +164,7 @@ func CanCastSpecial2(object clonk)
 	return true;
 }
 
-func InitChamp(clonk)
+public func InitChamp(clonk)
 {
 	var ball = clonk->CreateObject(BallsManBall, 0, -15, clonk->GetOwner());
 	clonk.Ball = ball;
@@ -197,7 +197,7 @@ func InitChamp(clonk)
 	eff.d = dummy;
 }
 
-func FxRangeTimer(target, fx)
+public func FxRangeTimer(target, fx)
 {
 	if(fx.d->Contained())
 	{
@@ -214,7 +214,7 @@ func FxRangeTimer(target, fx)
 		return -1;
 }
 
-func FxRangeStop(object target, proplist fx, int reason, bool temp)
+public func FxRangeStop(object target, proplist fx, int reason, bool temp)
 {
 	if(temp)
 		return;
@@ -222,7 +222,7 @@ func FxRangeStop(object target, proplist fx, int reason, bool temp)
 	fx.d->RemoveObject();
 }
 
-func CleanUp(object clonk)
+public func CleanUp(object clonk)
 {
 	if(GetEffect("Range", clonk))
 		RemoveEffect("Range", clonk);
@@ -231,7 +231,7 @@ func CleanUp(object clonk)
 		clonk.Ball->KillBall();
 }
 
-func FxBallHitStart(target, effect)
+public func FxBallHitStart(target, effect)
 {
 	effect.props =
 	{
@@ -245,7 +245,7 @@ func FxBallHitStart(target, effect)
 	};
 }
 
-func FxBallHitTimer(object target, proplist effect, int time)
+public func FxBallHitTimer(object target, proplist effect, int time)
 {
 	if (!target)
 		return FX_Execute_Kill;
@@ -275,5 +275,5 @@ local Spell2Name = "$Spell2Name$";
 local Spell2Description = "$Spell2Description$";
 local Spell3Name = "$Spell3Name$";
 local Spell3Description = "$Spell3Description$";
-//local PassiveName = "$PassiveName$";
-//local PassiveDescription = "$PassiveDescription$";
+local PassiveName = "$PassiveName$";
+local PassiveDescription = "$PassiveDescription$";

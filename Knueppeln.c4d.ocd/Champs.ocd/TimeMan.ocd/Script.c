@@ -192,5 +192,5 @@ local Spell2Name = "$Spell2Name$";
 local Spell2Description = "$Spell2Description$";
 local Spell3Name = "$Spell3Name$";
 local Spell3Description = "$Spell3Description$";
-//local PassiveName = "$PassiveName$";
-//local PassiveDescription = "$PassiveDescription$";
+local PassiveName = "$PassiveName$";
+local PassiveDescription = "$PassiveDescription$";

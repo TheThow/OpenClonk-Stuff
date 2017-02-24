@@ -6,3 +6,5 @@ Spell2Name=Aim and Fire
 Spell2Description=Minions will shoot towards the mouse cursor.
 Spell3Name=Spawn Peon
 Spell3Description=Spawns peons.
+PassiveName=Nothing
+PassiveDescription=This Champ doesn't have a passive ability.

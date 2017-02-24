@@ -6,3 +6,5 @@ Spell2Name=Zurück!
 Spell2Description=Dein Ball fliegt zu dir zurück und fügt dabei allen getroffenen Gegnern Schaden zu. Ist der Ball wieder bei dir, erhältst du einen Schild, der 15 Schadenspunkte abfängt.
 Spell3Name=Energiestoß!
 Spell3Description=Dein Ball entlädt einen starken Energiestoß, der Gegner Schaden zufügt und wegschleudert.
+PassiveName=Nichts
+PassiveDescription=Dieser Champ besitzt keine passive Fähigkeit.
