@@ -1,0 +1,4 @@
+MinionTeamLeft=Minions Rot
+MinionTeamRight=Minions Blau
+TeamLeft=Rot (Links)
+TeamRight=Blau (Rechts)

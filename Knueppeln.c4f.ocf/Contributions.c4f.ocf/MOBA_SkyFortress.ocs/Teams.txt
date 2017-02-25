@@ -1,0 +1,13 @@
+[Teams]
+LastTeamID=2
+TeamColors=true
+
+  [Team]
+  id=1
+  Name=$TeamLeft$
+  Color=4294180864
+
+  [Team]
+  id=2
+  Name=$TeamRight$
+  Color=4282400968
