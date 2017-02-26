@@ -11,9 +11,9 @@ static script_enemy1;
 static script_enemy2;
 
 // Which champs to test and how many battles between each pair.
-//static const rank_champs = [IceMan, NinjaMan];
-static const rank_champs = [ArchMan, BallsMan, BatMan, BombMan, EarthMan, ElectroMan, FireMan, FlashMan, GreatLeaderMan, HookMan, IceMan, LaserMan, NinjaMan, TimeMan];
-static const nr_pair_battles = 4;
+static const rank_champs = [MLGMan, ArchMan, FlashMan];
+//static const rank_champs = [ArchMan, BallsMan, BatMan, BombMan, EarthMan, ElectroMan, FireMan, FlashMan, GreatLeaderMan, HookMan, IceMan, LaserMan, NinjaMan, TimeMan];
+static const nr_pair_battles = 20;
 
 
 protected func Initialize()
@@ -85,6 +85,7 @@ static const FxChampRankings = new Effect
 		this.launched = false;
 		// Init games to play.
 		this.nr_battles = nr_pair_battles;
+		this.battle_rnd_nr = 1;
 		this.champ_scores = [];
 		this.rank_champs = rank_champs;
 		this.game_nr = 0;
@@ -102,8 +103,8 @@ static const FxChampRankings = new Effect
 		{
 			if (this.game_nr >= GetLength(this.games))
 			{
-				this.nr_battles--;
-				if (this.nr_battles <= 0)
+				this.battle_rnd_nr++;
+				if (this.battle_rnd_nr > this.nr_battles)
 					return FX_Execute_Kill;			
 				this.game_nr = 0;			
 			}
@@ -136,7 +137,7 @@ static const FxChampRankings = new Effect
 	
 	StartTest = func(id champ1, id champ2)
 	{
-		Log("Testing %i vs. %i.", champ1, champ2);
+		Log("Testing %i vs. %i (match %d/%d).", champ1, champ2, GetLength(this.games) * (this.battle_rnd_nr - 1) + this.game_nr + 1, this.nr_battles * GetLength(this.games));
 		this->CreateChamp(champ1, 120, 258, script_enemy1);
 		this->CreateChamp(champ2, 392, 258, script_enemy2);
 		return;

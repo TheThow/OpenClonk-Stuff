@@ -1,0 +1,3 @@
+[Particle]
+Name=Wow
+Face=0,0,140,70,-60,-30

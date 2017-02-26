@@ -57,7 +57,7 @@ private func LaunchChampAt(proplist prop_enemy, int wave_nr, int enemy_plr, prop
 local Champ = new DefaultEnemy
 {
 	Name = "$EnemyChamp$",
-	Champ = [ArchMan, BallsMan, BatMan, BombMan, EarthMan, ElectroMan, FireMan, FlashMan, GreatLeaderMan, HookMan, IceMan, LaserMan, NinjaMan, TimeMan],
+	Champ = [ArchMan, BallsMan, BatMan, BombMan, EarthMan, ElectroMan, FireMan, FlashMan, GreatLeaderMan, HookMan, IceMan, LaserMan, NinjaMan, MLGMan, TimeMan],
 	Energy = 50,
 	Magic = 100,
 	Bounty = 10,

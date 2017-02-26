@@ -1,0 +1,10 @@
+Name=MLG Man
+Description=Fights men with memes.
+Spell1Name=Spray and Pray
+Spell1Description=Shoot high velocity projectiles. Rapid fire is inaccurate.
+Spell2Name=Mountain Brew
+Spell2Description=Temporary boost to accuracy and mana regeneration.
+Spell3Name=360 No Scope
+Spell3Description=Turn around and take a shot.
+PassiveName=Head Shot
+PassiveDescription=Hitting enemy clonk's head deals increased damage.
