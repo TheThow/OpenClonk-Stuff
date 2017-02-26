@@ -1,2 +1,0 @@
-Name=Flinger
-Description=Throws Clonks around when it hits

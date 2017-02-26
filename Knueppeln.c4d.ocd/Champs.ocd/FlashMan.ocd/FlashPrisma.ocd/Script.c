@@ -49,17 +49,17 @@ func TravelEffect(int time)
 	}
 }
 
-func HitObject(obj)
+func HitObject(object obj)
 {
-	if(obj->~CanBeHit() == false)
+	if (!obj || !obj->~CanBeHit())
 		return;
 		
 	obj->Fling(0, -2, nil, true);
 }
 
-func HitDamage(obj)
+func HitDamage(object obj)
 {
-	if(obj->~CanBeHit() == false)
+	if (!obj || !obj->~CanBeHit())
 		return;
 	
 	AddEffect("FlashHit", obj, 20, 1, nil, FlashMan);
