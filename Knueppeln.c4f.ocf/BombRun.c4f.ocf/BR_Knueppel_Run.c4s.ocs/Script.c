@@ -9,10 +9,12 @@ func Initialize()
 {
 	CreateObject(Goal_BombRun);
 	CreateObject(Rule_KillLogs);
-	// Active the medal rule if loaded.
 	CheckScenarioParameters();
 	InitClouds();
+	// Active the medal rule if loaded.	
 	ActivateMedalRule();
+	// Gather statistics.
+	InitStatistics(STATS_Type_All);	
 }
 
 func GetItemCratePos()

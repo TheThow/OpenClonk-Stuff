@@ -105,6 +105,9 @@ func Initialize()
 	g_goal->SetRightBase(g_invlr);
 	
 	CreateEffect(FxGoalCheckTimer, 1, 50);
+
+	// Gather statistics.
+	InitStatistics(STATS_Type_All);	
 }
 
 func InitMinionPlayers()

@@ -38,6 +38,8 @@ func Initialize()
 
 	CreateObject(JumpPad, LandscapeWidth() - 860, 870, -1).Strength = 115;
 	CreateObject(JumpPad, LandscapeWidth() - 930, 1040, -1);
+	// Gather statistics.
+	InitStatistics(STATS_Type_All);	
 }
 
 public func DoPlayerCoins(int plr, int coins)
