@@ -274,17 +274,17 @@ func FxUpdateHUDTimer(object target)
 		return;
 	}
 
-	if(GetMagicEnergy() < ChampType.Special1Spell.ManaCost || !CanCast() || GetEffect("Special1CD", this) || !ChampType->CanCastSpecial1(this))
+	if (!ChampType.Special1Spell || GetMagicEnergy() < ChampType.Special1Spell.ManaCost || !CanCast() || GetEffect("Special1CD", this) || !ChampType->CanCastSpecial1(this))
 		QSymbol->SetClrModulation(color_spellblocked);
 	else
 		QSymbol->SetClrModulation(color_spellok);
 		
-	if(GetMagicEnergy() < ChampType.Special2Spell.ManaCost || !CanCast() || GetEffect("Special2CD", this) || !ChampType->CanCastSpecial2(this))
+	if (!ChampType.Special2Spell || GetMagicEnergy() < ChampType.Special2Spell.ManaCost || !CanCast() || GetEffect("Special2CD", this) || !ChampType->CanCastSpecial2(this))
 		ESymbol->SetClrModulation(color_spellblocked);
 	else
 		ESymbol->SetClrModulation(color_spellok);
 		
-	if(GetMagicEnergy() < ChampType.Special3Spell.ManaCost || !CanCast() || GetEffect("Special3CD", this) || !ChampType->CanCastSpecial3(this))
+	if (!ChampType.Special3Spell || GetMagicEnergy() < ChampType.Special3Spell.ManaCost || !CanCast() || GetEffect("Special3CD", this) || !ChampType->CanCastSpecial3(this))
 		RSymbol->SetClrModulation(color_spellblocked);
 	else
 		RSymbol->SetClrModulation(color_spellok);
