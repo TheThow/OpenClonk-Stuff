@@ -39,7 +39,7 @@ func IsFulfilled()
 		// Left team lost
 		for(var i = 0; i < GetPlayerCount(); i++)
 		{
-			if (GetPlayerTeam(GetPlayerByIndex(i)) == g_plrid_minions_left)
+			if (GetPlayerTeam(GetPlayerByIndex(i)) == 1)
 				EliminatePlayer(GetPlayerByIndex(i));
 		}
 	}
@@ -49,7 +49,7 @@ func IsFulfilled()
 		// Left team lost
 		for(var i = 0; i < GetPlayerCount(); i++)
 		{
-			if (GetPlayerTeam(GetPlayerByIndex(i)) == g_plrid_minions_right)
+			if (GetPlayerTeam(GetPlayerByIndex(i)) == 2)
 				EliminatePlayer(GetPlayerByIndex(i));
 		}
 	}
