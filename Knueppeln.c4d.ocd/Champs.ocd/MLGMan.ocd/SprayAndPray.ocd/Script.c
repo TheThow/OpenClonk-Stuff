@@ -17,7 +17,7 @@ public func Launch(object clonk, int x, int y)
 	var angle = Angle(0, 0, x, y, 10);
 	shooter = clonk;
 
-	var inaccuracy_amount = 5;
+	var inaccuracy_amount = 0;
 	if (!GetEffect("FxMountainBrew",clonk)) 
 		inaccuracy_amount = 15 * GetEffectCount("FxInaccuracy", clonk);
 	SetVelocity(angle + RandomX(-inaccuracy_amount, inaccuracy_amount), Speed, 10);
@@ -25,8 +25,8 @@ public func Launch(object clonk, int x, int y)
 	SetController(clonk->GetController());
 	AddEffect("HitCheck", this, 1, 1, nil, nil, clonk);
 	AddEffect("TheEffect", this, 1, 1, this, Projectile);
-
-	if (inaccuracy_amount<10) clonk->CreateEffect(FxInaccuracy,100,1,this.CoolingTime);
+	clonk->CreateEffect(FxInaccuracy, 100, 1, this.CoolingTime);
+	return;
 }
 
 local FxInaccuracy = new Effect 
@@ -38,12 +38,15 @@ local FxInaccuracy = new Effect
 	},
 	Timer = func(int time)
 	{
-		var inaccuracy_amount=GetEffectCount("FxInaccuracy",this.Target);
+		var inaccuracy_amount = GetEffectCount("FxInaccuracy", this.Target);
 
 		var particles =
 		{
 			Size = PV_Linear(2,0), 
-			R = 28*inaccuracy_amount,G = 255-(28*inaccuracy_amount),B = 50,Alpha = PV_Linear(255,0),
+			R = 28 * inaccuracy_amount,
+			G = 255 - (28 * inaccuracy_amount),
+			B = 50,
+			Alpha = PV_Linear(255,0),
 			Attach=ATTACH_MoveRelative,
 		};
 

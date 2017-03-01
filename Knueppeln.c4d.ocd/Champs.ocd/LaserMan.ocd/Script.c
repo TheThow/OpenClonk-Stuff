@@ -151,7 +151,7 @@ public func ExecuteAISpecial1Spell(effect fx)
 	var tx = fx.target->GetX(), ty = fx.target->GetY() - 4;
 	if (Distance(x, y, tx, ty) > 30)
 		return false;
-	if (fx.Target->LaunchSpell(Special1Spell, tx - x, ty - y, 0, 0))
+	if (fx.Target->LaunchSpecial1(tx - x, ty - y, false, false, fx.Target->CanCast() && fx.Target.ChampType->CanCastSpecial1(fx.Target)))
 		return true;
 	return false;
 }
@@ -164,7 +164,7 @@ public func ExecuteAISpecial2Spell(effect fx)
 	var tx = fx.target->GetX(), ty = fx.target->GetY() - 4;
 	if (Distance(x, y, tx, ty) > Special2Spell.MaxLength)
 		return false;
-	if (fx.Target->LaunchSpell(Special2Spell, tx - x, ty - y, 0, 0))
+	if (fx.Target->LaunchSpecial2(tx - x, ty - y, false, false, fx.Target->CanCast() && fx.Target.ChampType->CanCastSpecial2(fx.Target)))
 		return true;
 	return false;
 }
@@ -177,7 +177,7 @@ public func ExecuteAISpecial3Spell(effect fx)
 	var tx = fx.target->GetX(), ty = fx.target->GetY() - 4;
 	if (Distance(x, y, tx, ty) > Special3Spell.Length)
 		return false;
-	if (fx.Target->LaunchSpell(Special3Spell, tx - x, ty - y, 0, 0))
+	if (fx.Target->LaunchSpecial3(tx - x, ty - y, false, false, fx.Target->CanCast() && fx.Target.ChampType->CanCastSpecial3(fx.Target)))
 		return true;
 	return false;
 }

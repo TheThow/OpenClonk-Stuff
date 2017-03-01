@@ -112,13 +112,13 @@ public func IsSpecial1ShotSpeed() { return Special1Spell.Speed; }
 
 public func ExecuteAISpecial2Spell(effect fx)
 {
-  if (!fx.Target)
-    return false;
-  if (fx.Target->GetMagicEnergy() > fx.Target->GetMaxMagicEnergy() / 2)
-    return false;
-  if (fx.Target->LaunchSpell(Special2Spell, 0, 0, 0, 0))
-    return true;
-  return false;
+	if (!fx.Target)
+		return false;
+	if (fx.Target->GetMagicEnergy() > fx.Target->GetMaxMagicEnergy() / 2)
+		return false;
+	if (fx.Target->LaunchSpecial2(0, 0, false, false, fx.Target->CanCast() && fx.Target.ChampType->CanCastSpecial2(fx.Target)))
+		return true;
+	return false;
 }
 
 public func IsSpecial3Shot() { return true; }

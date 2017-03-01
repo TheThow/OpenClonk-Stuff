@@ -13,12 +13,11 @@ local Special3Spell = StickyBombMagnet;
 
 public func Special1(object clonk, int x, int y, bool released, bool mouseclick, bool abletocast, bool cooldown)
 {
-	if(!released && !mouseclick && abletocast && !cooldown)
+	if (!released && !mouseclick && abletocast && !cooldown)
 	{
-		if(clonk->LaunchSpell(Special1Spell, x, y, 0, 0))
+		if (clonk->LaunchSpell(Special1Spell, x, y, 0, 0))
 			return true;
 	}
-	
 	return false;
 }
 
@@ -138,7 +137,7 @@ public func ExecuteAISpecial1Spell(effect fx)
 	var tx = fx.target->GetX(), ty = fx.target->GetY() - 4;
 	if (Distance(x, y, tx, ty) > 50)
 		return false;
-	if (fx.Target->LaunchSpell(Special1Spell, tx - x, ty - y, 0, 0))
+	if (fx.Target->LaunchSpecial1(tx - x, ty - y, false, false, fx.Target->CanCast() && fx.Target.ChampType->CanCastSpecial1(fx.Target)))
 		return true;
 	return false;
 }
