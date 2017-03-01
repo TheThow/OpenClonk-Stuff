@@ -7,8 +7,20 @@ local BotTower;
 
 local FxNoDMGOnParentExist = new Effect
 {
+	Construction = func()
+	{
+		this.LastDMGAnnouncement = 0;
+	},
+	
 	Damage = func(dmg, cause, plr)
 	{
+		// Damage announcement
+		if (Time - this.LastDMGAnnouncement > 350)
+		{
+			this.LastDMGAnnouncement = Time;
+			Target->AnnounceAttack();
+		}
+		
 		if (cause == 32)
 			return dmg;
 		if (Target->GetTopTower() && Target->GetBotTower())
@@ -20,7 +32,7 @@ local FxNoDMGOnParentExist = new Effect
 
 func Initialize()
 {
-	CreateEffect(FxNoDMGOnParentExist, 1, 1);
+	this->CreateEffect(FxNoDMGOnParentExist, 1, 1);
 	return _inherited(...);
 }
 
@@ -29,6 +41,21 @@ public func Death()
 	Fireworks();
 	Explode(20);
 	return;
+}
+
+public func AnnounceAttack()
+{
+	for(var i = 0; i < GetPlayerCount(); i++)
+	{
+		var plr = GetPlayerByIndex(i);
+		if (GetPlayerType(plr) == C4PT_Script) continue; // Minion Players have no crew and need no announcements
+		if (!Hostile(this->GetOwner(), plr))
+		{
+			var crew = GetCrew(plr);
+			Log("%v for %d", crew, plr);
+			crew->Sound("$SndYourBaseUnderAttack$", true, 100, plr);
+		}
+	}
 }
 
 public func SetTopTower(tower)

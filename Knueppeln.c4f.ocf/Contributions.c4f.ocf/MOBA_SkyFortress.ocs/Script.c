@@ -27,6 +27,7 @@ static g_invll;
 static g_invlr;
 
 static g_goal;
+static g_gameover;
 
 local FxMinionSpawner = new Effect
 {	
@@ -81,7 +82,12 @@ local FxGoalCheckTimer = new Effect
 	{
 		if (g_goal->IsFulfilled())
 		{
-			GameOver();
+			if (!g_gameover)
+			{
+				g_gameover = true;
+				Sound("RoundEnd", true);
+				ScheduleCall(nil, "GameOver", 80, 0);
+			}
 		}
 			
 		
@@ -92,10 +98,6 @@ local FxGoalCheckTimer = new Effect
 func Initialize()
 {
 	CreateObject(Rule_NoFriendlyFire);
-	
-	
-	
-	
 	
 	InitStuff();
 	InitMinionPlayers();
@@ -119,15 +121,42 @@ func InitMinionPlayers()
 func InitializePlayer(plr, x, y, base, team, extradata)
 {	
 	var crew = GetCrew(plr);
+	var relaunch = CreateObject(RelaunchContainer, LandscapeWidth() / 2, LandscapeHeight() / 2);
+	relaunch->StartRelaunch(crew);
 	crew->CreateContents(Sword);
-	crew->~SelectChampion();
-	var invl = FindObject(Find_ID(InventorsLab),Find_Team(team));
-	crew->SetPosition(invl->GetX(), invl->GetY());
-	GameCallEx("OnCreationRuleNoFF", crew);
+	
+	ScheduleCall(nil, "PostPlayerInit", 15, 0, [plr, x, y, base, team, extradata, crew, relaunch]);
+	
 }
 
+global func PostPlayerInit(params)
+{	
+	var plr = params[0];
+	var x = params[1];
+	var y = params[2];
+	var base = params[3];
+	var team = params[4];
+	var extradata = params[5];
+	var crew = params[6];
+	var relaunch = params[7];
+	
+	if (!g_plrid_minions_right)
+		ScheduleCall(nil, "PostPlayerInit", 15, 0, [plr, x, y, base, team, extradata, crew, relaunch]);
+	else
+		Log("Right Minions is %v", g_plrid_minions_right);
+	
+	var invl = FindObject(Find_ID(InventorsLab),Find_Team(team));
+	
+	crew->~SelectChampion();
+	ScheduleCall(crew, "SelectChampion", 15, 0);
+	
+	relaunch->SetPosition(invl->GetX(), invl->GetY());
+	
+	GameCallEx("OnCreationRuleNoFF", crew);
+} 
+
 func InitAIStuff()
-{
+{	
 	// AI Players created. Assign Objects to AI players. Useful when no human players joined the enemy team.
 				
 	for (var obj in FindObjects(Find_Or(Find_ID(InventorsLab), Find_ID(DefenseTower))))
@@ -280,13 +309,7 @@ public func GiveRandomAttackTarget(object attacker)
 }
 
 func SpawnPlayer(int plr, object clonk)
-{
-	//Log("Spawnplayercall");
-	//LogCallStack();
-	
-	//Log("%d", GetPlayerType(plr));
-	//Log("%v", clonk);
-	
+{	
 	clonk->CreateContents(Sword);
 	clonk->SelectChampion();
 	
@@ -296,21 +319,8 @@ func SpawnPlayer(int plr, object clonk)
 	relaunch->StartRelaunch(clonk);
 	
 	GameCallEx("OnCreationRuleNoFF", clonk);
-	
-	
-	//clonk->SetPosition(invl->GetX(), invl->GetY());
-	
-	// var crew = clonk;
-	// crew->CreateContents(Sword);
-	// crew->~SelectChampion();
-	// var invl = FindObject(Find_ID(InventorsLab),Find_Team(GetPlayerTeam(plr)));
-	// crew->SetPosition(invl->GetX(), invl->GetY());
 }
 
-// func OnPlayerRelaunch(plr, whatever)
-// {
-	// SpawnPlayer(plr);
-// }
 
 
 

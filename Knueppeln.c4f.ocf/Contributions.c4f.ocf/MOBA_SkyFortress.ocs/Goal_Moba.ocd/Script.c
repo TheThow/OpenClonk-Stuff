@@ -88,21 +88,3 @@ func RelaunchPlayer(int plr, int killer)
 	}
 }
 
-// protected func RelaunchPlayer(int plr, int killer)
-// {
-	// _inherited(plr, killer, ...);
-	// var clonk = CreateObjectAbove(Clonk, 0, 0, plr);
-	// clonk->MakeCrewMember(plr);
-	// SetCursor(plr, clonk);
-	// JoinPlayer(plr);
-	// Scenario script callback.
-	// GameCall("OnPlayerRelaunch", plr, true);
-	// return;
-// }
-
-// protected func JoinPlayer(int plr)
-// {
-	// var clonk = GetCrew(plr);
-	// clonk->DoEnergy(100000);
-	// return;
-// }
