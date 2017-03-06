@@ -329,7 +329,7 @@ func Hit()
 
 func Death(int killed_by)
 {
-	if(!Scenario->~NoFlesh() && !this.isMobaMinion)
+	if(!Scenario->~NoFlesh() && !this.IsMobaMinion)
 		CastObjects(Flesh, 8, 50);
 		
 	ChampType->CleanUp(this);
@@ -337,7 +337,7 @@ func Death(int killed_by)
 	CreateParticle("Flash", 0, 0, PV_Random(-60, 60), PV_Random(-60, 30), 140, bloodprops, 45);
 	
 	//CastPXS("Blood", 50, 30);
-	if (!this.isMobaMinion) Sound("kill", false, 100);
+	if (!this.IsMobaMinion) Sound("kill", false, 100);
 	
 	SetClrModulation(RGBa(255,255,255,0));
 	

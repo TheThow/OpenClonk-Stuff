@@ -124,3 +124,4 @@ local FxFiringControl = new Effect
 
 local Name = "$Name$";
 local Description = "$Description$";
+local IsMinionTarget = true;

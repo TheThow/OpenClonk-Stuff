@@ -1,15 +1,9 @@
-
-/*
-
+/**
 	Sky Fortress / Himmelsfestung
 	
-	@author: K-Pone
-
+	@author K-Pone
 */
 
-
-static g_plrid_minions_left;
-static g_plrid_minions_right;
 
 static g_deftw1;
 static g_deftw2;
@@ -26,145 +20,61 @@ static g_deftw12;
 static g_invll;
 static g_invlr;
 
-static g_goal;
-static g_gameover;
 
-local FxMinionSpawner = new Effect
-{	
-	Timer = func()
-	{
-		//Log("%v %v", Time, Target->GetOwner());
-		if ((Time % 525) == 1)   SpawnMinion(Sword, "Top");
-		if ((Time % 525) == 20)  SpawnMinion(Sword, "Top");
-		if ((Time % 525) == 40)  SpawnMinion(Sword, "Top");
-		if ((Time % 525) == 60)  SpawnMinion(Sword, "Top");
-		if ((Time % 525) == 80)  SpawnMinion(Sword, "Top");
-		//if ((Time % 525) == 80)  SpawnMinion(Bow,   "Top", true);
-		if ((Time % 525) == 100) SpawnMinion(Sword, "Bot");
-		if ((Time % 525) == 120) SpawnMinion(Sword, "Bot");
-		if ((Time % 525) == 140) SpawnMinion(Sword, "Bot");
-		if ((Time % 525) == 160) SpawnMinion(Sword, "Bot");
-		if ((Time % 525) == 180) SpawnMinion(Sword, "Bot");
-		//if ((Time % 525) == 180) SpawnMinion(Bow,   "Bot", true);
-	},
-	
-	SpawnMinion = func(weapon, lane, towerattacker)
-	{
-		var minion = Target->CreateObject(Clonk);
-		minion->SetOwner(Target->GetOwner());
-		
-		if (weapon == Bow)
-			minion->CreateContents(Bow)->CreateContents(BombArrow)->SetInfiniteStackCount();
-		else
-			minion->CreateContents(weapon);
-		minion.isMobaMinion = true;
-		
-		if (Target->GetOwner() == g_plrid_minions_left)
-			minion->SetClrModulation(RGB(255,32,32));
-		if (Target->GetOwner() == g_plrid_minions_right)
-			minion->SetClrModulation(RGB(32,32,255));
-		
-		minion.Lane = lane;
-		
-		if (towerattacker) minion.isTowerattacker = true;
-		
-		MobaMinionAI->AddAI(minion);
-		
-		GameCallEx("OnCreationRuleNoFF", minion);
-		
-		return;
-	},
-};
-
-local FxGoalCheckTimer = new Effect
+public func Initialize()
 {
-	Timer = func()
-	{
-		if (g_goal->IsFulfilled())
-		{
-			if (!g_gameover)
-			{
-				g_gameover = true;
-				Sound("RoundEnd", true);
-				ScheduleCall(nil, "GameOver", 80, 0);
-			}
-		}
-			
-		
-	}
-};
-
-
-func Initialize()
-{
+	// Rules.
 	CreateObject(Rule_NoFriendlyFire);
 	
-	InitStuff();
-	InitMinionPlayers();
+	InitObjects();
 	
-	g_goal = CreateObject(Goal_Moba);
-	g_goal->SetLeftBase(g_invll);
-	g_goal->SetRightBase(g_invlr);
-	
-	CreateEffect(FxGoalCheckTimer, 1, 50);
+	// Goal.
+	var goal = CreateObject(Goal_Moba);
+	goal->SetLeftBase(g_invll);
+	goal->SetRightBase(g_invlr);
 
 	// Gather statistics.
 	InitStatistics(STATS_Type_All);	
 }
 
-func InitMinionPlayers()
+public func OnGoalsFulfilled()
 {
-	CreateScriptPlayer("$MinionTeamLeft$", RGB(225, 0, 0), 1, CSPF_FixedAttributes | CSPF_NoScenarioInit | CSPF_NoEliminationCheck | CSPF_Invisible, Goal_Moba);
-	CreateScriptPlayer("$MinionTeamRight$", RGB(64, 64, 255), 2, CSPF_FixedAttributes | CSPF_NoScenarioInit | CSPF_NoEliminationCheck | CSPF_Invisible, Goal_Moba);
+	Sound("RoundEnd", true);
+	ScheduleCall(nil, "GameOver", 80, 0);
+	return true;
 }
 
-func InitializePlayer(plr, x, y, base, team, extradata)
+public func InitializePlayer(int plr, int x, int y, int base, team, extradata)
 {	
 	var crew = GetCrew(plr);
 	var relaunch = CreateObject(RelaunchContainer, LandscapeWidth() / 2, LandscapeHeight() / 2);
 	relaunch->StartRelaunch(crew);
 	crew->CreateContents(Sword);
 	
-	ScheduleCall(nil, "PostPlayerInit", 15, 0, [plr, x, y, base, team, extradata, crew, relaunch]);
-	
+	ScheduleCall(nil, "PostPlayerInit", 15, 0, plr, team, crew, relaunch);
+	return;
 }
 
-global func PostPlayerInit(params)
+global func PostPlayerInit(int plr, int team, object crew, object relaunch)
 {	
-	var plr = params[0];
-	var x = params[1];
-	var y = params[2];
-	var base = params[3];
-	var team = params[4];
-	var extradata = params[5];
-	var crew = params[6];
-	var relaunch = params[7];
-	
-	if (!g_plrid_minions_right)
-		ScheduleCall(nil, "PostPlayerInit", 15, 0, [plr, x, y, base, team, extradata, crew, relaunch]);
-	else
-		Log("Right Minions is %v", g_plrid_minions_right);
-	
-	var invl = FindObject(Find_ID(InventorsLab),Find_Team(team));
+	var invl = FindObject(Find_ID(InventorsLab), Find_Team(team));
 	
 	crew->~SelectChampion();
 	ScheduleCall(crew, "SelectChampion", 15, 0);
 	
 	relaunch->SetPosition(invl->GetX(), invl->GetY());
-	
-	GameCallEx("OnCreationRuleNoFF", crew);
+	return;
 } 
 
-func InitAIStuff()
+public func InitAIObjects(int left_minion_plr, int right_minion_plr)
 {	
 	// AI Players created. Assign Objects to AI players. Useful when no human players joined the enemy team.
-				
 	for (var obj in FindObjects(Find_Or(Find_ID(InventorsLab), Find_ID(DefenseTower))))
 	{
 		if (obj->GetX() < LandscapeWidth() / 2)
-			obj->SetOwner(g_plrid_minions_left);
+			obj->SetOwner(left_minion_plr);
 		else
-			obj->SetOwner(g_plrid_minions_right);
+			obj->SetOwner(right_minion_plr);
 		obj->SetCategory(C4D_Living);
 		obj->SetAlive(true);
 		obj->AddVertex(0, obj->GetBottom() + 4);
@@ -173,16 +83,10 @@ func InitAIStuff()
 		obj->AddEnergyBar();
 		GameCallEx("OnCreationRuleNoFF", obj);	
 	}
-	
-	for (var obj in FindObjects(Find_ID(InventorsLab)))
-	{
-		obj->CreateEffect(FxMinionSpawner,1,1);
-	}
-	
-	g_goalmoba_init = true;
+	return;
 }
 
-func InitStuff()
+public func InitObjects()
 {
 	CreateObjectAbove(WoodenBridge, 516, 2012);
 	CreateObjectAbove(WoodenBridge, 1077, 1661);
@@ -263,76 +167,46 @@ func InitStuff()
 
 public func GiveRandomAttackTarget(object attacker)
 {
-	// Minions and Players first
+	// Minions and champs first.
 	var target = attacker->FindObject(Find_OCF(OCF_Alive), Find_Hostile(attacker->GetController()), Find_Distance(200), Sort_Distance());
-	
-	var towertarget;
-	
-	// Attack Towers and Bases then
-	if (attacker->GetOwner() == g_plrid_minions_left)
-	{
-		if (attacker.Lane == "Top")
-		{
-			towertarget =  g_deftw4 ?? g_deftw5 ?? g_deftw6 ?? g_invlr;
-		}
-		
-		if (attacker.Lane == "Bot")
-		{
-			towertarget =  g_deftw10 ?? g_deftw11 ?? g_deftw12 ?? g_invlr;
-		}
-	}
-	
-	if (attacker->GetOwner() == g_plrid_minions_right)
-	{
-		if (attacker.Lane == "Top")
-		{
-			towertarget =  g_deftw3 ?? g_deftw2 ?? g_deftw1 ?? g_invll;
-		}
-		
-		if (attacker.Lane == "Bot")
-		{
-			towertarget =  g_deftw9 ?? g_deftw8 ?? g_deftw7 ?? g_invll;
-		}
-	}
-	
-	// Towerattackers prefer towers, if near enough
-	//if (attacker.isTowerattacker && ObjectDistance(towertarget, attacker) < 200)
-		//return towertarget;
-	
 	if (target)
 		return target;
+		
+	var towertarget;
+	// Attack Towers and Bases then
+	if (attacker.Team == 1)
+	{
+		if (attacker.Lane == 0)
+		{
+			towertarget = g_deftw4 ?? g_deftw5 ?? g_deftw6 ?? g_invlr;
+		}
+		
+		if (attacker.Lane == 1)
+		{
+			towertarget = g_deftw10 ?? g_deftw11 ?? g_deftw12 ?? g_invlr;
+		}
+	}
 	
-	if (towertarget)
-		return towertarget;
-	
-	return;
+	if (attacker.Team == 2)
+	{
+		if (attacker.Lane == 0)
+		{
+			towertarget = g_deftw3 ?? g_deftw2 ?? g_deftw1 ?? g_invll;
+		}
+		
+		if (attacker.Lane == 1)
+		{
+			towertarget = g_deftw9 ?? g_deftw8 ?? g_deftw7 ?? g_invll;
+		}
+	}
+	return towertarget;
 }
 
-func SpawnPlayer(int plr, object clonk)
+public func SpawnPlayer(int plr, object clonk)
 {	
 	clonk->CreateContents(Sword);
 	clonk->SelectChampion();
-	
 	var invl = FindObject(Find_ID(InventorsLab),Find_Team(GetPlayerTeam(clonk->GetOwner())));
-	
 	var relaunch = CreateObject(RelaunchContainer, invl->GetX(), invl->GetY(), clonk->GetOwner());
 	relaunch->StartRelaunch(clonk);
-	
-	GameCallEx("OnCreationRuleNoFF", clonk);
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

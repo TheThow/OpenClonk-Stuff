@@ -1,86 +1,121 @@
-/*
-
-	Moba Gamemode for 2 Teams
+/**
+	Moba Goal
+	Moba game mode for 2 teams. Handles the goal and minion spawning, minions are spawned
+	at the bases of the two teams and then choose their paths.
 	
-	@author: K-Pone
-
+	@author K-Pone, Maikel
 */
 
 #include Library_Goal
 
-static g_goalmoba_init;
-local g_goalmoba_base_left;
-local g_goalmoba_base_right;
 
-func Initialize()
+local base_left;
+local base_right;
+local color_left;
+local color_right;
+local minion_plr_left;
+local minion_plr_right;
+local nr_lanes;
+
+public func Initialize()
 {
-	
+	nr_lanes = 2;
+	color_left = RGB(225, 0, 0);
+	color_right = RGB(64, 64, 255);
+	CreateScriptPlayer("$MinionTeamLeft$", color_left, 1, CSPF_FixedAttributes | CSPF_NoScenarioInit | CSPF_NoEliminationCheck | CSPF_Invisible, Goal_Moba);
+	CreateScriptPlayer("$MinionTeamRight$", color_right, 2, CSPF_FixedAttributes | CSPF_NoScenarioInit | CSPF_NoEliminationCheck | CSPF_Invisible, Goal_Moba);	
+	return _inherited(...);
 }
 
 public func InitializeScriptPlayer(int plr, int team)
 {
-	if (team == 1)
-		g_plrid_minions_left = plr;
-			
-	if (team == 2)
-		g_plrid_minions_right = plr;
+	// Forward to goal object.
+	if (this == Goal_Moba)
+	{
+		var goal = FindObject(Find_ID(Goal_Moba));
+		if (goal)
+			goal->InitializeScriptPlayer(plr, team);
+		return;
+	}	
 	
-	if (g_plrid_minions_left && g_plrid_minions_right)
-		GameCall("InitAIStuff");
+	// Store minion players.
+	if (team == 1)
+	{
+		minion_plr_left = plr;
+		InitBase(base_left, minion_plr_left, 1, color_left);
+	}
+	if (team == 2)
+	{
+		minion_plr_right = plr;
+		InitBase(base_right, minion_plr_right, 2, color_right);
+	}
+	// Do callback to scenario if both minion players have been initialized.
+	if (minion_plr_left && minion_plr_right)
+		GameCall("InitAIObjects", minion_plr_left, minion_plr_right);
+	return;	
 }
 
-func IsFulfilled()
+public func IsFulfilled()
 {
-	if (!g_goalmoba_init) return false;
-	if (g_goalmoba_base_left && g_goalmoba_base_right) return false;
+	if (!base_left && !base_right)
+		return false;
+	if (base_left && base_right)
+		return false;
 	
-	if (!g_goalmoba_base_left)
-	{
-		// Left team lost
-		for(var i = 0; i < GetPlayerCount(); i++)
-		{
-			if (GetPlayerTeam(GetPlayerByIndex(i)) == 1)
-				EliminatePlayer(GetPlayerByIndex(i));
-		}
-	}
-	
-	if (!g_goalmoba_base_right)
-	{
-		// Left team lost
-		for(var i = 0; i < GetPlayerCount(); i++)
-		{
-			if (GetPlayerTeam(GetPlayerByIndex(i)) == 2)
-				EliminatePlayer(GetPlayerByIndex(i));
-		}
-	}
-	
+	if (!base_left)
+		EliminateTeam(1);
+	else if (!base_right)
+		EliminateTeam(2);
 	return true;
 }
 
-func SetLeftBase(object base)
+public func EliminateTeam(int team)
 {
-	g_goalmoba_base_left = base;
+	for (var plr in GetPlayers(nil, team))
+		EliminatePlayer(plr);
+	return;
 }
 
-func SetRightBase(object base)
+
+/*-- Bases --*/
+
+public func SetLeftBase(object base)
 {
-	g_goalmoba_base_right = base;
+	base_left = base;
+	base_left.IsMinionTarget = true;
+	InitBase(base_left, minion_plr_left, 1, color_left);
+	return;
 }
 
-public func Activate(int byplr)
+public func SetRightBase(object base)
 {
-	MessageWindow("MOBA YEAH!!!!", byplr);
+	base_right = base;
+	base_right.IsMinionTarget = true;
+	InitBase(base_right, minion_plr_right, 2, color_right);
+	return;
 }
 
-func RelaunchPlayer(int plr, int killer)
+public func InitBase(object base, int plr, int team, int color)
 {
-	if (plr == g_plrid_minions_left || plr == g_plrid_minions_right)
+	if (!base || plr == nil || team == nil)
+		return;
+	base->SetOwner(plr);
+	base->CreateEffect(FxMinionSpawner, 100, 1, team, color, nr_lanes);
+	return;
+}
+
+
+/*-- Player Control --*/
+
+public func RelaunchPlayer(int plr, int killer)
+{
+	if (plr == minion_plr_left || plr == minion_plr_right)
 	{
-		// called for minions
+		// Called for minions.
 	}
 	else
 	{
-		// called for players
+		// Called for players.
 		var clonk = CreateObjectAbove(Clonk, 0, 0, plr);
 		clonk->MakeCrewMember(plr);
 		SetCursor(plr, clonk);
@@ -88,3 +123,86 @@ func RelaunchPlayer(int plr, int killer)
 	}
 }
 
+
+/*-- Minion Spawning --*/
+
+
+public func SetLaneCount(int lanes)
+{
+	nr_lanes = Max(1, lanes);
+	var fx, index = 0;
+	while (fx = GetEffect("FxMinionSpawner", this, index++))
+		fx.nr_lanes = nr_lanes;
+	return;
+}
+
+local FxMinionSpawner = new Effect
+{	
+	Construction = func(int team, int color, int nr_lanes)
+	{
+		this.team = team;
+		this.color = color;
+		this.nr_lanes = nr_lanes;
+		this.lane = 0;
+		// Minion rate.
+		this.Interval = 10;
+		this.minion_int = 2;
+		this.minion_group_size = 5;
+		this.group_int = 30;
+		// First timer call.
+		Timer(0);
+		return FX_OK;
+	},
+	
+	Timer = func(int time)
+	{
+		if ((time / this.Interval) % this.minion_int == 0 && ((time / this.Interval) % this.group_int) < this.minion_group_size * this.minion_int)
+			SpawnMinion(Sword, this.lane);
+		if (((time + this.Interval) / this.Interval) % this.group_int == 0)
+		{
+			this.lane++;
+			this.lane = this.lane % this.nr_lanes;
+		}
+		
+		return FX_OK;
+	},
+	
+	SpawnMinion = func(id weapon, int lane)
+	{
+		var minion = Target->CreateObjectAbove(Clonk, 0, Target->GetBottom(), Target->GetOwner());
+		minion->CreateContents(weapon);
+		minion.IsMobaMinion = true;
+		minion->SetClrModulation(this.color);		
+		minion.Lane = lane;
+		minion.Team = this.team;
+		MobaMinionAI->AddAI(minion);
+		GameCallEx("OnCreationRuleNoFF", minion);
+		return;
+	}
+};
+
+
+/*-- Scoreboard --*/
+
+public func OnClonkDeath(object clonk, int killer)
+{
+	if (clonk.IsMobaMinion && GetPlayerType(killer) == C4PT_User)
+		return;
+	return;
+}
+
+
+/*-- Description --*/
+
+public func GetDescription(int plr)
+{
+	return this.Description;
+}
+
+
+/*-- Properties --*/
+
+local Name = "$Name$";
+local Description = "$Description$";
+local Visibility = VIS_Editor;
+local EditorPlacementLimit = 1;
