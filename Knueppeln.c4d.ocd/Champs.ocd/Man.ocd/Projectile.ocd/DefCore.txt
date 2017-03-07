@@ -13,3 +13,4 @@ VertexFriction=40,40
 Mass=14
 StretchGrowth=1
 Rotate=1
+HideInCreator=true
