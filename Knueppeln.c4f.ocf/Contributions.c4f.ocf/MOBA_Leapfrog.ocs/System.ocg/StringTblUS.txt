@@ -1,0 +1,3 @@
+SndEnemyTowerDestroyed=Announcement::EnemyTowerDestroyedUS
+SndYourBaseUnderAttack=Announcement::YourBaseUnderAttackUS
+SndYourTowerDestroyed=Announcement::YourTowerDestroyedUS

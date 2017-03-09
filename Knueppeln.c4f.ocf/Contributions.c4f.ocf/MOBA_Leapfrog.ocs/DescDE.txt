@@ -1,0 +1,8 @@
+Bockspringen
+
+Leapfrog your enemy.
+
+Goal: Defeat the enemy minions, towers, champs and base.
+
+Tipps:
+- You can only destroy the inventor's lab when all towers are destroyed.

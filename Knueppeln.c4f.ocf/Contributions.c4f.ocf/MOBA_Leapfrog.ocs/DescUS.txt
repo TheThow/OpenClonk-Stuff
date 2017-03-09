@@ -1,0 +1,8 @@
+Leapfrog
+
+Leapfrog your enemy.
+
+Goal: Defeat the enemy minions, towers, champs and base.
+
+Hints:
+- You can only destroy the inventor's lab when all towers are destroyed.
