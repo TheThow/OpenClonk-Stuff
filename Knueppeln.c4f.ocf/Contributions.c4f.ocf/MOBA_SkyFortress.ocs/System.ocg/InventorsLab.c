@@ -21,7 +21,7 @@ local FxNoDMGOnParentExist = new Effect
 			Target->AnnounceAttack();
 		}
 		
-		if (cause == 32)
+		if (cause == FX_Call_EngScript)
 			return dmg;
 		if (Target->GetTopTower() && Target->GetBotTower())
 			return 0;

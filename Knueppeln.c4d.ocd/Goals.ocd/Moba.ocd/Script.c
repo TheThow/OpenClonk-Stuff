@@ -16,14 +16,22 @@ local color_right;
 local minion_plr_left;
 local minion_plr_right;
 local nr_lanes;
+local minions_killed;
 
 public func Initialize()
 {
 	nr_lanes = 2;
 	color_left = RGB(225, 0, 0);
 	color_right = RGB(64, 64, 255);
+	// Create script players for controlling minions.
 	CreateScriptPlayer("$MinionTeamLeft$", color_left, 1, CSPF_FixedAttributes | CSPF_NoScenarioInit | CSPF_NoEliminationCheck | CSPF_Invisible, Goal_Moba);
-	CreateScriptPlayer("$MinionTeamRight$", color_right, 2, CSPF_FixedAttributes | CSPF_NoScenarioInit | CSPF_NoEliminationCheck | CSPF_Invisible, Goal_Moba);	
+	CreateScriptPlayer("$MinionTeamRight$", color_right, 2, CSPF_FixedAttributes | CSPF_NoScenarioInit | CSPF_NoEliminationCheck | CSPF_Invisible, Goal_Moba);
+	// Initialize scoreboard.
+	minions_killed = [];
+	Scoreboard->SetTitle("$MsgScoreboard$");
+	Scoreboard->Init([
+		{key = "minions_killed", title = Boompack, sorted = true, desc = true, default = "0", priority = 100}
+	]);
 	return _inherited(...);
 }
 
@@ -72,7 +80,11 @@ public func IsFulfilled()
 public func EliminateTeam(int team)
 {
 	for (var plr in GetPlayers(nil, team))
+	{
+		// Remove all minions and then eliminate player.
+		RemoveAll(Find_Property("IsMobaMinion"), Find_Owner(plr));
 		EliminatePlayer(plr);
+	}
 	return;
 }
 
@@ -106,6 +118,20 @@ public func InitBase(object base, int plr, int team, int color)
 
 
 /*-- Player Control --*/
+
+public func InitializePlayer(int plr)
+{
+	// The enemy script player is initialized in the function below.
+	if (GetPlayerType(plr) == C4PT_Script)
+		return;
+	// Init the normal players
+	var plrid = GetPlayerID(plr);
+	// Initialize scoreboard.
+	Scoreboard->NewPlayerEntry(plr);
+	minions_killed[plrid] = 0;
+	Scoreboard->SetPlayerData(plr, "minions_killed", minions_killed[plrid]);
+	return;
+}
 
 public func RelaunchPlayer(int plr, int killer)
 {
@@ -187,7 +213,12 @@ local FxMinionSpawner = new Effect
 public func OnClonkDeath(object clonk, int killer)
 {
 	if (clonk.IsMobaMinion && GetPlayerType(killer) == C4PT_User)
-		return;
+	{
+		var plrid = GetPlayerID(killer);
+		minions_killed[plrid]++;
+		
+		Scoreboard->SetPlayerData(killer, "minions_killed", minions_killed[plrid]);
+	}
 	return;
 }
 

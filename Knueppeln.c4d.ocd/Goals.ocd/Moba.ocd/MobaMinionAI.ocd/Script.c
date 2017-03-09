@@ -14,39 +14,9 @@ public func Execute(effect fx, int time)
 	// Don't do anything when still in respawn container.
 	if (fx.Target->Contained())
 		return;
-	
-	//Log("%v %v", fx.Target.Lane, fx.target);
-	
-	if (fx.Target.Lane == 1)
-	{
-		// Bot needs to drop through a bridge
-		if (fx.Target.Team == 1)
-		{
-			if (fx.Target->GetX() > 500 && fx.Target->GetX() < 570)
-			{
-				fx.Target->HalfVehicleFadeJumpStart();
-			}
-			if (fx.Target->GetX() > 570)
-			{
-				fx.Target->HalfVehicleFadeJumpStop();
-			}
-		}
-		
-		if (fx.Target.Team == 2)
-		{
-			if (fx.Target->GetX() < 5900 && fx.Target->GetX() > 5830)
-			{
-				fx.Target->HalfVehicleFadeJumpStart();
-			}
-			if (fx.Target->GetX() < 5830)
-			{
-				fx.Target->HalfVehicleFadeJumpStop();
-			}
-		}
-	}
-	
+
 	// Check for near targets
-	var near = fx.Target->FindObject(Find_OCF(OCF_Alive), Find_Distance(100), Find_Hostile(fx.Target->GetOwner()), Sort_Distance());
+	var near = fx.Target->FindObject(Find_OCF(OCF_Alive), Find_Distance(100), Find_Hostile(fx.Target->GetOwner()), fx.Target->Find_PathFree(), Sort_Distance());
 	if (near)
 		fx.target = near;
 			
@@ -54,22 +24,31 @@ public func Execute(effect fx, int time)
 	return inherited(fx, time, ...);
 }
 
+// Don't evade anything.
 public func ExecuteEvade(effect fx, int threat_dx, int threat_dy)
 {
 	return false;
 }
 
+// Don't protect against anything.
 public func ExecuteProtection(effect fx)
 {
 	return false;
 }
 
+// Get normal target if close and path is free, otherwise get target from scenario callback.
 public func FindTarget(effect fx)
 {
 	var target = _inherited(fx, ...);
-	if (!target || ObjectDistance(target, fx.Target) > 150)
+	if (!target || ObjectDistance(target, fx.Target) > 150 || !PathFree(target->GetX(), target->GetY(), fx.Target->GetX(), fx.Target->GetY()))
 		target = GetRandomAttackTarget(fx.Target);
 	return target;
+}
+
+// Don't get any special emergency targets.
+public func FindEmergencyTarget(effect fx)
+{
+	return this->FindTarget(fx);
 }
 
 
@@ -87,16 +66,4 @@ public func HasWeaponForTarget(effect fx, object target)
 	if (target && target->~CanBeHit())
 		return true;
 	return _inherited(fx, target, ...);
-}
-
-
-/*-- Aiming Cursor --*/
-
-// Called by spell charging effects.
-public func GetAICursor(fx)
-{
-	if (fx.target)
-		return [fx.target->GetX() - fx.Target->GetX(), fx.target->GetY() - fx.Target->GetY()];
-	 // If the AI has no target, aim above its head.	
-	return [0, 5];
 }

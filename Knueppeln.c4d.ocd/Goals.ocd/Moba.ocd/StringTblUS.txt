@@ -3,3 +3,5 @@ Description=Eliminate all enemy champs, minions, bases and defense towers.
 
 MinionTeamLeft=Minions Red
 MinionTeamRight=Minions Blue
+
+MsgScoreboard=Moba
