@@ -90,9 +90,9 @@ global func FxSmokeTrailStart(object target, proplist e, int temp, int color)
 	var alpha = (e.color >> 24) & 0xff;
 	e.particles_smoke =
 	{
-		R = c[0],
-		G = c[1],
-		B = c[2],
+		R = c.R,
+		G = c.G,
+		B = c.B,
 		Alpha = PV_KeyFrames(0, 0, alpha/4, 200, alpha, 1000, 0),
 		Rotation = PV_Random(-45,45),
 		ForceX = PV_Wind(20),

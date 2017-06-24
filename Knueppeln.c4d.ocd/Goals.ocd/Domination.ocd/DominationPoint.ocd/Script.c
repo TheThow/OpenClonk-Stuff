@@ -55,7 +55,7 @@ local CheckFx = new Effect {
 			Target.curr_capturer = team;
 
 			var rgba = SplitRGBaValue(GetTeamColor(team));
-			Target.bar->SetBarColor(RGBa(rgba[0], rgba[1], rgba[2], 255));
+			Target.bar->SetBarColor(RGBa(rgba.R, rgba.G, rgba.B, 255));
 		}
 		
 		if (!Target.curr_capturer && Target.owner && Target.owner != team)
@@ -63,7 +63,7 @@ local CheckFx = new Effect {
 			Target.curr_capturer = team;
 			
 			var rgba = SplitRGBaValue(GetTeamColor(Target.owner));
-			Target.bar->SetBarColor(RGBa(rgba[0], rgba[1], rgba[2], 255));
+			Target.bar->SetBarColor(RGBa(rgba.R, rgba.G, rgba.B, 255));
 		}
 		
 		if (Target.curr_capturer && Target.curr_capturer == team && !Target.owner)
@@ -115,9 +115,9 @@ local CheckFx = new Effect {
 			Target.owner = team;
 			
 			var rgba = SplitRGBaValue(GetTeamColor(Target.owner));
-			Target.prt_props.R = rgba[0];
-			Target.prt_props.G = rgba[1];
-			Target.prt_props.B = rgba[2];
+			Target.prt_props.R = rgba.R;
+			Target.prt_props.G = rgba.G;
+			Target.prt_props.B = rgba.B;
 			
 			Target.curr_capturer = nil;
 			Target.capture = Target.frames_to_capture;

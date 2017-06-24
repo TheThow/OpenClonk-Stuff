@@ -187,9 +187,9 @@ func JumpEffect(object clonk, dir)
 			Prototype = Particles_ElectroSpark2(),
 			Size = PV_Linear(10,0),
 			Rotation = PV_Random(0, 360),
-			R = rgba[0],
-			G = rgba[1],
-			B = rgba[2],
+			R = rgba.R,
+			G = rgba.G,
+			B = rgba.B,
 			OnCollision = PC_Bounce(),
 		};
 	
@@ -211,9 +211,9 @@ func BlockEffect(object clonk, range)
 			Prototype = Particles_ElectroSpark2(),
 			Size = PV_Linear(15,0),
 			Rotation = PV_Random(0, 360),
-			R = rgba[0],
-			G = rgba[1],
-			B = rgba[2],
+			R = rgba.R,
+			G = rgba.G,
+			B = rgba.B,
 		};
 	
 		CreateParticle("StarSpark", x, y, 0, 0, 10, trailparticles);

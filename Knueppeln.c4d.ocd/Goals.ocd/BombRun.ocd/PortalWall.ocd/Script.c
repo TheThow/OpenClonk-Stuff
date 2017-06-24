@@ -32,7 +32,7 @@ func FxCheckWipfTimer()
 	if(CheckWipf())
 	{
 		var rgba = SplitRGBaValue(GetTeamColor(team));
-		bar->SetBarColor(RGBa(rgba[0], rgba[1], rgba[2], 255));
+		bar->SetBarColor(RGBa(rgba.R, rgba.G, rgba.B, 255));
 	}
 	else
 	{
@@ -95,7 +95,7 @@ func CreateWall(int teamid, int size_x, int size_y, int hp)
 		var stone = CreateObject(PortalStone, Cos(i, Size_x), Sin(i, Size_y), -1);
 		var clr = GetTeamColor(teamid);
 		var rgba = SplitRGBaValue(clr);
-		stone->SetClrModulation(RGBa(rgba[0], rgba[1], rgba[2], 100));
+		stone->SetClrModulation(RGBa(rgba.R, rgba.G, rgba.B, 100));
 		
 		stones[i] = stone;
 		if(stone)

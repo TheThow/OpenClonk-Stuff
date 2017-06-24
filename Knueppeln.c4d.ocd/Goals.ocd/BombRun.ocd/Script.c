@@ -89,9 +89,9 @@ func FxGoalCheckStart(object target, proplist effect, int temporary, var1, var2)
 	var rgba = SplitRGBaValue(clr);
 
 	effect.particles = {
-		R = rgba[0],
-		G = rgba[1],
-		B = rgba[2],
+		R = rgba.R,
+		G = rgba.G,
+		B = rgba.B,
 		Size = 5,
 		Alpha = PV_Linear(255, 0)
 	};
