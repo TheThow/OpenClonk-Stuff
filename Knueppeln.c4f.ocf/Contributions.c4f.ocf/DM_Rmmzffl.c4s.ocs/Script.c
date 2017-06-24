@@ -65,7 +65,7 @@ func GetItemCratePos()
 {
 	for (var i = 0; i < 100; i++)
 	{
-		var pos = [RandomX(LandscapeWidth() - 100, RandomX(LandscapeWidth() + 100), 10 + Random(LandscapeHeight() - 450)];
+		var pos = [RandomX(LandscapeWidth() - 100, LandscapeWidth() + 100), 10 + Random(LandscapeHeight() - 450)];
 		
 		if(GBackSolid(pos[0], pos[1]))
 			continue;
