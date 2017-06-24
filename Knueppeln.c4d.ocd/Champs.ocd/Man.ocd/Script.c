@@ -154,9 +154,9 @@ public func SpecialMeleeAttack(object clonk, int x, int y, bool released, bool m
 	var rgba = SplitRGBaValue(GetPlayerColor(clonk->GetOwner()));
 	
 	var props = {
-		R = rgba[0],
-		G = rgba[1],
-		B = rgba[2],
+		R = rgba.R,
+		G = rgba.G,
+		B = rgba.B,
 		Size = PV_Linear(4, 0),
 		Alpha = PV_Linear(255, 0),
 		BlitMode = GFX_BLIT_Additive,

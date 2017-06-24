@@ -71,9 +71,9 @@ func FxSuperberryTimer(target, fx, timer)
 	var rgba = SplitRGBaValue(HSL(Random(255), 255, 128));
 	
 	var props = {
-		R = rgba[0],
-		G = rgba[1],
-		B = rgba[2],
+		R = rgba.R,
+		G = rgba.G,
+		B = rgba.B,
 		Size = PV_Linear(5, 0),
 		Alpha = PV_Linear(255,0),
 		OnCollision = PC_Bounce(),

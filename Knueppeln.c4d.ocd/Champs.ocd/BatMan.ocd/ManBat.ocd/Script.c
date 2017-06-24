@@ -79,9 +79,9 @@ private func Construction()
 	var rgba = SplitRGBaValue(GetPlayerColor(GetOwner()));
 	
 	var props = {
-		R = rgba[0],
-		G = rgba[1],
-		B = rgba[2],
+		R = rgba.R,
+		G = rgba.G,
+		B = rgba.B,
 		Size = 20,
 		Alpha = 45,
 		Attach = ATTACH_Back | ATTACH_MoveRelative
