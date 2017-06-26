@@ -53,8 +53,8 @@ public func SpawnRandomAIClonk()
 	clnk->SetSkin(Random(4));
 	clnk->SetColor(RGB(Random(256),Random(256),Random(256)));
 	
-	KnueppelnAI->AddAI(clnk, aispawns);
-	KnueppelnAI->SetGuardRange(clnk, 0,0,LandscapeWidth(),LandscapeHeight());
+	KnueppelnAI->AddAI(clnk, KnueppelnAI);
+	KnueppelnAI->SetGuardRange(clnk, 0, 0, LandscapeWidth(),LandscapeHeight());
 }
 
 
