@@ -96,24 +96,18 @@ func SpawnPlayer(int plr, prev_clonk)
 	//clonk->ChooseMenu();
 }
 
-// Gamecall from LastManStanding goal, on respawning.
-protected func OnPlayerRelaunch(int plr)
-{
-	var clonk = GetCrew(plr);
-	var relaunch = CreateObjectAbove(RelaunchContainer, LandscapeWidth() / 2, LandscapeHeight() / 2, clonk->GetOwner());
-	relaunch->StartRelaunch(clonk);
-	
-	SpawnPlayer(plr);
-	
-	return;
-} 
-
 global func GetRandomSpawn()
 {
 	var spawns = [[490,605],[395,500],[585,500],[340,685],[625,685],[835,595]];
 	var rand = Random(GetLength(spawns));
 	return spawns[rand];
 }
+
+// see https://github.com/openclonk/openclonk/commit/c2f1d47f6301fa4488f1f479a419c7ae47a4eaf0
+func OnClonkEnteredRelaunch(object clonk, int plr)
+{	
+	SpawnPlayer(plr);
+} 
 
 func OnClonkLeftRelaunch(object clonk)
 {
