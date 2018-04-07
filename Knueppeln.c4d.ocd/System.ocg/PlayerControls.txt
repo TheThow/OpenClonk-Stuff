@@ -39,7 +39,7 @@
 	Gamepad=0
 		
 		[Assignment]
-		Key=Mouse1Move
+		Key=Mouse0Move
 		Control=AimingCursor
 		Priority=30
 		
